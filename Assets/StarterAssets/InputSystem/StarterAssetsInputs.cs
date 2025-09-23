@@ -1,6 +1,7 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using static Unity.Collections.AllocatorManager;
 #endif
 
 namespace StarterAssets
@@ -19,9 +20,10 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
+		public bool click = false;
 
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -42,11 +44,21 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
+
+
 		}
+
+        public void OnFire(InputValue value)
+        {
+            ClickInput(value.isPressed);
+        }
+
+
+
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -75,6 +87,18 @@ namespace StarterAssets
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
-	}
-	
+
+        public void ClickInput(bool newClickState)
+        {
+            click = newClickState;
+        }
+
+
+
+
+
+    }
+
+
+
 }
