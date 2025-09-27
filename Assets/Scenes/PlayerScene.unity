@@ -835,6 +835,14 @@ PrefabInstance:
       propertyPath: fpsCam
       value: 
       objectReference: {fileID: 820239819}
+    - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: HUDScript
+      value: 
+      objectReference: {fileID: 8252157037355258744}
+    - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: ammoCapacity
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.35031
@@ -977,6 +985,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+--- !u!114 &8252157037355258744 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5303168084007651350, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+  m_PrefabInstance: {fileID: 8252157037355258743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9d04041b1de38a18582be8609d7ecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
