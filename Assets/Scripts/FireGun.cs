@@ -9,6 +9,8 @@ using UnityEngine.Windows;
 public class GunFireScript : MonoBehaviour
 {
 
+    public GunSound gunSoundScript;
+
     public StarterAssetsInputs input;
     
     public float damage = 10f; //Change these values if you want to make the damage or range bigger or smaller
@@ -29,6 +31,7 @@ public class GunFireScript : MonoBehaviour
 
     void Shoot()
     {
+        gunSoundScript.playGunshotSound();
         RaycastHit hitInfo;
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
         {
