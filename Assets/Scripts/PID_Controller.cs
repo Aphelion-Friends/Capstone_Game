@@ -70,7 +70,8 @@ public class PIDController {
     }
 
     float AngleDifference(float a, float b) {
-        return (a - b + 540) % 360 - 180;   //calculate modular difference, and remap to [-180, 180]
+        // return ((a - b) + 540) % 360 - 180;   //calculate modular difference, and remap to [-180, 180]
+        return Mathf.DeltaAngle(b, a);
     }
 
     public float UpdateAngle(float dt, float currentAngle, float targetAngle) {

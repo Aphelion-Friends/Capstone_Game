@@ -158,6 +158,7 @@ GameObject:
   - component: {fileID: 1978471637655604388}
   - component: {fileID: 5420857361349278248}
   - component: {fileID: 8616685848737228376}
+  - component: {fileID: 5586964409754791011}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -269,9 +270,11 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  reload: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
+  click: 0
 --- !u!114 &8616685848737228376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,3 +373,27 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5586964409754791011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30503c88cf8e7e64b87032dc7b5c755b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  relativeGunOffset: {x: 1, y: 0.5, z: 0}
+  gunTransform: {fileID: 0}
+  gunRigidbody: {fileID: 0}
+  cameraTransform: {fileID: 0}
+  proportionalGain: 10
+  integralGain: 1
+  derivativeGain: 5
+  forceMultiplier: 100
+  proportionalGainTorque: 10
+  integralGainTorque: 1
+  derivativeGainTorque: 3
+  torqueMultiplier: 100
