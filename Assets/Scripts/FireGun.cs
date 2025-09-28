@@ -9,6 +9,8 @@ using UnityEngine.Windows;
 public class GunFireScript : MonoBehaviour
 {
 
+    public UpdateHUD HUDScript;
+
     public GunSound gunSoundScript;
 
     public StarterAssetsInputs input;
@@ -17,8 +19,14 @@ public class GunFireScript : MonoBehaviour
     public float range = 100f; //Ideally I'd like to have other variables like gun recoil 
     public Camera fpsCam;
 
-
+    int ammoCount = 0; // Current ammo in gun
+    public int ammoCapacity = 0; // Max ammo for gun
     
+    void Start()
+    {
+        Reload();
+        HUDScript.SetAmmo(ammoCount);
+    }
 
     void Update()
     {
@@ -27,20 +35,41 @@ public class GunFireScript : MonoBehaviour
             Shoot();
             input.click = false;
         }
+
+        if (input.reload)
+        {
+            Reload();
+            input.reload = false;
+        }
+    }
+
+    void Reload()
+    {
+        ammoCount = ammoCapacity;
+        HUDScript.SetAmmo(ammoCount);
+    }
+
+    void UseAmmo()
+    {
+        ammoCount--;
+        HUDScript.SetAmmo(ammoCount);
     }
 
     void Shoot()
     {
-        gunSoundScript.playGunshotSound();
-        RaycastHit hitInfo;
-        if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
+        if (ammoCount > 0)
         {
-            Debug.Log("Bang!");                         //Everytime you fire this will be send into the debug log
-            //Debug.Log(hitInfo.transform.name);        //Optionally you can uncomment this line of code and it'll tell you what you fired at
+            gunSoundScript.playGunshotSound();
+            RaycastHit hitInfo;
+
+            if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
+            {
+                Debug.Log("Bang!");                         //Everytime you fire this will be send into the debug log
+                //Debug.Log(hitInfo.transform.name);        //Optionally you can uncomment this line of code and it'll tell you what you fired at
+            }    
+            UseAmmo();
         }
+        
     }
-
-
-
 }
 
