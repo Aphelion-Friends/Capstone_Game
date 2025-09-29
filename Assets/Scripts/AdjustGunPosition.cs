@@ -12,6 +12,8 @@ public class AdjustGunPosition : MonoBehaviour
     public float derivativeGain;
     public float forceMultiplier;
 
+    public float maxDistance;
+
     PIDController PIDx = new PIDController();
     PIDController PIDy = new PIDController();
     PIDController PIDz = new PIDController();
@@ -48,5 +50,12 @@ public class AdjustGunPosition : MonoBehaviour
         Vector3 totalForce = new Vector3(forceX, forceY, forceZ) * forceMultiplier;
 
         gunRigidbody.AddForce(totalForce);
+        float distance = (gunTransform.position - linearTarget).magnitude;
+        Vector3 directionTowardsTarget = (gunTransform.position - linearTarget).normalized;
+
+        if (distance > maxDistance)
+        {
+            gunTransform.position = linearTarget + (directionTowardsTarget * maxDistance);
+        }
     }
 }
