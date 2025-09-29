@@ -60,7 +60,7 @@ public class AdjustGunPosition : MonoBehaviour
         Vector3 linearTarget = relativeGunOffset.x * cameraTransform.forward + relativeGunOffset.y * cameraTransform.up + relativeGunOffset.z * cameraTransform.right;
         linearTarget += cameraTransform.position;
 
-        Quaternion rotationalTarget = cameraTransform.rotation;
+        Vector3 rotationalTarget = cameraTransform.rotation.eulerAngles;
 
         // Debug.Log("rotation: " + rotationalTarget);
         // Debug.Log("current rotation: " + gunTransform.eulerAngles);
@@ -69,14 +69,15 @@ public class AdjustGunPosition : MonoBehaviour
         float forceY = PIDy.Update(Time.fixedDeltaTime, gunTransform.position.y, linearTarget.y);
         float forceZ = PIDz.Update(Time.fixedDeltaTime, gunTransform.position.z, linearTarget.z);
 
-        float torqueX = PIDxRot.UpdateAngle(Time.fixedDeltaTime, gunTransform.rotation.eulerAngles.x, rotationalTarget.eulerAngles.x);
-        float torqueY = PIDyRot.UpdateAngle(Time.fixedDeltaTime, gunTransform.rotation.eulerAngles.y, rotationalTarget.eulerAngles.y);
-        float torqueZ = PIDzRot.UpdateAngle(Time.fixedDeltaTime, gunTransform.rotation.eulerAngles.z, rotationalTarget.eulerAngles.z);
-
         Vector3 totalForce = new Vector3(forceX, forceY, forceZ) * forceMultiplier;
-        Vector3 totalTorque = new Vector3(torqueX, torqueY, torqueZ) * torqueMultiplier;
+
+        Vector3 gunRotation = Vector3.Slerp(gunRigidbody.rotation.eulerAngles, rotationalTarget, 0.2f);
 
         gunRigidbody.AddForce(totalForce);
-        gunRigidbody.AddTorque(totalTorque);
+        //gunRigidbody.AddTorque(totalTorque);
+        Quaternion gunRotationQ = new Quaternion();
+        gunRotationQ.eulerAngles = gunRotation;
+
+        gunRigidbody.rotation = gunRotationQ;
     }
 }
