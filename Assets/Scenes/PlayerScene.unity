@@ -966,7 +966,7 @@ PrefabInstance:
       objectReference: {fileID: 8252157037355258744}
     - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: gunRecoil
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: ammoCapacity
