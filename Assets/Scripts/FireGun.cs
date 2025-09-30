@@ -17,10 +17,13 @@ public class GunFireScript : MonoBehaviour
     
     public float damage = 10f; //Change these values if you want to make the damage or range bigger or smaller
     public float range = 100f; //Ideally I'd like to have other variables like gun recoil 
+    public float gunRecoil = 20f;
     public Camera fpsCam;
 
     int ammoCount = 0; // Current ammo in gun
     public int ammoCapacity = 0; // Max ammo for gun
+
+    public GunRecoil gunRecoilScript;
     
     void Start()
     {
@@ -60,6 +63,7 @@ public class GunFireScript : MonoBehaviour
         if (ammoCount > 0)
         {
             gunSoundScript.playGunshotSound();
+            gunRecoilScript.Recoil(gunRecoil);
             RaycastHit hitInfo;
 
             if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
