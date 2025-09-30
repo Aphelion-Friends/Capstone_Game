@@ -40,12 +40,15 @@ public class AdjustGunPosition : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 linearTarget = relativeGunOffset.x * cameraTransform.forward + relativeGunOffset.y * cameraTransform.up + relativeGunOffset.z * cameraTransform.right;
-        linearTarget += cameraTransform.position;
+        // Vector3 linearTarget = cameraTransform.position - gunTransform.position;
+        Vector3 relativeLinearTarget = relativeGunOffset.x * cameraTransform.forward + relativeGunOffset.y * cameraTransform.up + relativeGunOffset.z * cameraTransform.right;
+        Vector3 linearTarget = relativeLinearTarget + cameraTransform.position;
 
-        float forceX = PIDx.Update(Time.fixedDeltaTime, gunTransform.position.x, linearTarget.x);
-        float forceY = PIDy.Update(Time.fixedDeltaTime, gunTransform.position.y, linearTarget.y);
-        float forceZ = PIDz.Update(Time.fixedDeltaTime, gunTransform.position.z, linearTarget.z);
+        Vector3 relativeGunPosition = gunTransform.position - cameraTransform.position;
+
+        float forceX = PIDx.Update(Time.fixedDeltaTime, relativeGunPosition.x, relativeLinearTarget.x);
+        float forceY = PIDy.Update(Time.fixedDeltaTime, relativeGunPosition.y, relativeLinearTarget.y);
+        float forceZ = PIDz.Update(Time.fixedDeltaTime, relativeGunPosition.z, relativeLinearTarget.z);
 
         Vector3 totalForce = new Vector3(forceX, forceY, forceZ) * forceMultiplier;
 

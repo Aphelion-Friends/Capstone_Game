@@ -145,6 +145,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5586964409754791011, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: maxDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5586964409754791011, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: gunRigidbody
       value: 
       objectReference: {fileID: 1418844379}
@@ -154,11 +158,11 @@ PrefabInstance:
       objectReference: {fileID: 245808075}
     - target: {fileID: 5586964409754791011, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: integralGain
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5586964409754791011, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: derivativeGain
-      value: 75
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5586964409754791011, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: cameraTransform
@@ -166,11 +170,11 @@ PrefabInstance:
       objectReference: {fileID: 820239820}
     - target: {fileID: 5586964409754791011, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: forceMultiplier
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5586964409754791011, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: proportionalGain
-      value: 200
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5586964409754791011, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: torqueMultiplier
@@ -961,9 +965,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8252157037355258744}
     - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: gunRecoil
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: ammoCapacity
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 3798096523933562354, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1418844379}
+    - target: {fileID: 3798096523933562354, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: cameraTransform
+      value: 
+      objectReference: {fileID: 820239820}
     - target: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -982,15 +998,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
