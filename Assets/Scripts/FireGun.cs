@@ -62,7 +62,7 @@ public class GunFireScript : MonoBehaviour
     {
         if (ammoCount > 0)
         {
-            gunSoundScript.playGunshotSound();
+            gunSoundScript.PlayGunshotSound();
             gunRecoilScript.Recoil(gunRecoil);
             RaycastHit hitInfo;
 
