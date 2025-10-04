@@ -76,6 +76,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   walkRange: 15
+  giveUpTime: 5
+  sightRange: 8
+  attackRange: 1
 --- !u!1001 &7471100612395838964
 PrefabInstance:
   m_ObjectHideFlags: 0

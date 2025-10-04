@@ -17,6 +17,9 @@ public class enemyAIPatrol : MonoBehaviour
     float timeAtLastDestSet;
     [SerializeField] float giveUpTime = 5f;
 
+    [SerializeField] float sightRange, attackRange;
+    bool playerInSight, playerInAttackRange;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,7 +29,16 @@ public class enemyAIPatrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Patrol();
+        playerInSight = Physics.CheckSphere(transform.position, sightRange, playerLayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
+
+        if (!playerInSight && !playerInAttackRange) Patrol();
+        if (playerInSight && !playerInAttackRange) Chase();
+    }
+
+    void Chase()
+    {
+        agent.SetDestination(player.transform.position);
     }
 
     void Patrol()
