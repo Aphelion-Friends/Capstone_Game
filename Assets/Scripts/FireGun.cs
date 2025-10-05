@@ -19,6 +19,7 @@ public class GunFireScript : MonoBehaviour
     public float range = 100f; //Ideally I'd like to have other variables like gun recoil 
     public float roundsPerMinute = 100f;
     public float gunRecoil = 20f;
+    public bool fullyAutomatic = false;
     public Camera fpsCam;
 
     int ammoCount = 0; // Current ammo in gun
@@ -42,13 +43,22 @@ public class GunFireScript : MonoBehaviour
         if (input.click)
         {
             Shoot();
-            input.click = false;
+            if (!fullyAutomatic)
+            {
+                input.click = false;
+            }
         }
 
         if (input.reload)
         {
             Reload();
             input.reload = false;
+        }
+
+        if (input.selectFire)
+        {
+            SelectFire();
+            input.selectFire = false;
         }
     }
 
@@ -99,6 +109,11 @@ public class GunFireScript : MonoBehaviour
         {
             allEnemiesInEarshot[x].gameObject.GetComponent<enemyAIPatrol>().HearSound(transform.position);
         }
+    }
+
+    void SelectFire()
+    {
+        fullyAutomatic = !fullyAutomatic;
     }
 }
 

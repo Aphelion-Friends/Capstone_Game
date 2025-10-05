@@ -142,5 +142,6 @@ public class enemyAIPatrol : MonoBehaviour
         dead = true;
         animator.SetTrigger("Die");
         GetComponent<Collider>().enabled = false;
+        agent.SetDestination(transform.position);
     }
 }

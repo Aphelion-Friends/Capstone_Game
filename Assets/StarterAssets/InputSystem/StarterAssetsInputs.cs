@@ -22,6 +22,7 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 		public bool click = false;
+                public bool selectFire = false;
 
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
@@ -57,6 +58,11 @@ namespace StarterAssets
         public void OnReload(InputValue value)
         {
             ReloadInput(value.isPressed);
+        }
+
+        public void OnSelectFire(InputValue value)
+        {
+            SelectFireInput(value.isPressed);
         }
 
 
@@ -102,6 +108,10 @@ namespace StarterAssets
         public void ReloadInput(bool newReloadState)
         {
             reload = newReloadState;
+        }
+        public void SelectFireInput(bool newSelectFireState)
+        {
+            selectFire = newSelectFireState;
         }
 
 
