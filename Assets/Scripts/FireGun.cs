@@ -72,6 +72,10 @@ public class GunFireScript : MonoBehaviour
             if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
             {
                 Debug.Log("Bang!");                         //Everytime you fire this will be send into the debug log
+                if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemies"))
+                {
+                    hitInfo.transform.gameObject.GetComponent<enemyAIPatrol>().Die();
+                }
                 //Debug.Log(hitInfo.transform.name);        //Optionally you can uncomment this line of code and it'll tell you what you fired at
             }    
             UseAmmo();
