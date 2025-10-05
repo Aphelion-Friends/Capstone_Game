@@ -4986,6 +4986,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 972057005}
     - target: {fileID: 2972367083148195683, guid: 73fb8f3b8793afb259a282d4cb1e35f6, type: 3}
+      propertyPath: sightRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972367083148195683, guid: 73fb8f3b8793afb259a282d4cb1e35f6, type: 3}
       propertyPath: attackCooldown
       value: 1
       objectReference: {fileID: 0}
