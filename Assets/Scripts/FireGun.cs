@@ -24,6 +24,9 @@ public class GunFireScript : MonoBehaviour
     public int ammoCapacity = 0; // Max ammo for gun
 
     public GunRecoil gunRecoilScript;
+
+    [SerializeField] LayerMask enemyLayer;
+    [SerializeField] float enemyAlertRadius;
     
     void Start()
     {
@@ -72,8 +75,19 @@ public class GunFireScript : MonoBehaviour
                 //Debug.Log(hitInfo.transform.name);        //Optionally you can uncomment this line of code and it'll tell you what you fired at
             }    
             UseAmmo();
+            AlertEnemies();
         }
         
+    }
+
+    void AlertEnemies()
+    {
+        Collider[] allEnemiesInEarshot = Physics.OverlapSphere(transform.position, enemyAlertRadius, enemyLayer);
+
+        for (int x = 0; x < allEnemiesInEarshot.Length; x++)
+        {
+            allEnemiesInEarshot[x].gameObject.GetComponent<enemyAIPatrol>().HearSound(transform.position);
+        }
     }
 }
 
