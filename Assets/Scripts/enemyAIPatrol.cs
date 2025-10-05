@@ -23,10 +23,13 @@ public class enemyAIPatrol : MonoBehaviour
     float timeAtLastAttack;
     [SerializeField] float attackCooldown = 1f;
 
+    Animator animator;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -72,6 +75,8 @@ public class enemyAIPatrol : MonoBehaviour
     void Attack()
     {
         float timeSinceLastAttack = Time.time - timeAtLastAttack;
+        animator.SetTrigger("Attack");
+        // agent.SetDestination(transform.position);
 
         if (timeSinceLastAttack >= attackCooldown)
         {
