@@ -116,4 +116,14 @@ public class enemyAIPatrol : MonoBehaviour
             timeAtLastDestSet = Time.time;
         }
     }
+
+    public void HearSound(Vector3 soundLocation)
+    {
+        if (!playerInSight && !playerInAttackRange)
+        {
+            destPoint = soundLocation;
+            walkPointSet = true;
+            timeAtLastDestSet = Time.time;
+        }
+    }
 }
