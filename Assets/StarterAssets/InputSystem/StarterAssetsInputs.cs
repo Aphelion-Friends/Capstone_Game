@@ -23,6 +23,7 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 		public bool click = false;
                 public bool selectFire = false;
+                public bool pause = false;
 
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
@@ -63,6 +64,11 @@ namespace StarterAssets
         public void OnSelectFire(InputValue value)
         {
             SelectFireInput(value.isPressed);
+        }
+
+        public void OnPause(InputValue value)
+        {
+            PauseInput(value.isPressed);
         }
 
 
@@ -112,6 +118,10 @@ namespace StarterAssets
         public void SelectFireInput(bool newSelectFireState)
         {
             selectFire = newSelectFireState;
+        }
+        public void PauseInput(bool newPauseState)
+        {
+            pause = newPauseState;
         }
 
 
