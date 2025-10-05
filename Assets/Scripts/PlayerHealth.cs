@@ -30,15 +30,15 @@ public class PlayerHealth : MonoBehaviour
         healthText.text = $"{currentHealth}/{maxHealth}";
     }
     
-//Temporaraily is in place to test damage (*REMOVE AFTER MOBS DO DAMAGE*)
+    //Temporaraily is in place to test damage (*REMOVE AFTER MOBS DO DAMAGE*)
     void Update()
-{
-    // Using the new Input System
-    if (Keyboard.current.spaceKey.wasPressedThisFrame)
     {
-        TakeDamage(10f);
+        // Using the new Input System
+        // if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        // {
+        //     TakeDamage(10f);
+        // }
     }
-}
 
     
 }

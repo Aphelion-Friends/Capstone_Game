@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class enemyAIPatrol : MonoBehaviour
 {
-    [SerializeField] GameObject player;
+    GameObject player;
     NavMeshAgent agent;
 
     [SerializeField] LayerMask groundLayer, playerLayer;
@@ -20,6 +20,9 @@ public class enemyAIPatrol : MonoBehaviour
     [SerializeField] float sightRange, attackRange;
     bool playerInSight, playerInAttackRange;
 
+    float timeAtLastAttack;
+    [SerializeField] float attackCooldown = 1f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -29,11 +32,52 @@ public class enemyAIPatrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerInSight = Physics.CheckSphere(transform.position, sightRange, playerLayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, playerLayer);
+        Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
+        Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
+
+        playerInSight = playerInSightColliders.Length > 0;
+        playerInAttackRange = playerInAttackRangeColliders.Length > 0;
+
+        if (playerInAttackRange)
+        {
+            // Debug.Log("ATTAK");
+            player = GetClosestPlayer(playerInAttackRangeColliders);
+        }
+        else if (playerInSight)
+        {
+            player = GetClosestPlayer(playerInSightColliders);
+        }
 
         if (!playerInSight && !playerInAttackRange) Patrol();
         if (playerInSight && !playerInAttackRange) Chase();
+        if (playerInSight && playerInAttackRange) Attack();
+    }
+
+    GameObject GetClosestPlayer(Collider[] colliderArray)
+    {
+        GameObject currentBest = colliderArray[0].gameObject;
+        for (int x = 1; x < colliderArray.Length; x++)
+        {
+            float currentBestDistance = Vector3.Distance(transform.position, currentBest.transform.position);
+            float currentDistance = Vector3.Distance(transform.position, colliderArray[x].gameObject.transform.position);
+
+            if (currentDistance < currentBestDistance)
+            {
+                currentBest = colliderArray[x].gameObject;
+            }
+        }
+        return currentBest;
+    }
+
+    void Attack()
+    {
+        float timeSinceLastAttack = Time.time - timeAtLastAttack;
+
+        if (timeSinceLastAttack >= attackCooldown)
+        {
+            FindFirstObjectByType<PlayerHealth>().TakeDamage(10f);
+            timeAtLastAttack = Time.time;
+        }
     }
 
     void Chase()
