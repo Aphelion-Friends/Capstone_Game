@@ -5220,7 +5220,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3688170438458974228, guid: 73fb8f3b8793afb259a282d4cb1e35f6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1587704434}
   m_SourcePrefab: {fileID: 100100000, guid: 73fb8f3b8793afb259a282d4cb1e35f6, type: 3}
 --- !u!43 &992039067
 Mesh:
@@ -10316,7 +10319,7 @@ PrefabInstance:
       objectReference: {fileID: 137063045}
     - target: {fileID: 1611434386731831580, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: enemyAlertRadius
-      value: 50
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1611434386731831580, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: enemyLayer.m_Bits
@@ -11791,6 +11794,34 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1587704430 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3688170438458974228, guid: 73fb8f3b8793afb259a282d4cb1e35f6, type: 3}
+  m_PrefabInstance: {fileID: 973782890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &1587704434
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587704430}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1590321995
 GameObject:
   m_ObjectHideFlags: 0
