@@ -5,6 +5,7 @@ using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
+using UnityEngine.VFX;
 
 public class GunFireScript : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GunFireScript : MonoBehaviour
     public UpdateHUD HUDScript;
 
     public GunSound gunSoundScript;
+    public VisualEffect muzzleFlash;
 
     public StarterAssetsInputs input;
     
@@ -97,6 +99,7 @@ public class GunFireScript : MonoBehaviour
             }    
             UseAmmo();
             AlertEnemies();
+            muzzleFlash.Play();
         }
         
     }
