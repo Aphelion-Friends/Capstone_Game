@@ -59,6 +59,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Select Fire",
+                    "type": "Button",
+                    "id": "823e9a5b-9803-4bb7-8867-277763e8de09",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -253,7 +262,7 @@
                     "name": "",
                     "id": "52c6d8cd-0def-404b-b4f2-4f930c6e80c2",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": ";KeyboardMouse",
                     "action": "Fire",
@@ -279,6 +288,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Reload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f190e1e-87c7-4c37-97b7-4723aab53e01",
+                    "path": "<Keyboard>/v",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "Select Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
