@@ -10322,6 +10322,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 137063045}
     - target: {fileID: 1611434386731831580, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: roundsPerMinute
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1611434386731831580, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: enemyAlertRadius
       value: 1000
       objectReference: {fileID: 0}

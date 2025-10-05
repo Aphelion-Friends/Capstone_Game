@@ -17,6 +17,7 @@ public class GunFireScript : MonoBehaviour
     
     public float damage = 10f; //Change these values if you want to make the damage or range bigger or smaller
     public float range = 100f; //Ideally I'd like to have other variables like gun recoil 
+    public float roundsPerMinute = 100f;
     public float gunRecoil = 20f;
     public Camera fpsCam;
 
@@ -27,6 +28,8 @@ public class GunFireScript : MonoBehaviour
 
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float enemyAlertRadius;
+
+    float timeAtLastShot = 0;
     
     void Start()
     {
@@ -63,8 +66,12 @@ public class GunFireScript : MonoBehaviour
 
     void Shoot()
     {
-        if (ammoCount > 0)
+        float shootDelay = (1 / roundsPerMinute) * 60;
+
+        if (ammoCount > 0 && (Time.time - timeAtLastShot) >= shootDelay)
         {
+            timeAtLastShot = Time.time;
+
             gunSoundScript.playGunshotSound();
             gunRecoilScript.Recoil(gunRecoil);
             RaycastHit hitInfo;
