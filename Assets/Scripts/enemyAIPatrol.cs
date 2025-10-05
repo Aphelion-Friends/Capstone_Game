@@ -23,34 +23,42 @@ public class enemyAIPatrol : MonoBehaviour
     float timeAtLastAttack;
     [SerializeField] float attackCooldown = 1f;
 
+    Animator animator;
+
+    bool dead = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
-        Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
-
-        playerInSight = playerInSightColliders.Length > 0;
-        playerInAttackRange = playerInAttackRangeColliders.Length > 0;
-
-        if (playerInAttackRange)
+        if (!dead)
         {
-            // Debug.Log("ATTAK");
-            player = GetClosestPlayer(playerInAttackRangeColliders);
-        }
-        else if (playerInSight)
-        {
-            player = GetClosestPlayer(playerInSightColliders);
-        }
+            Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
+            Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 
-        if (!playerInSight && !playerInAttackRange) Patrol();
-        if (playerInSight && !playerInAttackRange) Chase();
-        if (playerInSight && playerInAttackRange) Attack();
+            playerInSight = playerInSightColliders.Length > 0;
+            playerInAttackRange = playerInAttackRangeColliders.Length > 0;
+
+            if (playerInAttackRange)
+            {
+                // Debug.Log("ATTAK");
+                player = GetClosestPlayer(playerInAttackRangeColliders);
+            }
+            else if (playerInSight)
+            {
+                player = GetClosestPlayer(playerInSightColliders);
+            }
+
+            if (!playerInSight && !playerInAttackRange) Patrol();
+            if (playerInSight && !playerInAttackRange) Chase();
+            if (playerInSight && playerInAttackRange) Attack();
+        }
     }
 
     GameObject GetClosestPlayer(Collider[] colliderArray)
@@ -72,6 +80,8 @@ public class enemyAIPatrol : MonoBehaviour
     void Attack()
     {
         float timeSinceLastAttack = Time.time - timeAtLastAttack;
+        animator.SetTrigger("Attack");
+        // agent.SetDestination(transform.position);
 
         if (timeSinceLastAttack >= attackCooldown)
         {
@@ -125,5 +135,12 @@ public class enemyAIPatrol : MonoBehaviour
             walkPointSet = true;
             timeAtLastDestSet = Time.time;
         }
+    }
+
+    public void Die()
+    {
+        dead = true;
+        animator.SetTrigger("Die");
+        GetComponent<Collider>().enabled = false;
     }
 }
