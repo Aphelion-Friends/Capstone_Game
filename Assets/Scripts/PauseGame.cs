@@ -19,23 +19,27 @@ public class PauseGame : MonoBehaviour
             if (paused) Resume();
             if (!paused) Pause();
 
-            Debug.Log("PAUSE");
-            paused = !paused;
             input.pause = false;
         }
     }
 
-    void Pause()
+    public void Pause()
     {
+        input.cursorLocked = false;
         Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.Confined;
         GetComponent<Canvas>().enabled = true;
         input.locked = true;
+        paused = !paused;
     }
 
-    void Resume()
+    public void Resume()
     {
+        input.cursorLocked = true;
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
         GetComponent<Canvas>().enabled = false;
         input.locked = false;
+        paused = !paused;
     }
 }
