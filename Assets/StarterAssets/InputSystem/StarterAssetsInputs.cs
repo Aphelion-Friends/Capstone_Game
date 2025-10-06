@@ -13,6 +13,8 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+                public bool selectFire = false;
+                public bool pause = false;
                 public bool reload;
 
 		[Header("Movement Settings")]
@@ -22,8 +24,9 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 		public bool click = false;
-                public bool selectFire = false;
-                public bool pause = false;
+
+                [Header("Lock Input")]
+                public bool locked = false;
 
 #if ENABLE_INPUT_SYSTEM
         public void OnMove(InputValue value)
@@ -78,22 +81,24 @@ namespace StarterAssets
 
         public void MoveInput(Vector2 newMoveDirection)
 		{
-			move = newMoveDirection;
+			if (locked == false) move = newMoveDirection;
+                        else move = Vector3.zero;
 		} 
 
 		public void LookInput(Vector2 newLookDirection)
 		{
-			look = newLookDirection;
+                    if (locked == false) look = newLookDirection;
+                    else look = Vector3.zero;
 		}
 
 		public void JumpInput(bool newJumpState)
 		{
-			jump = newJumpState;
+			if (locked == false) jump = newJumpState;
 		}
 
 		public void SprintInput(bool newSprintState)
 		{
-			sprint = newSprintState;
+			if (locked == false) sprint = newSprintState;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)
@@ -108,16 +113,16 @@ namespace StarterAssets
 
         public void ClickInput(bool newClickState)
         {
-            click = newClickState;
+            if (locked == false) click = newClickState;
         }
 
         public void ReloadInput(bool newReloadState)
         {
-            reload = newReloadState;
+            if (locked == false) reload = newReloadState;
         }
         public void SelectFireInput(bool newSelectFireState)
         {
-            selectFire = newSelectFireState;
+            if (locked == false) selectFire = newSelectFireState;
         }
         public void PauseInput(bool newPauseState)
         {

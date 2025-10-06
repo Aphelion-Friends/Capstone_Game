@@ -16,24 +16,26 @@ public class PauseGame : MonoBehaviour
     {
         if (input.pause)
         {
+            if (paused) Resume();
+            if (!paused) Pause();
+
             Debug.Log("PAUSE");
             paused = !paused;
             input.pause = false;
-
-            if (paused) Pause();
-            if (!paused) Resume();
         }
     }
 
     void Pause()
     {
         Time.timeScale = 0;
-        GetComponent<Canvas>().enabled = false;
+        GetComponent<Canvas>().enabled = true;
+        input.locked = true;
     }
 
     void Resume()
     {
         Time.timeScale = 1;
-        GetComponent<Canvas>().enabled = true;
+        GetComponent<Canvas>().enabled = false;
+        input.locked = false;
     }
 }
