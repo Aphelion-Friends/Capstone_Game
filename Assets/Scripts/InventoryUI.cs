@@ -7,7 +7,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryPanel;
 
     private InputSystem_Actions inputActions;
-    private bool isOpen = false;
+    public static bool inventoryOpen = false;
 
     private void Awake()
     {
@@ -28,7 +28,18 @@ public class InventoryUI : MonoBehaviour
 
     private void OnToggleInventory(InputAction.CallbackContext context)
     {
-        isOpen = !isOpen;
-        inventoryPanel.SetActive(isOpen);
+        inventoryOpen = !inventoryOpen;
+        inventoryPanel.SetActive(inventoryOpen);
+
+        if (inventoryOpen)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

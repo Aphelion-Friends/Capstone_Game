@@ -33,6 +33,10 @@ public class GunFireScript : MonoBehaviour
 
     void Update()
     {
+        if (InventoryUI.inventoryOpen)
+        {
+            return;
+        }
         if (input.click)
         {
             Shoot();
@@ -66,14 +70,15 @@ public class GunFireScript : MonoBehaviour
             gunRecoilScript.Recoil(gunRecoil);
             RaycastHit hitInfo;
 
-            if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
             {
                 Debug.Log("Bang!");                         //Everytime you fire this will be send into the debug log
                 //Debug.Log(hitInfo.transform.name);        //Optionally you can uncomment this line of code and it'll tell you what you fired at
-            }    
+            }
             UseAmmo();
         }
-        
+
     }
+
 }
 
