@@ -42,6 +42,10 @@ public class GunFireScript : MonoBehaviour
 
     void Update()
     {
+        if (InventoryUI.inventoryOpen)
+        {
+            return;
+        }
         if (input.click)
         {
             Shoot();
@@ -84,11 +88,11 @@ public class GunFireScript : MonoBehaviour
         {
             timeAtLastShot = Time.time;
 
-            gunSoundScript.playGunshotSound();
+            gunSoundScript.PlayGunshotSound();
             gunRecoilScript.Recoil(gunRecoil);
             RaycastHit hitInfo;
 
-            if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
+            if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
             {
                 Debug.Log("Bang!");                         //Everytime you fire this will be send into the debug log
                 if (hitInfo.transform.gameObject.layer == LayerMask.NameToLayer("Enemies"))
@@ -96,12 +100,12 @@ public class GunFireScript : MonoBehaviour
                     hitInfo.transform.gameObject.GetComponent<enemyAIPatrol>().Die();
                 }
                 //Debug.Log(hitInfo.transform.name);        //Optionally you can uncomment this line of code and it'll tell you what you fired at
-            }    
+            }
             UseAmmo();
             AlertEnemies();
             muzzleFlash.Play();
         }
-        
+
     }
 
     void AlertEnemies()

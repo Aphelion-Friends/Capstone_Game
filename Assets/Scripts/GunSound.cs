@@ -2,11 +2,49 @@ using UnityEngine;
 
 public class GunSound : MonoBehaviour
 {
+    [Header("Audio Source")]
     public AudioSource gunshotAudio;
 
-    
-    public void playGunshotSound()
+    [Header("Settings")]
+    [Range(0f, 1f)] public float volume = 1f;
+    public bool isMuted = false;
+
+    void Start()
     {
-        gunshotAudio.PlayOneShot(gunshotAudio.clip);
+        if (gunshotAudio != null)
+        {
+            gunshotAudio.volume = volume;
+            gunshotAudio.mute = isMuted;
+        }
+    }
+
+    public void PlayGunshotSound()
+    {
+        if (gunshotAudio != null && gunshotAudio.clip != null)
+        {
+            gunshotAudio.volume = volume; // update to latest
+            gunshotAudio.mute = isMuted;
+            gunshotAudio.PlayOneShot(gunshotAudio.clip, volume);
+        }
+    }
+
+    public void SetVolume(float newVolume)
+    {
+        volume = Mathf.Clamp01(newVolume);
+        if (gunshotAudio != null)
+            gunshotAudio.volume = volume;
+    }
+
+    public void ToggleMute()
+    {
+        isMuted = !isMuted;
+        if (gunshotAudio != null)
+            gunshotAudio.mute = isMuted;
+    }
+
+    public void SetPitch(float newPitch)
+    {
+        if (gunshotAudio != null)
+            gunshotAudio.pitch = Mathf.Clamp(newPitch, 0.5f, 2f); // keeps it natural
     }
 }

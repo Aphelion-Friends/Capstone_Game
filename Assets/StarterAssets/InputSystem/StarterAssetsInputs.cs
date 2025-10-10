@@ -56,6 +56,10 @@ namespace StarterAssets
 
         public void OnFire(InputValue value)
         {
+			if (InventoryUI.inventoryOpen)
+			{
+				return;
+			}
             ClickInput(value.isPressed);
         }
 
