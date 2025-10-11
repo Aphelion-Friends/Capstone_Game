@@ -2,8 +2,9 @@
 
 using UnityEngine;
 using UnityEngine.AI;
+using PurrNet;
 
-public class enemyAIPatrol : MonoBehaviour
+public class enemyAIPatrol : NetworkIdentity
 {
     GameObject player;
     NavMeshAgent agent;
@@ -25,11 +26,13 @@ public class enemyAIPatrol : MonoBehaviour
 
     Animator animator;
 
-    bool dead = false;
+    SyncVar<bool> dead = new(true, ownerAuth:false);
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    protected override void OnSpawned()
     {
+        base.OnSpawned();
+
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
@@ -37,7 +40,7 @@ public class enemyAIPatrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!dead)
+        if (!dead && isServer)
         {
             Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
             Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
@@ -137,11 +140,26 @@ public class enemyAIPatrol : MonoBehaviour
         }
     }
 
+    [ServerRpc]
     public void Die()
     {
-        dead = true;
-        animator.SetTrigger("Die");
-        GetComponent<Collider>().enabled = false;
+        Debug.Log("SHOUD DIE");
+        Debug.Log(dead.value);
+        dead.value = true;
+        OnDie(dead.value);
         agent.SetDestination(transform.position);
+    }
+
+    // Makes the enemy appear dead for the clients
+    // Should be called when the server sets the spider to be dead
+    [ObserversRpc]
+    private void OnDie(bool isDead)
+    {
+        Debug.Log("DEAD!");
+        if (isDead)
+        {
+            animator.SetTrigger("Die");
+            GetComponent<Collider>().enabled = false;
+        }
     }
 }
