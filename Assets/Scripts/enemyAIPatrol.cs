@@ -26,21 +26,25 @@ public class enemyAIPatrol : NetworkIdentity
 
     Animator animator;
 
-    SyncVar<bool> dead = new(true, ownerAuth:false);
+    SyncVar<bool> dead = new(false, ownerAuth:true);
 
 
-    protected override void OnSpawned()
+    protected override void OnSpawned(bool asServer)
     {
-        base.OnSpawned();
+        base.OnSpawned(asServer);
+        // if (asServer)
+        //     GiveOwnership(PlayerID.Server);
 
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        networkManager.onTick += OnTick;
     }
 
     // Update is called once per frame
-    void Update()
+    private void OnTick(bool asServer)
     {
-        if (!dead && isServer)
+        if (!dead && asServer)
         {
             Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
             Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
