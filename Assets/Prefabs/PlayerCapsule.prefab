@@ -28,11 +28,10 @@ Transform:
   m_GameObject: {fileID: 2330289719389882315}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 870713990147224876}
+  m_Children: []
   m_Father: {fileID: 4135013735270702856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &8129962517813295323
@@ -168,6 +167,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5818257951969907912}
+  - {fileID: 870713990147224876}
   m_Father: {fileID: 8997996947095583982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5393215578589016642
@@ -298,6 +298,8 @@ GameObject:
   - component: {fileID: 5420857361349278248}
   - component: {fileID: 8616685848737228376}
   - component: {fileID: 5586964409754791011}
+  - component: {fileID: 459986035164704537}
+  - component: {fileID: -5253801109596342059}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -409,11 +411,14 @@ MonoBehaviour:
   look: {x: 0, y: 0}
   jump: 0
   sprint: 0
+  selectFire: 0
+  pause: 0
   reload: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
   click: 0
+  locked: 0
 --- !u!114 &8616685848737228376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,7 +513,7 @@ MonoBehaviour:
     m_ActionId: 22860f9f-2f3c-40aa-a08d-54400b29fa8b
     m_ActionName: 'Player/Fire[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: KeyboardMouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
@@ -533,13 +538,79 @@ MonoBehaviour:
   derivativeGain: 15
   forceMultiplier: 15
   maxDistance: 0.2
+--- !u!114 &459986035164704537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817fe5016bd0a2a49a95b6eb338bb132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkTransform
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 1
+  _syncParent: 1
+  _interpolateSettings: 7
+  _minBufferSize: 1
+  _maxBufferSize: 2
+  _characterControllerPatch: 0
+  _ownerAuth: 1
+  _interpolationTiming: 0
+--- !u!114 &-5253801109596342059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d5e4b97b1615f4aae984a3d5f4235f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkOwnershipToggle
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _components:
+  - target: {fileID: 8616685848737228376}
+    activeAsOwner: 1
+  - target: {fileID: 5420857361349278248}
+    activeAsOwner: 1
+  - target: {fileID: 8616685848737228371}
+    activeAsOwner: 1
+  _gameObjects:
+  - target: {fileID: 2330289719389882315}
+    activeAsOwner: 1
+  _toActivate: []
+  _toDeactivate: []
+  _toEnable: []
+  _toDisable: []
 --- !u!1001 &3504088887871206599
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 5818257951969907912}
+    m_TransformParent: {fileID: 4135013735270702856}
     m_Modifications:
     - target: {fileID: 939228477493637411, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: m_Name
@@ -560,6 +631,14 @@ PrefabInstance:
     - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: ammoCapacity
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: roundsPerMinute
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470453815674081890, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3798096523933562354, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: gun
@@ -651,12 +730,29 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 939228477493637411, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4920745367536182561}
+    - targetCorrespondingSourceObject: {fileID: 939228477493637411, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6289836328190242155}
+    - targetCorrespondingSourceObject: {fileID: 939228477493637411, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1006124222743870362}
   m_SourcePrefab: {fileID: 100100000, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
 --- !u!4 &870713990147224876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
   m_PrefabInstance: {fileID: 3504088887871206599}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1611434386731831580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+  m_PrefabInstance: {fileID: 3504088887871206599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443303603117262308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37afd6984fc8e3948bb89eee2eb308b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GunFireScript
 --- !u!1 &4443303603117262308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 939228477493637411, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
@@ -710,3 +806,63 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6289836328190242155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443303603117262308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d5e4b97b1615f4aae984a3d5f4235f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkOwnershipToggle
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _components:
+  - target: {fileID: 1611434386731831580}
+    activeAsOwner: 1
+  _gameObjects: []
+  _toActivate: []
+  _toDeactivate: []
+  _toEnable: []
+  _toDisable: []
+--- !u!114 &1006124222743870362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443303603117262308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817fe5016bd0a2a49a95b6eb338bb132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkTransform
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _syncPosition: 1
+  _syncRotation: 1
+  _syncScale: 1
+  _syncParent: 1
+  _interpolateSettings: 7
+  _minBufferSize: 1
+  _maxBufferSize: 2
+  _characterControllerPatch: 0
+  _ownerAuth: 1
+  _interpolationTiming: 0

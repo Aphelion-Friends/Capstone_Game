@@ -10,7 +10,7 @@ using UnityEngine.VFX;
 public class GunFireScript : MonoBehaviour
 {
 
-    public UpdateHUD HUDScript;
+    private UpdateHUD HUDScript;
 
     public GunSound gunSoundScript;
     public VisualEffect muzzleFlash;
@@ -36,6 +36,7 @@ public class GunFireScript : MonoBehaviour
     
     void Start()
     {
+        HUDScript = FindFirstObjectByType<UpdateHUD>();
         Reload();
         HUDScript.SetAmmo(ammoCount);
     }
