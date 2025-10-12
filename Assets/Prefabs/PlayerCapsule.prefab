@@ -636,6 +636,14 @@ PrefabInstance:
       propertyPath: roundsPerMinute
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: enemyAlertRadius
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: enemyLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 3470453815674081890, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: m_Enabled
       value: 1

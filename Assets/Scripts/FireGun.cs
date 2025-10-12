@@ -117,10 +117,12 @@ public class GunFireScript : NetworkIdentity
         gun.GetComponent<GunFireScript>().muzzleFlash.Play();
     }
 
-    [ObserversRpc]
+    [ServerRpc]
     void AlertEnemies(GameObject gun)
     {
         Collider[] allEnemiesInEarshot = Physics.OverlapSphere(gun.transform.position, enemyAlertRadius, enemyLayer);
+
+        Debug.Log(allEnemiesInEarshot.Length);
 
         for (int x = 0; x < allEnemiesInEarshot.Length; x++)
         {
