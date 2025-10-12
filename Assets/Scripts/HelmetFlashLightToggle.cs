@@ -1,13 +1,33 @@
 using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
+using PurrNet;
 
-public class FlashlightToggle : MonoBehaviour
+public class FlashlightToggle : NetworkIdentity 
 {
     private Light lightComp;
+    private SyncVar<bool> lightOn = new(false, ownerAuth:true);
 
-    void Start()
+    protected override void OnSpawned()
     {
         lightComp = GetComponent<Light>();
+        lightOn.onChanged += SetLight;
+        SetLight(false);
+    }
+
+    protected override void OnDestroy()
+    {
+        lightOn.onChanged -= SetLight;
+    }
+
+    private void ToggleLight()
+    {
+        if (isOwner)
+            lightOn.value = !lightOn.value;
+    }
+    
+    private void SetLight(bool On)
+    {
+        lightComp.enabled = On;
     }
 
     void Update()
@@ -15,7 +35,7 @@ public class FlashlightToggle : MonoBehaviour
         // Check if the 'F' key was pressed this frame
         if (Keyboard.current.fKey.wasPressedThisFrame)
         {
-            lightComp.enabled = !lightComp.enabled;
+            ToggleLight(); 
         }
     }
 }
