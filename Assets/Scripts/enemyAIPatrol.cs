@@ -6,7 +6,6 @@ using PurrNet;
 
 public class enemyAIPatrol : NetworkIdentity
 {
-    GameObject player;
     NavMeshAgent agent;
 
     [SerializeField] LayerMask groundLayer, playerLayer;
@@ -24,7 +23,7 @@ public class enemyAIPatrol : NetworkIdentity
     float timeAtLastAttack;
     [SerializeField] float attackCooldown = 1f;
 
-    Animator animator;
+    NetworkAnimator animator;
 
     SyncVar<bool> dead = new(false, ownerAuth:true);
 
@@ -36,7 +35,7 @@ public class enemyAIPatrol : NetworkIdentity
         //     GiveOwnership(PlayerID.Server);
 
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        animator = GetComponent<NetworkAnimator>();
 
         networkManager.onTick += OnTick;
     }
@@ -46,6 +45,7 @@ public class enemyAIPatrol : NetworkIdentity
     {
         if (!dead && asServer)
         {
+            GameObject targetedPlayer = null;
             Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
             Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 
@@ -55,16 +55,20 @@ public class enemyAIPatrol : NetworkIdentity
             if (playerInAttackRange)
             {
                 // Debug.Log("ATTAK");
-                player = GetClosestPlayer(playerInAttackRangeColliders);
+                targetedPlayer = GetClosestPlayer(playerInAttackRangeColliders);
             }
             else if (playerInSight)
             {
-                player = GetClosestPlayer(playerInSightColliders);
+                targetedPlayer = GetClosestPlayer(playerInSightColliders);
             }
 
             if (!playerInSight && !playerInAttackRange) Patrol();
-            if (playerInSight && !playerInAttackRange) Chase();
-            if (playerInSight && playerInAttackRange) Attack();
+
+            if (targetedPlayer is null)
+                return;
+
+            if (playerInSight && !playerInAttackRange) Chase(targetedPlayer);
+            if (playerInSight && playerInAttackRange) Attack(targetedPlayer);
         }
     }
 
@@ -84,22 +88,29 @@ public class enemyAIPatrol : NetworkIdentity
         return currentBest;
     }
 
-    void Attack()
+    void Attack(GameObject playerAttacked)
     {
         float timeSinceLastAttack = Time.time - timeAtLastAttack;
         animator.SetTrigger("Attack");
-        // agent.SetDestination(transform.position);
+        NetworkIdentity playerAttackedOwner = playerAttacked.GetComponent<NetworkIdentity>();
 
-        if (timeSinceLastAttack >= attackCooldown)
+        if (timeSinceLastAttack >= attackCooldown && playerAttackedOwner is not null)
         {
-            FindFirstObjectByType<PlayerHealth>().TakeDamage(10f);
+            // playerAttacked.GetComponent<PlayerHealth>().TakeDamage(10f);
+            DealDamage(playerAttackedOwner.owner.Value, 10f);
             timeAtLastAttack = Time.time;
         }
     }
 
-    void Chase()
+    [TargetRpc]
+    void DealDamage(PlayerID target, float damage)
     {
-        agent.SetDestination(player.transform.position);
+        FindFirstObjectByType<PlayerHealth>().TakeDamage(damage);
+    }
+
+    void Chase(GameObject targetedPlayer)
+    {
+        agent.SetDestination(targetedPlayer.transform.position);
     }
 
     void Patrol()
@@ -147,11 +158,12 @@ public class enemyAIPatrol : NetworkIdentity
     [ServerRpc]
     public void Die()
     {
-        Debug.Log("SHOUD DIE");
+        // Debug.Log("SHOUD DIE");
         Debug.Log(dead.value);
         dead.value = true;
         OnDie(dead.value);
         agent.SetDestination(transform.position);
+        animator.SetTrigger("Die");
     }
 
     // Makes the enemy appear dead for the clients
@@ -159,10 +171,9 @@ public class enemyAIPatrol : NetworkIdentity
     [ObserversRpc]
     private void OnDie(bool isDead)
     {
-        Debug.Log("DEAD!");
+        // Debug.Log("DEAD!");
         if (isDead)
         {
-            animator.SetTrigger("Die");
             GetComponent<Collider>().enabled = false;
         }
     }
