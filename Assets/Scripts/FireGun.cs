@@ -6,11 +6,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
 using UnityEngine.VFX;
+using PurrNet;
 
-public class GunFireScript : MonoBehaviour
+public class GunFireScript : NetworkIdentity
 {
 
-    public UpdateHUD HUDScript;
+    private UpdateHUD HUDScript;
 
     public GunSound gunSoundScript;
     public VisualEffect muzzleFlash;
@@ -36,6 +37,7 @@ public class GunFireScript : MonoBehaviour
     
     void Start()
     {
+        HUDScript = FindFirstObjectByType<UpdateHUD>();
         Reload();
         HUDScript.SetAmmo(ammoCount);
     }
@@ -88,8 +90,8 @@ public class GunFireScript : MonoBehaviour
         {
             timeAtLastShot = Time.time;
 
-            gunSoundScript.PlayGunshotSound();
             gunRecoilScript.Recoil(gunRecoil);
+            // gunSoundScript.PlayGunshotSound();
             RaycastHit hitInfo;
 
             if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hitInfo, range))
@@ -102,19 +104,29 @@ public class GunFireScript : MonoBehaviour
                 //Debug.Log(hitInfo.transform.name);        //Optionally you can uncomment this line of code and it'll tell you what you fired at
             }
             UseAmmo();
-            AlertEnemies();
-            muzzleFlash.Play();
+            AlertEnemies(gameObject);
+            PlayGunEffects(gameObject);
         }
 
     }
 
-    void AlertEnemies()
+    [ObserversRpc]
+    void PlayGunEffects(GameObject gun)
     {
-        Collider[] allEnemiesInEarshot = Physics.OverlapSphere(transform.position, enemyAlertRadius, enemyLayer);
+        gun.GetComponent<GunFireScript>().gunSoundScript.PlayGunshotSound();
+        gun.GetComponent<GunFireScript>().muzzleFlash.Play();
+    }
+
+    [ServerRpc]
+    void AlertEnemies(GameObject gun)
+    {
+        Collider[] allEnemiesInEarshot = Physics.OverlapSphere(gun.transform.position, enemyAlertRadius, enemyLayer);
+
+        Debug.Log(allEnemiesInEarshot.Length);
 
         for (int x = 0; x < allEnemiesInEarshot.Length; x++)
         {
-            allEnemiesInEarshot[x].gameObject.GetComponent<enemyAIPatrol>().HearSound(transform.position);
+            allEnemiesInEarshot[x].gameObject.GetComponent<enemyAIPatrol>().HearSound(gun.transform.position);
         }
     }
 
