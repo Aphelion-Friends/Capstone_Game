@@ -5,11 +5,19 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Health Settings")]
     public float maxHealth = 100f;
     public float currentHealth;
 
+    [Header("UI parts")]
     public Image healthBarFill;
     public TMP_Text healthText;
+
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip hurtSound;
+    private float lastHurtSoundTime;
+    public float hurtSoundCooldown = 0.2f;
 
     void Start()
     {
@@ -22,6 +30,12 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         UpdateHealthUI();
+
+        if(hurtSound != null && audioSource != null && Time.time - lastHurtSoundTime > hurtSoundCooldown)
+        {
+            audioSource.PlayOneShot(hurtSound);
+            lastHurtSoundTime = Time.time;
+        }
     }
 
     void UpdateHealthUI()
