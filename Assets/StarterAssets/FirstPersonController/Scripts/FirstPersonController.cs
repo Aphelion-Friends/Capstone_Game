@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PurrNet;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -9,7 +10,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
 	[RequireComponent(typeof(PlayerInput))]
 #endif
-	public class FirstPersonController : MonoBehaviour
+	public class FirstPersonController : NetworkIdentity
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
@@ -115,6 +116,7 @@ namespace StarterAssets
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			HandleFootsteps();
 		}
 
 		private void LateUpdate()
@@ -257,7 +259,54 @@ namespace StarterAssets
 			return Mathf.Clamp(lfAngle, lfMin, lfMax);
 		}
 
-		private void OnDrawGizmosSelected()
+		//------------------------------------------------------------------------------------------------------------------------------------------
+
+        [Header("Footsteps")]
+        public AudioSource footstepAudioSource;
+        public AudioClip[] footstepClips;
+        public float baseStepInterval = 0.5f;
+        [Tooltip("Multiplier applied when sprinting (lower = faster)")]
+        public float sprintStepMultiplier = 0.6f;
+
+		private float footstepTimer;
+
+        private void HandleFootsteps()
+        {
+            if (!Grounded) return;
+
+            Vector3 horizontalVelocity = new Vector3(_controller.velocity.x, 0, _controller.velocity.z);
+            float speed = horizontalVelocity.magnitude;
+
+            if (speed > 0.1f)
+            {
+                footstepTimer -= Time.deltaTime;
+                float currentInterval = _input.sprint ? baseStepInterval * sprintStepMultiplier : baseStepInterval;
+
+                if (footstepTimer <= 0f)
+				{
+					if (isOwner)
+					{
+						PlayFootstepSound();
+					}
+                    footstepTimer = currentInterval;
+                }
+			}
+            else
+            {
+                footstepTimer = 0f;
+            }
+        }
+
+		[ObserversRpc]
+        private void PlayFootstepSound()
+        {
+            if (footstepAudioSource != null && footstepClips.Length > 0)
+            {
+                int index = Random.Range(0, footstepClips.Length);
+                footstepAudioSource.PlayOneShot(footstepClips[index]);
+            }
+        }
+        private void OnDrawGizmosSelected()
 		{
 			Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
 			Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
