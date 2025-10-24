@@ -297,7 +297,7 @@ namespace StarterAssets
             }
         }
 
-		[ObserversRpc]
+		//[ObserversRpc]
         private void PlayFootstepSound()
         {
             if (footstepAudioSource != null && footstepClips.Length > 0)

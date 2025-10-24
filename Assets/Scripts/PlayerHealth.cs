@@ -53,7 +53,7 @@ public class PlayerHealth : NetworkIdentity
         }
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     void playHurtSound()
     {
         if (hurtSound != null)
@@ -62,7 +62,7 @@ public class PlayerHealth : NetworkIdentity
         }
     }
 
-    [ObserversRpc]
+    //[ObserversRpc]
     void playDeathSound()
     {
         if (deathSound != null)

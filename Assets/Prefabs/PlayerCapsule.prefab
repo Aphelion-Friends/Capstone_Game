@@ -592,6 +592,7 @@ GameObject:
   - component: {fileID: 5586964409754791011}
   - component: {fileID: 459986035164704537}
   - component: {fileID: -5253801109596342059}
+  - component: {fileID: 6796405120365970608}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -912,6 +913,28 @@ MonoBehaviour:
   _toDeactivate: []
   _toEnable: []
   _toDisable: []
+--- !u!114 &6796405120365970608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d4864d88a4dcbb4f93c069c4d175cbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  hud: {fileID: 3770811166195637928}
 --- !u!1001 &123111870689033908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1020,6 +1043,11 @@ PrefabInstance:
 --- !u!224 &3107957938927622437 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3068304704505079697, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+  m_PrefabInstance: {fileID: 123111870689033908}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3770811166195637928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3882662938035052572, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
   m_PrefabInstance: {fileID: 123111870689033908}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2887507019554988059
