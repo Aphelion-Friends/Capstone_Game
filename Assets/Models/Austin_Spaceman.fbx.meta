@@ -1,0 +1,210 @@
+fileFormatVersion: 2
+guid: 35b281c98d9678b98bba950362c79d11
+ModelImporter:
+  serializedVersion: 24200
+  internalIDToNameTable: []
+  externalObjects: {}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: Austin_Spaceman(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Armature
+      parentName: Austin_Spaceman(Clone)
+      position: {x: 0, y: -2.844673, z: 0.05000007}
+      rotation: {x: -0.7071067, y: -0.00000012506558, z: -0.00000006324834, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    - name: Root
+      parentName: Armature
+      position: {x: -0, y: -0.0009986496, z: 0.005174983}
+      rotation: {x: -7.1054274e-15, y: 0.00000008940698, z: 1, w: 0.00000006154912}
+      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+    - name: Body
+      parentName: Root
+      position: {x: 2.38193e-20, y: -0.0014986491, z: 0.013884885}
+      rotation: {x: 0.00000005338506, y: -0.7071068, z: -0.7071068, w: 0.00000005338507}
+      scale: {x: 0.9999995, y: 0.99999946, z: 0.99999946}
+    - name: Arm1.L
+      parentName: Body
+      position: {x: -0.006, y: 0.009500002, z: -9.804807e-10}
+      rotation: {x: 0.5092352, y: -0.50493455, z: 0.49501616, w: 0.49059114}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000008}
+    - name: Arm2.L
+      parentName: Arm1.L
+      position: {x: -6.7106753e-10, y: 0.0035014316, z: -2.2032028e-10}
+      rotation: {x: 0.000000018626451, y: 0.000000089556124, z: -0.02142251, w: 0.9997706}
+      scale: {x: 1, y: 1, z: 1.0000002}
+    - name: Hand.L
+      parentName: Arm2.L
+      position: {x: -2.7945984e-10, y: 0.0070007145, z: -7.2768964e-11}
+      rotation: {x: 0.0000000019681516, y: -0.0000002086358, z: 0.0071422467, w: 0.9999745}
+      scale: {x: 1, y: 1.0000002, z: 0.9999999}
+    - name: Head
+      parentName: Body
+      position: {x: -2.3819294e-20, y: 0.013000003, z: 0}
+      rotation: {x: -0, y: -0.00000016292061, z: -7.1054274e-15, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Leg1.R
+      parentName: Body
+      position: {x: 0.002, y: 0.0000000011920929, z: 3.0199163e-10}
+      rotation: {x: 0.99982435, y: 7.635331e-10, z: 0.000000040736307, w: 0.018740116}
+      scale: {x: 1, y: 1.0000006, z: 1.0000017}
+    - name: Leg2.R
+      parentName: Leg1.R
+      position: {x: -1.9017693e-10, y: 0.008005624, z: 2.4296362e-10}
+      rotation: {x: 0.022888022, y: -0.7067363, z: -0.022888051, w: 0.70673627}
+      scale: {x: 0.9999998, y: 0.99999976, z: 0.9999997}
+    - name: Leg1.L
+      parentName: Body
+      position: {x: -0.002, y: 0.0000000011920929, z: -3.0199163e-10}
+      rotation: {x: 0.99982435, y: 7.6353845e-10, z: 0.000000040736264, w: 0.018740116}
+      scale: {x: 1, y: 1.0000006, z: 1.0000017}
+    - name: Leg2.L
+      parentName: Leg1.L
+      position: {x: 1.5703364e-10, y: 0.008005624, z: 1.7864449e-10}
+      rotation: {x: 0.022888022, y: 0.7067362, z: 0.022887992, w: 0.7067364}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
+    - name: Arm1.R
+      parentName: Body
+      position: {x: 0.006, y: 0.009500002, z: 8.3146906e-10}
+      rotation: {x: 0.50923526, y: 0.5049348, z: -0.49501625, w: 0.4905908}
+      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000008}
+    - name: Arm2.R
+      parentName: Arm1.R
+      position: {x: -1.3173626e-10, y: 0.0035014313, z: 2.5027078e-10}
+      rotation: {x: 0.00000008381903, y: -0.0000002683737, z: 0.021422574, w: 0.9997706}
+      scale: {x: 1, y: 1.0000001, z: 1.0000002}
+    - name: Hand.R
+      parentName: Arm2.R
+      position: {x: -3.1728432e-11, y: 0.0070007145, z: 4.1932216e-10}
+      rotation: {x: -0.0000000844629, y: 4.5392307e-10, z: -0.0071422914, w: 0.9999745}
+      scale: {x: 0.9999999, y: 1.0000001, z: 0.9999999}
+    - name: target.leg.R
+      parentName: Root
+      position: {x: -0.002, y: 0.005067962, z: 0.003843392}
+      rotation: {x: -2.842171e-14, y: -1, z: 7.1054274e-14, w: 0.00000031391647}
+      scale: {x: 0.99999976, y: 0.99999976, z: 0.99999976}
+    - name: target.leg.L
+      parentName: Root
+      position: {x: 0.002, y: 0.005067962, z: 0.003843392}
+      rotation: {x: 1.4210855e-14, y: -1, z: -4.973799e-14, w: -0.00000031391647}
+      scale: {x: 0.99999976, y: 0.99999976, z: 0.99999976}
+    - name: target.arm.L
+      parentName: Root
+      position: {x: 0.006, y: -0.0031986497, z: 0.019992158}
+      rotation: {x: 0.70710665, y: 0.000000010103825, z: -0.7071069, w: 0.000000017335111}
+      scale: {x: 0.99999976, y: 1, z: 0.99999976}
+    - name: target.arm.R
+      parentName: Root
+      position: {x: -0.006, y: -0.0031986497, z: 0.019992158}
+      rotation: {x: 0.7071067, y: 0.000000047137437, z: 0.7071069, w: 0.000000019698467}
+      scale: {x: 0.9999997, y: 0.9999997, z: 0.99999976}
+    - name: characterModel
+      parentName: Austin_Spaceman(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.70710677, y: -0.00000016858739, z: -0.00000010677015, w: 0.7071068}
+      scale: {x: 100, y: 100, z: 100}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
