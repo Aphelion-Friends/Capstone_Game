@@ -1,10 +1,11 @@
 using UnityEngine;
 using StarterAssets;
+using PurrNet;
 
 public class PlayAnimations : MonoBehaviour
 {
     [SerializeField] StarterAssetsInputs input;
-    [SerializeField] Animator animator;
+    [SerializeField] NetworkAnimator animator;
 
     // Update is called once per frame
     void Update()
