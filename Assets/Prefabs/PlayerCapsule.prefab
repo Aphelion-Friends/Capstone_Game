@@ -796,7 +796,8 @@ MonoBehaviour:
   TopClamp: 89
   BottomClamp: -89
   footstepAudioSource: {fileID: 3237887246211841742}
-  footstepClips: []
+  footstepClips:
+  - {fileID: 8300000, guid: 5e0fe368d9a158a46b0fe96e660e78cc, type: 3}
   baseStepInterval: 0.5
   sprintStepMultiplier: 0.6
 --- !u!114 &1978471637655604388
@@ -2381,6 +2382,14 @@ PrefabInstance:
       propertyPath: m_UiScaleMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5787219269957047297, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: hurtSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 711b998429a93428cbd3fbd1a6d57948, type: 3}
+    - target: {fileID: 5787219269957047297, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: c63f35c55e22d4b2a81f9dbc0eba64e8, type: 3}
     - target: {fileID: 5787219269957047297, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
       propertyPath: audioSource
       value: 
