@@ -470,6 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6816873078024926263}
+  - component: {fileID: 1581812252625534810}
   m_Layer: 0
   m_Name: IK
   m_TagString: Untagged
@@ -494,6 +495,20 @@ Transform:
   - {fileID: 7203757895020025360}
   m_Father: {fileID: 3087541776158907783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1581812252625534810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2687725155660187950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.Rig
+  m_Weight: 1
+  m_Effectors: []
 --- !u!1 &3455399413050079130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,7 +1861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.RigBuilder
   m_RigLayers:
-  - m_Rig: {fileID: 0}
+  - m_Rig: {fileID: 1581812252625534810}
     m_Active: 1
   m_Effectors: []
 --- !u!4 &2472584431032313342 stripped
