@@ -67,6 +67,7 @@ public class InventoryUI : MonoBehaviour
             if (!inventoryObject.Container[x].empty)
             {
                 GameObject newItemGameObject = inventoryObject.Container[x].item.InstantiatePrefab();
+                newItemGameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
                 // newItemGameObject.transform.parent = slotList[x].transform;
                 newItemGameObject.transform.SetParent(slotList[x].transform, false);
             }
