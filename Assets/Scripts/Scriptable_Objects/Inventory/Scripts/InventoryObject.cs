@@ -34,7 +34,6 @@ public class InventoryObject : ScriptableObject
 
         if (!hasItem && hasSpace)
         {
-            // Container.Add(new InventorySlot(_item, _amount));
             Container[firstEmptySlot] = new InventorySlot(_item, _amount);
         }
 

@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 public class InventoryUI : MonoBehaviour
 {
-    // [Header("References")]
-    // public GameObject inventoryPanel;
 
     [SerializeField] StarterAssetsInputs input;
     public static bool inventoryOpen = false;
@@ -14,24 +12,6 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] GameObject slotPrefab;
     private List<GameObject> slotList;
     [SerializeField] GameObject itemPrefab;
-
-    // private void Awake()
-    // {
-    //     inputActions = new InputSystem_Actions();
-    // }
-
-    // private void OnEnable()
-    // {
-    //     inputActions.UI.ToggleInventory.performed += OnToggleInventory;
-    //     inputActions.UI.Enable();
-    // }
-
-    // private void OnDisable()
-    // {
-    //     inputActions.UI.ToggleInventory.performed -= OnToggleInventory;
-    //     inputActions.UI.Disable();
-    // }
-    
 
     void Awake()
     {
@@ -55,12 +35,10 @@ public class InventoryUI : MonoBehaviour
 
     void onInventoryChange()
     {
-        // Debug.Log("CHANGE");
         for (int x = 0; x < slotList.Count; x++)
         {
             if (slotList[x].transform.childCount > 0)
             {
-                // GameObject itemGameObj = slotList[x].transform.GetChild(0).gameObject;
                 Destroy(slotList[x].transform.GetChild(0).gameObject);
             }
 
@@ -68,7 +46,6 @@ public class InventoryUI : MonoBehaviour
             {
                 GameObject newItemGameObject = inventoryObject.Container[x].item.InstantiatePrefab();
                 newItemGameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
-                // newItemGameObject.transform.parent = slotList[x].transform;
                 newItemGameObject.transform.SetParent(slotList[x].transform, false);
             }
         }
