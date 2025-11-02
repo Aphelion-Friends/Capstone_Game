@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using StarterAssets;
+using System.Collections.Generic;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class InventoryUI : MonoBehaviour
 
     [SerializeField] StarterAssetsInputs input;
     public static bool inventoryOpen = false;
+    [SerializeField] InventoryObject inventoryObject;
+    [SerializeField] GameObject slotPrefab;
+    private List<GameObject> slotList;
 
     // private void Awake()
     // {
@@ -28,6 +32,31 @@ public class InventoryUI : MonoBehaviour
     // }
     
 
+    void Awake()
+    {
+        slotList = new List<GameObject>();
+        inventoryObject.Reset();
+        InstantiateSlots(inventoryObject.numStorageSlots);
+        SetVisibility();
+        inventoryObject.Subscribe(onInventoryChange);
+    }
+
+    void InstantiateSlots(int _numSlots)
+    {
+        for (int x = 0; x < _numSlots; x++)
+        {
+            GameObject newSlotObject = Instantiate(slotPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            newSlotObject.GetComponent<SlotScript>().index = x;
+            newSlotObject.transform.SetParent(transform, false);
+            slotList.Add(newSlotObject);
+        }
+    }
+
+    void onInventoryChange()
+    {
+        Debug.Log("CHANGE");
+    }
+
     public void Update()
     {
         if (input.inventoryOpen)
@@ -37,11 +66,19 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    public void SetVisibility()
+    {
+        GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+        for (int x = 0; x < slotList.Count; x++){
+            slotList[x].GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+        }
+    }
+
     private void OnToggleInventory()
     {
         Debug.Log("INVEN");
         inventoryOpen = !inventoryOpen;
-        GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+        SetVisibility();
 
         if (inventoryOpen)
         {

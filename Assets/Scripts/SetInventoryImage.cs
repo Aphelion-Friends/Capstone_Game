@@ -10,10 +10,4 @@ public class SetInventoryImage : MonoBehaviour
         GetComponent<Image>().sprite = inventoryObject.backgroundImage;
         GetComponent<CanvasRenderer>().SetAlpha(0f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

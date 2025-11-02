@@ -1801,10 +1801,33 @@ PrefabInstance:
       propertyPath: input
       value: 
       objectReference: {fileID: 5420857361349278248}
+    - target: {fileID: 5952822777409375991, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: slotPrefab
+      value: 
+      objectReference: {fileID: 9071334772301819752, guid: ac1d57e9eca9c9340b0922609bf65330, type: 3}
+    - target: {fileID: 5952822777409375991, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: inventoryObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 011ceb61190712ee3978dfc6a5d6a0ee, type: 2}
+    - target: {fileID: 5973417076302104648, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973417076302104648, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973417076302104648, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4438942568461872448, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2975679243892948062}
   m_SourcePrefab: {fileID: 100100000, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
 --- !u!224 &5487007306775838408 stripped
 RectTransform:
@@ -1816,3 +1839,32 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3882662938035052572, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
   m_PrefabInstance: {fileID: 7399707541534923097}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6569415343669802009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4438942568461872448, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+  m_PrefabInstance: {fileID: 7399707541534923097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2975679243892948062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569415343669802009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
