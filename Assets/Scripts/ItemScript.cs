@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ItemScript : MonoBehaviour
 {
-    [SerializeField] ItemObject itemObject;
+    public ItemObject itemObject;
 
     // void Awake()
     // {

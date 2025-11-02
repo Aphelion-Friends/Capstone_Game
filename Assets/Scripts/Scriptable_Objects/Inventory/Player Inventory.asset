@@ -13,96 +13,9 @@ MonoBehaviour:
   m_Name: Player Inventory
   m_EditorClassIdentifier: Assembly-CSharp::InventoryObject
   Container:
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
-  - item: {fileID: 0}
-    amount: 0
-    empty: 1
+  - item: {fileID: 11400000, guid: 693e4ad20c0f840bf9f5de00be5eab22, type: 2}
+    amount: 2
+    empty: 0
   - item: {fileID: 0}
     amount: 0
     empty: 1
@@ -137,7 +50,4 @@ MonoBehaviour:
     amount: 0
     empty: 1
   backgroundImage: {fileID: 21300000, guid: 34ec319ed05418a4bac16064b1b6ff7e, type: 3}
-  numColumns: 5
-  numStorageSlots: 10
-  gap: {x: 15, y: 15}
-  firstSlotPosition: {x: 0, y: 0}
+  numStorageSlots: 12

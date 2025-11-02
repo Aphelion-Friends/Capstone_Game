@@ -21,6 +21,7 @@ public abstract class ItemObject : ScriptableObject
     {
         GameObject newGameObj = Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);
         newGameObj.GetComponent<Image>().sprite = texture;
+        newGameObj.GetComponent<ItemScript>().itemObject = this;
 
         return newGameObj;
     }

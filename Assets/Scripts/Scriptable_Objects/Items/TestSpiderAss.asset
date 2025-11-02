@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8525f62f5e719416b36b03d48529da3, type: 3}
   m_Name: TestSpiderAss
   m_EditorClassIdentifier: Assembly-CSharp::DefaultObject
-  prefab: {fileID: 0}
-  type: 2
-  description: A test item for the inventory system.
+  prefab: {fileID: 646221675248979603, guid: 776c77cb476280f46bfd8e574e159926, type: 3}
+  texture: {fileID: 21300000, guid: 035a8b408a17b23f291113d6548c3be9, type: 3}
+  type: 1
+  description: A beautiful spider ass to collect.
