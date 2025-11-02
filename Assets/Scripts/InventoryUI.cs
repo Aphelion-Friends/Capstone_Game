@@ -13,6 +13,7 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] InventoryObject inventoryObject;
     [SerializeField] GameObject slotPrefab;
     private List<GameObject> slotList;
+    [SerializeField] GameObject itemPrefab;
 
     // private void Awake()
     // {
@@ -54,7 +55,23 @@ public class InventoryUI : MonoBehaviour
 
     void onInventoryChange()
     {
-        Debug.Log("CHANGE");
+        // Debug.Log("CHANGE");
+        for (int x = 0; x < slotList.Count; x++)
+        {
+            if (slotList[x].transform.childCount > 0)
+            {
+                // GameObject itemGameObj = slotList[x].transform.GetChild(0).gameObject;
+                Destroy(slotList[x].transform.GetChild(0).gameObject);
+            }
+
+            if (!inventoryObject.Container[x].empty)
+            {
+                GameObject newItemGameObject = inventoryObject.Container[x].item.InstantiatePrefab();
+                // newItemGameObject.transform.parent = slotList[x].transform;
+                newItemGameObject.transform.SetParent(slotList[x].transform, false);
+            }
+        }
+        SetVisibility();
     }
 
     public void Update()
@@ -68,9 +85,15 @@ public class InventoryUI : MonoBehaviour
 
     public void SetVisibility()
     {
+        Debug.Log("visible! toggle");
         GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
         for (int x = 0; x < slotList.Count; x++){
             slotList[x].GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+            Debug.Log(slotList[x].transform.childCount);
+            if (slotList[x].transform.childCount > 0)
+            {
+                slotList[x].transform.GetChild(0).gameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+            }
         }
     }
 

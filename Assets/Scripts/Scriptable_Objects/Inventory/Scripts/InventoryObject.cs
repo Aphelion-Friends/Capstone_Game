@@ -13,9 +13,17 @@ public class InventoryObject : ScriptableObject
     public void AddItem(ItemObject _item, int _amount)
     {
         bool hasItem = false;
+        int firstEmptySlot = 0;
+        bool hasSpace = false;
 
         for(int x = 0; x < Container.Count; x++)
         {
+            if (Container[x].empty && !hasSpace)
+            {
+                firstEmptySlot = x;
+                hasSpace = true;
+            }
+
             if (!Container[x].empty && Container[x].item == _item)
             {
                 Container[x].AddAmount(_amount);
@@ -24,9 +32,10 @@ public class InventoryObject : ScriptableObject
             }
         }
 
-        if (!hasItem)
+        if (!hasItem && hasSpace)
         {
-            Container.Add(new InventorySlot(_item, _amount));
+            // Container.Add(new InventorySlot(_item, _amount));
+            Container[firstEmptySlot] = new InventorySlot(_item, _amount);
         }
 
         executeOnChange();
