@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class InventoryObject : ScriptableObject
 {
     public List<InventorySlot> Container = new List<InventorySlot>();
+    public Sprite backgroundImage;
     
     public void AddItem(ItemObject _item, int _amount)
     {

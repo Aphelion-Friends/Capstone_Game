@@ -1,35 +1,47 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using StarterAssets;
 
 public class InventoryUI : MonoBehaviour
 {
-    [Header("References")]
-    public GameObject inventoryPanel;
+    // [Header("References")]
+    // public GameObject inventoryPanel;
 
-    private InputSystem_Actions inputActions;
+    [SerializeField] StarterAssetsInputs input;
     public static bool inventoryOpen = false;
 
-    private void Awake()
+    // private void Awake()
+    // {
+    //     inputActions = new InputSystem_Actions();
+    // }
+
+    // private void OnEnable()
+    // {
+    //     inputActions.UI.ToggleInventory.performed += OnToggleInventory;
+    //     inputActions.UI.Enable();
+    // }
+
+    // private void OnDisable()
+    // {
+    //     inputActions.UI.ToggleInventory.performed -= OnToggleInventory;
+    //     inputActions.UI.Disable();
+    // }
+    
+
+    public void Update()
     {
-        inputActions = new InputSystem_Actions();
+        if (input.inventoryOpen)
+        {
+            OnToggleInventory();
+            input.inventoryOpen = false;
+        }
     }
 
-    private void OnEnable()
+    private void OnToggleInventory()
     {
-        inputActions.UI.ToggleInventory.performed += OnToggleInventory;
-        inputActions.UI.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputActions.UI.ToggleInventory.performed -= OnToggleInventory;
-        inputActions.UI.Disable();
-    }
-
-    private void OnToggleInventory(InputAction.CallbackContext context)
-    {
+        Debug.Log("INVEN");
         inventoryOpen = !inventoryOpen;
-        inventoryPanel.SetActive(inventoryOpen);
+        GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
 
         if (inventoryOpen)
         {

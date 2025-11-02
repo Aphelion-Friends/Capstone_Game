@@ -640,7 +640,6 @@ GameObject:
   - component: {fileID: -5253801109596342059}
   - component: {fileID: -3358284087859943733}
   - component: {fileID: 8382420282795075002}
-  - component: {fileID: 802538746782847013}
   - component: {fileID: 2931192913808201863}
   m_Layer: 8
   m_Name: PlayerCapsule
@@ -662,9 +661,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5641376807186289610}
   - {fileID: 3087541776158907783}
   - {fileID: 6375478683997628740}
+  - {fileID: 5487007306775838408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &8616685848737228382
@@ -771,6 +770,7 @@ MonoBehaviour:
   selectFire: 0
   pause: 0
   reload: 0
+  inventoryOpen: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -957,6 +957,8 @@ MonoBehaviour:
   _gameObjects:
   - target: {fileID: 2330289719389882315}
     activeAsOwner: 1
+  - target: {fileID: 6003570515272317253}
+    activeAsOwner: 1
   _toActivate: []
   _toDeactivate: []
   _toEnable: []
@@ -1000,28 +1002,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   input: {fileID: 5420857361349278248}
   animator: {fileID: -3358284087859943733}
---- !u!114 &802538746782847013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d4864d88a4dcbb4f93c069c4d175cbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
-  _isSetup: 0
-  _prefabId: -2147483648
-  _componentIndex: -2147483648
-  _shouldBePooled: 0
-  _parent: {fileID: 0}
-  _invertedPathToNearestParent: 
-  _directChildren: []
-  hud: {fileID: 5854400036405728327}
 --- !u!114 &2931192913808201863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1725,7 +1705,7 @@ MonoBehaviour:
   _characterControllerPatch: 0
   _ownerAuth: 1
   _interpolationTiming: 0
---- !u!1001 &7268524536962233435
+--- !u!1001 &7399707541534923097
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1817,34 +1797,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 4582416604468766738, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5787219269957047297, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
-      propertyPath: hurtSound
+    - target: {fileID: 5952822777409375991, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: input
       value: 
-      objectReference: {fileID: 8300000, guid: 711b998429a93428cbd3fbd1a6d57948, type: 3}
-    - target: {fileID: 5787219269957047297, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
-      propertyPath: deathSound
-      value: 
-      objectReference: {fileID: 8300000, guid: c63f35c55e22d4b2a81f9dbc0eba64e8, type: 3}
-    - target: {fileID: 5787219269957047297, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 8245017918606985052}
+      objectReference: {fileID: 5420857361349278248}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
---- !u!224 &5641376807186289610 stripped
+--- !u!224 &5487007306775838408 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3068304704505079697, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
-  m_PrefabInstance: {fileID: 7268524536962233435}
+  m_PrefabInstance: {fileID: 7399707541534923097}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5854400036405728327 stripped
+--- !u!1 &6003570515272317253 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3882662938035052572, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
-  m_PrefabInstance: {fileID: 7268524536962233435}
+  m_PrefabInstance: {fileID: 7399707541534923097}
   m_PrefabAsset: {fileID: 0}
