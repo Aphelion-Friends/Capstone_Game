@@ -29,6 +29,7 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     public void OnBeginDrag(PointerEventData eventData)
     {
         parentAfterDrag = transform.parent;
+        image.raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -40,6 +41,7 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     {
         transform.SetParent(parentAfterDrag, false);
         transform.position = parentAfterDrag.position;
+        image.raycastTarget = true;
     }
 
     // public void OnEndDrag(PointerEventData eventData)
