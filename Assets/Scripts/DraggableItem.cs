@@ -9,6 +9,7 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBegi
     [HideInInspector] public Transform parentAfterDrag;
     public Canvas canvas;
     private RectTransform rectTransform;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();

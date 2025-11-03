@@ -40,6 +40,25 @@ public class InventoryObject : ScriptableObject
         executeOnChange();
     }
 
+    public bool AddItemAtIndex(ItemObject _item, int _amount, int _index)
+    {
+        if (!Container[_index].empty && Container[_index].item != _item)
+        {
+            return false;
+        }
+        else if (Container[_index].empty)
+        {
+            Container[_index] = new InventorySlot(_item, _amount);
+            return true;
+        }
+        else if (!Container[_index].empty)
+        {
+            Container[_index].amount += _amount;
+            return true;
+        }
+        return false;
+    }
+
     public void Reset()
     {
         ClearInventory();
