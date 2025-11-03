@@ -49,14 +49,34 @@ public class InventoryObject : ScriptableObject
         else if (Container[_index].empty)
         {
             Container[_index] = new InventorySlot(_item, _amount);
+            executeOnChange();
             return true;
         }
         else if (!Container[_index].empty)
         {
             Container[_index].amount += _amount;
+            executeOnChange();
             return true;
         }
         return false;
+    }
+
+    public bool RemoveItemAtIndex(int _amount, int _index)
+    {
+        if (Container[_index].empty)
+        {
+            return false;
+        }
+        else if (Container[_index].amount - _amount < 0)
+        {
+            return false;
+        }
+        else
+        {
+            Container[_index].amount -= _amount;
+            executeOnChange();
+            return true;
+        }
     }
 
     public void Reset()
