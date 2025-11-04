@@ -74,9 +74,26 @@ public class InventoryObject : ScriptableObject
         else
         {
             Container[_index].amount -= _amount;
+
+            if (Container[_index].amount == 0)
+            {
+                Container[_index].empty = true;
+                Container[_index].item = null;
+            }
+            
             executeOnChange();
             return true;
         }
+    }
+
+    public int GetItemAmountAtIndex(int _index)
+    {
+        return Container[_index].amount;
+    }
+
+    public ItemObject GetItemAtIndex(int _index)
+    {
+        return Container[_index].item;
     }
 
     public void Reset()
