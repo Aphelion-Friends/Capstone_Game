@@ -44,8 +44,10 @@ public class InventoryUI : MonoBehaviour
             if (!inventoryObject.Container[x].empty)
             {
                 GameObject newItemGameObject = inventoryObject.Container[x].item.InstantiatePrefab();
+                TMPro.TMP_Text amountText = newItemGameObject.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>();
                 newItemGameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
-                newItemGameObject.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().enabled = inventoryOpen;
+                amountText.enabled = inventoryOpen;
+                amountText.text = inventoryObject.Container[x].amount.ToString();
                 newItemGameObject.GetComponent<DraggableItem>().inventory = inventoryObject;
                 newItemGameObject.transform.SetParent(slotList[x].transform, false);
             }
