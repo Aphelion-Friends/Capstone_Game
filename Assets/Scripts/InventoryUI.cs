@@ -45,6 +45,7 @@ public class InventoryUI : MonoBehaviour
             {
                 GameObject newItemGameObject = inventoryObject.Container[x].item.InstantiatePrefab();
                 newItemGameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+                newItemGameObject.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().enabled = inventoryOpen;
                 newItemGameObject.GetComponent<DraggableItem>().inventory = inventoryObject;
                 newItemGameObject.transform.SetParent(slotList[x].transform, false);
             }
@@ -71,6 +72,7 @@ public class InventoryUI : MonoBehaviour
             if (slotList[x].transform.childCount > 0)
             {
                 slotList[x].transform.GetChild(0).gameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+                slotList[x].transform.GetChild(0).GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().enabled = inventoryOpen;
             }
         }
     }
