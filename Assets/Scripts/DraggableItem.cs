@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class DraggableItem : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
     public Image image;
+    public InventoryObject inventory;
     [HideInInspector] public Transform parentAfterDrag;
     public Canvas canvas;
     private RectTransform rectTransform;

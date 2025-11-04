@@ -45,6 +45,7 @@ public class InventoryUI : MonoBehaviour
             {
                 GameObject newItemGameObject = inventoryObject.Container[x].item.InstantiatePrefab();
                 newItemGameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+                newItemGameObject.GetComponent<DraggableItem>().inventory = inventoryObject;
                 newItemGameObject.transform.SetParent(slotList[x].transform, false);
             }
         }
