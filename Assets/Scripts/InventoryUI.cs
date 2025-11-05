@@ -38,7 +38,10 @@ public class InventoryUI : MonoBehaviour
         {
             if (slotList[x].transform.childCount > 0)
             {
-                Destroy(slotList[x].transform.GetChild(0).gameObject);
+                for (int c = 0; c < slotList[x].transform.childCount; c++)
+                {
+                    Destroy(slotList[x].transform.GetChild(c).gameObject);
+                }
             }
 
             if (!inventoryObject.Container[x].empty)
