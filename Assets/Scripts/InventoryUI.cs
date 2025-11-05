@@ -21,6 +21,7 @@ public class InventoryUI : MonoBehaviour
         inventoryObject.Subscribe(onInventoryChange);
     }
 
+    // Creates the slot GameObjects for the inventory.
     void InstantiateSlots(int _numSlots)
     {
         for (int x = 0; x < _numSlots; x++)
@@ -32,10 +33,13 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    // This function is called every time the inventory has a change. For example, if the player picks up an item, or drags an item,
+    // or drops an item. This function updates the actual item GameObjects after the inventory scriptable object has a change.
     void onInventoryChange()
     {
         for (int x = 0; x < slotList.Count; x++)
         {
+            // First delete all of the item GameObjects.
             if (slotList[x].transform.childCount > 0)
             {
                 for (int c = 0; c < slotList[x].transform.childCount; c++)
@@ -44,6 +48,7 @@ public class InventoryUI : MonoBehaviour
                 }
             }
 
+            // Then, recreate the item GameObjects if needed. Sorry this code looks bad. I should rewrite it later.
             if (!inventoryObject.Container[x].empty)
             {
                 GameObject newItemGameObject = inventoryObject.Container[x].item.InstantiatePrefab();
@@ -55,6 +60,7 @@ public class InventoryUI : MonoBehaviour
                 newItemGameObject.transform.SetParent(slotList[x].transform, false);
             }
         }
+        // Then set the visibility so if the inventory is closed, the inventory GUI and the items are invisible.
         SetVisibility();
     }
 
@@ -67,9 +73,11 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    // Sets the visibility of the inventory GUI based on the inventoryOpen bool. It sets the opacity of the objects instead of disabling them.
+    // The reason it sets the opacity to 0 instead of disabling them is because I don't want the scripts attached to the GameObjects to be disabled.
     public void SetVisibility()
     {
-        Debug.Log("visible! toggle");
+        // Set the opacity of the inventory background and then loop through the slots
         GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
         for (int x = 0; x < slotList.Count; x++){
             slotList[x].GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
@@ -82,9 +90,9 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    // Called when the inventory key is pressed. Toggles inventory visibility and locks/unlocks cursor
     private void OnToggleInventory()
     {
-        Debug.Log("INVEN");
         inventoryOpen = !inventoryOpen;
         SetVisibility();
 
