@@ -1,14 +1,71 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    [Header("Inventory Reference")]
     public InventoryObject inventory;
 
-    public void OnTriggerEnter(Collider other)
-    {
-        var item = other.GetComponent<Item>();
+    [Header("Pickup Settings")]
+    public float pickupRange = 3f;
+    public LayerMask itemLayer;
 
-        inventory.AddItem(item.item, 1);
-        Destroy(other.gameObject);
+    private Camera mainCam;
+    private Item lookedAtItem;
+
+    private void OnEnable()
+    {
+        StartCoroutine(FindCameraWhenReady());
+    }
+
+    private IEnumerator FindCameraWhenReady()
+    {
+        while (mainCam == null)
+        {
+            mainCam = Camera.main;
+            yield return null;
+        }
+        Debug.Log($"Player camera found: {mainCam.name}");
+    }
+
+    private void Update()
+    {
+        if (mainCam == null) return;
+        DetectItemInFront();
+    }
+
+    private void DetectItemInFront()
+    {
+        Ray ray = new Ray(mainCam.transform.position, mainCam.transform.forward);
+        RaycastHit hit;
+        Debug.DrawRay(ray.origin, ray.direction * pickupRange, Color.red);
+
+        if (Physics.Raycast(ray, out hit, pickupRange, itemLayer))
+        {
+            Item item = hit.collider.GetComponent<Item>();
+            lookedAtItem = item;
+        }
+        else
+        {
+            lookedAtItem = null;
+        }
+    }
+
+    private void OnInteract()
+    {
+        Debug.Log("E pressed!");
+
+        if (lookedAtItem == null)
+        {
+            Debug.Log("No item to pick up.");
+            return;
+        }
+
+        inventory.AddItem(lookedAtItem.item, 1);
+        Debug.Log("Picked up: " + lookedAtItem.name);
+
+        Destroy(lookedAtItem.gameObject);
+        lookedAtItem = null;
     }
 }

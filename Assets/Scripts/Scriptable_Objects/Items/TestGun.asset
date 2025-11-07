@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultObject
   prefab: {fileID: 646221675248979603, guid: 776c77cb476280f46bfd8e574e159926, type: 3}
   texture: {fileID: 21300000, guid: 995851c55c0d5d342a0d57fcbfd8a5ac, type: 3}
-  type: 0
+  worldModelPrefab: {fileID: 919132149155446097, guid: 032c7dfa36cfb6443ac38433512bfc1a, type: 3}
+  type: 2
   description: A test gun.

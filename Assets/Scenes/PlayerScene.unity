@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2931192913808201863, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: Interact
+      value: 
+      objectReference: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -255,11 +259,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &832960381 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8539308510633701260, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-  m_PrefabInstance: {fileID: 361515725}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &870929422
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +288,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098ead992e66ff04599b980e9000fcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
-  inventoryPanel: {fileID: 832960381}
+  input: {fileID: 0}
+  inventoryObject: {fileID: 0}
+  slotPrefab: {fileID: 0}
+  itemPrefab: {fileID: 0}
 --- !u!4 &870929424
 Transform:
   m_ObjectHideFlags: 0
