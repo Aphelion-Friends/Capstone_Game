@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e99435598093cd0ab811c9acd492a51, type: 3}
+  m_Name: Player Inventory
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryObject
+  Container:
+  - item: {fileID: 11400000, guid: 693e4ad20c0f840bf9f5de00be5eab22, type: 2}
+    amount: 2
+    empty: 0
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  - item: {fileID: 0}
+    amount: 0
+    empty: 1
+  backgroundImage: {fileID: 21300000, guid: 34ec319ed05418a4bac16064b1b6ff7e, type: 3}
+  numStorageSlots: 12
