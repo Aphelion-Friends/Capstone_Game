@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using PurrNet;
 
-public class Player : MonoBehaviour
+public class Player : NetworkIdentity
 {
     [Header("Inventory Reference")]
     public InventoryObject inventory;
@@ -65,7 +66,14 @@ public class Player : MonoBehaviour
         inventory.AddItem(lookedAtItem.item, 1);
         Debug.Log("Picked up: " + lookedAtItem.name);
 
-        Destroy(lookedAtItem.gameObject);
+        DestroyItemForAll(lookedAtItem.gameObject);
         lookedAtItem = null;
+    }
+
+    [ObserversRpc(bufferLast:true)]
+    void DestroyItemForAll(GameObject itemGameObject)
+    {
+        Destroy(itemGameObject);
+        Debug.Log("DESTROY");
     }
 }
