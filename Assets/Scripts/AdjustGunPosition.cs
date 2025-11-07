@@ -24,8 +24,6 @@ public class AdjustGunPosition : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log(Mathf.DeltaAngle(2, 359));
-
         allLinearPIDs[0] = PIDx;
         allLinearPIDs[1] = PIDy;
         allLinearPIDs[2] = PIDz;

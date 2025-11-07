@@ -104,6 +104,7 @@ public class InventoryObject : ScriptableObject
     // You can call this function at the very start of the game when you want the inventory to be completely refreshed.
     public void Reset()
     {
+        Debug.Log("RESET");
         ClearInventory();
         onChange.Clear();
     }
@@ -111,6 +112,7 @@ public class InventoryObject : ScriptableObject
     // Removes all the items from the inventory. Unlike Reset(), this does not clear the onChange list.
     public void ClearInventory()
     {
+        Debug.Log("CLEAR");
         Container.Clear();
         for (int x = 0; x < numStorageSlots; x++)
         {

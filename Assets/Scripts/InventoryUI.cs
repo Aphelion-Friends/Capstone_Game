@@ -12,8 +12,9 @@ public class InventoryUI : MonoBehaviour
     private List<GameObject> slotList;
     [SerializeField] GameObject itemPrefab;
 
-    void Awake()
+    void Start()
     {
+        //Debug.Log("WOKE");
         slotList = new List<GameObject>();
         inventoryObject.Reset();
         InstantiateSlots(inventoryObject.numStorageSlots);
@@ -81,7 +82,6 @@ public class InventoryUI : MonoBehaviour
         GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
         for (int x = 0; x < slotList.Count; x++){
             slotList[x].GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
-            Debug.Log(slotList[x].transform.childCount);
             if (slotList[x].transform.childCount > 0)
             {
                 slotList[x].transform.GetChild(0).gameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
