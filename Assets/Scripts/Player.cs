@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 using PurrNet;
+using TMPro;
 
 public class Player : NetworkIdentity
 {
@@ -11,6 +12,9 @@ public class Player : NetworkIdentity
     [Header("Pickup Settings")]
     public float pickupRange = 3f;
     public LayerMask itemLayer;
+
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI pickupPrompt;
 
     private Camera mainCam;
     private Item lookedAtItem;
@@ -34,6 +38,7 @@ public class Player : NetworkIdentity
     {
         if (mainCam == null) return;
         DetectItemInFront();
+        UpdatePromptUI();
     }
 
     private void DetectItemInFront()
@@ -52,7 +57,20 @@ public class Player : NetworkIdentity
             lookedAtItem = null;
         }
     }
+    private void UpdatePromptUI()
+    {
+        if (pickupPrompt == null) return;
 
+        if (lookedAtItem != null)
+        {
+            pickupPrompt.gameObject.SetActive(true);
+            pickupPrompt.text = $"Press E to pick up <color=#FFD700>{lookedAtItem.name}</color>";
+        }
+        else
+        {
+            pickupPrompt.gameObject.SetActive(false);
+        }
+    }
     private void OnInteract()
     {
         Debug.Log("E pressed!");
