@@ -22,6 +22,18 @@ public class GunFireScript : NetworkIdentity
     public float range = 100f; //Ideally I'd like to have other variables like gun recoil 
     public float roundsPerMinute = 100f;
     public float gunRecoil = 20f;
+
+    public float sprayX;
+    public float sprayY;
+    public float sprayZ;
+
+    public float sprayXAim;
+    public float sprayYAim;
+    public float sprayZAim;
+
+    public float snappiness;
+    public float returnSpeed;
+
     public bool fullyAutomatic = false;
     public Camera fpsCam;
 
@@ -32,6 +44,8 @@ public class GunFireScript : NetworkIdentity
 
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float enemyAlertRadius;
+
+    [SerializeField] PlayerGunSpray playerGunSpray;
 
     float timeAtLastShot = 0;
     
@@ -106,6 +120,7 @@ public class GunFireScript : NetworkIdentity
             UseAmmo();
             AlertEnemies(gameObject);
             PlayGunEffects(gameObject);
+            playerGunSpray.RecoilFire();
         }
 
     }

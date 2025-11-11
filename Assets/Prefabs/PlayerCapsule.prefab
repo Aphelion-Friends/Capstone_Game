@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &530806453828589445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 979638608410328453}
+  m_Layer: 0
+  m_Name: SprayContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &979638608410328453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530806453828589445}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4135013735270702856}
+  m_Father: {fileID: 2693679932910752436}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1612460374107219255
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,15 +567,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4135013735270702863}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00000014901164, y: -0.00000022058084, z: 0.00000004371137, w: -1}
-  m_LocalPosition: {x: 0, y: 0.0048401253, z: 0.005499987}
+  m_LocalRotation: {x: 0.00000014901164, y: -0.00000022058084, z: 0.000000043711363, w: -1}
+  m_LocalPosition: {x: 0, y: 0.004840118, z: 0.005499987}
   m_LocalScale: {x: 0.01, y: 0.010000002, z: 0.010000002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7046836592798259829}
   - {fileID: 5818257951969907912}
   - {fileID: 870713990147224876}
-  m_Father: {fileID: 2693679932910752436}
+  m_Father: {fileID: 979638608410328453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4422467659725174148
 GameObject:
@@ -852,6 +884,7 @@ GameObject:
   - component: {fileID: 8382420282795075002}
   - component: {fileID: 2931192913808201863}
   - component: {fileID: 1872431787805344371}
+  - component: {fileID: 173184604241885641}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -1255,6 +1288,20 @@ MonoBehaviour:
   input: {fileID: 5420857361349278248}
   gun: {fileID: 4443303603117262308}
   crosshair: {fileID: 4659640089227052824}
+--- !u!114 &173184604241885641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173de614ee46cf5c28e7291482644a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  gun: {fileID: 4443303603117262308}
+  mainCameraRoot: {fileID: 530806453828589445}
 --- !u!1 &9003293518194359629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1514,7 +1561,7 @@ PrefabInstance:
       addedObject: {fileID: 6816873078024926263}
     - targetCorrespondingSourceObject: {fileID: 590605139931457752, guid: 35b281c98d9678b98bba950362c79d11, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4135013735270702856}
+      addedObject: {fileID: 979638608410328453}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 35b281c98d9678b98bba950362c79d11, type: 3}
       insertIndex: -1
@@ -1703,6 +1750,10 @@ PrefabInstance:
       propertyPath: ammoCapacity
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+      propertyPath: playerGunSpray
+      value: 
+      objectReference: {fileID: 173184604241885641}
     - target: {fileID: 2809667061317690843, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
       propertyPath: roundsPerMinute
       value: 500

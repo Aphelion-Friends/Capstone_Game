@@ -64,7 +64,15 @@ MonoBehaviour:
   damage: 10
   range: 100
   roundsPerMinute: 100
-  gunRecoil: 20
+  gunRecoil: 10
+  sprayX: -2
+  sprayY: 2
+  sprayZ: 0.3
+  sprayXAim: 0
+  sprayYAim: 0
+  sprayZAim: 0
+  snappiness: 6
+  returnSpeed: 2
   fullyAutomatic: 0
   fpsCam: {fileID: 0}
   ammoCapacity: 30
@@ -73,6 +81,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   enemyAlertRadius: 0
+  playerGunSpray: {fileID: 0}
 --- !u!114 &6222514899644299383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,9 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c105a9909b7dd729292f2b1211c82449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  recoilAnimationStrength: 10
-  recoilAnimationTime: 0.1
-  recoilMuzzleLiftUp: 5
+  recoilAnimationStrength: 2
+  recoilAnimationTime: 0.05
 --- !u!1 &2495700022114234775
 GameObject:
   m_ObjectHideFlags: 0
