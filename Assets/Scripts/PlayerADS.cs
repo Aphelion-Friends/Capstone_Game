@@ -5,12 +5,12 @@ public class PlayerADS : MonoBehaviour
 {
     public StarterAssetsInputs input;
     private bool isAiming = false;
-    [SerializeField] private AdjustGunPosition adjustGunPosition;
-    private float zOffsetBeforeADS;
+    public GameObject gun;
+    private float gunRelativeYBeforeADS;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        zOffsetBeforeADS = adjustGunPosition.relativeGunOffset.z;
+        gunRelativeYBeforeADS = gun.transform.localPosition.y;
     }
 
     // Update is called once per frame
@@ -30,11 +30,11 @@ public class PlayerADS : MonoBehaviour
 
     void StartADS()
     {
-        adjustGunPosition.relativeGunOffset.z = 0;
+        gun.transform.localPosition = new Vector3(gun.transform.localPosition.x, 0, gun.transform.localPosition.z);
     }
 
     void StopADS()
     {
-        adjustGunPosition.relativeGunOffset.z = zOffsetBeforeADS;
+        gun.transform.localPosition = new Vector3(gun.transform.localPosition.x, gunRelativeYBeforeADS, gun.transform.localPosition.z);
     }
 }

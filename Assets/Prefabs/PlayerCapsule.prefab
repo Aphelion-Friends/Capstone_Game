@@ -846,7 +846,6 @@ GameObject:
   - component: {fileID: 1978471637655604388}
   - component: {fileID: 5420857361349278248}
   - component: {fileID: 8616685848737228376}
-  - component: {fileID: 5586964409754791011}
   - component: {fileID: 459986035164704537}
   - component: {fileID: -5253801109596342059}
   - component: {fileID: -3358284087859943733}
@@ -1103,27 +1102,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5586964409754791011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30503c88cf8e7e64b87032dc7b5c755b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  relativeGunOffset: {x: 0.5, y: -0.5, z: 0.3}
-  gunTransform: {fileID: 870713990147224876}
-  gunRigidbody: {fileID: 2031935351976154140}
-  cameraTransform: {fileID: 5818257951969907912}
-  proportionalGain: 500
-  integralGain: 2
-  derivativeGain: 15
-  forceMultiplier: 15
-  maxDistance: 0.2
 --- !u!114 &459986035164704537
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1275,7 +1253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   input: {fileID: 5420857361349278248}
-  adjustGunPosition: {fileID: 5586964409754791011}
+  adjustGunPosition: {fileID: 0}
 --- !u!1 &9003293518194359629
 GameObject:
   m_ObjectHideFlags: 0
