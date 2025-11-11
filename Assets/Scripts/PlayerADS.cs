@@ -7,6 +7,7 @@ public class PlayerADS : MonoBehaviour
     private bool isAiming = false;
     public GameObject gun;
     private float gunRelativeXBeforeADS;
+    [SerializeField] private GameObject crosshair;
 
     private float timeForADS = 0.1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,11 +34,13 @@ public class PlayerADS : MonoBehaviour
     void StartADS()
     {
         LeanTween.moveLocalX(gun, 0, timeForADS).setEase(LeanTweenType.easeInOutCubic);
+        crosshair.SetActive(false);
 
     }
 
     void StopADS()
     {
         LeanTween.moveLocalX(gun, gunRelativeXBeforeADS, timeForADS).setEase(LeanTweenType.easeInOutCubic);
+        crosshair.SetActive(true);
     }
 }

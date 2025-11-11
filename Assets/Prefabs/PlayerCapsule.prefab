@@ -1254,6 +1254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   input: {fileID: 5420857361349278248}
   gun: {fileID: 4443303603117262308}
+  crosshair: {fileID: 4659640089227052824}
 --- !u!1 &9003293518194359629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2029,6 +2030,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2975679243892948062}
   m_SourcePrefab: {fileID: 100100000, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+--- !u!1 &4659640089227052824 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2745884281170271809, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+  m_PrefabInstance: {fileID: 7399707541534923097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5487007306775838408 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3068304704505079697, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
