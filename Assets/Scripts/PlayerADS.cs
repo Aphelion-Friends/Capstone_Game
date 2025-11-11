@@ -4,7 +4,7 @@ using StarterAssets;
 public class PlayerADS : MonoBehaviour
 {
     public StarterAssetsInputs input;
-    private bool isAiming = false;
+    public bool isAiming = false;
     public GameObject gun;
     private float gunRelativeXBeforeADS;
     [SerializeField] private GameObject crosshair;

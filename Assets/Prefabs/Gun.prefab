@@ -68,9 +68,9 @@ MonoBehaviour:
   sprayX: -2
   sprayY: 2
   sprayZ: 0.3
-  sprayXAim: 0
-  sprayYAim: 0
-  sprayZAim: 0
+  sprayXAim: -1
+  sprayYAim: 1
+  sprayZAim: 0.1
   snappiness: 6
   returnSpeed: 2
   fullyAutomatic: 0

@@ -10,6 +10,9 @@ public class PlayerGunSpray : MonoBehaviour
     private Vector3 targetRotation;
 
     GunFireScript fireGun;
+    PlayerADS playerADS;
+
+    bool isAiming = false;
 
     void Update()
     {
@@ -20,10 +23,15 @@ public class PlayerGunSpray : MonoBehaviour
         
         mainCameraRoot.transform.localRotation = Quaternion.Euler(currentRotation);
 
+        playerADS = GetComponent<PlayerADS>();
     }
 
     public void RecoilFire()
     {
-        targetRotation += new Vector3(fireGun.sprayX, Random.Range(-fireGun.sprayY, fireGun.sprayY), Random.Range(-fireGun.sprayZ, fireGun.sprayZ));
+        PlayerADS playerADS = GetComponent<PlayerADS>();
+        if (playerADS.isAiming)
+            targetRotation += new Vector3(fireGun.sprayXAim, Random.Range(-fireGun.sprayYAim, fireGun.sprayYAim), Random.Range(-fireGun.sprayZAim, fireGun.sprayZAim));
+        else if (!playerADS.isAiming)
+            targetRotation += new Vector3(fireGun.sprayX, Random.Range(-fireGun.sprayY, fireGun.sprayY), Random.Range(-fireGun.sprayZ, fireGun.sprayZ));
     }
 }
