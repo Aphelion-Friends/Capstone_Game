@@ -17,6 +17,7 @@ namespace StarterAssets
                 public bool pause = false;
                 public bool reload;
                 public bool inventoryOpen;
+                public bool aim;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -82,6 +83,10 @@ namespace StarterAssets
         {
             OpenInventoryInput(value.isPressed);
         }
+        public void OnAim(InputValue value)
+        {
+            AimInput(value.isPressed);
+        }
 
 
 
@@ -140,6 +145,10 @@ namespace StarterAssets
         public void OpenInventoryInput(bool newInventoryState)
         {
             inventoryOpen = newInventoryState;
+        }
+        public void AimInput(bool newAimState)
+        {
+            aim = newAimState;
         }
 
 

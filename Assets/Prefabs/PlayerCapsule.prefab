@@ -983,6 +983,7 @@ MonoBehaviour:
   pause: 0
   reload: 0
   inventoryOpen: 0
+  aim: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
@@ -1273,6 +1274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d564b431744971b1b118373d4db104e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  input: {fileID: 5420857361349278248}
+  adjustGunPosition: {fileID: 5586964409754791011}
 --- !u!1 &9003293518194359629
 GameObject:
   m_ObjectHideFlags: 0
