@@ -7,6 +7,8 @@ public class PlayerADS : MonoBehaviour
     private bool isAiming = false;
     public GameObject gun;
     private float gunRelativeXBeforeADS;
+
+    private float timeForADS = 0.1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,11 +32,12 @@ public class PlayerADS : MonoBehaviour
 
     void StartADS()
     {
-        gun.transform.localPosition = new Vector3(0, gun.transform.localPosition.y, gun.transform.localPosition.z);
+        LeanTween.moveLocalX(gun, 0, timeForADS).setEase(LeanTweenType.easeInOutCubic);
+
     }
 
     void StopADS()
     {
-        gun.transform.localPosition = new Vector3(gunRelativeXBeforeADS, gun.transform.localPosition.y, gun.transform.localPosition.z);
+        LeanTween.moveLocalX(gun, gunRelativeXBeforeADS, timeForADS).setEase(LeanTweenType.easeInOutCubic);
     }
 }
