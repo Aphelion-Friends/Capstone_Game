@@ -95,13 +95,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939228477493637411}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c105a9909b7dd729292f2b1211c82449, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  gun: {fileID: 0}
-  cameraTransform: {fileID: 0}
+  recoilAnimationStrength: 10
+  recoilAnimationTime: 0.1
+  recoilMuzzleLiftUp: 5
 --- !u!1 &2495700022114234775
 GameObject:
   m_ObjectHideFlags: 0
