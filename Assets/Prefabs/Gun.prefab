@@ -72,7 +72,7 @@ MonoBehaviour:
   sprayYAim: 1
   sprayZAim: 0.1
   snappiness: 6
-  returnSpeed: 2
+  returnSpeed: 3
   fullyAutomatic: 0
   fpsCam: {fileID: 0}
   ammoCapacity: 30
