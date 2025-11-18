@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
-    List<Task> tasks = new List<Task>();
+    [SerializeField] List<Task> tasks = new List<Task>();
+    public int numTasks;
+    bool isComplete = false;
 
     void Start()
     {
-        
+        numTasks = tasks.Count;
     }
 
     // Update is called once per frame
