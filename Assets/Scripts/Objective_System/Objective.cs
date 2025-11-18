@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
-    [SerializeField] List<Task> tasks = new List<Task>();
+    [SerializeField] List<GameObject> tasks = new List<GameObject>();
     public int numTasks;
     bool isComplete = false;
 
