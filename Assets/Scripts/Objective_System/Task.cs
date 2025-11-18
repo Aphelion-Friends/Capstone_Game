@@ -1,5 +1,7 @@
+using UnityEngine;
+
 [System.Serializable]
-public class Task
+public class Task: MonoBehaviour
 {
     public bool isComplete = false;
     public string displayName;
