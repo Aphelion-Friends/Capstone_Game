@@ -1,10 +1,9 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Objective : MonoBehaviour
 {
-    [SerializeField] List<GameObject> tasks = new List<GameObject>();
+    [SerializeField] List<Task> tasks = new List<Task>();
     private int numTasks;
     bool isComplete = false;
 
@@ -15,13 +14,42 @@ public class Objective : MonoBehaviour
 
     public int getNumTasks() {  return numTasks; }
 
+    public void PlayerMove(Vector3 position)
+    {
+        foreach (Task task in tasks)
+        {
+            task.PlayerMove(position);
+        }
+    }
+
+    public void EnemyKilled(string enemyName) {
+        foreach (Task task in tasks)
+        {
+            task.EnemyKilled(enemyName);
+        }
+    }
+
+    public void ItemCollected(string itemName) {
+        foreach (Task task in tasks)
+        {
+            task.ItemCollected(itemName);
+        }
+    }
+
+    public void ItemDropped(string itemName) {
+        foreach (Task task in tasks)
+        {
+            task.ItemDropped(itemName);
+        }
+    }
+
     public void checkTaskCompletion()
     {
         bool taskIncomplete = false;
         
-        foreach (GameObject task in tasks)
+        foreach (Task task in tasks)
         {
-            if(task.GetComponent<Task>().isComplete == false)   //Go through lisit of task objects and see if any are incomplete
+            if(task.isComplete == false)   //Go through lisit of task objects and see if any are incomplete
             {
                 taskIncomplete = true;                          //If a task isn't complete, set taskIncomplete to true to prevent the Objective from being marked complete
             }
@@ -31,19 +59,5 @@ public class Objective : MonoBehaviour
         { 
             isComplete = true;      
         }
-    }
-
-    public void reportTask(string reportedTask)
-    {
-        foreach (GameObject task in tasks)      //Go through the list of task objects and determine if the reported task matches any in the list 
-        {
-            if (task.GetComponent<Task>().taskName == reportedTask)
-            {
-                task.GetComponent<Task>().isComplete = true;    //If it does, set that task to be complete
-            }
-        }
-
-        checkTaskCompletion();  //Check the status of all tasks afterwards to determine if the objective has been completed
-
     }
 }
