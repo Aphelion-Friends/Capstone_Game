@@ -19,6 +19,8 @@ public class Player : NetworkIdentity
     private Camera mainCam;
     private Item lookedAtItem;
 
+    public Objective playerObjective;
+
     private void OnEnable()
     {
         StartCoroutine(FindCameraWhenReady());
