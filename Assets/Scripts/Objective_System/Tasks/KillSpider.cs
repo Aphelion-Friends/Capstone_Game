@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class KillSpider : Task
 {
-    public override void KillEnemy()
+    private string requiredEnemyName = "spider";
+
+    public override void EnemyKilled(string enemyName)
     {
-        currentAmount ++;
+        if (enemyName == requiredEnemyName)
+            currentAmount ++;
     }
 }

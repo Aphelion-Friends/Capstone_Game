@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-abstract class Task
+public abstract class Task
 {
     public bool isComplete = false;
     public string displayName;
