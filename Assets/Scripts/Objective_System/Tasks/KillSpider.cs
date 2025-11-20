@@ -4,6 +4,6 @@ public class KillSpider : Task
 {
     public override void KillEnemy()
     {
-        amount ++;
+        currentAmount ++;
     }
 }
