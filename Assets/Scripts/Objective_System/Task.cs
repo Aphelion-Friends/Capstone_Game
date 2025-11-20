@@ -1,11 +1,15 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Task: MonoBehaviour
+abstract class Task
 {
     public bool isComplete = false;
     public string displayName;
     public string taskName;
     public string taskDescription;
 
+    public virtual void PlayerMove(Vector3 position) {}
+    public virtual void EnemyKilled(string enemyName) {}
+    public virtual void ItemCollected(string itemName) {}
+    public virtual void ItemDropped(string itemName) {}
 }
