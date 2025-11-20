@@ -35,7 +35,7 @@ public class Objective
 
     }
 
-    public void ItemCollected(string itemName) {
+    public void ItemCollected(ItemObject.Name itemName) {
         foreach (Task task in tasks)
         {
             task.ItemCollected(itemName);
@@ -45,7 +45,7 @@ public class Objective
 
     }
 
-    public void ItemDropped(string itemName) {
+    public void ItemDropped(ItemObject.Name itemName) {
         foreach (Task task in tasks)
         {
             task.ItemDropped(itemName);
