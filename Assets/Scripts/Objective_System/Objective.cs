@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Objective : MonoBehaviour
+public class Objective
 {
     [SerializeField] List<Task> tasks = new List<Task>();
     private int numTasks;
