@@ -22,6 +22,12 @@ public abstract class ItemObject : ScriptableObject
     [TextArea(15, 20)]
     public string description;
 
+    public enum Name
+    {
+        SpiderAss,
+        Gun
+    }
+
     public GameObject InstantiatePrefab()
     {
         GameObject newGameObj = Instantiate(prefab, new Vector3(0, 0, 0), Quaternion.identity);

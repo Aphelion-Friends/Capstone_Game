@@ -8,5 +8,8 @@ public class KillSpider : Task
     {
         if (enemyName == requiredEnemyName)
             currentAmount ++;
+
+        if (currentAmount >= amount)
+            isComplete = true;
     }
 }
