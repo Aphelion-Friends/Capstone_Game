@@ -21,7 +21,7 @@ public class Objective
             task.PlayerMove(position);
         }
 
-        checkTaskCompletion();
+        checkObjectiveCompletion();
 
     }
 
@@ -31,7 +31,7 @@ public class Objective
             task.EnemyKilled(enemyName);
         }
 
-        checkTaskCompletion();
+        checkObjectiveCompletion();
 
     }
 
@@ -41,7 +41,7 @@ public class Objective
             task.ItemCollected(itemName);
         }
 
-        checkTaskCompletion();
+        checkObjectiveCompletion();
 
     }
 
@@ -51,11 +51,11 @@ public class Objective
             task.ItemDropped(itemName);
         }
 
-        checkTaskCompletion();
+        checkObjectiveCompletion();
 
     }
 
-    public void checkTaskCompletion()
+    public void checkObjectiveCompletion()
     {
         bool taskIncomplete = false;
         
