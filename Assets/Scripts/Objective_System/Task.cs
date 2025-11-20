@@ -12,6 +12,6 @@ public abstract class Task
 
     public virtual void PlayerMove(Vector3 position) {}
     public virtual void EnemyKilled(string enemyName) {}
-    public virtual void ItemCollected(string itemName) {}
-    public virtual void ItemDropped(string itemName) {}
+    public virtual void ItemCollected(ItemObject.Name itemName) {}
+    public virtual void ItemDropped(ItemObject.Name itemName) {}
 }
