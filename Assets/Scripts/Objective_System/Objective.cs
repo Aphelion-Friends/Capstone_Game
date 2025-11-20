@@ -20,6 +20,9 @@ public class Objective
         {
             task.PlayerMove(position);
         }
+
+        checkTaskCompletion();
+
     }
 
     public void EnemyKilled(string enemyName) {
@@ -27,6 +30,9 @@ public class Objective
         {
             task.EnemyKilled(enemyName);
         }
+
+        checkTaskCompletion();
+
     }
 
     public void ItemCollected(string itemName) {
@@ -34,6 +40,9 @@ public class Objective
         {
             task.ItemCollected(itemName);
         }
+
+        checkTaskCompletion();
+
     }
 
     public void ItemDropped(string itemName) {
@@ -41,6 +50,9 @@ public class Objective
         {
             task.ItemDropped(itemName);
         }
+
+        checkTaskCompletion();
+
     }
 
     public void checkTaskCompletion()
