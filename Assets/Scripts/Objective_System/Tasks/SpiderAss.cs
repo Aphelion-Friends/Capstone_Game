@@ -2,11 +2,23 @@ using UnityEngine;
 
 public class SpiderAss : Task
 {
-    public override void ItemCollected(string itemName) 
+    ItemObject.Name taskItem = ItemObject.Name.SpiderAss;
+    public override void ItemCollected(ItemObject.Name itemName) 
     {
-        currentAmount++;
 
+        if (taskItem == itemName)
+        {
+            currentAmount++;
+            checkTaskCompletion();
+        }
 
     }
-    public override void ItemDropped(string itemName) { }
+    public override void ItemDropped(ItemObject.Name itemName)
+    {
+        if (taskItem == itemName)
+        {
+            currentAmount--;
+            checkTaskCompletion();
+        }
+    }
 }
