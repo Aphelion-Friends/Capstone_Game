@@ -1,16 +1,12 @@
 using UnityEngine;
 
-public class SpiderAss : MonoBehaviour
+public class SpiderAss : Task
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void ItemCollected(string itemName) 
     {
-        
-    }
+        currentAmount++;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
     }
+    public override void ItemDropped(string itemName) { }
 }
