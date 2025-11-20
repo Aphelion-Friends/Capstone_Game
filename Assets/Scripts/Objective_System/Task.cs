@@ -7,6 +7,7 @@ abstract class Task
     public string displayName;
     public string taskName;
     public string taskDescription;
+    public int amount = 1;
 
     public virtual void PlayerMove(Vector3 position) {}
     public virtual void EnemyKilled(string enemyName) {}
