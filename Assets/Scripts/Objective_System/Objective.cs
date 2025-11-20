@@ -69,7 +69,8 @@ public class Objective
 
         if (taskIncomplete) //If taskComplete is false that means all tasks are marked as complete and thus the objective can be marked as completed
         { 
-            isComplete = true;      
+            isComplete = true;
+            Debug.Log("OBJECTIVE COMPLETE!");
         }
     }
 }
