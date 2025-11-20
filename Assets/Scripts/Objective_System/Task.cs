@@ -1,3 +1,4 @@
+using NUnit.Framework.Interfaces;
 using UnityEngine;
 
 [System.Serializable]
@@ -14,4 +15,16 @@ public abstract class Task
     public virtual void EnemyKilled(string enemyName) {}
     public virtual void ItemCollected(ItemObject.Name itemName) {}
     public virtual void ItemDropped(ItemObject.Name itemName) {}
+    
+    public void checkTaskCompletion()
+    {
+        if(currentAmount >= amount)
+        {
+            isComplete = true;
+        
+        }else
+        {
+            isComplete= false;
+        }
+    }
 }
