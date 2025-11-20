@@ -1,24 +1,3 @@
-using UnityEngine;
-
-public class SpiderAss : Task
+public class SpiderAss
 {
-    ItemObject.Name taskItem = ItemObject.Name.SpiderAss;
-    public override void ItemCollected(ItemObject.Name itemName) 
-    {
-
-        if (taskItem == itemName)
-        {
-            currentAmount++;
-            checkTaskCompletion();
-        }
-
-    }
-    public override void ItemDropped(ItemObject.Name itemName)
-    {
-        if (taskItem == itemName)
-        {
-            currentAmount--;
-            checkTaskCompletion();
-        }
-    }
 }
