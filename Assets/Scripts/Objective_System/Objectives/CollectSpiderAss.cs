@@ -1,16 +1,8 @@
-using UnityEngine;
-
-public class CollectSpiderAss : MonoBehaviour
+public class CollectSpiderAss : Objective
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public CollectSpiderAss()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        tasks.Add(new KillSpider());
+        tasks.Add(new SpiderAss());
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Objective
 {
-    [SerializeField] List<Task> tasks = new List<Task>();
+    protected List<Task> tasks = new List<Task>();
     private int numTasks;
     bool isComplete = false;
 
