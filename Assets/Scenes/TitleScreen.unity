@@ -208,6 +208,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 830744822}
     m_Modifications:
+    - target: {fileID: 1849374348941502696, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+      propertyPath: FadeOutImage
+      value: 
+      objectReference: {fileID: 2033088587}
     - target: {fileID: 2402087350697235795, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
       propertyPath: m_Enabled
       value: 0
