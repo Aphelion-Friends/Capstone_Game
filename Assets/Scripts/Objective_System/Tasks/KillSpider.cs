@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class KillSpider : Task
 {
     private string requiredEnemyName = "spider";
