@@ -14,6 +14,19 @@ public class Objective
 
     public int getNumTasks() {  return numTasks; }
 
+    public Task GetFirstIncompleteTask()
+    {
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            Task task = tasks[i];
+            if (task.isComplete)
+            {
+                return task;
+            }
+        }
+        return null;
+    }
+
     public void PlayerMove(Vector3 position)
     {
         foreach (Task task in tasks)
