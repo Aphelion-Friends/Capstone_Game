@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Objective
 {
@@ -7,12 +8,29 @@ public class Objective
     private int numTasks;
     bool isComplete = false;
 
+    // List of function to call every time the objective is updated
+    protected List<Action> onChangeList;
+
     void Start()
     {
         numTasks = tasks.Count;
     }
 
     public int getNumTasks() {  return numTasks; }
+
+    // Whenever the objective status changes, all the functions in onChangeList are called
+    protected void OnChange()
+    {
+        foreach (Action onChangeFunction in onChangeList)
+        {
+            onChangeFunction();
+        }
+    }
+
+    public void Subscribe(Action newFunction)
+    {
+        onChangeList.Add(newFunction);
+    }
 
     public Task GetFirstIncompleteTask()
     {
