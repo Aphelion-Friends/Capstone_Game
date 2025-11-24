@@ -19,7 +19,6 @@ public class Objective
         for (int i = 0; i < tasks.Count; i++)
         {
             Task task = tasks[i];
-            if (task.isComplete)
             {
                 return task;
             }
