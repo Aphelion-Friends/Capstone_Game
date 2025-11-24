@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 332922222539264247}
   - component: {fileID: 632719206619632482}
   m_Layer: 5
-  m_Name: ObjectiveName
+  m_Name: TaskName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -599,7 +599,7 @@ GameObject:
   - component: {fileID: 7976246404101756344}
   - component: {fileID: 6236576233426952153}
   m_Layer: 5
-  m_Name: ObjectiveDescription
+  m_Name: TaskDescription
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
