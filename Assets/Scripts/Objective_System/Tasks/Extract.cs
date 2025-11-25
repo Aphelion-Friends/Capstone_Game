@@ -12,6 +12,8 @@ public class Extract : Task
         taskName = "Extract";
         displayName = "Escape";
         taskDescription = originalDescription;
+        extractionLocation = new Vector3(-26, 0, -36);
+        completionDistance = 5f;
     }
 
     public override void PlayerMove(Vector3 position)

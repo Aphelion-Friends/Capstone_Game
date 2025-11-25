@@ -53,7 +53,7 @@ public class Objective
         }
 
         checkObjectiveCompletion();
-
+        OnChange();
     }
 
     public void EnemyKilled(string enemyName) {
