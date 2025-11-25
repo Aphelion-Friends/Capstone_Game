@@ -92,7 +92,7 @@ public class Objective
         
         foreach (Task task in tasks)
         {
-            if(task.isComplete == false)   //Go through lisit of task objects and see if any are incomplete
+            if(task.checkTaskCompletion() == false)   //Go through lisit of task objects and see if any are incomplete
             {
                 taskIncomplete = true;                          //If a task isn't complete, set taskIncomplete to true to prevent the Objective from being marked complete
             }
