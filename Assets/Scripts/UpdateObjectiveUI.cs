@@ -21,9 +21,4 @@ public class UpdateObjectiveUI : MonoBehaviour
         taskName.text = currentTask.displayName;
         taskDescription.text = currentTask.taskDescription;
     }
-
-    void Update()
-    {
-        
-    }
 }
