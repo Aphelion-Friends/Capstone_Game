@@ -19,6 +19,8 @@ public class Player : NetworkIdentity
     private Camera mainCam;
     private Item lookedAtItem;
 
+    public Objective playerObjective;
+
     private void OnEnable()
     {
         StartCoroutine(FindCameraWhenReady());
@@ -83,6 +85,7 @@ public class Player : NetworkIdentity
 
         inventory.AddItem(lookedAtItem.item, 1);
         Debug.Log("Picked up: " + lookedAtItem.name);
+        ObjectiveManager.Instance.objective.ItemCollected(lookedAtItem.item.itemName);
 
         DestroyItemForAll(lookedAtItem.gameObject);
         lookedAtItem = null;
