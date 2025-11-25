@@ -749,6 +749,7 @@ GameObject:
   - component: {fileID: 2931192913808201863}
   - component: {fileID: 1872431787805344371}
   - component: {fileID: 173184604241885641}
+  - component: {fileID: 7453188584738586443}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -1060,6 +1061,8 @@ MonoBehaviour:
     activeAsOwner: 1
   - target: {fileID: 2931192913808201863}
     activeAsOwner: 1
+  - target: {fileID: 7453188584738586443}
+    activeAsOwner: 1
   _gameObjects:
   - target: {fileID: 2330289719389882315}
     activeAsOwner: 1
@@ -1167,6 +1170,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   gun: {fileID: 4443303603117262308}
   mainCameraRoot: {fileID: 530806453828589445}
+--- !u!114 &7453188584738586443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fec96d2d7e36035db1a938d028d3ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &9003293518194359629
 GameObject:
   m_ObjectHideFlags: 0
