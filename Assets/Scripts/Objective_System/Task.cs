@@ -8,7 +8,7 @@ public abstract class Task
     public string displayName;
     public string taskName;
     public string taskDescription;
-    public int amount = 1;
+    private int amount = 1;
     public int currentAmount = 0;
 
     public virtual void PlayerMove(Vector3 position) {}
@@ -24,7 +24,7 @@ public abstract class Task
         
         }else
         {
-            isComplete= false;
+            isComplete = false;
         }
     }
 }

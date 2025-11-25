@@ -4,6 +4,6 @@ public class CollectSpiderAss : Objective
     {
         tasks.Add(new KillSpider());
         tasks.Add(new SpiderAss());
-        //tasks.Add(new Extract());
+        tasks.Add(new Extract());
     }
 }

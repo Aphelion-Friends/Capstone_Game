@@ -73,7 +73,7 @@ public class Objective
         }
 
         checkObjectiveCompletion();
-
+        OnChange();
     }
 
     public void ItemDropped(ItemObject.Name itemName) {
