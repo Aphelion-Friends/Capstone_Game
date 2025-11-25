@@ -17,8 +17,17 @@ public class UpdateObjectiveUI : MonoBehaviour
     void UpdateTaskNameAndDescription()
     {
         Objective objective = ObjectiveManager.Instance.objective;
-        Task currentTask = objective.GetFirstIncompleteTask();
-        taskName.text = currentTask.displayName;
-        taskDescription.text = currentTask.taskDescription;
+
+        if (!objective.checkObjectiveCompletion())
+        {
+            Task currentTask = objective.GetFirstIncompleteTask();
+            taskName.text = currentTask.displayName;
+            taskDescription.text = currentTask.taskDescription;
+        }
+        else
+        {
+            taskName.text = "All Objectives Completed";
+            taskDescription.text = "";
+        }
     }
 }
