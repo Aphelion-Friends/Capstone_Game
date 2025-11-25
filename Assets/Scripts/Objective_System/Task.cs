@@ -8,7 +8,7 @@ public abstract class Task
     public string displayName;
     public string taskName;
     public string taskDescription;
-    private int amount = 1;
+    protected int amount = 1;
     public int currentAmount = 0;
 
     public virtual void PlayerMove(Vector3 position) {}
@@ -16,15 +16,18 @@ public abstract class Task
     public virtual void ItemCollected(ItemObject.Name itemName) {}
     public virtual void ItemDropped(ItemObject.Name itemName) {}
     
-    public void checkTaskCompletion()
+    public bool checkTaskCompletion()
     {
         if(currentAmount >= amount)
         {
             isComplete = true;
         
-        }else
+        }
+        else
         {
             isComplete = false;
         }
+        
+        return isComplete;
     }
 }
