@@ -13,9 +13,4 @@ public class ObjectiveManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        objective.checkObjectiveCompletion();
-    }
-
 }
