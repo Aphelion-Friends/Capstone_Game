@@ -86,7 +86,7 @@ public class Objective
 
     }
 
-    public void checkObjectiveCompletion()
+    public bool checkObjectiveCompletion()
     {
         bool taskIncomplete = false;
         
@@ -103,5 +103,7 @@ public class Objective
             isComplete = true;
             Debug.Log("OBJECTIVE COMPLETE!");
         }
+
+        return isComplete;
     }
 }
