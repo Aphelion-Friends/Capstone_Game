@@ -9,7 +9,7 @@ public class Objective
     bool isComplete = false;
 
     // List of function to call every time the objective is updated
-    protected List<Action> onChangeList;
+    protected List<Action> onChangeList = new List<Action>();
 
     void Start()
     {
@@ -37,6 +37,7 @@ public class Objective
         for (int i = 0; i < tasks.Count; i++)
         {
             Task task = tasks[i];
+            if(task.isComplete == false)
             {
                 return task;
             }
@@ -62,7 +63,7 @@ public class Objective
         }
 
         checkObjectiveCompletion();
-
+        OnChange();
     }
 
     public void ItemCollected(ItemObject.Name itemName) {
@@ -97,7 +98,7 @@ public class Objective
             }
         }
 
-        if (taskIncomplete) //If taskComplete is false that means all tasks are marked as complete and thus the objective can be marked as completed
+        if (!taskIncomplete) //If taskComplete is false that means all tasks are marked as complete and thus the objective can be marked as completed
         { 
             isComplete = true;
             Debug.Log("OBJECTIVE COMPLETE!");

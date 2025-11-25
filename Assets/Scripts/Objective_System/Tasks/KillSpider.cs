@@ -1,3 +1,4 @@
+using UnityEngine;
 public class KillSpider : Task
 {
     private string requiredEnemyName = "spider";
@@ -13,7 +14,7 @@ public class KillSpider : Task
     {
         if (enemyName == requiredEnemyName)
             currentAmount ++;
-
+            Debug.Log("Task Completion Amount =" + currentAmount);
         checkTaskCompletion();
     }
 }

@@ -175,7 +175,7 @@ public class enemyAIPatrol : NetworkIdentity
         if (isDead)
         {
             GetComponent<Collider>().enabled = false;
-            //ObjectiveManager.Instance.objective.EnemyKilled("spider");
+            ObjectiveManager.Instance.objective.EnemyKilled("spider");
         }
     }
 }
