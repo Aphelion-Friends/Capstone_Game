@@ -838,7 +838,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.Transports.UDPTransport
   _serverPort: 5000
   _maxConnections: 100
-  _address: 127.0.0.1
+  _address: 16.203.173.138
   _timeoutInSeconds: 5
   _pollEventsInUpdate: 0
 --- !u!114 &1120294646
@@ -854,7 +854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkManager
   _stopPlayingOnDisconnect: 1
-  _startServerFlags: 9
+  _startServerFlags: 8
   _startClientFlags: 7
   _cookieScope: 1
   _dontDestroyOnLoad: 0
