@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: dcdd8648f98d00937b536e804a5b055e
   - enabled: 1
+    path: Assets/PurrLobby/LobbyScenes/LobbySample.unity
+    guid: 163ab76a47bff6646b7627336bc33bdf
+  - enabled: 1
     path: Assets/Scenes/MultiplayerTest.unity
     guid: 5dbebe44aa9638913bc9d9580980ec1e
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/PurrLobby/LobbyScenes/LobbySample.unity
-    guid: 163ab76a47bff6646b7627336bc33bdf
   - enabled: 0
     path: Assets/PurrLobby/LobbyScenes/NetworkedScene.unity
     guid: e6ba6bbd3072e63449ec09bda4a1b5e6
