@@ -2560,7 +2560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyManager: {fileID: 1097043115}
-  nextScene: MultiplayerTest
+  nextScene: SpaceStationMap
   playerCounter: {fileID: 1097043117}
 --- !u!114 &1097043117
 MonoBehaviour:
