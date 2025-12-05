@@ -181,11 +181,11 @@ public class enemyAIPatrol : NetworkIdentity
         {
             //GetComponent<Collider>().enabled = false;
 
+
             gameObject.layer = 7;
             gameObject.GetComponent<Item>().enabled = true;
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
             gameObject.GetComponent<enemyAIPatrol>().enabled = false;
-            
             ObjectiveManager.Instance.objective.EnemyKilled("spider");
 
          
