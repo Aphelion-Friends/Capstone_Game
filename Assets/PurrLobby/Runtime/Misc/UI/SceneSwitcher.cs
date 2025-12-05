@@ -8,11 +8,15 @@ namespace PurrLobby
     {
         [SerializeField] private LobbyManager lobbyManager;
         [PurrScene, SerializeField] private string nextScene;
+        [SerializeField] private PlayerCounter playerCounter;
 
         public void SwitchScene()
         {
-            lobbyManager.SetLobbyStarted();
-            SceneManager.LoadSceneAsync(nextScene);
+            if (playerCounter.playerCount >= 2)
+            {
+                lobbyManager.SetLobbyStarted();
+                SceneManager.LoadSceneAsync(nextScene);
+            }
         }
     }
 }

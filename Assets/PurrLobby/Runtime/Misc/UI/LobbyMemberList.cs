@@ -9,6 +9,7 @@ namespace PurrLobby
     {
         [SerializeField] private MemberEntry memberEntryPrefab;
         [SerializeField] private Transform content;
+        [SerializeField] private PlayerCounter playerCounter;
 
         public void LobbyDataUpdate(Lobby room)
         {
@@ -44,6 +45,7 @@ namespace PurrLobby
         private void HandleNewMembers(Lobby room)
         {
             var existingMembers = content.GetComponentsInChildren<MemberEntry>();
+            playerCounter.playerCount = room.Members.Count;
     
             foreach (var member in room.Members)
             {
@@ -58,6 +60,7 @@ namespace PurrLobby
         private void HandleLeftMembers(Lobby room)
         {
             var childrenToRemove = new List<Transform>();
+            playerCounter.playerCount = room.Members.Count;
 
             for (int i = 0; i < content.childCount; i++)
             {
