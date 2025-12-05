@@ -167,6 +167,10 @@ public class enemyAIPatrol : NetworkIdentity
             agent.SetDestination(transform.position);
             animator.SetTrigger("Die");
             EnemySpawner.Instance.spawnEnemy(0);
+            gameObject.layer = 7;
+            gameObject.GetComponent<Item>().enabled = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            gameObject.GetComponent<enemyAIPatrol>().enabled = false;
 
         }
     }
@@ -182,10 +186,7 @@ public class enemyAIPatrol : NetworkIdentity
             //GetComponent<Collider>().enabled = false;
 
 
-            gameObject.layer = 7;
-            gameObject.GetComponent<Item>().enabled = true;
-            gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            gameObject.GetComponent<enemyAIPatrol>().enabled = false;
+            
             ObjectiveManager.Instance.objective.EnemyKilled("spider");
 
          
