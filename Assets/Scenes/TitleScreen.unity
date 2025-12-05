@@ -229,6 +229,10 @@ PrefabInstance:
       propertyPath: FadeOutImage
       value: 
       objectReference: {fileID: 2033088587}
+    - target: {fileID: 2155330564931890468, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2402087350697235795, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -356,7 +360,71 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2997035284124034261, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
       insertIndex: -1
       addedObject: {fileID: 363850210}
+    - targetCorrespondingSourceObject: {fileID: 6687988738625812020, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 952129371}
+    - targetCorrespondingSourceObject: {fileID: 5379412354165638916, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 952129370}
   m_SourcePrefab: {fileID: 100100000, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+--- !u!114 &952129366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6091859127933410407, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+  m_PrefabInstance: {fileID: 952129365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &952129367 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5379412354165638916, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+  m_PrefabInstance: {fileID: 952129365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &952129368 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 305724696987983008, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+  m_PrefabInstance: {fileID: 952129365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &952129369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6687988738625812020, guid: f4f194a176429e24f9f229daa7eff595, type: 3}
+  m_PrefabInstance: {fileID: 952129365}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &952129370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952129367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872a8a726e3270147af30388103f8094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableButton
+  button: {fileID: 952129366}
+--- !u!114 &952129371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952129369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872a8a726e3270147af30388103f8094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisableButton
+  button: {fileID: 952129368}
 --- !u!1 &1248993342
 GameObject:
   m_ObjectHideFlags: 0
