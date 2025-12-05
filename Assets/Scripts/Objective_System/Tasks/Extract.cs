@@ -12,7 +12,7 @@ public class Extract : Task
         taskName = "Extract";
         displayName = "Escape";
         taskDescription = originalDescription;
-        extractionLocation = new Vector3(-26, 0, -36);
+        extractionLocation = new Vector3(451, 5, -303);
         completionDistance = 5f;
     }
 

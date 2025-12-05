@@ -92,7 +92,7 @@ MonoBehaviour:
   walkRange: 15
   giveUpTime: 5
   sightRange: 10
-  attackRange: 1
+  attackRange: 2
   attackCooldown: 1
 --- !u!95 &5943122773063260689
 Animator:
