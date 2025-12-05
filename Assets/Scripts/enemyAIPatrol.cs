@@ -159,11 +159,16 @@ public class enemyAIPatrol : NetworkIdentity
     public void Die()
     {
         // Debug.Log("SHOUD DIE");
-        Debug.Log(dead.value);
-        dead.value = true;
-        OnDie(dead.value);
-        agent.SetDestination(transform.position);
-        animator.SetTrigger("Die");
+        if (!dead.value)
+        {
+            Debug.Log(dead.value);
+            dead.value = true;
+            OnDie(dead.value);
+            agent.SetDestination(transform.position);
+            animator.SetTrigger("Die");
+            EnemySpawner.Instance.spawnEnemy(0);
+
+        }
     }
 
     // Makes the enemy appear dead for the clients
@@ -174,8 +179,16 @@ public class enemyAIPatrol : NetworkIdentity
         // Debug.Log("DEAD!");
         if (isDead)
         {
-            GetComponent<Collider>().enabled = false;
+            //GetComponent<Collider>().enabled = false;
+
+            gameObject.layer = 7;
+            gameObject.GetComponent<Item>().enabled = true;
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            gameObject.GetComponent<enemyAIPatrol>().enabled = false;
+            
             ObjectiveManager.Instance.objective.EnemyKilled("spider");
+
+         
         }
     }
 }
