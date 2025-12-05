@@ -12,7 +12,7 @@ namespace PurrLobby
 
         public void SwitchScene()
         {
-            if (playerCounter.playerCount >= 2)
+            if (playerCounter.playerCount >= 1)
             {
                 lobbyManager.SetLobbyStarted();
                 SceneManager.LoadSceneAsync(nextScene);

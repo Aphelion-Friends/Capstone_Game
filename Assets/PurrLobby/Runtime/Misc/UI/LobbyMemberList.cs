@@ -29,6 +29,7 @@ namespace PurrLobby
 
         private void HandleExistingMembers(Lobby room)
         {
+            playerCounter.playerCount = room.Members.Count;
             foreach (Transform child in content)
             {
                 if (!child.TryGetComponent(out MemberEntry member))
