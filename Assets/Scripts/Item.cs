@@ -10,9 +10,9 @@ public class Item : MonoBehaviour
         // If the item has a world model prefab, instantiate it as a child
         if (item != null && item.worldModelPrefab != null)
         {
-            GameObject model = Instantiate(item.worldModelPrefab, transform);
-            model.transform.localPosition = Vector3.zero;
-            model.transform.localRotation = Quaternion.identity;
+            // GameObject model = Instantiate(item.worldModelPrefab, transform);
+            // model.transform.localPosition = Vector3.zero;
+            // model.transform.localRotation = Quaternion.identity;
         }
         else
         {
