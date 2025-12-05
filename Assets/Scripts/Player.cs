@@ -66,7 +66,7 @@ public class Player : NetworkIdentity
         if (lookedAtItem != null)
         {
             pickupPrompt.gameObject.SetActive(true);
-            pickupPrompt.text = $"Press E to pick up <color=#FFD700>{lookedAtItem.name}</color>";
+            pickupPrompt.text = $"Press E to pick up <color=#FFD700>{lookedAtItem.item.displayName}</color>";
         }
         else
         {
