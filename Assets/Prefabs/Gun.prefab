@@ -65,14 +65,14 @@ MonoBehaviour:
   range: 100
   roundsPerMinute: 100
   gunRecoil: 10
-  sprayX: -2
+  sprayX: -5
   sprayY: 2
   sprayZ: 0.3
-  sprayXAim: -1
+  sprayXAim: -2
   sprayYAim: 1
   sprayZAim: 0.1
-  snappiness: 6
-  returnSpeed: 3
+  snappiness: 20
+  returnSpeed: 10
   fullyAutomatic: 0
   fpsCam: {fileID: 0}
   ammoCapacity: 30
