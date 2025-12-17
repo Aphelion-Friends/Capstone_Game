@@ -932,11 +932,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: df26f05e-f18b-4827-a352-e12af74ec19d
+  cloudProjectId: a7f1fa68-3e13-4f47-a2c0-1070b513ce27
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Capstone_Game
-  organizationId: piethespy
+  organizationId: moddude661
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
