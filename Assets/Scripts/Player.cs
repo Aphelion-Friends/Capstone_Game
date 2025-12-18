@@ -4,7 +4,7 @@ using System.Collections;
 using PurrNet;
 using TMPro;
 
-public class Player : NetworkIdentity
+public class Player
 {
     [Header("Inventory Reference")]
     public InventoryObject inventory;
@@ -23,7 +23,7 @@ public class Player : NetworkIdentity
 
     private void OnEnable()
     {
-        StartCoroutine(FindCameraWhenReady());
+        // StartCoroutine(FindCameraWhenReady());
     }
 
     private IEnumerator FindCameraWhenReady()
@@ -87,14 +87,14 @@ public class Player : NetworkIdentity
         Debug.Log("Picked up: " + lookedAtItem.name);
         ObjectiveManager.Instance.objective.ItemCollected(lookedAtItem.item.itemName);
 
-        DestroyItemForAll(lookedAtItem.gameObject);
+        // DestroyItemForAll(lookedAtItem.gameObject);
         lookedAtItem = null;
     }
 
-    [ObserversRpc(bufferLast:true)]
-    void DestroyItemForAll(GameObject itemGameObject)
-    {
-        Destroy(itemGameObject);
-        Debug.Log("DESTROY");
-    }
+    // [ObserversRpc(bufferLast:true)]
+    // void DestroyItemForAll(GameObject itemGameObject)
+    // {
+    //     Destroy(itemGameObject);
+    //     Debug.Log("DESTROY");
+    // }
 }
