@@ -2,9 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
-using PurrNet;
 
-public class PlayerHealth : NetworkIdentity
+public class PlayerHealth
 {
     [Header("Health Settings")]
     public float maxHealth = 100f;
