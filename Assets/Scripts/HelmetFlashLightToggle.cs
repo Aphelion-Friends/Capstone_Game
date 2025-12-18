@@ -1,28 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using PurrNet;
 
-public class FlashlightToggle : NetworkIdentity 
+public class FlashlightToggle
 {
     private Light lightComp;
-    private SyncVar<bool> lightOn = new(false, ownerAuth:true);
-
-    protected override void OnSpawned()
-    {
-        lightComp = GetComponent<Light>();
-        lightOn.onChanged += SetLight;
-        SetLight(false);
-    }
-
-    protected override void OnDestroy()
-    {
-        lightOn.onChanged -= SetLight;
-    }
 
     private void ToggleLight()
     {
-        if (isOwner)
-            lightOn.value = !lightOn.value;
     }
     
     private void SetLight(bool On)
