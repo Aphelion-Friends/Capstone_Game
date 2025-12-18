@@ -3,35 +3,35 @@ using UnityEngine;
 
 public class PlayerGunSpray : MonoBehaviour
 {
-    public GameObject gun;
-    public GameObject mainCameraRoot;
+//     public GameObject gun;
+//     public GameObject mainCameraRoot;
 
-    private Vector3 currentRotation;
-    private Vector3 targetRotation;
+//     private Vector3 currentRotation;
+//     private Vector3 targetRotation;
 
-    GunFireScript fireGun;
-    PlayerADS playerADS;
+//     GunFireScript fireGun;
+//     PlayerADS playerADS;
 
-    bool isAiming = false;
+//     bool isAiming = false;
 
-    void Update()
-    {
-        fireGun = gun.GetComponent<GunFireScript>();
+//     void Update()
+//     {
+//         fireGun = gun.GetComponent<GunFireScript>();
 
-        targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, fireGun.returnSpeed * Time.deltaTime);
-        currentRotation = Vector3.Slerp(currentRotation, targetRotation, fireGun.snappiness * Time.fixedDeltaTime);
+//         targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, fireGun.returnSpeed * Time.deltaTime);
+//         currentRotation = Vector3.Slerp(currentRotation, targetRotation, fireGun.snappiness * Time.fixedDeltaTime);
         
-        mainCameraRoot.transform.localRotation = Quaternion.Euler(currentRotation);
+//         mainCameraRoot.transform.localRotation = Quaternion.Euler(currentRotation);
 
-        playerADS = GetComponent<PlayerADS>();
-    }
+//         playerADS = GetComponent<PlayerADS>();
+//     }
 
-    public void RecoilFire()
-    {
-        PlayerADS playerADS = GetComponent<PlayerADS>();
-        if (playerADS.isAiming)
-            targetRotation += new Vector3(fireGun.sprayXAim, Random.Range(-fireGun.sprayYAim, fireGun.sprayYAim), Random.Range(-fireGun.sprayZAim, fireGun.sprayZAim));
-        else if (!playerADS.isAiming)
-            targetRotation += new Vector3(fireGun.sprayX, Random.Range(-fireGun.sprayY, fireGun.sprayY), Random.Range(-fireGun.sprayZ, fireGun.sprayZ));
-    }
+//     public void RecoilFire()
+//     {
+//         PlayerADS playerADS = GetComponent<PlayerADS>();
+//         if (playerADS.isAiming)
+//             targetRotation += new Vector3(fireGun.sprayXAim, Random.Range(-fireGun.sprayYAim, fireGun.sprayYAim), Random.Range(-fireGun.sprayZAim, fireGun.sprayZAim));
+//         else if (!playerADS.isAiming)
+//             targetRotation += new Vector3(fireGun.sprayX, Random.Range(-fireGun.sprayY, fireGun.sprayY), Random.Range(-fireGun.sprayZ, fireGun.sprayZ));
+//     }
 }

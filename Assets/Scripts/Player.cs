@@ -4,7 +4,7 @@ using System.Collections;
 using PurrNet;
 using TMPro;
 
-public class Player
+public class Player : MonoBehaviour
 {
     [Header("Inventory Reference")]
     public InventoryObject inventory;

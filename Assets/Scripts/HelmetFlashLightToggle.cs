@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FlashlightToggle
+public class FlashlightToggle : MonoBehaviour
 {
     private Light lightComp;
 

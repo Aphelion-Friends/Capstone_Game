@@ -8,8 +8,10 @@
 // using UnityEngine.VFX;
 // using PurrNet;
 
-// public class GunFireScript : NetworkIdentity
-// {
+using UnityEngine;
+
+public class GunFireScript : MonoBehaviour
+{
 
 //     private UpdateHUD HUDScript;
 
@@ -149,5 +151,5 @@
 //     {
 //         fullyAutomatic = !fullyAutomatic;
 //     }
-// }
+}
 
