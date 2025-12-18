@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: PredictedPrefabs
   m_EditorClassIdentifier: PurrNet.Prediction::PurrNet.Prediction.PredictedPrefabs
   _autoGenerate: 1
-  _folder: {fileID: 0}
+  _folder: {fileID: 102900000, guid: b0cbd22182b0faa5a8d366496f4f41a6, type: 3}
   _defaultPooling:
     usePooling: 0
     initialSize: 0
   _prefabs: []
-  _newPrefabs: []
+  _newPrefabs:
+  - prefab: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+    pooling:
+      usePooling: 0
+      initialSize: 0
