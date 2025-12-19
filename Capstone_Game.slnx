@@ -33,7 +33,6 @@
   <Project Path="PurrNet.Prediction.csproj" />
   <Project Path="Unity.Searcher.Editor.csproj" />
   <Project Path="Unity.ProBuilder.Editor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="com.rlabrecque.steamworks.net.csproj" />
   <Project Path="UnityEditor.TestRunner.csproj" />
   <Project Path="PurrDiction.Editor.csproj" />
@@ -51,6 +50,7 @@
   <Project Path="Unity.TextMeshPro.csproj" />
   <Project Path="Unity.TextMeshPro.Editor.csproj" />
   <Project Path="Unity.Rendering.LightTransport.Runtime.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="com.unity.cinemachine.editor.csproj" />
   <Project Path="Unity.Burst.Editor.csproj" />
   <Project Path="Unity.Rider.Editor.csproj" />
