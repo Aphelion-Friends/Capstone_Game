@@ -1,4 +1,4 @@
-﻿using PurrNet;
+﻿using PurrNet.Prediction;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -11,8 +11,26 @@ using StarterAssets;
 #if ENABLE_INPUT_SYSTEM
 [RequireComponent(typeof(PlayerInput))]
 #endif
-public class FirstPersonController : MonoBehaviour
+public class FirstPersonController : PredictedIdentity<FirstPersonController.MoveInput, FirstPersonController.MoveState>
 {
+    protected override void Simulate(MoveInput input, ref MoveState state, float delta)
+    {
+
+    }
+
+    public struct MoveInput : IPredictedData
+    {
+        public Vector2 moveDirection;
+        public Vector3 cameraForward;
+
+        public void Dispose() {}
+    }
+
+    public struct MoveState : IPredictedData<MoveState>
+    {
+        public void Dispose() {}
+    }
+
 	[Header("Player")]
 	[Tooltip("Move speed of the character in m/s")]
 	public float MoveSpeed = 4.0f;
