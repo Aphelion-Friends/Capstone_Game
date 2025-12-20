@@ -9,6 +9,8 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] private float _maxLookAngle = 85f;
     private Camera _playerCamera; //Camera I'm using for fps
 
+    public Camera playerCamera { get { return _playerCamera; } }
+
     private Vector2 _currentRotation;
     private bool _initalized;
 

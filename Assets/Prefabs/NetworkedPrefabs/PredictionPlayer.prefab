@@ -639,6 +639,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   _playerMovement: {fileID: 5213993213753222480}
+  firstPersonCamera: {fileID: 5425517718750818120}
+  roundsPerMinute: 500
+  maxAmmo: 30
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0
