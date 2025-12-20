@@ -40,6 +40,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         Vector2 move = Vector2.zero;
 
         move = InputManager.Instance.moveDirection;
+        Debug.Log(move);
 
         input.moveDirection = Vector2.ClampMagnitude(move, 1f);
         input.cameraForward = _camera.forward;
