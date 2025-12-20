@@ -1,8 +1,6 @@
 // Adapted from this video: https://www.youtube.com/watch?v=wd3mDnogxRk&list=PLF6lFlLzb6CRom_ItuhgGRTGNArFf23uw&index=1&t=296s
 using UnityEngine;
 using Cinemachine; //To use the cinemachine camera
-using UnityEngine.InputSystem;
-using UnityEngine.AI;
 
 
 public class FirstPersonCamera : MonoBehaviour
@@ -34,8 +32,7 @@ public class FirstPersonCamera : MonoBehaviour
         if (!_initalized) return;
 
         Vector2 mouseDelta = Vector2.zero;
-        if (Mouse.current != null)
-            mouseDelta = Mouse.current.delta.ReadValue() * _lookSensitivity;
+        mouseDelta = InputManager.Instance.lookDirection;
 
         _currentRotation.x -= mouseDelta.y;
         _currentRotation.x = Mathf.Clamp(_currentRotation.x, -_maxLookAngle, _maxLookAngle);
