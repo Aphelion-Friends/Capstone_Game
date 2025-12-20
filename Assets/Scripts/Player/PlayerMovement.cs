@@ -10,6 +10,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     [SerializeField] private float _planarDamping = 10f;
     [SerializeField] private float _jumpForce = 100f;
     [SerializeField] private float _groundCheckRadius = 0.5f;
+    [SerializeField] private float _jumpCooldown = 0.2f;
     [SerializeField] private LayerMask _groundMask;
 
     [SerializeField] private FirstPersonCamera _camera;
@@ -23,6 +24,8 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     protected override void Simulate(MoveInput input, ref MoveState state, float delta)
     {
+        state.jumpCooldown -= delta;
+
         Vector3 targetVel = (transform.forward * input.moveDirection.y + transform.right * input.moveDirection.x) * _moveSpeed;
         _rigidbody.AddForce(targetVel * _acceleration);
         Debug.Log(targetVel);
@@ -33,9 +36,10 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
             _rigidbody.velocity = new Vector3(targetVel.x, _rigidbody.velocity.y, targetVel.z);
 
         
-        if(input.jump && isGrounded())
+        if(input.jump && isGrounded() && state.jumpCooldown <= 0)
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce);
+            state.jumpCooldown = _jumpCooldown;
         }
 
         var cameraForward = input.cameraForward;
@@ -78,6 +82,8 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     public struct MoveState : IPredictedData<MoveState>
     {
+        public float jumpCooldown;
+
         public void Dispose() {}
     }
 
