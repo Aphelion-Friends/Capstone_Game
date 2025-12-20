@@ -36,6 +36,8 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
         if (_instance != null)
         {
             Destroy(_instance.gameObject);
