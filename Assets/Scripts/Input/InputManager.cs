@@ -24,6 +24,7 @@ public class InputManager : MonoBehaviour
     private InputAction _interactAction;
     private InputAction _inventoryAction;
     private InputAction _flashlightAction;
+    private InputAction _reloadAction;
 
     public InputAction moveAction { get { return _moveAction; } }
     public InputAction lookAction { get { return _lookAction; } }
@@ -33,6 +34,7 @@ public class InputManager : MonoBehaviour
     public InputAction interactAction { get { return _interactAction; } }
     public InputAction inventoryAction { get { return _inventoryAction; } }
     public InputAction flashlightAction { get { return _flashlightAction; } }
+    public InputAction reloadAction { get { return _reloadAction; } }
 
     private void Awake()
     {
@@ -54,6 +56,7 @@ public class InputManager : MonoBehaviour
         _interactAction = _playerInput.currentActionMap.FindAction("Interact");
         _inventoryAction = _playerInput.currentActionMap.FindAction("Inventory");
         _flashlightAction = _playerInput.currentActionMap.FindAction("Flashlight");
+        _reloadAction = _playerInput.currentActionMap.FindAction("Reload");
 
         _playerInput.onActionTriggered += OnAction;
     }
