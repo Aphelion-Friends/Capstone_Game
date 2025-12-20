@@ -5,8 +5,9 @@ using PurrNet.Prediction;
 
 public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, PlayerMovement.MoveState>
 {
-    [SerializeField] private float _moveSpeed = 7;
-    [SerializeField] private float _acceleration = 20;
+    [SerializeField] private float _moveSpeed = 7f;
+    [SerializeField] private float _sprintSpeed = 12f;
+    [SerializeField] private float _acceleration = 20f;
     [SerializeField] private float _planarDamping = 10f;
     [SerializeField] private float _jumpForce = 100f;
     [SerializeField] private float _groundCheckRadius = 0.5f;
@@ -26,7 +27,9 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     {
         state.jumpCooldown -= delta;
 
-        Vector3 targetVel = (transform.forward * input.moveDirection.y + transform.right * input.moveDirection.x) * _moveSpeed;
+        float speed = input.sprint ? _sprintSpeed : _moveSpeed;
+
+        Vector3 targetVel = (transform.forward * input.moveDirection.y + transform.right * input.moveDirection.x) * speed;
         _rigidbody.AddForce(targetVel * _acceleration);
         Debug.Log(targetVel);
 
@@ -61,6 +64,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
         move = InputManager.Instance.moveDirection;
 
+        input.sprint = InputManager.Instance.sprintAction.inProgress;
         input.moveDirection = Vector2.ClampMagnitude(move, 1f);
         input.cameraForward = _camera.forward;
     }
@@ -81,6 +85,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         public Vector2 moveDirection;
         public Vector3 cameraForward;
         public bool jump;
+        public bool sprint;
 
         public void Dispose() {}
     }

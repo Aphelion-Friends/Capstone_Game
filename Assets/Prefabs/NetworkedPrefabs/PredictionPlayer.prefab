@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e322384b9e5348d80acb37671ba697a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonCamera
-  _lookSensitivity: 1
+  _lookSensitivity: 0.25
   _maxLookAngle: 85
 --- !u!20 &6726161711833801846
 Camera:
@@ -488,6 +488,7 @@ MonoBehaviour:
   _repeatInputFactor: 0.8
   _extrapolateInput: 1
   _moveSpeed: 7
+  _sprintSpeed: 12
   _acceleration: 20
   _planarDamping: 10
   _jumpForce: 100
