@@ -5,14 +5,21 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 {
     [SerializeField] private LayerMask _shootLayerMask;
     [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private float roundsPerMinute = 200;
+    [SerializeField] private int maxAmmo = 30;
+
 
     protected override void Simulate(ShootInput input, ref ShootState state, float delta)
     {
         RaycastHit hit;
-        if (input.shoot)
+        state.shootCooldown -= delta;
+
+        if (input.shoot && state.shootCooldown <= 0)
         {
             // if (Physics.Raycast(transform.position, _playerMovement))
             Debug.Log("Shoot!");
+            float cooldownTime = 1 / (roundsPerMinute / 60);
+            state.shootCooldown = cooldownTime;
         }
     }
 
@@ -36,6 +43,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     public struct ShootState : IPredictedData<ShootState>
     {
         public int ammo;
+        public float shootCooldown;
 
         public void Dispose() {}
     }
