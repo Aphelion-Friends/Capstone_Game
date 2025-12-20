@@ -21,6 +21,7 @@ public class FirstPersonCamera : MonoBehaviour
     public void Init()
     {
         _initalized = true;
+        _playerCamera.enabled = true;
     }
 
     void LateUpdate()

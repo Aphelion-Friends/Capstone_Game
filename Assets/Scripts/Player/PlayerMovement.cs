@@ -21,18 +21,19 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     {
         Vector3 targetVel = (transform.forward * input.moveDirection.y + transform.right * input.moveDirection.x) * _moveSpeed;
         _rigidbody.AddForce(targetVel * _acceleration);
+        Debug.Log(targetVel);
 
         var horizontal = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);
         if (horizontal.magnitude > _moveSpeed)
             _rigidbody.velocity = new Vector3(targetVel.x, _rigidbody.velocity.y, targetVel.z);
 
         
-            var cameraForward = input.cameraForward;
-            cameraForward.y = 0;
-            if(cameraForward.sqrMagnitude > 0.0001f)
-            {
-                _rigidbody.MoveRotation((Quaternion.LookRotation(cameraForward.normalized)));
-            }
+        var cameraForward = input.cameraForward;
+        cameraForward.y = 0;
+        if(cameraForward.sqrMagnitude > 0.0001f)
+        {
+            _rigidbody.MoveRotation((Quaternion.LookRotation(cameraForward.normalized)));
+        }
     }
 
     protected override void GetFinalInput(ref MoveInput input)
