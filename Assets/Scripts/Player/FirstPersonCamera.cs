@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
-    [SerializeField] private float _lookSensitivity = 2f;
+    [Range(0, 1)]
+    [SerializeField] private float _lookSensitivity = 0.2f;
     [SerializeField] private float _maxLookAngle = 85f;
     private Camera _playerCamera; //Camera I'm using for fps
 
@@ -30,6 +31,7 @@ public class FirstPersonCamera : MonoBehaviour
 
         Vector2 mouseDelta = Vector2.zero;
         mouseDelta = InputManager.Instance.lookDirection;
+        mouseDelta *= _lookSensitivity;
 
         _currentRotation.x -= mouseDelta.y;
         _currentRotation.x = Mathf.Clamp(_currentRotation.x, -_maxLookAngle, _maxLookAngle);
