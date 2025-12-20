@@ -65,6 +65,11 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         input.cameraForward = _camera.forward;
     }
 
+    protected override void ModifyExtrapolatedInput(ref MoveInput input)
+    {
+        input.jump = false;
+    }
+
     protected override void SanitizeInput(ref MoveInput input)
     {
         if(input.moveDirection.magnitude > 1)

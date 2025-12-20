@@ -259,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5578140092833276513}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.71, z: 0.731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -492,6 +492,7 @@ MonoBehaviour:
   _planarDamping: 10
   _jumpForce: 100
   _groundCheckRadius: 0.5
+  _jumpCooldown: 0.2
   _groundMask:
     serializedVersion: 2
     m_Bits: 64
