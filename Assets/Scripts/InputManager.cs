@@ -10,13 +10,11 @@ public class InputManager : MonoBehaviour
     private PlayerInput _playerInput;
     public PlayerInput playerInput { get { return _playerInput; } }
 
-    private Vector2 _move;
+    private Vector2 _moveDirection;
     private Vector2 _lookDirection;
-    private Vector3 _forward;
 
-    public Vector2 move { get { return _move; } }
+    public Vector2 moveDirection { get { return _moveDirection; } }
     public Vector2 lookDirection { get { return _lookDirection; } }
-    public Vector3 forward { get { return _forward; } }
 
     private InputAction _moveAction;
     private InputAction _lookAction;
@@ -51,5 +49,20 @@ public class InputManager : MonoBehaviour
         _interactAction = _playerInput.currentActionMap.FindAction("Interact");
         _inventoryAction = _playerInput.currentActionMap.FindAction("Inventory");
         _flashlightAction = _playerInput.currentActionMap.FindAction("Flashlight");
+
+        _playerInput.onActionTriggered += OnAction;
+    }
+
+    private void OnAction(InputAction.CallbackContext context)
+    {
+        if (context.action == _moveAction)
+        {
+            _moveDirection = moveAction.ReadValue<Vector2>();
+        }
+
+        if (context.action == _lookAction)
+        {
+            _lookDirection = lookAction.ReadValue<Vector2>();
+        }
     }
 }
