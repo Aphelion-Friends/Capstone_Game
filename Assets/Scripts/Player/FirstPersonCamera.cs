@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
+    [SerializeField] private float _lookSensitivity = 2f;
+    [SerializeField] private float _maxLookAngle = 85f;
+    [SerializeField] private Camera _mainCamera;
+
+    private Vector2 _currentRotation;
+    private bool _initalized;
+
+    public Vector3 forward => Quaternion.Euler(_currentRotation.x, _currentRotation.y, 0) * Vector3.forward;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
