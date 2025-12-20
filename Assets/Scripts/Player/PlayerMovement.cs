@@ -31,7 +31,6 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
         Vector3 targetVel = (transform.forward * input.moveDirection.y + transform.right * input.moveDirection.x) * speed;
         _rigidbody.AddForce(targetVel * _acceleration);
-        Debug.Log(targetVel);
 
         var horizontal = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);
         _rigidbody.AddForce(-horizontal * _planarDamping);
