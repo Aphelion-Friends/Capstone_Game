@@ -500,7 +500,7 @@ Rigidbody:
   m_GameObject: {fileID: 8078684614268146017}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 10
+  m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -534,7 +534,7 @@ MonoBehaviour:
   _floatAccuracy: 1
   _interpolationSettings: {fileID: 11400000, guid: 4a8aa8e44e23cfd4a8d4387ef3f36173, type: 2}
   _unparentGraphics: 0
-  _characterControllerPatch: 0
+  _characterControllerPatch: 1
 --- !u!114 &7961874865920024228
 MonoBehaviour:
   m_ObjectHideFlags: 0

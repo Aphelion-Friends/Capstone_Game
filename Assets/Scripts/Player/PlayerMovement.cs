@@ -7,6 +7,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 {
     [SerializeField] private float _moveSpeed = 7;
     [SerializeField] private float _acceleration = 20;
+    [SerializeField] private float _planarDamping = 10f;
 
     [SerializeField] private FirstPersonCamera _camera;
     [SerializeField] private PredictedRigidbody _rigidbody;
@@ -24,6 +25,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         Debug.Log(targetVel);
 
         var horizontal = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);
+        _rigidbody.AddForce(-horizontal * _planarDamping);
         if (horizontal.magnitude > _moveSpeed)
             _rigidbody.velocity = new Vector3(targetVel.x, _rigidbody.velocity.y, targetVel.z);
 
