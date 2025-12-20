@@ -8,6 +8,9 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     [SerializeField] private float _moveSpeed = 7;
     [SerializeField] private float _acceleration = 20;
     [SerializeField] private float _planarDamping = 10f;
+    [SerializeField] private float _jumpForce = 100f;
+    [SerializeField] private float _groundCheckRadius = 0.5f;
+    [SerializeField] private LayerMask _groundMask;
 
     [SerializeField] private FirstPersonCamera _camera;
     [SerializeField] private PredictedRigidbody _rigidbody;
@@ -30,12 +33,22 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
             _rigidbody.velocity = new Vector3(targetVel.x, _rigidbody.velocity.y, targetVel.z);
 
         
+        if(input.jump && isGrounded())
+        {
+            _rigidbody.AddForce(Vector3.up * _jumpForce);
+        }
+
         var cameraForward = input.cameraForward;
         cameraForward.y = 0;
         if(cameraForward.sqrMagnitude > 0.0001f)
         {
             _rigidbody.MoveRotation((Quaternion.LookRotation(cameraForward.normalized)));
         }
+    }
+
+    protected override void UpdateInput(ref MoveInput input)
+    {
+        input.jump |= InputManager.Instance.jumpAction.inProgress;
     }
 
     protected override void GetFinalInput(ref MoveInput input)
@@ -58,6 +71,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     {
         public Vector2 moveDirection;
         public Vector3 cameraForward;
+        public bool jump;
 
         public void Dispose() {}
     }
@@ -65,5 +79,16 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     public struct MoveState : IPredictedData<MoveState>
     {
         public void Dispose() {}
+    }
+
+    private bool isGrounded()
+    {
+        return Physics.CheckSphere(transform.position, _groundCheckRadius, _groundMask);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _groundCheckRadius);
     }
 }

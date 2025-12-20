@@ -18,6 +18,7 @@ public class InputManager : MonoBehaviour
 
     private InputAction _moveAction;
     private InputAction _lookAction;
+    private InputAction _jumpAction;
     private InputAction _fireAction;
     private InputAction _sprintAction;
     private InputAction _interactAction;
@@ -26,6 +27,7 @@ public class InputManager : MonoBehaviour
 
     public InputAction moveAction { get { return _moveAction; } }
     public InputAction lookAction { get { return _lookAction; } }
+    public InputAction jumpAction { get { return _jumpAction; } }
     public InputAction fireAction { get { return _fireAction; } }
     public InputAction sprintAction { get { return _sprintAction; } }
     public InputAction interactAction { get { return _interactAction; } }
@@ -44,6 +46,7 @@ public class InputManager : MonoBehaviour
 
         _moveAction = _playerInput.currentActionMap.FindAction("Move");
         _lookAction = _playerInput.currentActionMap.FindAction("Look");
+        _jumpAction = _playerInput.currentActionMap.FindAction("Jump");
         _fireAction = _playerInput.currentActionMap.FindAction("Fire");
         _sprintAction = _playerInput.currentActionMap.FindAction("Sprint");
         _interactAction = _playerInput.currentActionMap.FindAction("Interact");
