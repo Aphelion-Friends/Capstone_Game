@@ -8,6 +8,7 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] private float _lookSensitivity = 0.2f;
     [SerializeField] private float _maxLookAngle = 85f;
     private Camera _playerCamera; //Camera I'm using for fps
+    private AudioListener _audioListener;
 
     public Camera playerCamera { get { return _playerCamera; } }
 
@@ -19,12 +20,14 @@ public class FirstPersonCamera : MonoBehaviour
     void Awake()
     {
         _playerCamera = GetComponent<Camera>();
+        _audioListener = GetComponent<AudioListener>();
     }
 
     public void Init()
     {
         _initalized = true;
         _playerCamera.enabled = true;
+        _audioListener.enabled = true;
     }
 
     void LateUpdate()
