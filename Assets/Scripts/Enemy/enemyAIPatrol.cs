@@ -64,7 +64,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
         state.giveUpTimer -= delta;
 
-        float distance = Vector3.Distance(state.destPoint, transform.position);
+        float distance = Vector3.Distance(state.destPoint, state.position);
 
         if (distance <= minDistance)
         {
@@ -122,8 +122,8 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         GameObject currentBest = colliderArray[0].gameObject;
         for (int x = 1; x < colliderArray.Length; x++)
         {
-            float currentBestDistance = Vector3.Distance(transform.position, currentBest.transform.position);
-            float currentDistance = Vector3.Distance(transform.position, colliderArray[x].gameObject.transform.position);
+            float currentBestDistance = Vector3.Distance(currentState.position, currentBest.transform.position);
+            float currentDistance = Vector3.Distance(currentState.position, colliderArray[x].gameObject.transform.position);
 
             if (currentDistance < currentBestDistance)
             {
@@ -166,7 +166,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         float x = Random.Range(-walkRange, walkRange);
         float z = Random.Range(-walkRange, walkRange);
 
-        currentState.destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+        currentState.destPoint = new Vector3(currentState.position.x + x, currentState.position.y, currentState.position.z + z);
 
         if (Physics.Raycast(currentState.destPoint, Vector3.down, groundLayer))
         {
