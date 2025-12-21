@@ -5,7 +5,6 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 {
     [SerializeField] private LayerMask _shootLayerMask;
     [SerializeField] private PlayerMovement _playerMovement;
-    [SerializeField] private FirstPersonCamera firstPersonCamera;
     [SerializeField] private int roundsPerMinute = 500;
     [SerializeField] private int maxAmmo = 30;
 
@@ -24,10 +23,10 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
         if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0)
         {
             Debug.Log("Shoot!");
-            if (Physics.Raycast(firstPersonCamera.playerCamera.transform.position, firstPersonCamera.forward, out hit, Mathf.Infinity, _shootLayerMask))
-            {
-                Debug.Log(hit.transform.name);
-            }
+            // if (Physics.Raycast(_playerMovement, currentInput.cameraForward, out hit, Mathf.Infinity, _shootLayerMask))
+            // {
+            //     Debug.Log(hit.transform.name);
+            // }
             float cooldownTime = 1 / (roundsPerMinute / 60);
             state.shootCooldown = cooldownTime;
             state.ammo--;
