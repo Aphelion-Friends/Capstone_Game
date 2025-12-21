@@ -39,12 +39,21 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
         public float giveUpTimer;
 
+        public Vector3 position;
+        public Quaternion rotation;
+
         public void Dispose() {}
     }
 
     protected override void LateAwake()
     {
         agent = GetComponent<NavMeshAgent>();
+    }
+
+    protected override void GetUnityState(ref EnemyState state)
+    {
+        state.position = transform.position;
+        state.rotation = transform.rotation;
     }
 
     protected override void Simulate(ref EnemyState state, float delta)
@@ -82,8 +91,8 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         }
 
         GameObject targetedPlayer = null;
-        Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
-        Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
+        Collider[] playerInSightColliders = Physics.OverlapSphere(state.position, sightRange, playerLayer);
+        Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(state.position, attackRange, playerLayer);
 
         playerInSight = playerInSightColliders.Length > 0;
         playerInAttackRange = playerInAttackRangeColliders.Length > 0;
