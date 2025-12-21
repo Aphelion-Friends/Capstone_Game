@@ -44,7 +44,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
             state.jumpCooldown = _jumpCooldown;
         }
 
-        var cameraForward = input.cameraForward;
+        Vector3 cameraForward = input.cameraForward;
         cameraForward.y = 0;
         if(cameraForward.sqrMagnitude > 0.0001f)
         {
@@ -77,7 +77,10 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     {
         if(input.moveDirection.magnitude > 1)
             input.moveDirection.Normalize();
+
+        input.cameraForward.Normalize();
     }
+
 
     public struct MoveInput : IPredictedData
     {

@@ -5,14 +5,14 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 {
     [SerializeField] private LayerMask _shootLayerMask;
     [SerializeField] private PlayerMovement _playerMovement;
-    [SerializeField] private int roundsPerMinute = 500;
+    [SerializeField] private float roundsPerMinute = 250;
     [SerializeField] private int maxAmmo = 30;
 
+    [SerializeField] private Transform shootOrigin;
 
 
     protected override void Simulate(ShootInput input, ref ShootState state, float delta)
     {
-        RaycastHit hit;
         state.shootCooldown -= delta;
 
         if (input.reload)
@@ -22,14 +22,22 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
         if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0)
         {
-            Debug.Log("Shoot!");
-            // if (Physics.Raycast(_playerMovement, currentInput.cameraForward, out hit, Mathf.Infinity, _shootLayerMask))
-            // {
-            //     Debug.Log(hit.transform.name);
-            // }
+            
+            Shoot();
             float cooldownTime = 1 / (roundsPerMinute / 60);
             state.shootCooldown = cooldownTime;
             state.ammo--;
+        }
+    }
+
+    private void Shoot()
+    {
+        RaycastHit hit;
+
+        Debug.Log("Shoot!");
+        if (Physics.Raycast(shootOrigin.position, _playerMovement.currentInput.cameraForward, out hit, Mathf.Infinity, _shootLayerMask))
+        {
+            Debug.Log(hit.transform.name);
         }
     }
 
