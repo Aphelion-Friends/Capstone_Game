@@ -488,7 +488,6 @@ GameObject:
   - component: {fileID: 4293443447547487517}
   - component: {fileID: 7961874865920024228}
   - component: {fileID: 7493958456960721005}
-  - component: {fileID: 6992032732657434611}
   - component: {fileID: 7598048237954868060}
   - component: {fileID: 6780938194775121917}
   - component: {fileID: 7036621359131802969}
@@ -625,31 +624,6 @@ CapsuleCollider:
   m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
---- !u!114 &6992032732657434611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8078684614268146017}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b598b9d8509d64abb9fdaf07fa3f6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkAnimator
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
-  _isSetup: 0
-  _prefabId: -2147483648
-  _componentIndex: -2147483648
-  _shouldBePooled: 0
-  _parent: {fileID: 0}
-  _invertedPathToNearestParent: 
-  _directChildren: []
-  _animator: {fileID: 3781700708315503250}
-  _ownerAuth: 1
-  _autoSyncParameters: 1
-  _dontSyncParameters: []
 --- !u!114 &7598048237954868060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1071,11 +1045,6 @@ Transform:
 --- !u!4 &3534114030456324058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6060271248664893657, guid: 35b281c98d9678b98bba950362c79d11, type: 3}
-  m_PrefabInstance: {fileID: 7282841130284984067}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &3781700708315503250 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 35b281c98d9678b98bba950362c79d11, type: 3}
   m_PrefabInstance: {fileID: 7282841130284984067}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4695111325812840978 stripped
