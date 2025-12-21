@@ -8,7 +8,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     [SerializeField] private float roundsPerMinute = 300;
     [SerializeField] private int _maxAmmo = 30;
     [SerializeField] private float _damage = 10f;
-    [SerializeField] private GunSound gunSound;
+    [SerializeField] private GunEffects gunEffects;
 
     [SerializeField] private Transform shootOrigin;
 
@@ -29,7 +29,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
     private void OnShootEvent()
     {
-        gunSound.PlayGunshotSound();
+        gunEffects.PlayEffects();
     }
 
     protected override void Simulate(ShootInput input, ref ShootState state, float delta)

@@ -50,6 +50,7 @@ MonoBehaviour:
   gunshotAudio: {fileID: 3970074215158122251}
   volume: 1
   isMuted: 0
+  _muzzleFlash: {fileID: 311398070167299602}
 --- !u!1 &2495700022114234775
 GameObject:
   m_ObjectHideFlags: 0

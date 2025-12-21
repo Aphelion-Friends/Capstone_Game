@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
-public class GunSound : MonoBehaviour
+public class GunEffects : MonoBehaviour
 {
     [Header("Audio Source")]
     public AudioSource gunshotAudio;
@@ -8,6 +9,15 @@ public class GunSound : MonoBehaviour
     [Header("Settings")]
     [Range(0f, 1f)] public float volume = 1f;
     public bool isMuted = false;
+
+    [Header("Visual Effects")]
+    [SerializeField] private VisualEffect _muzzleFlash;
+
+    public void PlayEffects()
+    {
+        PlayGunshotSound();
+        _muzzleFlash.Play();
+    }
 
     void Start()
     {

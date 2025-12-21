@@ -684,7 +684,7 @@ MonoBehaviour:
   roundsPerMinute: 250
   _maxAmmo: 30
   _damage: 10
-  gunSound: {fileID: 1110538303390578580}
+  gunEffects: {fileID: 1110538303390578580}
   shootOrigin: {fileID: 3433072650591229891}
 --- !u!114 &7036621359131802969
 MonoBehaviour:
