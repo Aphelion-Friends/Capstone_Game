@@ -1,195 +1,188 @@
-// Using this tutorial: https://www.youtube.com/watch?v=-Iwsz4gdgyQ
+// Adapted from this tutorial: https://www.youtube.com/watch?v=-Iwsz4gdgyQ
 
-// using UnityEngine;
-// using UnityEngine.AI;
-// using PurrNet;
+using UnityEngine;
+using UnityEngine.AI;
+using PurrNet.Prediction;
 
-// public class enemyAIPatrol : NetworkIdentity
-// {
-//     NavMeshAgent agent;
+public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
+{
+    NavMeshAgent agent;
+    [SerializeField] LayerMask groundLayer, playerLayer;
 
-//     [SerializeField] LayerMask groundLayer, playerLayer;
+    Vector3 destPoint;
+    bool walkPointSet;
+    [SerializeField] float walkRange;
 
-//     Vector3 destPoint;
-//     bool walkPointSet;
-//     [SerializeField] float walkRange;
+    float timeAtLastDestSet;
+    [SerializeField] float giveUpTime = 5f;
 
-//     float timeAtLastDestSet;
-//     [SerializeField] float giveUpTime = 5f;
+    [SerializeField] float sightRange, attackRange;
+    bool playerInSight, playerInAttackRange;
 
-//     [SerializeField] float sightRange, attackRange;
-//     bool playerInSight, playerInAttackRange;
+    float timeAtLastAttack;
+    [SerializeField] float attackCooldown = 1f;
 
-//     float timeAtLastAttack;
-//     [SerializeField] float attackCooldown = 1f;
+    public struct EnemyState : IPredictedData<EnemyState>
+    {
+        Vector3 destPoint;
+        bool destPointSet;
+        public float destSetCooldownTimer;
 
-//     NetworkAnimator animator;
+        public bool playerInSight;
+        public bool playerInAttackRange;
 
-//     SyncVar<bool> dead = new(false, ownerAuth:true);
+        public void Dispose() {}
+    }
 
+    // private void OnTick(bool asServer)
+    // {
+    //     if (!dead && asServer)
+    //     {
+    //         GameObject targetedPlayer = null;
+    //         Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
+    //         Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 
-//     protected override void OnSpawned(bool asServer)
-//     {
-//         base.OnSpawned(asServer);
-//         // if (asServer)
-//         //     GiveOwnership(PlayerID.Server);
+    //         playerInSight = playerInSightColliders.Length > 0;
+    //         playerInAttackRange = playerInAttackRangeColliders.Length > 0;
 
-//         agent = GetComponent<NavMeshAgent>();
-//         animator = GetComponent<NetworkAnimator>();
+    //         if (playerInAttackRange)
+    //         {
+    //             // Debug.Log("ATTAK");
+    //             targetedPlayer = GetClosestPlayer(playerInAttackRangeColliders);
+    //         }
+    //         else if (playerInSight)
+    //         {
+    //             targetedPlayer = GetClosestPlayer(playerInSightColliders);
+    //         }
 
-//         networkManager.onTick += OnTick;
-//     }
+    //         if (!playerInSight && !playerInAttackRange) Patrol();
 
-//     // Update is called once per frame
-//     private void OnTick(bool asServer)
-//     {
-//         if (!dead && asServer)
-//         {
-//             GameObject targetedPlayer = null;
-//             Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
-//             Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
+    //         if (targetedPlayer is null)
+    //             return;
 
-//             playerInSight = playerInSightColliders.Length > 0;
-//             playerInAttackRange = playerInAttackRangeColliders.Length > 0;
+    //         if (playerInSight && !playerInAttackRange) Chase(targetedPlayer);
+    //         if (playerInSight && playerInAttackRange) Attack(targetedPlayer);
+    //     }
+    // }
 
-//             if (playerInAttackRange)
-//             {
-//                 // Debug.Log("ATTAK");
-//                 targetedPlayer = GetClosestPlayer(playerInAttackRangeColliders);
-//             }
-//             else if (playerInSight)
-//             {
-//                 targetedPlayer = GetClosestPlayer(playerInSightColliders);
-//             }
+    // GameObject GetClosestPlayer(Collider[] colliderArray)
+    // {
+    //     GameObject currentBest = colliderArray[0].gameObject;
+    //     for (int x = 1; x < colliderArray.Length; x++)
+    //     {
+    //         float currentBestDistance = Vector3.Distance(transform.position, currentBest.transform.position);
+    //         float currentDistance = Vector3.Distance(transform.position, colliderArray[x].gameObject.transform.position);
 
-//             if (!playerInSight && !playerInAttackRange) Patrol();
+    //         if (currentDistance < currentBestDistance)
+    //         {
+    //             currentBest = colliderArray[x].gameObject;
+    //         }
+    //     }
+    //     return currentBest;
+    // }
 
-//             if (targetedPlayer is null)
-//                 return;
+    // void Attack(GameObject playerAttacked)
+    // {
+    //     float timeSinceLastAttack = Time.time - timeAtLastAttack;
+    //     animator.SetTrigger("Attack");
+    //     NetworkIdentity playerAttackedOwner = playerAttacked.GetComponent<NetworkIdentity>();
 
-//             if (playerInSight && !playerInAttackRange) Chase(targetedPlayer);
-//             if (playerInSight && playerInAttackRange) Attack(targetedPlayer);
-//         }
-//     }
+    //     if (timeSinceLastAttack >= attackCooldown && playerAttackedOwner is not null)
+    //     {
+    //         // playerAttacked.GetComponent<PlayerHealth>().TakeDamage(10f);
+    //         DealDamage(playerAttackedOwner.owner.Value, 10f);
+    //         timeAtLastAttack = Time.time;
+    //     }
+    // }
 
-//     GameObject GetClosestPlayer(Collider[] colliderArray)
-//     {
-//         GameObject currentBest = colliderArray[0].gameObject;
-//         for (int x = 1; x < colliderArray.Length; x++)
-//         {
-//             float currentBestDistance = Vector3.Distance(transform.position, currentBest.transform.position);
-//             float currentDistance = Vector3.Distance(transform.position, colliderArray[x].gameObject.transform.position);
+    // [TargetRpc]
+    // void DealDamage(PlayerID target, float damage)
+    // {
+    //     FindFirstObjectByType<PlayerHealth>().TakeDamage(damage);
+    // }
 
-//             if (currentDistance < currentBestDistance)
-//             {
-//                 currentBest = colliderArray[x].gameObject;
-//             }
-//         }
-//         return currentBest;
-//     }
+    // void Chase(GameObject targetedPlayer)
+    // {
+    //     agent.SetDestination(targetedPlayer.transform.position);
+    // }
 
-//     void Attack(GameObject playerAttacked)
-//     {
-//         float timeSinceLastAttack = Time.time - timeAtLastAttack;
-//         animator.SetTrigger("Attack");
-//         NetworkIdentity playerAttackedOwner = playerAttacked.GetComponent<NetworkIdentity>();
+    // void Patrol()
+    // {
+    //     if (!walkPointSet)
+    //     {
+    //         SearchForDest();
+    //     }
+    //     else if (walkPointSet)
+    //     {
+    //         agent.SetDestination(destPoint);
+    //     }
 
-//         if (timeSinceLastAttack >= attackCooldown && playerAttackedOwner is not null)
-//         {
-//             // playerAttacked.GetComponent<PlayerHealth>().TakeDamage(10f);
-//             DealDamage(playerAttackedOwner.owner.Value, 10f);
-//             timeAtLastAttack = Time.time;
-//         }
-//     }
+    //     // It gives up eventually if it can't reach its destination.
+    //     if (Vector3.Distance(transform.position, destPoint) < 10 || (Time.time - timeAtLastDestSet) >= giveUpTime)
+    //     {
+    //         walkPointSet = false;
+    //     }
+    // }
 
-//     [TargetRpc]
-//     void DealDamage(PlayerID target, float damage)
-//     {
-//         FindFirstObjectByType<PlayerHealth>().TakeDamage(damage);
-//     }
+    // void SearchForDest()
+    // {
+    //     float x = Random.Range(-walkRange, walkRange);
+    //     float z = Random.Range(-walkRange, walkRange);
 
-//     void Chase(GameObject targetedPlayer)
-//     {
-//         agent.SetDestination(targetedPlayer.transform.position);
-//     }
+    //     destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
 
-//     void Patrol()
-//     {
-//         if (!walkPointSet)
-//         {
-//             SearchForDest();
-//         }
-//         else if (walkPointSet)
-//         {
-//             agent.SetDestination(destPoint);
-//         }
+    //     if (Physics.Raycast(destPoint, Vector3.down, groundLayer))
+    //     {
+    //         walkPointSet = true;
+    //         timeAtLastDestSet = Time.time;
+    //     }
+    // }
 
-//         // It gives up eventually if it can't reach its destination.
-//         if (Vector3.Distance(transform.position, destPoint) < 10 || (Time.time - timeAtLastDestSet) >= giveUpTime)
-//         {
-//             walkPointSet = false;
-//         }
-//     }
+    // public void HearSound(Vector3 soundLocation)
+    // {
+    //     if (!playerInSight && !playerInAttackRange)
+    //     {
+    //         destPoint = soundLocation;
+    //         walkPointSet = true;
+    //         timeAtLastDestSet = Time.time;
+    //     }
+    // }
 
-//     void SearchForDest()
-//     {
-//         float x = Random.Range(-walkRange, walkRange);
-//         float z = Random.Range(-walkRange, walkRange);
+    // [ServerRpc]
+    // public void Die()
+    // {
+    //     // Debug.Log("SHOUD DIE");
+    //     if (!dead.value)
+    //     {
+    //         Debug.Log(dead.value);
+    //         dead.value = true;
+    //         OnDie(dead.value);
+    //         agent.SetDestination(transform.position);
+    //         animator.SetTrigger("Die");
+    //         EnemySpawner.Instance.spawnEnemy(0);
 
-//         destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+    //     }
+    // }
 
-//         if (Physics.Raycast(destPoint, Vector3.down, groundLayer))
-//         {
-//             walkPointSet = true;
-//             timeAtLastDestSet = Time.time;
-//         }
-//     }
-
-//     public void HearSound(Vector3 soundLocation)
-//     {
-//         if (!playerInSight && !playerInAttackRange)
-//         {
-//             destPoint = soundLocation;
-//             walkPointSet = true;
-//             timeAtLastDestSet = Time.time;
-//         }
-//     }
-
-//     [ServerRpc]
-//     public void Die()
-//     {
-//         // Debug.Log("SHOUD DIE");
-//         if (!dead.value)
-//         {
-//             Debug.Log(dead.value);
-//             dead.value = true;
-//             OnDie(dead.value);
-//             agent.SetDestination(transform.position);
-//             animator.SetTrigger("Die");
-//             EnemySpawner.Instance.spawnEnemy(0);
-
-//         }
-//     }
-
-//     // Makes the enemy appear dead for the clients
-//     // Should be called when the server sets the spider to be dead
-//     [ObserversRpc]
-//     private void OnDie(bool isDead)
-//     {
-//         // Debug.Log("DEAD!");
-//         if (isDead)
-//         {
-//             //GetComponent<Collider>().enabled = false;
+    // // Makes the enemy appear dead for the clients
+    // // Should be called when the server sets the spider to be dead
+    // [ObserversRpc]
+    // private void OnDie(bool isDead)
+    // {
+    //     // Debug.Log("DEAD!");
+    //     if (isDead)
+    //     {
+    //         //GetComponent<Collider>().enabled = false;
 
 
-            
-//             ObjectiveManager.Instance.objective.EnemyKilled("spider");
-//             gameObject.layer = 7;
-//             gameObject.GetComponent<Item>().enabled = true;
-//             gameObject.GetComponent<NavMeshAgent>().enabled = false;
-//             gameObject.GetComponent<enemyAIPatrol>().enabled = false;
+    //      
+    //         ObjectiveManager.Instance.objective.EnemyKilled("spider");
+    //         gameObject.layer = 7;
+    //         gameObject.GetComponent<Item>().enabled = true;
+    //         gameObject.GetComponent<NavMeshAgent>().enabled = false;
+    //         gameObject.GetComponent<enemyAIPatrol>().enabled = false;
 
-         
-//         }
-//     }
-// }
+    //   
+    //     }
+    // }
+}
