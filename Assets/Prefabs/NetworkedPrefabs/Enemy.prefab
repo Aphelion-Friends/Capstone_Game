@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2922306155244310206}
   - component: {fileID: 3802930602602083806}
   - component: {fileID: 4559315082083917078}
+  - component: {fileID: 3935838105812009191}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -114,8 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817fe5016bd0a2a49a95b6eb338bb132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkTransform
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -123,6 +122,8 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _syncPosition: 1
   _syncRotation: 1
   _syncScale: 1
@@ -146,6 +147,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
   item: {fileID: 11400000, guid: 693e4ad20c0f840bf9f5de00be5eab22, type: 2}
+--- !u!114 &3935838105812009191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688170438458974228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1095957a6704d299cf8f4e6e4476dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAIPatrol
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  giveUpTime: 10
+  walkRange: 10
+  destPointCooldown: 5
+  sightRange: 5
+  attackRange: 1.5
+  attackCooldown: 1
 --- !u!1001 &2876520803769328354
 PrefabInstance:
   m_ObjectHideFlags: 0

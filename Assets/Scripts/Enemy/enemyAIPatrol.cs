@@ -3,18 +3,20 @@
 using UnityEngine;
 using UnityEngine.AI;
 using PurrNet.Prediction;
+using Unity.VisualScripting;
+using UnityEditor.Rendering;
 
 public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 {
     NavMeshAgent agent;
     [SerializeField] LayerMask groundLayer, playerLayer;
 
-    Vector3 destPoint;
-    bool walkPointSet;
+    [SerializeField] private float giveUpTime;
+
     [SerializeField] float walkRange;
 
     float timeAtLastDestSet;
-    [SerializeField] float giveUpTime = 5f;
+    [SerializeField] float destPointCooldown = 5f;
 
     [SerializeField] float sightRange, attackRange;
     bool playerInSight, playerInAttackRange;
@@ -22,121 +24,146 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
     float timeAtLastAttack;
     [SerializeField] float attackCooldown = 1f;
 
+    [SerializeField] float minDistance = 2f;
+
     public struct EnemyState : IPredictedData<EnemyState>
     {
-        Vector3 destPoint;
-        bool destPointSet;
+        public Vector3 destPoint;
+        public bool destPointSet;
         public float destSetCooldownTimer;
 
         public bool playerInSight;
         public bool playerInAttackRange;
 
+        public float attackCooldownTimer;
+
+        public float giveUpTimer;
+
         public void Dispose() {}
     }
 
-    // private void OnTick(bool asServer)
-    // {
-    //     if (!dead && asServer)
-    //     {
-    //         GameObject targetedPlayer = null;
-    //         Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
-    //         Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
+    protected override void LateAwake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
-    //         playerInSight = playerInSightColliders.Length > 0;
-    //         playerInAttackRange = playerInAttackRangeColliders.Length > 0;
+    protected override void Simulate(ref EnemyState state, float delta)
+    {
+        state.destSetCooldownTimer -= delta;
 
-    //         if (playerInAttackRange)
-    //         {
-    //             // Debug.Log("ATTAK");
-    //             targetedPlayer = GetClosestPlayer(playerInAttackRangeColliders);
-    //         }
-    //         else if (playerInSight)
-    //         {
-    //             targetedPlayer = GetClosestPlayer(playerInSightColliders);
-    //         }
+        state.attackCooldownTimer -= delta;
 
-    //         if (!playerInSight && !playerInAttackRange) Patrol();
+        state.giveUpTimer -= delta;
 
-    //         if (targetedPlayer is null)
-    //             return;
+        float distance = Vector3.Distance(state.destPoint, transform.position);
 
-    //         if (playerInSight && !playerInAttackRange) Chase(targetedPlayer);
-    //         if (playerInSight && playerInAttackRange) Attack(targetedPlayer);
-    //     }
-    // }
+        if (distance <= minDistance)
+        {
+            state.destPointSet = false;
+        }
 
-    // GameObject GetClosestPlayer(Collider[] colliderArray)
-    // {
-    //     GameObject currentBest = colliderArray[0].gameObject;
-    //     for (int x = 1; x < colliderArray.Length; x++)
-    //     {
-    //         float currentBestDistance = Vector3.Distance(transform.position, currentBest.transform.position);
-    //         float currentDistance = Vector3.Distance(transform.position, colliderArray[x].gameObject.transform.position);
+        if (state.destSetCooldownTimer <= 0)
+        {
+            state.destPointSet = false;
 
-    //         if (currentDistance < currentBestDistance)
-    //         {
-    //             currentBest = colliderArray[x].gameObject;
-    //         }
-    //     }
-    //     return currentBest;
-    // }
+            state.destSetCooldownTimer = destPointCooldown; 
+        }
 
-    // void Attack(GameObject playerAttacked)
-    // {
-    //     float timeSinceLastAttack = Time.time - timeAtLastAttack;
-    //     animator.SetTrigger("Attack");
-    //     NetworkIdentity playerAttackedOwner = playerAttacked.GetComponent<NetworkIdentity>();
+        if (state.attackCooldownTimer <= 0)
+        {
+            state.attackCooldownTimer = attackCooldown;
+        }
 
-    //     if (timeSinceLastAttack >= attackCooldown && playerAttackedOwner is not null)
-    //     {
-    //         // playerAttacked.GetComponent<PlayerHealth>().TakeDamage(10f);
-    //         DealDamage(playerAttackedOwner.owner.Value, 10f);
-    //         timeAtLastAttack = Time.time;
-    //     }
-    // }
+        if (state.destPointSet == true && state.giveUpTimer <= 0)
+        {
+            state.giveUpTimer = giveUpTime;
 
-    // [TargetRpc]
-    // void DealDamage(PlayerID target, float damage)
-    // {
-    //     FindFirstObjectByType<PlayerHealth>().TakeDamage(damage);
-    // }
+            state.destPointSet = false;
+        }
 
-    // void Chase(GameObject targetedPlayer)
-    // {
-    //     agent.SetDestination(targetedPlayer.transform.position);
-    // }
+        GameObject targetedPlayer = null;
+        Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
+        Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 
-    // void Patrol()
-    // {
-    //     if (!walkPointSet)
-    //     {
-    //         SearchForDest();
-    //     }
-    //     else if (walkPointSet)
-    //     {
-    //         agent.SetDestination(destPoint);
-    //     }
+        playerInSight = playerInSightColliders.Length > 0;
+        playerInAttackRange = playerInAttackRangeColliders.Length > 0;
 
-    //     // It gives up eventually if it can't reach its destination.
-    //     if (Vector3.Distance(transform.position, destPoint) < 10 || (Time.time - timeAtLastDestSet) >= giveUpTime)
-    //     {
-    //         walkPointSet = false;
-    //     }
-    // }
+        if (playerInAttackRange)
+        {
+            // Debug.Log("ATTAK");
+            targetedPlayer = GetClosestPlayer(playerInAttackRangeColliders);
+        }
+        else if (playerInSight)
+        {
+            targetedPlayer = GetClosestPlayer(playerInSightColliders);
+        }
 
-    // void SearchForDest()
-    // {
-    //     float x = Random.Range(-walkRange, walkRange);
-    //     float z = Random.Range(-walkRange, walkRange);
+        if (!playerInSight && !playerInAttackRange) Patrol();
 
-    //     destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+        if (targetedPlayer is null)
+            return;
 
-    //     if (Physics.Raycast(destPoint, Vector3.down, groundLayer))
-    //     {
-    //         walkPointSet = true;
-    //         timeAtLastDestSet = Time.time;
-    //     }
-    // }
+        if (playerInSight && !playerInAttackRange) Chase(targetedPlayer);
+        if (playerInSight && playerInAttackRange) Attack(targetedPlayer);
+      
+    }
+
+    GameObject GetClosestPlayer(Collider[] colliderArray)
+    {
+        GameObject currentBest = colliderArray[0].gameObject;
+        for (int x = 1; x < colliderArray.Length; x++)
+        {
+            float currentBestDistance = Vector3.Distance(transform.position, currentBest.transform.position);
+            float currentDistance = Vector3.Distance(transform.position, colliderArray[x].gameObject.transform.position);
+
+            if (currentDistance < currentBestDistance)
+            {
+                currentBest = colliderArray[x].gameObject;
+            }
+        }
+        return currentBest;
+    }
+
+    //NEEDS TO BE REDONE COMPLETELY 
+    void Attack(GameObject playerAttacked)
+    {
+        if (playerAttacked is not null)
+        {    
+            playerAttacked.GetComponent<PlayerHealth>().ChangeHealth(-10f);
+        }
+    }
+
+
+    void Chase(GameObject targetedPlayer)
+    {
+        agent.SetDestination(targetedPlayer.transform.position);
+    }
+
+    void Patrol()
+    {
+        if (!currentState.destPointSet)
+        {
+            SearchForDest();
+        }
+        else if (currentState.destPointSet)
+        {
+            agent.SetDestination(currentState.destPoint);
+        }
+
+    }
+
+    void SearchForDest()
+    {
+        float x = Random.Range(-walkRange, walkRange);
+        float z = Random.Range(-walkRange, walkRange);
+
+        currentState.destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+
+        if (Physics.Raycast(currentState.destPoint, Vector3.down, groundLayer))
+        {
+            currentState.destPointSet = true;
+        }
+    }
 
     // public void HearSound(Vector3 soundLocation)
     // {
