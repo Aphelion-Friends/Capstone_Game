@@ -26,6 +26,8 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     [SerializeField] float minDistance = 2f;
 
+    private bool agentInitalized = false;
+
     public struct EnemyState : IPredictedData<EnemyState>
     {
         public Vector3 destPoint;
@@ -39,32 +41,35 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
         public float giveUpTimer;
 
-        public Vector3 position;
-        public Quaternion rotation;
-
         public void Dispose() {}
     }
 
     protected override void LateAwake()
     {
+        Debug.Log("Game started!");
         agent = GetComponent<NavMeshAgent>();
     }
 
-    protected override void GetUnityState(ref EnemyState state)
+
+    private void Start()
     {
-        state.position = transform.position;
-        state.rotation = transform.rotation;
     }
 
     protected override void Simulate(ref EnemyState state, float delta)
     {
+        if (!agentInitalized)
+        {
+            agent.enabled = true;
+            agentInitalized = true;
+        }
+
         state.destSetCooldownTimer -= delta;
 
         state.attackCooldownTimer -= delta;
 
         state.giveUpTimer -= delta;
 
-        float distance = Vector3.Distance(state.destPoint, state.position);
+        float distance = Vector3.Distance(state.destPoint, transform.position);
 
         if (distance <= minDistance)
         {
@@ -78,11 +83,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
             state.destSetCooldownTimer = destPointCooldown; 
         }
 
-        if (state.attackCooldownTimer <= 0)
-        {
-            state.attackCooldownTimer = attackCooldown;
-        }
-
         if (state.destPointSet == true && state.giveUpTimer <= 0)
         {
             state.giveUpTimer = giveUpTime;
@@ -91,8 +91,8 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         }
 
         GameObject targetedPlayer = null;
-        Collider[] playerInSightColliders = Physics.OverlapSphere(state.position, sightRange, playerLayer);
-        Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(state.position, attackRange, playerLayer);
+        Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
+        Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 
         playerInSight = playerInSightColliders.Length > 0;
         playerInAttackRange = playerInAttackRangeColliders.Length > 0;
@@ -113,8 +113,11 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
             return;
 
         if (playerInSight && !playerInAttackRange) Chase(targetedPlayer);
-        if (playerInSight && playerInAttackRange) Attack(targetedPlayer);
-      
+        if (playerInSight && playerInAttackRange && state.attackCooldownTimer <= 0) 
+        {
+            state.attackCooldownTimer = attackCooldown;
+            Attack(targetedPlayer);
+        }
     }
 
     GameObject GetClosestPlayer(Collider[] colliderArray)
@@ -122,8 +125,8 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         GameObject currentBest = colliderArray[0].gameObject;
         for (int x = 1; x < colliderArray.Length; x++)
         {
-            float currentBestDistance = Vector3.Distance(currentState.position, currentBest.transform.position);
-            float currentDistance = Vector3.Distance(currentState.position, colliderArray[x].gameObject.transform.position);
+            float currentBestDistance = Vector3.Distance(transform.position, currentBest.transform.position);
+            float currentDistance = Vector3.Distance(transform.position, colliderArray[x].gameObject.transform.position);
 
             if (currentDistance < currentBestDistance)
             {
@@ -166,7 +169,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         float x = Random.Range(-walkRange, walkRange);
         float z = Random.Range(-walkRange, walkRange);
 
-        currentState.destPoint = new Vector3(currentState.position.x + x, currentState.position.y, currentState.position.z + z);
+        currentState.destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
 
         if (Physics.Raycast(currentState.destPoint, Vector3.down, groundLayer))
         {
