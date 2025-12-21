@@ -29,7 +29,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
     private void OnShootEvent()
     {
-        Debug.Log("Shoot event!");
+        gunSound.PlayGunshotSound();
     }
 
     protected override void Simulate(ShootInput input, ref ShootState state, float delta)
