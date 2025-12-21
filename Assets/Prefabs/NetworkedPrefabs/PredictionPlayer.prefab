@@ -491,9 +491,9 @@ GameObject:
   - component: {fileID: 7598048237954868060}
   - component: {fileID: 6780938194775121917}
   - component: {fileID: 7036621359131802969}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PredictionPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
