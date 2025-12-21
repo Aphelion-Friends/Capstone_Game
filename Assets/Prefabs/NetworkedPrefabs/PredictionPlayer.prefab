@@ -628,6 +628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b598b9d8509d64abb9fdaf07fa3f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkAnimator
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -635,8 +637,6 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _animator: {fileID: 3781700708315503250}
   _ownerAuth: 1
   _autoSyncParameters: 1
@@ -675,6 +675,7 @@ MonoBehaviour:
   roundsPerMinute: 250
   _maxAmmo: 30
   _damage: 10
+  gunSound: {fileID: 1110538303390578580}
   shootOrigin: {fileID: 3433072650591229891}
 --- !u!114 &7036621359131802969
 MonoBehaviour:
@@ -869,6 +870,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+--- !u!114 &1110538303390578580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6222514899644299383, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}
+  m_PrefabInstance: {fileID: 6427688792468017123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db243a9fb60c41ca1849576945eba743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!4 &7316061736729316872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}

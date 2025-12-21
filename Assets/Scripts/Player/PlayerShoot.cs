@@ -8,9 +8,29 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     [SerializeField] private float roundsPerMinute = 300;
     [SerializeField] private int _maxAmmo = 30;
     [SerializeField] private float _damage = 10f;
+    [SerializeField] private GunSound gunSound;
 
     [SerializeField] private Transform shootOrigin;
 
+    private PredictedEvent _onShoot;
+
+    protected override void LateAwake()
+    {
+        base.LateAwake();
+        _onShoot  = new PredictedEvent(predictionManager, this);
+        _onShoot.AddListener(OnShootEvent);
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        _onShoot.RemoveListener(OnShootEvent);
+    }
+
+    private void OnShootEvent()
+    {
+        Debug.Log("Shoot event!");
+    }
 
     protected override void Simulate(ShootInput input, ref ShootState state, float delta)
     {
@@ -33,6 +53,8 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
     private void Shoot()
     {
+        _onShoot?.Invoke();
+
         RaycastHit hit;
 
         if (Physics.Raycast(shootOrigin.position, _playerMovement.currentInput.cameraForward, out hit, Mathf.Infinity, _shootLayerMask))
