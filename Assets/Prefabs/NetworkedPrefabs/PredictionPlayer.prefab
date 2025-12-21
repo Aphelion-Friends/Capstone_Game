@@ -538,7 +538,7 @@ MonoBehaviour:
   _jumpCooldown: 0.2
   _groundMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1239
   _camera: {fileID: 5425517718750818120}
   _rigidbody: {fileID: 7961874865920024228}
 --- !u!54 &3541979704348186581
