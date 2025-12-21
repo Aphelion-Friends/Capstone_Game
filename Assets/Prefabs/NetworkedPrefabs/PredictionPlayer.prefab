@@ -522,7 +522,7 @@ MonoBehaviour:
   _repeatInputFactor: 0.8
   _extrapolateInput: 1
   _moveSpeed: 7
-  _sprintSpeed: 12
+  _sprintSpeed: 15
   _acceleration: 20
   _planarDamping: 10
   _jumpForce: 100
@@ -628,8 +628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b598b9d8509d64abb9fdaf07fa3f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkAnimator
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -637,6 +635,8 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _animator: {fileID: 3781700708315503250}
   _ownerAuth: 1
   _autoSyncParameters: 1
