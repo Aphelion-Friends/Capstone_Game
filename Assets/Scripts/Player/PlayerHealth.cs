@@ -17,6 +17,14 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     public void ChangeHealth(float change)
     {
         currentState.health += change;
+
+        if (currentState.health <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        Debug.Log("The player died!");
     }
 
     public struct HealthState : IPredictedData<HealthState>

@@ -6,7 +6,8 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     [SerializeField] private LayerMask _shootLayerMask;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private float roundsPerMinute = 300;
-    [SerializeField] private int maxAmmo = 30;
+    [SerializeField] private int _maxAmmo = 30;
+    [SerializeField] private float _damage = 10f;
 
     [SerializeField] private Transform shootOrigin;
 
@@ -17,7 +18,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
         if (input.reload)
         {
-            state.ammo = maxAmmo;
+            state.ammo = _maxAmmo;
         }
 
         if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0)
@@ -34,10 +35,12 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     {
         RaycastHit hit;
 
-        Debug.Log("Shoot!");
         if (Physics.Raycast(shootOrigin.position, _playerMovement.currentInput.cameraForward, out hit, Mathf.Infinity, _shootLayerMask))
         {
-            Debug.Log(hit.transform.name);
+            Debug.Log($"Hit: {hit.transform.name}");
+
+            if(hit.transform.TryGetComponent(out PlayerHealth playerHealth))
+                playerHealth.ChangeHealth(-_damage);
         }
     }
 
@@ -57,7 +60,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     {
         return new ShootState
         {
-            ammo = maxAmmo,
+            ammo = _maxAmmo,
             shootCooldown = 0,
         };
     }

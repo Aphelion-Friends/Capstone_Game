@@ -257,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 4880120414878868538}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.64, z: 0}
+  m_LocalPosition: {x: 0, y: 3.71, z: 0.731}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -482,6 +482,7 @@ GameObject:
   - component: {fileID: 6992032732657434611}
   - component: {fileID: 7598048237954868060}
   - component: {fileID: 6780938194775121917}
+  - component: {fileID: 7036621359131802969}
   m_Layer: 0
   m_Name: PredictionPlayer
   m_TagString: Untagged
@@ -672,8 +673,22 @@ MonoBehaviour:
     m_Bits: 4294967295
   _playerMovement: {fileID: 5213993213753222480}
   roundsPerMinute: 250
-  maxAmmo: 30
+  _maxAmmo: 30
+  _damage: 10
   shootOrigin: {fileID: 3433072650591229891}
+--- !u!114 &7036621359131802969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bfdf8876d9667e4ab1f32ae2ea2cbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  _maxHealth: 100
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0
