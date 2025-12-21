@@ -5,7 +5,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 {
     [SerializeField] private LayerMask _shootLayerMask;
     [SerializeField] private PlayerMovement _playerMovement;
-    [SerializeField] private float roundsPerMinute = 250;
+    [SerializeField] private float roundsPerMinute = 300;
     [SerializeField] private int maxAmmo = 30;
 
     [SerializeField] private Transform shootOrigin;
@@ -74,6 +74,11 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     {
         public int ammo;
         public float shootCooldown;
+
+        public override string ToString()
+        {
+            return $"Ammo: {ammo}\nCooldown: {shootCooldown}";
+        }
 
         public void Dispose() {}
     }

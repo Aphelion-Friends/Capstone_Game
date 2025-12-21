@@ -23,6 +23,11 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     {
         public float health;
 
+        public override string ToString()
+        {
+            return $"Health: {health}";
+        }
+
         public void Dispose() {}
     }
 }
