@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using PurrNet.Prediction;
+using PurrNet;
 
 public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, PlayerMovement.MoveState>
 {
@@ -17,14 +18,26 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     [SerializeField] private FirstPersonCamera _camera;
     [SerializeField] private PredictedRigidbody _rigidbody;
 
+    private Animator _playerAnimator;
+
     protected override void LateAwake()
     {
         if(isOwner)
             _camera.Init();
+        _playerAnimator = GetComponent<Animator>();
     }
 
     protected override void Simulate(MoveInput input, ref MoveState state, float delta)
     {
+        if (input.moveDirection.y > 0)
+        {
+            _playerAnimator.SetTrigger("StartWalk");
+        }
+        else if (input.moveDirection.y <= 0)
+        {
+            _playerAnimator.SetTrigger("StopWalk");
+        }
+
         state.jumpCooldown -= delta;
 
         float speed = input.sprint ? _sprintSpeed : _moveSpeed;
