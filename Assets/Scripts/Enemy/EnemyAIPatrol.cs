@@ -14,9 +14,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
     [SerializeField] float walkRange;
 
     [SerializeField] float sightRange, attackRange;
-    bool playerInSight, playerInAttackRange;
 
-    float timeAtLastAttack;
     [SerializeField] float attackCooldown = 1f;
 
     [SerializeField] float minDistance = 2f;
@@ -57,7 +55,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
         public override string ToString()
         {
-            return $"Give up timer: {giveUpTimer}\nDest point: {destPoint}\nDest point set: {destPointSet}";
+            return $"Give up timer: {giveUpTimer}\nDest point: {destPoint}\nDest point set: {destPointSet}\nPlayer in sight: {playerInSight}\nPlayer in attack range: {playerInAttackRange}";
         }
 
         public void Dispose() {}
@@ -109,26 +107,26 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
         Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 
-        playerInSight = playerInSightColliders.Length > 0;
-        playerInAttackRange = playerInAttackRangeColliders.Length > 0;
+        state.playerInSight = playerInSightColliders.Length > 0;
+        state.playerInAttackRange = playerInAttackRangeColliders.Length > 0;
 
-        if (playerInAttackRange)
+        if (state.playerInAttackRange)
         {
             // Debug.Log("ATTAK");
             targetedPlayer = GetClosestPlayer(playerInAttackRangeColliders);
         }
-        else if (playerInSight)
+        else if (state.playerInSight)
         {
             targetedPlayer = GetClosestPlayer(playerInSightColliders);
         }
 
-        if (!playerInSight && !playerInAttackRange) Patrol();
+        if (!state.playerInSight && !state.playerInAttackRange) Patrol();
 
         if (targetedPlayer is null)
             return;
 
-        if (playerInSight && !playerInAttackRange) Chase(targetedPlayer);
-        if (playerInSight && playerInAttackRange && state.attackCooldownTimer <= 0) 
+        if (state.playerInSight && !state.playerInAttackRange) Chase(targetedPlayer);
+        if (state.playerInSight && state.playerInAttackRange && state.attackCooldownTimer <= 0) 
         {
             state.attackCooldownTimer = attackCooldown;
             Attack(targetedPlayer);
