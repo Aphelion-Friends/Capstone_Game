@@ -1,10 +1,11 @@
 using UnityEngine;
 using PurrNet.Prediction;
+using PurrNet;
 
 public class EnemyHealth : PredictedIdentity<EnemyHealth.HealthState>
 {
     [SerializeField] private float _maxHealth;
-    [SerializeField] private Animator _animator;
+    [SerializeField] private NetworkAnimator _animator;
     private EnemyAIPatrol _enemyAIPatrol;
 
     private PredictedEvent _onDie;
