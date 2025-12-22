@@ -58,6 +58,11 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         public float attackCooldownTimer;
         public float giveUpTimer;
 
+        public override string ToString()
+        {
+            return $"Dest set cooldown: {destSetCooldownTimer}\nGive up timer: {giveUpTimer}\nDest point: {destPoint}\nDest point set: {destPointSet}";
+        }
+
         public void Dispose() {}
     }
 
