@@ -63,7 +63,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     protected override void LateAwake()
     {
-        Debug.Log("Game started!");
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -191,52 +190,4 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
             currentState.destPointSet = true;
         }
     }
-
-    // public void HearSound(Vector3 soundLocation)
-    // {
-    //     if (!playerInSight && !playerInAttackRange)
-    //     {
-    //         destPoint = soundLocation;
-    //         walkPointSet = true;
-    //         timeAtLastDestSet = Time.time;
-    //     }
-    // }
-
-    // [ServerRpc]
-    // public void Die()
-    // {
-    //     // Debug.Log("SHOUD DIE");
-    //     if (!dead.value)
-    //     {
-    //         Debug.Log(dead.value);
-    //         dead.value = true;
-    //         OnDie(dead.value);
-    //         agent.SetDestination(transform.position);
-    //         animator.SetTrigger("Die");
-    //         EnemySpawner.Instance.spawnEnemy(0);
-
-    //     }
-    // }
-
-    // // Makes the enemy appear dead for the clients
-    // // Should be called when the server sets the spider to be dead
-    // [ObserversRpc]
-    // private void OnDie(bool isDead)
-    // {
-    //     // Debug.Log("DEAD!");
-    //     if (isDead)
-    //     {
-    //         //GetComponent<Collider>().enabled = false;
-
-
-    //      
-    //         ObjectiveManager.Instance.objective.EnemyKilled("spider");
-    //         gameObject.layer = 7;
-    //         gameObject.GetComponent<Item>().enabled = true;
-    //         gameObject.GetComponent<NavMeshAgent>().enabled = false;
-    //         gameObject.GetComponent<enemyAIPatrol>().enabled = false;
-
-    //   
-    //     }
-    // }
 }

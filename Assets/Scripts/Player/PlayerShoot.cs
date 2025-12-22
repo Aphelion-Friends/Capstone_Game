@@ -59,8 +59,6 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
         if (Physics.Raycast(shootOrigin.position, _playerMovement.currentInput.cameraForward, out hit, Mathf.Infinity, _shootLayerMask))
         {
-            Debug.Log($"Hit: {hit.transform.name}");
-
             if(hit.transform.TryGetComponent(out PlayerHealth playerHealth))
                 playerHealth.ChangeHealth(-_damage);
             else if(hit.transform.TryGetComponent(out EnemyHealth enemyHealth))
