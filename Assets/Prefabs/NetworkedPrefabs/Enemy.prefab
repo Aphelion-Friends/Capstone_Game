@@ -164,12 +164,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   giveUpTime: 10
-  walkRange: 10
-  destPointCooldown: 5
+  walkRange: 20
   sightRange: 20
   attackRange: 1.5
   attackCooldown: 1
-  minDistance: 2
+  minDistance: 5
 --- !u!114 &4424683530279120396
 MonoBehaviour:
   m_ObjectHideFlags: 0

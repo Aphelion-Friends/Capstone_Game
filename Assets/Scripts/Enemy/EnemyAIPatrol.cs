@@ -13,9 +13,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     [SerializeField] float walkRange;
 
-    float timeAtLastDestSet;
-    [SerializeField] float destPointCooldown = 5f;
-
     [SerializeField] float sightRange, attackRange;
     bool playerInSight, playerInAttackRange;
 
@@ -54,13 +51,12 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         public bool playerInSight;
         public bool playerInAttackRange;
 
-        public float destSetCooldownTimer;
         public float attackCooldownTimer;
         public float giveUpTimer;
 
         public override string ToString()
         {
-            return $"Dest set cooldown: {destSetCooldownTimer}\nGive up timer: {giveUpTimer}\nDest point: {destPoint}\nDest point set: {destPointSet}";
+            return $"Give up timer: {giveUpTimer}\nDest point: {destPoint}\nDest point set: {destPointSet}";
         }
 
         public void Dispose() {}
@@ -71,6 +67,11 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         agent = GetComponent<NavMeshAgent>();
     }
 
+
+    protected override void SimulationStart()
+    {
+        currentState.random.seed = (uint) Random.Range(0, 100000);
+    }
 
     protected override void Simulate(ref EnemyState state, float delta)
     {
@@ -83,31 +84,24 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
             agentInitalized = true;
         }
 
-        state.destSetCooldownTimer -= delta;
-
         state.attackCooldownTimer -= delta;
 
         state.giveUpTimer -= delta;
 
         float distance = Vector3.Distance(state.destPoint, transform.position);
 
+        // Destination reached
         if (distance <= minDistance)
         {
             state.destPointSet = false;
-        }
-
-        if (state.destSetCooldownTimer <= 0)
-        {
-            state.destPointSet = false;
-
-            state.destSetCooldownTimer = destPointCooldown; 
+            state.giveUpTimer = giveUpTime;
         }
 
         if (state.destPointSet == true && state.giveUpTimer <= 0)
         {
             state.giveUpTimer = giveUpTime;
-
             state.destPointSet = false;
+            Debug.Log("Could not reach dest point! I give up!");
         }
 
         GameObject targetedPlayer = null;
@@ -176,11 +170,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         {
             SearchForDest();
         }
-        else if (currentState.destPointSet)
-        {
-            agent.SetDestination(currentState.destPoint);
-        }
-
     }
 
     void SearchForDest()
@@ -189,10 +178,13 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         float z = currentState.random.NextFloat(-walkRange, walkRange);
 
         currentState.destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
+        agent.SetDestination(currentState.destPoint);
+        agent.isStopped = true;
 
-        if (Physics.Raycast(currentState.destPoint, Vector3.down, groundLayer))
+        if (agent.pathStatus == NavMeshPathStatus.PathComplete)
         {
             currentState.destPointSet = true;
+            agent.isStopped = false;
         }
     }
 }
