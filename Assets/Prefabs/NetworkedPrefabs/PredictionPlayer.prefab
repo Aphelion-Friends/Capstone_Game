@@ -534,7 +534,7 @@ MonoBehaviour:
   _acceleration: 20
   _planarDamping: 10
   _jumpForce: 100
-  _groundCheckRadius: 0.5
+  _groundCheckRadius: 0.6
   _jumpCooldown: 0.2
   _groundMask:
     serializedVersion: 2

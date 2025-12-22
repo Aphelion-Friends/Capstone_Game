@@ -37,6 +37,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         agent.enabled = false;
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.isKinematic = false;
+        rigidbody.constraints &= RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     public struct EnemyState : IPredictedData<EnemyState>

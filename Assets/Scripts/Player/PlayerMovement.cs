@@ -20,17 +20,22 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     private Animator _playerAnimator;
 
+    private void Awake()
+    {
+        _playerAnimator = GetComponent<Animator>();
+    }
+
     protected override void LateAwake()
     {
         if(isOwner)
             _camera.Init();
-        _playerAnimator = GetComponent<Animator>();
     }
 
     protected override void Simulate(MoveInput input, ref MoveState state, float delta)
     {
         if (input.moveDirection.y > 0)
         {
+            Debug.Log("Start walk");
             _playerAnimator.SetTrigger("StartWalk");
         }
         else if (input.moveDirection.y <= 0)
