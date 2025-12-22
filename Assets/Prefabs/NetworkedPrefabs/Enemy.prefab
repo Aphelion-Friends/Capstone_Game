@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2922306155244310206}
   - component: {fileID: 4559315082083917078}
   - component: {fileID: 3935838105812009191}
+  - component: {fileID: 4424683530279120396}
   - component: {fileID: 779197984937563191}
   - component: {fileID: 7387104424671008606}
   - component: {fileID: 7440084079210519358}
@@ -143,6 +144,20 @@ MonoBehaviour:
   attackRange: 1.5
   attackCooldown: 1
   minDistance: 2
+--- !u!114 &4424683530279120396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688170438458974228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855ae3aa1ca86c022bc4b4650d002c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  _maxHealth: 30
+  _animator: {fileID: 5943122773063260689}
 --- !u!54 &779197984937563191
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -287,7 +302,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: malcolm_spider
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 949b39dd72cf2f9e99a2fa341520d7d4, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

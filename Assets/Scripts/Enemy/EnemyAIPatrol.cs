@@ -3,8 +3,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 using PurrNet.Prediction;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
 
 public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 {
@@ -32,13 +30,12 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
     {
         public Vector3 destPoint;
         public bool destPointSet;
-        public float destSetCooldownTimer;
 
         public bool playerInSight;
         public bool playerInAttackRange;
 
+        public float destSetCooldownTimer;
         public float attackCooldownTimer;
-
         public float giveUpTimer;
 
         public void Dispose() {}
