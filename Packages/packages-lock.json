@@ -42,15 +42,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.cinemachine": {
-      "version": "2.10.4",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.test-framework": "1.1.31"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.collab-proxy": {
       "version": "2.10.0",
       "depth": 0,
@@ -313,6 +304,15 @@
       "dependencies": {},
       "hash": "610157ad762084380380148ba8ce14e266a6da97"
     },
+    "dev.purrnet.purrdiction": {
+      "version": "https://github.com/PurrNet/PurrDiction.git?path=/Assets/PurrDiction#release",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.mono-cecil": "1.11.4"
+      },
+      "hash": "69c8e0a1f448cc7ee02ef6d4cd1787dc798a47d2"
+    },
     "dev.purrnet.purrnet": {
       "version": "https://github.com/PurrNet/PurrNet.git?path=/Assets/PurrNet#release",
       "depth": 0,
@@ -321,7 +321,7 @@
         "com.unity.nuget.mono-cecil": "1.11.4",
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "08e9abc0dbc41eae23ff418d77444979b7def75a"
+      "hash": "3c4ddbf8d5b0984bee8b2e1049ec66f72657a711"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
