@@ -44,6 +44,8 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     public struct EnemyState : IPredictedData<EnemyState>
     {
+        public PredictedRandom random;
+
         public bool stopped;
 
         public Vector3 destPoint;
@@ -179,8 +181,8 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     void SearchForDest()
     {
-        float x = Random.Range(-walkRange, walkRange);
-        float z = Random.Range(-walkRange, walkRange);
+        float x = currentState.random.NextFloat(-walkRange, walkRange);
+        float z = currentState.random.NextFloat(-walkRange, walkRange);
 
         currentState.destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
 
