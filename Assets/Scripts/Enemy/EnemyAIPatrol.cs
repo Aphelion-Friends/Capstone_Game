@@ -26,8 +26,26 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     private bool agentInitalized = false;
 
+    protected override EnemyState GetInitialState()
+    {
+        return new EnemyState
+        {
+            stopped = false,
+        };
+    }
+
+    public void Stop()
+    {
+        currentState.stopped = true;
+        agent.enabled = false;
+        Rigidbody rigidbody = GetComponent<Rigidbody>();
+        rigidbody.isKinematic = false;
+    }
+
     public struct EnemyState : IPredictedData<EnemyState>
     {
+        public bool stopped;
+
         public Vector3 destPoint;
         public bool destPointSet;
 
@@ -48,12 +66,11 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
     }
 
 
-    private void Start()
-    {
-    }
-
     protected override void Simulate(ref EnemyState state, float delta)
     {
+        if (state.stopped)
+            return;
+
         if (!agentInitalized)
         {
             agent.enabled = true;
@@ -133,7 +150,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         return currentBest;
     }
 
-    //NEEDS TO BE REDONE COMPLETELY 
     void Attack(GameObject playerAttacked)
     {
         if (playerAttacked is not null)

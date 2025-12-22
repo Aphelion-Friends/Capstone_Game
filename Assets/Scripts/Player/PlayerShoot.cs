@@ -63,6 +63,8 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
             if(hit.transform.TryGetComponent(out PlayerHealth playerHealth))
                 playerHealth.ChangeHealth(-_damage);
+            else if(hit.transform.TryGetComponent(out EnemyHealth enemyHealth))
+                enemyHealth.ChangeHealth(-_damage);
         }
     }
 
