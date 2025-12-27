@@ -21,7 +21,10 @@ public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveMana
 
     protected override ObjectiveManagerState GetInitialState()
     {
-        return base.GetInitialState();
+        return new ObjectiveManagerState
+        {
+            objective = new CollectSpiderAss(),
+        };
     }
 
 
