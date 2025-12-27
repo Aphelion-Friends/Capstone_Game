@@ -17,6 +17,10 @@ public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveMana
         public Objective objective;
         public void Dispose() { }
 
+        public override string ToString()
+        {
+            return $"Objective name: {objective.GetType().Name}. Number of tasks: {objective.getNumTasks()}. Is complete? {objective.checkObjectiveCompletion()}";
+        }
     }
 
     protected override ObjectiveManagerState GetInitialState()
