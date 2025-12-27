@@ -9,7 +9,7 @@ public class PlayerOnMove : MonoBehaviour
         Vector3 currentPosition = gameObject.transform.position;
         if (currentPosition != lastPosition)
         {
-            ObjectiveManager.Instance.objective.PlayerMove(currentPosition);
+            ObjectiveManager.Instance.currentState.objective.PlayerMove(currentPosition);
         }
     }
 }

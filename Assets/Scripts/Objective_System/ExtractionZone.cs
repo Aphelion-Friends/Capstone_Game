@@ -9,7 +9,7 @@ public class ExtractionZone : MonoBehaviour
 
         if (player != null) 
         {
-            if (ObjectiveManager.Instance.objective.checkObjectiveCompletion())
+            if (ObjectiveManager.Instance.currentState.objective.checkObjectiveCompletion())
             {
                 SceneManager.LoadScene(0);
             }
