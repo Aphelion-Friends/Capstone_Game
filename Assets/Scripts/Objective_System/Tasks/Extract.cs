@@ -1,35 +1,39 @@
 using UnityEngine;
 
-public class Extract : Task
+public struct Extract : Task
 {
-    private Vector3 extractionLocation;
+    public Vector3 extractionLocation;
+
+    private string distanceString;
+    private bool _isComplete;
     private float completionDistance;
-    private string originalDescription = "Locate the extraction point and escape. Distance: ";
-    private bool inRange = false;
 
-    public Extract()
-    {
-        taskName = "Extract";
-        displayName = "Escape";
-        taskDescription = originalDescription;
-        extractionLocation = new Vector3(451, 5, -303);
-        completionDistance = 5f;
-    }
+    public bool isComplete { get => _isComplete; }
+    public string displayName { get { return "Escape"; }  }
+    public string taskName { get { return "escape"; } }
+    public string taskDescription { get { return "Locate the extraction point and escape. Distance: " + distanceString; } }
 
-    public override void PlayerMove(Vector3 position)
+    public void PlayerMove(Vector3 position)
     {
         float distance = (extractionLocation - position).magnitude;
-        taskDescription = originalDescription + (Mathf.Round(distance)).ToString();
+        distanceString = (Mathf.Round(distance)).ToString();
 
-        if (distance <= completionDistance && !inRange)
+        if (distance <= completionDistance)
         {
-            currentAmount++;
-            inRange = true;
+            _isComplete = true;
         }
-        else if (distance > completionDistance && inRange)
+        else if (distance > completionDistance)
         {
-            currentAmount--;
-            inRange = false;
+            _isComplete = false;
         }
+    }
+    public void EnemyKilled(string enemyName) {}
+    public void ItemCollected(ItemObject.Name itemName) {}
+    public void ItemDropped(ItemObject.Name itemName) {}
+
+    public void Initalize()
+    {
+        extractionLocation = new Vector3(451, 5, -303);
+        completionDistance = 5;
     }
 }
