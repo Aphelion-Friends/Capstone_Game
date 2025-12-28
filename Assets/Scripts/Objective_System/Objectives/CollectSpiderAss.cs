@@ -15,9 +15,17 @@ public class ObjectiveInitalizer
     {
         Objective objective = new Objective();
 
-        objective.tasks.Add(new KillSpider());
-        objective.tasks.Add(new SpiderAss());
-        objective.tasks.Add(new Extract());
+        KillSpider killSpider = new KillSpider();
+        SpiderAss spiderAss = new SpiderAss();
+        Extract extract = new Extract();
+
+        killSpider.Initalize();
+        spiderAss.Initalize();
+        extract.Initalize();
+
+        objective.tasks.Add(killSpider);
+        objective.tasks.Add(spiderAss);
+        objective.tasks.Add(extract);
 
         return objective;
     }
