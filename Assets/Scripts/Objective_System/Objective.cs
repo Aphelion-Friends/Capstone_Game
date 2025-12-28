@@ -2,14 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Objective
+public struct Objective
 {
-    protected List<Task> tasks = new List<Task>();
-    private int numTasks;
-    bool isComplete = false;
+    public List<Task> tasks;
+    public int numTasks;
+    public bool isComplete;
 
     // List of function to call every time the objective is updated
-    protected List<Action> onChangeList = new List<Action>();
+    private List<Action> onChangeList;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class Objective
     public int getNumTasks() {  return numTasks; }
 
     // Whenever the objective status changes, all the functions in onChangeList are called
-    protected void OnChange()
+    private void OnChange()
     {
         foreach (Action onChangeFunction in onChangeList)
         {
