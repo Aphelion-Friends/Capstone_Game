@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ObjectiveInitalizer
 {
@@ -13,7 +14,8 @@ public class ObjectiveInitalizer
 
     public Objective CollectSpiderAss()
     {
-        Objective objective = new Objective();
+        Debug.Log("SpiderAss");
+        Objective objective = InitalizeGenericObjective();
 
         KillSpider killSpider = new KillSpider();
         SpiderAss spiderAss = new SpiderAss();
