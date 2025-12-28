@@ -1,19 +1,25 @@
 using UnityEngine;
-public class KillSpider : Task
+public struct KillSpider : Task
 {
-    private string requiredEnemyName = "spider";
-    public KillSpider()
-    {
-        taskName = "KillSpider";
-        displayName = "Kill Spider";
-        taskDescription = "Find and kill a spider.";
-    }
+    private bool _isComplete;
+    private string requiredEnemyName;
 
-    public override void EnemyKilled(string enemyName)
-    {
+    public bool isComplete { get =>_isComplete; }
+    public string displayName { get => "Kill Spider"; }
+    public string taskName { get => "KillSpider"; }
+    public string taskDescription { get => "Find and kill a spider"; }
+
+    public void PlayerMove(Vector3 position) {}
+    public void EnemyKilled(string enemyName) {
         if (enemyName == requiredEnemyName)
-            currentAmount ++;
-            Debug.Log("Task Completion Amount =" + currentAmount);
-        checkTaskCompletion();
+        {
+            _isComplete = true;
+        }
+    }
+    public void ItemCollected(ItemObject.Name itemName) {}
+    public void ItemDropped(ItemObject.Name itemName) {}
+
+    public void Initalize() {
+        _isComplete = false;
     }
 }
