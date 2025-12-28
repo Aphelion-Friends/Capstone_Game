@@ -1,33 +1,16 @@
-using NUnit.Framework.Interfaces;
 using UnityEngine;
 
-[System.Serializable]
-public abstract class Task
+public interface Task
 {
-    public bool isComplete = false;
-    public string displayName;
-    public string taskName;
-    public string taskDescription;
-    protected int amount = 1;
-    public int currentAmount = 0;
+    public bool isComplete { get; }
+    public string displayName { get; }
+    public string taskName { get; }
+    public string taskDescription { get; }
 
-    public virtual void PlayerMove(Vector3 position) {}
-    public virtual void EnemyKilled(string enemyName) {}
-    public virtual void ItemCollected(ItemObject.Name itemName) {}
-    public virtual void ItemDropped(ItemObject.Name itemName) {}
-    
-    public bool checkTaskCompletion()
-    {
-        if(currentAmount >= amount)
-        {
-            isComplete = true;
-        
-        }
-        else
-        {
-            isComplete = false;
-        }
-        
-        return isComplete;
-    }
+    public void PlayerMove(Vector3 position) {}
+    public void EnemyKilled(string enemyName) {}
+    public void ItemCollected(ItemObject.Name itemName) {}
+    public void ItemDropped(ItemObject.Name itemName) {}
+
+    public void Initalize() {}
 }
