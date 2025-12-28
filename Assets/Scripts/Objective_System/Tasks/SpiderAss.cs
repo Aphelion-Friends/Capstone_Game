@@ -1,33 +1,43 @@
-public class SpiderAss : Task
+using UnityEngine;
+
+public struct SpiderAss : Task
 {
-    
-    ItemObject.Name taskItem = ItemObject.Name.SpiderAss;
+    private bool _isComplete;
+    private string taskItem;
+    private int currentAmount;
 
-    public SpiderAss()
-    {
-        taskName = "SpiderAss";
-        displayName = "Collect Spider Ass";
-        taskDescription = "Obtain the ass from the spider you just killed";
-    }
+    public bool isComplete { get => _isComplete; }
+    public string displayName { get => "Collect Spider Ass"; }
+    public string taskName { get => "SpiderAss"; }
+    public string taskDescription { get => "Obtain the ass from the spider you just killed."; }
 
-    public override void ItemCollected(ItemObject.Name itemName)
-    {
-        currentAmount++;
-
-        if (taskItem == itemName)
+    public void PlayerMove(Vector3 position) {}
+    public void EnemyKilled(string enemyName) {}
+    public void ItemCollected(string itemName) {
+        if (itemName == taskItem)
         {
             currentAmount++;
-            checkTaskCompletion();
+            if (currentAmount > 0)
+            {
+                _isComplete = true;
+            }
         }
-
     }
-
-    public override void ItemDropped(ItemObject.Name itemName)
-    {
-        if (taskItem == itemName)
+    public void ItemDropped(string itemName) {
+        if (itemName == taskItem)
         {
             currentAmount--;
-            checkTaskCompletion();
+            
+            if (currentAmount < 1)
+            {
+                _isComplete = false;
+            }
         }
+    }
+
+    public void Initalize() {
+        _isComplete = false;
+        currentAmount = 0;
+        taskItem = "spiderAss";
     }
 }
