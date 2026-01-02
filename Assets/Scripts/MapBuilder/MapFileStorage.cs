@@ -39,6 +39,9 @@ namespace MapBuilder
             Debug.Log($"Map file load time: {loadStopwatch.ElapsedMilliseconds}ms");
 
             Map mapFromFile = JsonUtility.FromJson<Map>(json);
+            if (mapFromFile is null)
+                return new Map();
+
             return mapFromFile;
         }
     }
