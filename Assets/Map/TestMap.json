@@ -1,0 +1,76 @@
+{
+    "_rootWorldPosition": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "_gridUnitSize": 6.400000095367432,
+    "_pieces": [
+        {
+            "_location": {
+                "x": 2,
+                "y": 3,
+                "z": 5
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "floor"
+            }
+        },
+        {
+            "_location": {
+                "x": 3,
+                "y": 3,
+                "z": 5
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "floor"
+            }
+        },
+        {
+            "_location": {
+                "x": 2,
+                "y": 3,
+                "z": 6
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "floor"
+            }
+        },
+        {
+            "_location": {
+                "x": 3,
+                "y": 3,
+                "z": 6
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "floor"
+            }
+        },
+        {
+            "_location": {
+                "x": 2,
+                "y": 3,
+                "z": 7
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "floor"
+            }
+        },
+        {
+            "_location": {
+                "x": 3,
+                "y": 3,
+                "z": 7
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "floor"
+            }
+        }
+    ]
+}

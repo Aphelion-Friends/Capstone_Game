@@ -24,6 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SpaceStationMap.unity
     guid: 501ea5a1bc379194fac188e9bc1a055c
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: c62d9fa71ba0452bd858c7611f9960f2, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 1a103a1b8c76f6c74ac2bf8ad8ec54d0, type: 3}
   m_UseUCBPForAssetBundles: 0
