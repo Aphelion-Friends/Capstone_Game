@@ -14,7 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Map
   m_GUID: fcd3f44f267789bb98f307850399b4c1
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 0df1cee9f9d90aeecbddc5967738e956
+    m_Address: ceiling
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ee89f0b9a4a3531eb2e9346285750da
+    m_Address: wall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d483458d2cec246d7b2aa4c5622630f9
+    m_Address: floor
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 56c6d2afad7d5604a83a625dd1443bb7, type: 2}
   m_SchemaSet:
