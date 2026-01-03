@@ -8,6 +8,7 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace MapBuilder
 {
+    // A singleton class that is responsible for storing the Map object and all the prefabs used for editing the map.
     public class MapEditor : MonoBehaviour
     {
         private static MapEditor _instance;
@@ -18,6 +19,8 @@ namespace MapBuilder
         private Map _map;
         public Map map { get => _map; }
 
+        // If you want a prefab to appear in the selection menu, you have to add it to this list.
+        // I don't know how to get the list of addressables names
         private List<string> _keys = new List<string> {
             "wall",
             "ceiling",
@@ -39,7 +42,7 @@ namespace MapBuilder
             _instance = this;
         }
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+
         void Start()
         {
             Ready.AddListener(OnAssetsReady);
@@ -51,9 +54,11 @@ namespace MapBuilder
         {
             _mapName = mapName;
 
+            // Get the map from its json file
             MapFileStorage mapFileStorage = new MapFileStorage();
             _map = mapFileStorage.ReadMapFromFile(mapName);
 
+            // Spawn in a MapInitializer to handle loading the map
             MapInitializer mapInitializer = gameObject.AddComponent<MapInitializer>();
             mapInitializer.Initialize(_map, editMode:true);
         }
@@ -70,6 +75,7 @@ namespace MapBuilder
             _assetsLoaded = true;
         }
 
+        // IDK how this works, I just copy pasted it from the Unity docs
         // From: https://docs.unity3d.com/Packages/com.unity.addressables@1.19/manual/LoadingAddressableAssets.html#correlating-loaded-assets-to-their-keys
         IEnumerator LoadAndAssociateResultWithKey(IList<string> keys) {
             if (operationDictionary == null)
@@ -95,6 +101,7 @@ namespace MapBuilder
             Ready.Invoke();
         }
 
+        // When the game stops, free the addressables and save the map to a file
         private void OnDestroy()
         {
             foreach (var item in operationDictionary) {

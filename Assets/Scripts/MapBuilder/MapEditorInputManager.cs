@@ -120,6 +120,7 @@ namespace MapBuilder
 
             if (context.action == _lookAction)
             {
+                // To prevent the player's camera from jumping when the cursor gets locked
                 if (_ignoreMouseMove && context.performed)
                 {
                     _ignoreMouseMove = false;

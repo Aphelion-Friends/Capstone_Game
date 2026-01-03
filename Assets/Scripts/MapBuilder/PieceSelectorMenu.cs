@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace MapBuilder
 {
+    // This class is responsible for adding the buttons to the menu.
     public class PieceSelectorMenu : MonoBehaviour
     {
         private bool _menuOpen = false;
@@ -19,6 +20,7 @@ namespace MapBuilder
             AddAllItemsToMenu();
         }
 
+        // Add a single button to the menu with a given name
         public void AddEntryToMenu(string name)
         {
             GameObject newEntry = Instantiate(pieceSelectionButtonPrefab);
@@ -40,6 +42,7 @@ namespace MapBuilder
             }
         }
 
+        // This function is called when the menu key is pressed. It hides and shows the menu as well as locking and unlocking the cursor.
         private void OnMenu(InputAction.CallbackContext context)
         {
             _menuOpen = !_menuOpen;

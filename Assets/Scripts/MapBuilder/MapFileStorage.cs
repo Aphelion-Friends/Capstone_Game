@@ -15,6 +15,7 @@ namespace MapBuilder
         {
             saveStopwatch = System.Diagnostics.Stopwatch.StartNew();
 
+            // Sort the map pieces according to their coordinates' Morton encoding
             map.SortPieces();
 
             string json = JsonUtility.ToJson(map, prettyPrint:true);

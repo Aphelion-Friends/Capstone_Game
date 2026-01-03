@@ -8,18 +8,25 @@ using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace MapBuilder
 {
+    // This class is responsible for loading the map into the game based on a Map object
     public class MapInitializer : MonoBehaviour
     {
         [SerializeField] private string mapName;
+        // If you attach this script to a GameObject and you want to load the map when the game starts, set this to true
         [SerializeField] private bool autoInitialize = false;
 
         private Map map;
 
+        // Maps addressable names to their assets
         private Dictionary<string, AsyncOperationHandle<GameObject>> operationDictionary;
+        // List of all addressable names
         private List<string> keys;
+        // Maps the addressable name of a map piece to its MapPiece object
         private Dictionary<string, MapPiece> mapPieceDictionary;
+        // An event that gets triggered when the addressables are loaded
         public UnityEvent Ready;
 
+        // If _editMode is true, a box collider will be created for each map piece
         private bool _editMode = false;
 
         private System.Diagnostics.Stopwatch addressablesLoadStopwatch;
@@ -57,20 +64,21 @@ namespace MapBuilder
             }
         }
 
+        // This function is called after the addressables finish loading
         private void OnAssetsReady()
         {
-
             foreach (var mapPiece in map.pieces)
             {
+                // Create all the map piece GameObjects and set their position and rotation
                 Vector3 position = new Vector3(mapPiece.location.x * map.gridUnitSize, mapPiece.location.y * map.gridUnitSize, mapPiece.location.z * map.gridUnitSize);
                 Quaternion rotation = new Quaternion();
                 rotation.eulerAngles = new Vector3(0, mapPiece.orientation * 90, 0);
 
                 GameObject newPiece = Instantiate(operationDictionary[mapPiece.piece.prefabName].Result, position, rotation);
 
+                // Create the box colliders
                 if (_editMode)
                 {
-
                     GameObject newCollider = new GameObject("Collider");
                     newCollider.AddComponent<BoxCollider>();
                     newCollider.transform.parent = newPiece.transform;

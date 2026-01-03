@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace MapBuilder
 {
+    // This class is responsible for moving the creative player's camera in response to mouse movement.
     public class CreativePlayerCamera : MonoBehaviour
     {
         [Range(0, 1)]
