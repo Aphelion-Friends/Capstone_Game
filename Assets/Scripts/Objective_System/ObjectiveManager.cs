@@ -5,7 +5,7 @@ using PurrNet.Prediction;
 public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveManagerState> {
 
     public static ObjectiveManager Instance;
-    private ObjectiveInitalizer objectiveInitalizer = new ObjectiveInitalizer();
+    private ObjectiveInitializer objectiveInitializer = new ObjectiveInitializer();
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveMana
         Debug.Log("Initalizing objective!");
         return new ObjectiveManagerState
         {
-            objective = objectiveInitalizer.CollectSpiderAss(),
+            objective = objectiveInitializer.CollectSpiderAss(),
         };
     }
 

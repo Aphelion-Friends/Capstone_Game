@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectiveInitalizer
+public class ObjectiveInitializer
 {
-    private Objective InitalizeGenericObjective()
+    private Objective InitializeGenericObjective()
     {
         Objective objective = new Objective();
         objective.tasks = new List<Task>();
@@ -15,7 +15,7 @@ public class ObjectiveInitalizer
     public Objective CollectSpiderAss()
     {
         Debug.Log("SpiderAss");
-        Objective objective = InitalizeGenericObjective();
+        Objective objective = InitializeGenericObjective();
 
         KillSpider killSpider = new KillSpider();
         SpiderAss spiderAss = new SpiderAss();
