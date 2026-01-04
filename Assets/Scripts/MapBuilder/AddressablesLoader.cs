@@ -12,11 +12,12 @@ namespace MapBuilder
     public class AddressablesLoader : MonoBehaviour
     {
         // Maps addressable names to their assets
-        private Dictionary<string, AsyncOperationHandle<GameObject>> operationDictionary;
+        private Dictionary<string, AsyncOperationHandle<GameObject>> _operationDictionary;
+        public Dictionary<string, AsyncOperationHandle<GameObject>> operationDictionary { get { return _operationDictionary; } }
         // An event that gets triggered when the addressables are loaded
         public UnityEvent Ready;
 
-        void LoadAssets(List<string> keys)
+        public void LoadAssets(List<string> keys)
         {
             StartCoroutine(LoadAndAssociateResultWithKey(keys));
         }
@@ -31,8 +32,8 @@ namespace MapBuilder
         // From: https://docs.unity3d.com/Packages/com.unity.addressables@1.19/manual/LoadingAddressableAssets.html#correlating-loaded-assets-to-their-keys
         IEnumerator LoadAndAssociateResultWithKey(IList<string> keys) {
 
-            if (operationDictionary == null)
-                operationDictionary = new Dictionary<string, AsyncOperationHandle<GameObject>>();
+            if (_operationDictionary == null)
+                _operationDictionary = new Dictionary<string, AsyncOperationHandle<GameObject>>();
 
             AsyncOperationHandle<IList<IResourceLocation>> locations
                 = Addressables.LoadResourceLocationsAsync(keys,
@@ -45,7 +46,7 @@ namespace MapBuilder
             foreach (IResourceLocation location in locations.Result) {
                 AsyncOperationHandle<GameObject> handle =
                     Addressables.LoadAssetAsync<GameObject>(location);
-                handle.Completed += obj => operationDictionary.Add(location.PrimaryKey, obj);
+                handle.Completed += obj => _operationDictionary.Add(location.PrimaryKey, obj);
                 loadOps.Add(handle);
             }
 
@@ -56,7 +57,7 @@ namespace MapBuilder
 
         private void OnDestroy()
         {
-            foreach (var item in operationDictionary) {
+            foreach (var item in _operationDictionary) {
                 Addressables.Release(item.Value);
             }
         }

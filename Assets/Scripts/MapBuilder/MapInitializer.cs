@@ -8,6 +8,8 @@ namespace MapBuilder
     // This class is responsible for loading the map into the game based on a Map object
     public class MapInitializer : MonoBehaviour
     {
+        private AddressablesLoader addressablesLoader;
+
         [SerializeField] private string mapName;
         // If you attach this script to a GameObject and you want to load the map when the game starts, set this to true
         [SerializeField] private bool autoInitialize = false;
@@ -24,12 +26,12 @@ namespace MapBuilder
 
         public void Initialize(Map newMap, bool editMode)
         {
-
             _editMode = editMode;
             map = newMap;
             keys = GetAllMapPrefabNames();
             Debug.Log($"Num keys: {keys.Count}");
             mapPieceDictionary = GetMapPieceDictionary();
+            addressablesLoader.LoadAssets(keys);
         }
 
         public void Initialize(Map newMap)
@@ -39,7 +41,8 @@ namespace MapBuilder
 
         void Awake()
         {
-            Ready.AddListener(OnAssetsReady);
+            addressablesLoader = gameObject.AddComponent<AddressablesLoader>();
+            addressablesLoader.Ready.AddListener(OnAssetsReady);
 
             if (autoInitialize)
             {
@@ -59,7 +62,7 @@ namespace MapBuilder
                 Quaternion rotation = new Quaternion();
                 rotation.eulerAngles = new Vector3(0, mapPiece.orientation * 90, 0);
 
-                GameObject newPiece = Instantiate(operationDictionary[mapPiece.piece.prefabName].Result, position, rotation);
+                GameObject newPiece = Instantiate(addressablesLoader.operationDictionary[mapPiece.piece.prefabName].Result, position, rotation);
 
                 // Create the box colliders
                 if (_editMode)
