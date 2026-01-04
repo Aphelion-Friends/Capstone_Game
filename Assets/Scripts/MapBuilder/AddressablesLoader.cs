@@ -12,8 +12,6 @@ namespace MapBuilder
     public class AddressablesLoader : MonoBehaviour
     {
         // Maps addressable names to their assets
-        private Dictionary<string, GameObject> _gameObjectDictionary;
-        public Dictionary<string, GameObject> gameObjectDictionary { get { return _gameObjectDictionary; } }
         private Dictionary<string, AsyncOperationHandle<GameObject>> operationDictionary;
         // An event that gets triggered when the addressables are loaded
         public UnityEvent Ready;
@@ -27,16 +25,6 @@ namespace MapBuilder
         {
             if (Ready == null)
                 Ready = new UnityEvent();
-
-            Ready.AddListener(OnAssetsReady);
-        }
-
-        private void OnAssetsReady()
-        {
-            foreach(var op in operationDictionary)
-            {
-                _gameObjectDictionary[op.Key] = op.Value.Result;
-            }
         }
 
         // IDK how this works, I just copy pasted it from the Unity docs
@@ -64,6 +52,13 @@ namespace MapBuilder
             yield return Addressables.ResourceManager.CreateGenericGroupOperation(loadOps, true);
 
             Ready.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            foreach (var item in operationDictionary) {
+                Addressables.Release(item.Value);
+            }
         }
     }
 }
