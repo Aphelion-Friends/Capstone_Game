@@ -1,10 +1,5 @@
 using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
 
 namespace MapBuilder
 {
@@ -27,9 +22,6 @@ namespace MapBuilder
             "floor"
         };
         public List<string> keys { get { return _keys; } }
-
-        private Dictionary<string, AsyncOperationHandle<GameObject>> operationDictionary;
-        public UnityEvent Ready;
 
         private Dictionary<string, GameObject> _mapPiecePrefabs;
         public Dictionary<string, GameObject> mapPiecePrefabs { get { return _mapPiecePrefabs; } }
@@ -75,38 +67,9 @@ namespace MapBuilder
             _assetsLoaded = true;
         }
 
-        // IDK how this works, I just copy pasted it from the Unity docs
-        // From: https://docs.unity3d.com/Packages/com.unity.addressables@1.19/manual/LoadingAddressableAssets.html#correlating-loaded-assets-to-their-keys
-        IEnumerator LoadAndAssociateResultWithKey(IList<string> keys) {
-            if (operationDictionary == null)
-                operationDictionary = new Dictionary<string, AsyncOperationHandle<GameObject>>();
-
-            AsyncOperationHandle<IList<IResourceLocation>> locations
-                = Addressables.LoadResourceLocationsAsync(keys,
-                    Addressables.MergeMode.Union, typeof(GameObject));
-
-            yield return locations;
-
-            var loadOps = new List<AsyncOperationHandle>(locations.Result.Count);
-
-            foreach (IResourceLocation location in locations.Result) {
-                AsyncOperationHandle<GameObject> handle =
-                    Addressables.LoadAssetAsync<GameObject>(location);
-                handle.Completed += obj => operationDictionary.Add(location.PrimaryKey, obj);
-                loadOps.Add(handle);
-            }
-
-            yield return Addressables.ResourceManager.CreateGenericGroupOperation(loadOps, true);
-
-            Ready.Invoke();
-        }
-
-        // When the game stops, free the addressables and save the map to a file
+        // When the game stops, save the map to a file
         private void OnDestroy()
         {
-            foreach (var item in operationDictionary) {
-                Addressables.Release(item.Value);
-            }
             MapFileStorage mapFileStorage = new MapFileStorage();
             mapFileStorage.WriteMapToFile(_map, _mapName);
         }
