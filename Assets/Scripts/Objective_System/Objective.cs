@@ -42,7 +42,7 @@ public struct Objective
                 return task;
             }
         }
-        return null;
+        return new Task();
     }
 
     public void PlayerMove(Vector3 position)
@@ -66,7 +66,7 @@ public struct Objective
         OnChange();
     }
 
-    public void ItemCollected(ItemObject.Name itemName) {
+    public void ItemCollected(string itemName) {
         foreach (Task task in tasks)
         {
             task.ItemCollected(itemName);
@@ -76,7 +76,7 @@ public struct Objective
         OnChange();
     }
 
-    public void ItemDropped(ItemObject.Name itemName) {
+    public void ItemDropped(string itemName) {
         foreach (Task task in tasks)
         {
             task.ItemDropped(itemName);

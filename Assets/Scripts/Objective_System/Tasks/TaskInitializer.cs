@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class TaskInitializer : MonoBehaviour
+public class TaskInitializer
 {
-    private Task InitializeGenericTask()
+    public Task InitializeGenericTask()
     {
         Task newTask = new Task();
         newTask.isComplete = false;

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ObjectiveInitializer
 {
+    TaskInitializer taskInitializer = new TaskInitializer();
+
     private Objective InitializeGenericObjective()
     {
         Objective objective = new Objective();
@@ -17,13 +19,9 @@ public class ObjectiveInitializer
         Debug.Log("SpiderAss");
         Objective objective = InitializeGenericObjective();
 
-        KillSpider killSpider = new KillSpider();
-        SpiderAss spiderAss = new SpiderAss();
-        Extract extract = new Extract();
-
-        killSpider.Initalize();
-        spiderAss.Initalize();
-        extract.Initalize();
+        Task killSpider = taskInitializer.KillSpider();
+        Task spiderAss = taskInitializer.SpiderAss();
+        Task extract = taskInitializer.Extract();
 
         objective.tasks.Add(killSpider);
         objective.tasks.Add(spiderAss);
