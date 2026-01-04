@@ -37,11 +37,13 @@ namespace MapBuilder
         void Start()
         {
             // The MapEditor singleton is assumed to be instantiated
-            gridUnitSize = MapEditor.Instance.map.gridUnitSize;
         }
 
         void Update()
         {
+            if (MapEditor.Instance is null)
+                return;
+
             // Since the assets are loaded asynchronously, they might not be completely loaded at first, so we have to wait
             if (!MapEditor.Instance.assetsLoaded)
                 return;
@@ -52,6 +54,7 @@ namespace MapBuilder
 
             if (!pieceInstantiated)
             {
+                gridUnitSize = MapEditor.Instance.map.gridUnitSize;
                 // Maybe the pieceObject has already been previously instantiated, so we have to destroy it and make a new one.
                 // This can happen when the player selects a new piece from the menu.
                 if (pieceObject is not null)
