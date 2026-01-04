@@ -9,6 +9,8 @@ namespace MapBuilder
         private static MapEditor _instance;
         public static MapEditor Instance { get { return _instance; } }
 
+        private AddressablesLoader addressablesLoader;
+
         [SerializeField] private string _mapName;
 
         private Map _map;
@@ -37,8 +39,9 @@ namespace MapBuilder
 
         void Start()
         {
-            Ready.AddListener(OnAssetsReady);
-            StartCoroutine(LoadAndAssociateResultWithKey(_keys));
+            addressablesLoader = gameObject.AddComponent<AddressablesLoader>();
+            addressablesLoader.Ready.AddListener(OnAssetsReady);
+            addressablesLoader.LoadAssets(_keys);
             LoadMap(_mapName);
         }
 
@@ -58,9 +61,8 @@ namespace MapBuilder
         private void OnAssetsReady()
         {
             _mapPiecePrefabs = new Dictionary<string, GameObject>();
-            foreach (var op in operationDictionary)
+            foreach (var op in addressablesLoader.operationDictionary)
             {
-                Debug.Log($"Key: {op.Key}");
                 _mapPiecePrefabs[op.Key] = op.Value.Result;
             }
 
