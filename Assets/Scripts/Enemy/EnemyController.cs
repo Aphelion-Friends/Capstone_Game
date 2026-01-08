@@ -19,11 +19,21 @@ public class EnemyController : PredictedIdentity<EnemyController.ControllerState
         _agent.autoRepath = false;
         _agent.speed = currentState.speed;
         _agent.height = _height;
+
+        gameObject.AddComponent<PredictedTransform>();
+        gameObject.AddComponent<PredictedRigidbody>();
     }
 
     private void SetActive()
     {
         _agent.enabled = active;
+    }
+
+    protected override void SetUnityState(ControllerState state)
+    {
+        base.SetUnityState(state);
+
+        _agent.Warp(transform.position);
     }
 
     public struct ControllerState : IPredictedData<ControllerState>
