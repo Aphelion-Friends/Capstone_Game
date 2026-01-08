@@ -2,33 +2,36 @@ using UnityEngine;
 using UnityEngine.AI;
 using PurrNet.Prediction;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : PredictedIdentity<EnemyController.ControllerState>
 {
     private NavMeshAgent _agent;
 
-    private float _speed = 3f;
     private float _radius = 1f;
     private float _height = 1f;
 
-    public float speed { get => _speed; set => _speed = Mathf.Abs(value); }
+    public bool active { get => currentState.active; set { currentState.active = value; SetActive(); } }
 
-    void Awake()
+    public float speed { get => currentState.speed; set => currentState.speed = Mathf.Abs(value); }
+
+    protected override void LateAwake()
     {
         _agent = gameObject.AddComponent<NavMeshAgent>();
         _agent.autoRepath = false;
-        _agent.speed = _speed;
+        _agent.speed = currentState.speed;
         _agent.height = _height;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void SetActive()
     {
-        
+        _agent.enabled = active;
     }
 
-    // Update is called once per frame
-    void Update()
+    public struct ControllerState : IPredictedData<ControllerState>
     {
-        
+        public bool active;
+        public Vector3 destPoint;
+        public float speed;
+
+        public void Dispose() {}
     }
 }
