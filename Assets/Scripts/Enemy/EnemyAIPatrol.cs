@@ -1,12 +1,10 @@
 // Adapted from this tutorial: https://www.youtube.com/watch?v=-Iwsz4gdgyQ
 
 using UnityEngine;
-using UnityEngine.AI;
 using PurrNet.Prediction;
 
 public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 {
-    NavMeshAgent agent;
     [SerializeField] LayerMask groundLayer, playerLayer;
 
     [SerializeField] private float giveUpTime;
@@ -19,8 +17,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     [SerializeField] float minDistance = 2f;
 
-    private bool agentInitalized = false;
-
     protected override EnemyState GetInitialState()
     {
         return new EnemyState
@@ -32,7 +28,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
     public void Stop()
     {
         currentState.stopped = true;
-        agent.enabled = false;
         Rigidbody rigidbody = GetComponent<Rigidbody>();
         rigidbody.isKinematic = false;
         rigidbody.constraints &= RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
@@ -61,12 +56,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         public void Dispose() {}
     }
 
-    protected override void LateAwake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
-
-
     protected override void SimulationStart()
     {
         currentState.random.seed = (uint) Random.Range(0, 100000);
@@ -76,12 +65,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
     {
         if (state.stopped)
             return;
-
-        if (!agentInitalized)
-        {
-            agent.enabled = true;
-            agentInitalized = true;
-        }
 
         state.attackCooldownTimer -= delta;
 
@@ -160,7 +143,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     void Chase(GameObject targetedPlayer)
     {
-        agent.SetDestination(targetedPlayer.transform.position);
+        // agent.SetDestination(targetedPlayer.transform.position);
     }
 
     void Patrol()
@@ -177,13 +160,13 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         float z = currentState.random.NextFloat(-walkRange, walkRange);
 
         currentState.destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-        agent.SetDestination(currentState.destPoint);
-        agent.isStopped = true;
+        // agent.SetDestination(currentState.destPoint);
+        // agent.isStopped = true;
 
-        if (agent.pathStatus == NavMeshPathStatus.PathComplete)
-        {
-            currentState.destPointSet = true;
-            agent.isStopped = false;
-        }
+        // if (agent.pathStatus == NavMeshPathStatus.PathComplete)
+        // {
+        //     currentState.destPointSet = true;
+        //     agent.isStopped = false;
+        // }
     }
 }
