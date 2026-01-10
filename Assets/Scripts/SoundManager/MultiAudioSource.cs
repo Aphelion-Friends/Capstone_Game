@@ -146,9 +146,10 @@ public class MultiAudioSource {
 		}
 
 		var audioSource = gameObject.AddComponent<AudioSource>();
+		audioSource.playOnAwake = false;
 		audioSource.clip = clip;
 
-		audioSource.playOnAwake = false;
+		
 		audioSource.loop = loop;
 		audioSource.outputAudioMixerGroup = Resources.Load<AudioMixerGroup>(audioMixer);
 
