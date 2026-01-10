@@ -54,7 +54,9 @@ public struct Task
 
         if (enemyName == requiredEnemyName)
         {
+            Debug.Log("I died!!!!!");
             isComplete = true;
+            Debug.Log(isComplete);
         }
     }
 

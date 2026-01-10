@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class ObjectiveInitializer
 {
     TaskInitializer taskInitializer = new TaskInitializer();
@@ -9,7 +9,7 @@ public class ObjectiveInitializer
     {
         Objective objective = new Objective();
         objective.tasks = new List<Task>();
-
+       // objective.onChangeList = new List<Action>();
 
         return objective;
     }
@@ -26,6 +26,8 @@ public class ObjectiveInitializer
         objective.tasks.Add(killSpider);
         objective.tasks.Add(spiderAss);
         objective.tasks.Add(extract);
+
+        objective.numTasks = 3;
 
         return objective;
     }

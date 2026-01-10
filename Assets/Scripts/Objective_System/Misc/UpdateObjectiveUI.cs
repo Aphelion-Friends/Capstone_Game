@@ -11,7 +11,7 @@ public class UpdateObjectiveUI : MonoBehaviour
         Objective objective = ObjectiveManager.Instance.currentState.objective;
         UpdateTaskNameAndDescription();
 
-        objective.Subscribe(UpdateTaskNameAndDescription);
+        //objective.Subscribe(UpdateTaskNameAndDescription);
     }
 
     void UpdateTaskNameAndDescription()

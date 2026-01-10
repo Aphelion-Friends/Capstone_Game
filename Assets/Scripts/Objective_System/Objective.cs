@@ -9,28 +9,23 @@ public struct Objective
     public bool isComplete;
 
     // List of function to call every time the objective is updated
-    private List<Action> onChangeList;
-
-    void Start()
-    {
-        numTasks = tasks.Count;
-    }
 
     public int getNumTasks() {  return numTasks; }
 
     // Whenever the objective status changes, all the functions in onChangeList are called
-    private void OnChange()
-    {
-        foreach (Action onChangeFunction in onChangeList)
-        {
-            onChangeFunction();
-        }
-    }
+    //private void OnChange()
+    //{
+        
+    //    foreach (Action onChangeFunction in onChangeList)
+    //    {
+    //        onChangeFunction();
+    //    }
+    //}
 
-    public void Subscribe(Action newFunction)
-    {
-        onChangeList.Add(newFunction);
-    }
+    //public void Subscribe(Action newFunction)
+    //{
+    //    onChangeList.Add(newFunction);
+    //}
 
     public Task GetFirstIncompleteTask()
     {
@@ -53,7 +48,7 @@ public struct Objective
         }
 
         checkObjectiveCompletion();
-        OnChange();
+        //OnChange();
     }
 
     public void EnemyKilled(string enemyName) {
@@ -63,7 +58,7 @@ public struct Objective
         }
 
         checkObjectiveCompletion();
-        OnChange();
+        //OnChange();
     }
 
     public void ItemCollected(string itemName) {
@@ -73,7 +68,7 @@ public struct Objective
         }
 
         checkObjectiveCompletion();
-        OnChange();
+        //OnChange();
     }
 
     public void ItemDropped(string itemName) {
@@ -92,9 +87,16 @@ public struct Objective
         
         foreach (Task task in tasks)
         {
+
+            Debug.Log(task.taskName + " is " + task.isComplete);
+            
             if (!task.isComplete)   //Go through lisit of task objects and see if any are incomplete
             {
                 taskIncomplete = true;                          //If a task isn't complete, set taskIncomplete to true to prevent the Objective from being marked complete
+            }
+            else
+            {
+                Debug.Log(task.taskName + "Checked off");
             }
         }
 

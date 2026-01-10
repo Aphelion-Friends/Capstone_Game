@@ -20,7 +20,7 @@ public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveMana
 
         public override string ToString()
         {
-            return $"Objective name: {objective.GetType().Name}. Number of tasks: {objective.getNumTasks()}. Is complete? {objective.checkObjectiveCompletion()}";
+            return $"Objective name: {objective.GetType().Name}. Number of tasks: {objective.getNumTasks()}. Is complete? {objective.checkObjectiveCompletion()}. Current task : {objective.GetFirstIncompleteTask().taskName}";
         }
     }
 
