@@ -6,11 +6,31 @@ public class AmbientSound : MonoBehaviour
 
     [SerializeField][Range(0,1)] float playProbability;
 
+    private enum Soundtype
+    {
+        metal,
+        glass,
+        monsterSound,
+    }
+
+    [SerializeField] Soundtype soundtype;
+
     private float remainTime;
     private MultiAudioSource audioSource;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        switch (soundtype)
+        {
+            case (Soundtype.metal):
+                break;
+
+            case (Soundtype.glass):
+                break;
+
+            case (Soundtype.monsterSound):
+                break; 
+        }
         audioSource = MultiAudioSource.FromResource(this.gameObject, "gunshot");
 
         remainTime = delayedTime;
