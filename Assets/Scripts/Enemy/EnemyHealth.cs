@@ -60,6 +60,6 @@ public class EnemyHealth : PredictedIdentity<EnemyHealth.HealthState>
         _animator.SetTrigger("Die");
         _enemyAIPatrol.Stop();
 
-        ObjectiveManager.Instance.EnemyKilled("spider");
+        ObjectiveManager.Instance.currentState.objective.EnemyKilled("spider");
     }
 }
