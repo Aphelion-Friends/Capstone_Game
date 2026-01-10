@@ -13,15 +13,15 @@ public class GunEffects : MonoBehaviour
     [Header("Visual Effects")]
     [SerializeField] private VisualEffect _muzzleFlash;
 
-    // private MultiAudioSource audioSource;
+    private MultiAudioSource audioSource;
 
     void Awake()
     {
-        // audioSource = MultiAudioSource.FromResource(this.gameObject, "gunshot");
+        audioSource = MultiAudioSource.FromResource(this.gameObject, "gunshot");
     }
     public void PlayEffects()
     {
-        // audioSource.Play();
+        audioSource.Play();
         _muzzleFlash.Play();
     }
 

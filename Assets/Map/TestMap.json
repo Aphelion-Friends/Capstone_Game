@@ -9,6 +9,28 @@
         {
             "_location": {
                 "x": 2,
+                "y": 2,
+                "z": 5
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "wall"
+            }
+        },
+        {
+            "_location": {
+                "x": 3,
+                "y": 2,
+                "z": 5
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "wall"
+            }
+        },
+        {
+            "_location": {
+                "x": 2,
                 "y": 3,
                 "z": 5
             },
@@ -31,6 +53,28 @@
         {
             "_location": {
                 "x": 2,
+                "y": 2,
+                "z": 6
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "wall"
+            }
+        },
+        {
+            "_location": {
+                "x": 3,
+                "y": 2,
+                "z": 6
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "wall"
+            }
+        },
+        {
+            "_location": {
+                "x": 2,
                 "y": 3,
                 "z": 6
             },
@@ -48,6 +92,28 @@
             "_orientation": 0,
             "_piece": {
                 "_prefabName": "floor"
+            }
+        },
+        {
+            "_location": {
+                "x": 2,
+                "y": 2,
+                "z": 7
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "wall"
+            }
+        },
+        {
+            "_location": {
+                "x": 3,
+                "y": 2,
+                "z": 7
+            },
+            "_orientation": 0,
+            "_piece": {
+                "_prefabName": "wall"
             }
         },
         {
