@@ -1,16 +1,15 @@
 using UnityEngine;
+using PurrNet.Prediction;
 
-public class SpiderAttack : MonoBehaviour
+public class SpiderAttack : PredictedIdentity<SpiderAttack.AttackState>, IEnemyAttack
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Attack()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public struct AttackState : IPredictedData<AttackState>
     {
-        
+        public void Dispose() {}
     }
 }
