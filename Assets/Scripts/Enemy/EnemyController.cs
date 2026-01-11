@@ -24,6 +24,7 @@ public class EnemyController : PredictedIdentity<EnemyController.ControllerState
         _agent = gameObject.AddComponent<NavMeshAgent>();
         _agent.autoRepath = false;
         _agent.height = _height;
+        _agent.radius = _radius;
         _agent.enabled = true;
     }
 
