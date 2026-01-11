@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 public struct Objective
 {
@@ -51,10 +52,13 @@ public struct Objective
         //OnChange();
     }
 
-    public void EnemyKilled(string enemyName) {
-        foreach (Task task in tasks)
+    public void EnemyKilled(string enemyName)
+    {
+        for (int i = 0; i < tasks.Count; i++)
         {
-            task.EnemyKilled(enemyName);
+            Task newTask = tasks[i];
+            newTask.EnemyKilled(enemyName);
+            tasks[i] = newTask;
         }
 
         checkObjectiveCompletion();
@@ -84,13 +88,13 @@ public struct Objective
     public bool checkObjectiveCompletion()
     {
         bool taskIncomplete = false;
-        
+
         foreach (Task task in tasks)
         {
 
             Debug.Log(task.taskName + " is " + task.isComplete);
             
-            if (!task.isComplete)   //Go through lisit of task objects and see if any are incomplete
+            if (!task.isComplete)   //Go through list of task objects and see if any are incomplete
             {
                 taskIncomplete = true;                          //If a task isn't complete, set taskIncomplete to true to prevent the Objective from being marked complete
             }
