@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spider : MonoBehaviour
+public class SpiderChase : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
