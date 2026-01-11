@@ -18,11 +18,10 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     [SerializeField] private FirstPersonCamera _camera;
     [SerializeField] private PredictedRigidbody _rigidbody;
 
-    private Animator _playerAnimator;
+    [SerializeField] private Animator _playerAnimator;
 
     private void Awake()
     {
-        _playerAnimator = GetComponent<Animator>();
     }
 
     protected override void LateAwake()

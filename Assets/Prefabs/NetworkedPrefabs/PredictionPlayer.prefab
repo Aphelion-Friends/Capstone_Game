@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Animation.Rigging::UnityEngine.Animations.Rigging.Rig
-  m_Weight: 1
+  m_Weight: 0
   m_Effectors: []
 --- !u!1 &3189734014813344341
 GameObject:
@@ -490,7 +490,6 @@ GameObject:
   - component: {fileID: 7493958456960721005}
   - component: {fileID: 6780938194775121917}
   - component: {fileID: 7036621359131802969}
-  - component: {fileID: 8915702303854501371}
   m_Layer: 8
   m_Name: PredictionPlayer
   m_TagString: Player
@@ -541,6 +540,7 @@ MonoBehaviour:
     m_Bits: 1239
   _camera: {fileID: 5425517718750818120}
   _rigidbody: {fileID: 7961874865920024228}
+  _playerAnimator: {fileID: 3781700708315503250}
 --- !u!54 &3541979704348186581
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -660,28 +660,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   _maxHealth: 100
---- !u!95 &8915702303854501371
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8078684614268146017}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 35b281c98d9678b98bba950362c79d11, type: 3}
-  m_Controller: {fileID: 9100000, guid: e6ad7761b39c74c59ab7985211ce3835, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1032,11 @@ Transform:
 --- !u!4 &3534114030456324058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6060271248664893657, guid: 35b281c98d9678b98bba950362c79d11, type: 3}
+  m_PrefabInstance: {fileID: 7282841130284984067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3781700708315503250 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 35b281c98d9678b98bba950362c79d11, type: 3}
   m_PrefabInstance: {fileID: 7282841130284984067}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &4695111325812840978 stripped
