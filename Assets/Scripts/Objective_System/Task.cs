@@ -26,6 +26,7 @@ public struct Task
     public bool enemyKilledEnabled;
     public bool itemCollectedEnabled;
     public bool itemDroppedEnabled;
+    public bool powerActivationEnabled;
 
     public void PlayerMove(Vector3 position)
     {
@@ -90,4 +91,14 @@ public struct Task
             }
         }
     }
+
+    public void ActivatePower()
+    {
+        if(!powerActivationEnabled)
+            return;
+
+        isComplete = true;
+    }
+
+
 }

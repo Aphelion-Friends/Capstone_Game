@@ -56,4 +56,15 @@ public class TaskInitializer
 
         return extract;
     }
+
+    public Task ActivatePower()
+    {
+        Task power = InitializeGenericTask();
+        power.taskName = "ActivatePower";
+        power.taskDescription = "Locate the control room and reactivate the power";
+        power.powerActivationEnabled = true;
+        power.originalTaskDescription = power.taskDescription;
+
+        return power;
+    }
 }
