@@ -12,9 +12,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     [SerializeField] float walkRange;
 
-    [SerializeField] float sightRange, attackRange;
-
-    [SerializeField] float attackCooldown = 1f;
+    [SerializeField] float sightRange;
 
     [SerializeField] float minDistance = 2f;
 
@@ -97,17 +95,10 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
         GameObject targetedPlayer = null;
         Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
-        Collider[] playerInAttackRangeColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 
         state.playerInSight = playerInSightColliders.Length > 0;
-        state.playerInAttackRange = playerInAttackRangeColliders.Length > 0;
 
-        if (state.playerInAttackRange)
-        {
-            // Debug.Log("ATTAK");
-            targetedPlayer = GetClosestPlayer(playerInAttackRangeColliders);
-        }
-        else if (state.playerInSight)
+        if (state.playerInSight)
         {
             targetedPlayer = GetClosestPlayer(playerInSightColliders);
         }
@@ -118,11 +109,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
             return;
 
         if (state.playerInSight && !state.playerInAttackRange) Chase(targetedPlayer);
-        if (state.playerInSight && state.playerInAttackRange && state.attackCooldownTimer <= 0) 
-        {
-            state.attackCooldownTimer = attackCooldown;
-            Attack(targetedPlayer);
-        }
     }
 
     GameObject GetClosestPlayer(Collider[] colliderArray)
@@ -140,15 +126,6 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
         }
         return currentBest;
     }
-
-    void Attack(GameObject playerAttacked)
-    {
-        if (playerAttacked is not null)
-        {    
-            playerAttacked.GetComponent<PlayerHealth>().ChangeHealth(-10f);
-        }
-    }
-
 
     void Chase(GameObject targetedPlayer)
     {

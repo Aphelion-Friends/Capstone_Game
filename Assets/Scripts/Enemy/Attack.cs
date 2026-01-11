@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected float _attackRange;
+    [SerializeField] protected float _attackCooldown;
 
-    // Update is called once per frame
-    void Update()
+    void DamagePlayer(GameObject playerAttacked)
     {
-        
+        if (playerAttacked is not null)
+        {    
+            playerAttacked.GetComponent<PlayerHealth>().ChangeHealth(-10f);
+        }
     }
 }
