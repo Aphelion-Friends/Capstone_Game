@@ -7,11 +7,11 @@ public class EnemyController : PredictedIdentity<EnemyController.ControllerState
 {
     private NavMeshAgent _agent;
 
-    private float _radius = 1f;
-    private float _height = 1f;
+    [SerializeField] private float _radius = 1f;
+    [SerializeField] private float _height = 1f;
 
     // Choose a value that is not too small because the enemy movement will get too twitchy but also not too large
-    private float _warpDistance = 10f;
+    [SerializeField] private float _warpDistance = 10f;
 
     public bool active { get => currentState.active; set { currentState.active = value; SetActive(); } }
 
@@ -33,30 +33,29 @@ public class EnemyController : PredictedIdentity<EnemyController.ControllerState
     }
 
 
-    protected override void Simulate()
+    protected override void Simulate(ref ControllerState state, float delta)
     {
+        _agent.enabled = active;
 
+        if (!active)
+            return;
+
+        _agent.speed = state.speed;
+        _agent.destination = state.destPoint;
+
+        if (Vector3.Magnitude(_agent.nextPosition - transform.position) > _warpDistance)
+        {
+            Debug.Log("Warping!");
+            _agent.Warp(transform.position);
+        }
     }
-    // protected override void SetUnityState(ControllerState state)
-    // {
-    //     Debug.Log("Setting state!");
-
-    //     _agent.speed = state.speed;
-
-    //     _agent.destination = currentState.destPoint;
-    //     if (active && Vector3.Magnitude(_agent.nextPosition - gameObject.transform.position) > _warpDistance)
-    //     {
-    //         Debug.Log("Warping!");
-    //         _agent.Warp(transform.position);
-    //     }
-    // }
 
     protected override ControllerState GetInitialState()
     {
         return new ControllerState{
             active = true,
             destPoint = new Vector3(),
-            speed = 1
+            speed = 5f
         };
     }
 
@@ -65,8 +64,6 @@ public class EnemyController : PredictedIdentity<EnemyController.ControllerState
         public bool active;
         public Vector3 destPoint;
         public float speed;
-        public Vector3 position;
-        public Quaternion rotation;
 
         public void Dispose() {}
     }

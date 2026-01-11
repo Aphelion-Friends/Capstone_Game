@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 779197984937563191}
   - component: {fileID: 3146541770134008824}
   - component: {fileID: 6660510467268262390}
+  - component: {fileID: 223560168957533158}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -199,11 +200,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98dbb08343eac044895b9b52872bcb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Prediction::PurrNet.Prediction.PredictedTransform
-  _graphics: {fileID: 0}
+  _graphics: {fileID: 983899964485797323}
   _floatAccuracy: 1
   _interpolationSettings: {fileID: 11400000, guid: 4a8aa8e44e23cfd4a8d4387ef3f36173, type: 2}
   _unparentGraphics: 0
-  _characterControllerPatch: 1
+  _characterControllerPatch: 0
 --- !u!114 &6660510467268262390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +221,21 @@ MonoBehaviour:
   _floatAccuracy: 1
   _eventMask: 63
   _ignoreTriggerOnTrigger: 0
+--- !u!114 &223560168957533158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688170438458974228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acb0226c75433424aa2efeda0245276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  _radius: 1
+  _height: 1
+  _warpDistance: 10
 --- !u!1 &4434807534815196201
 GameObject:
   m_ObjectHideFlags: 0

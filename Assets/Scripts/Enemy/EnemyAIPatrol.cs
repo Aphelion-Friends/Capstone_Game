@@ -3,6 +3,7 @@
 using UnityEngine;
 using PurrNet.Prediction;
 
+[RequireComponent(typeof(EnemyController))]
 public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 {
     [SerializeField] LayerMask groundLayer, playerLayer;
@@ -21,7 +22,7 @@ public class EnemyAIPatrol : PredictedIdentity<EnemyAIPatrol.EnemyState>
 
     protected override void LateAwake()
     {
-        enemyController = gameObject.AddComponent<EnemyController>();
+        enemyController = GetComponent<EnemyController>();
     }
 
     protected override EnemyState GetInitialState()
