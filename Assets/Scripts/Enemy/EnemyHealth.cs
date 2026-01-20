@@ -6,13 +6,13 @@ public class EnemyHealth : PredictedIdentity<EnemyHealth.HealthState>
 {
     [SerializeField] private float _maxHealth;
     [SerializeField] private NetworkAnimator _animator;
-    private EnemyAIPatrol _enemyAIPatrol;
+    // private EnemyAIPatrol _enemyAIPatrol;
 
     private PredictedEvent _onDie;
 
     private void Awake()
     {
-        _enemyAIPatrol = GetComponent<EnemyAIPatrol>();
+        // _enemyAIPatrol = GetComponent<EnemyAIPatrol>();
     }
 
     protected override void LateAwake()
@@ -58,6 +58,6 @@ public class EnemyHealth : PredictedIdentity<EnemyHealth.HealthState>
         Debug.Log("The enemy died!");
         currentState.alive = false;
         _animator.SetTrigger("Die");
-        _enemyAIPatrol.Stop();
+        // _enemyAIPatrol.Stop();
     }
 }

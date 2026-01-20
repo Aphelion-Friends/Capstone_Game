@@ -34,7 +34,6 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     {
         if (input.moveDirection.y > 0)
         {
-            Debug.Log("Start walk");
             _playerAnimator.SetTrigger("StartWalk");
         }
         else if (input.moveDirection.y <= 0)
