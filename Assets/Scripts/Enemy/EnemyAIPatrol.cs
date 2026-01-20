@@ -72,11 +72,13 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
 
     protected override void StateSimulate(ref PatrolState state, float delta)
     {
+        transitionFunc(ref state);
+
         if (state.stopped)
             return;
 
         if (!state.randomSeedSet)
-            currentState.random.seed = (uint) Random.Range(0, 100000);
+            currentState.random.seed = (uint) UnityEngine.Random.Range(0, 100000);
 
         state.attackCooldownTimer -= delta;
 
@@ -84,41 +86,40 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
 
         float distance = Vector3.Distance(state.destPoint, transform.position);
 
-        // Destination reached
-        if (distance <= minDistance)
-        {
-            Debug.Log("Dest reached!");
-            state.destPointSet = false;
-            state.giveUpTimer = giveUpTime;
-        }
+        // // Destination reached
+        // if (distance <= minDistance)
+        // {
+        //     Debug.Log("Dest reached!");
+        //     state.destPointSet = false;
+        //     state.giveUpTimer = giveUpTime;
+        // }
 
-        if (state.destPointSet && state.giveUpTimer <= 0)
-        {
-            state.giveUpTimer = giveUpTime;
-            state.destPointSet = false;
-            Debug.Log("Could not reach dest point! I give up!");
-        }
+        // if (state.destPointSet && state.giveUpTimer <= 0)
+        // {
+        //     state.giveUpTimer = giveUpTime;
+        //     state.destPointSet = false;
+        //     Debug.Log("Could not reach dest point! I give up!");
+        // }
 
-        GameObject targetedPlayer = null;
-        Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
+        // GameObject targetedPlayer = null;
+        // Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
 
-        state.playerInSight = playerInSightColliders.Length > 0;
+        // state.playerInSight = playerInSightColliders.Length > 0;
 
-        if (state.playerInSight)
-        {
-            targetedPlayer = GetClosestPlayer(playerInSightColliders);
-        }
+        // if (state.playerInSight)
+        // {
+        //     targetedPlayer = GetClosestPlayer(playerInSightColliders);
+        // }
 
-        if (!state.playerInSight && !state.playerInAttackRange) 
-        {
-            // Patrol(ref PatrolState state);
-            state.destPointSet = true;
-        }
+        // if (!state.playerInSight && !state.playerInAttackRange) 
+        // {
+        //     // Patrol(ref PatrolState state);
+        //     state.destPointSet = true;
+        // }
 
-        if (targetedPlayer is null)
-            return;
+        // if (targetedPlayer is null)
+        //     return;
 
-        if (state.playerInSight && !state.playerInAttackRange) Chase(targetedPlayer);
     }
 
     GameObject GetClosestPlayer(Collider[] colliderArray)
