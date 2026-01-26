@@ -8,8 +8,9 @@ public class Psychotron : GenericEnemy
 
     protected override void AttackTransitions(ref EnemyAttackState.AttackState state)
     {
-        base.AttackTransitions(ref state);
-
+        Debug.Log("Psychotron attak!!!");
         animator.SetTrigger("Attack");
+
+        base.AttackTransitions(ref state);
     }
 }
