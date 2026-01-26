@@ -1,16 +1,11 @@
 using UnityEngine;
+using PurrNet.Prediction;
+using PurrNet.Prediction.StateMachine;
 
-public class Psychotron : MonoBehaviour
+[RequireComponent(typeof(PredictedStateMachine))]
+[RequireComponent(typeof(EnemyPatrolState))]
+[RequireComponent(typeof(EnemyChaseState))]
+[RequireComponent(typeof(EnemyAttackState))]
+public class Psychotron : StatelessPredictedIdentity
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
