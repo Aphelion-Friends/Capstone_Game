@@ -5,20 +5,44 @@ using PurrNet.Prediction.StateMachine;
 [RequireComponent(typeof(PredictedStateMachine))]
 [RequireComponent(typeof(EnemyPatrolState))]
 [RequireComponent(typeof(EnemyChaseState))]
-public class Spider : MonoBehaviour
+public class Spider : StatelessPredictedIdentity
 {
+    PredictedStateMachine stateMachine;
     EnemyPatrolState enemyPatrolState;
     EnemyChaseState enemyChaseState;
+
+    [SerializeField] private float chaseRange;
+    [SerializeField] private LayerMask playerLayer;
+
     void Awake()
     {
+        stateMachine = GetComponent<PredictedStateMachine>();
         enemyPatrolState = GetComponent<EnemyPatrolState>();
         enemyChaseState = GetComponent<EnemyChaseState>();
         enemyPatrolState.transitionFunc = PatrolTransitions;
+        enemyChaseState.transitionFunc = ChaseTransitions;
+    }
+
+    void ChaseTransitions(ref EnemyChaseState.ChaseState state)
+    {
+
     }
 
     void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
     {
-        // Debug.Log("Checking if I should transition....");
+        Collider[] playerColliders = Physics.OverlapSphere(transform.position, chaseRange, playerLayer);
+
+        if (playerColliders.Length == 0)
+            return;
+
+        GameObject playerCollider = GetClosestPlayer(playerColliders);
+        PredictedObjectID playerID;
+
+        if (!predictionManager.hierarchy.TryGetId(playerCollider, out playerID))
+            return;
+
+        enemyChaseState.targetedPlayer = playerID;
+        stateMachine.SetState(enemyChaseState);
     }
 
     GameObject GetClosestPlayer(Collider[] colliderArray)

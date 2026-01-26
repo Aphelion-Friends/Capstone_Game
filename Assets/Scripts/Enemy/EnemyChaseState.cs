@@ -9,6 +9,8 @@ public class EnemyChaseState : PredictedStateNode<EnemyChaseState.ChaseState>
     public delegate void TransitionFunc(ref EnemyChaseState.ChaseState state);
     public TransitionFunc transitionFunc;
 
+    public PredictedObjectID? targetedPlayer { get => currentState.targetedPlayer; set => currentState.targetedPlayer = value; }
+
     private EnemyController enemyController;
 
     public struct ChaseState : IPredictedData<ChaseState>

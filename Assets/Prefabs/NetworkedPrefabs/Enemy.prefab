@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3745326291466856234}
   - component: {fileID: 4573857694349896534}
   - component: {fileID: 1685356620355799643}
+  - component: {fileID: 1415150836451596787}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -184,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: PurrNet.Prediction::PurrNet.Prediction.StateMachine.PredictedStateMachine
   _wrappedStates:
   - _object: {fileID: 4573857694349896534}
+  - _object: {fileID: 1415150836451596787}
 --- !u!114 &3745326291466856234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +221,6 @@ MonoBehaviour:
     m_Bits: 0
   giveUpTime: 10
   walkRange: 10
-  sightRange: 0
   minDistance: 2
 --- !u!114 &1685356620355799643
 MonoBehaviour:
@@ -233,6 +234,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6715254f9d7198cf9d297203488514f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spider
+  chaseRange: 30
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &1415150836451596787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688170438458974228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63cd9aa49529f8a248cda77175907f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyChaseState
 --- !u!1 &4434807534815196201
 GameObject:
   m_ObjectHideFlags: 0
