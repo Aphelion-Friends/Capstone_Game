@@ -17,7 +17,7 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
     [SerializeField] protected float attackRange;
     [SerializeField] protected LayerMask playerLayer;
 
-    protected void Awake()
+    virtual protected void Awake()
     {
         stateMachine = GetComponent<PredictedStateMachine>();
         enemyPatrolState = GetComponent<EnemyPatrolState>();
@@ -28,7 +28,7 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
         enemyAttackState.transitionFunc = AttackTransitions;
     }
     
-    protected void AttackTransitions(ref EnemyAttackState.AttackState state)
+    virtual protected void AttackTransitions(ref EnemyAttackState.AttackState state)
     {
         GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
 
@@ -41,7 +41,7 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
         }
     }
 
-    protected void ChaseTransitions(ref EnemyChaseState.ChaseState state)
+    virtual protected void ChaseTransitions(ref EnemyChaseState.ChaseState state)
     {
         GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
 
@@ -56,7 +56,7 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
         }
     }
 
-    protected void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
+    virtual protected void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
     {
         Collider[] playerColliders = Physics.OverlapSphere(transform.position, chaseRange, playerLayer);
 
@@ -74,7 +74,7 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
         stateMachine.SetState(enemyChaseState);
     }
 
-    protected GameObject GetClosestPlayer(Collider[] colliderArray)
+    virtual protected GameObject GetClosestPlayer(Collider[] colliderArray)
     {
         GameObject currentBest = colliderArray[0].gameObject;
         for (int x = 1; x < colliderArray.Length; x++)
