@@ -53,6 +53,11 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
         public void Dispose() {}
     }
 
+    public override void Enter()
+    {
+        currentState.destPointSet = false;
+    }
+
     protected override void StateSimulate(ref PatrolState state, float delta)
     {
 

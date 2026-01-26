@@ -25,7 +25,13 @@ public class Spider : StatelessPredictedIdentity
 
     void ChaseTransitions(ref EnemyChaseState.ChaseState state)
     {
+        GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
 
+        if (Vector3.Distance(transform.position, targetedPlayer.transform.position) >= chaseRange)
+        {
+            Debug.Log("Transitioning to patrol state!");
+            stateMachine.SetState(enemyPatrolState);
+        }
     }
 
     void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
@@ -42,6 +48,7 @@ public class Spider : StatelessPredictedIdentity
             return;
 
         enemyChaseState.targetedPlayer = playerID;
+        Debug.Log("Transitioning to chase state!");
         stateMachine.SetState(enemyChaseState);
     }
 
