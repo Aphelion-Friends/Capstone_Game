@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4573857694349896534}
   - component: {fileID: 1685356620355799643}
   - component: {fileID: 1415150836451596787}
+  - component: {fileID: 2501398386697882068}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -186,6 +187,7 @@ MonoBehaviour:
   _wrappedStates:
   - _object: {fileID: 4573857694349896534}
   - _object: {fileID: 1415150836451596787}
+  - _object: {fileID: 2501398386697882068}
 --- !u!114 &3745326291466856234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Spider
   chaseRange: 30
+  attackRange: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -250,6 +253,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63cd9aa49529f8a248cda77175907f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyChaseState
+--- !u!114 &2501398386697882068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3688170438458974228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a932b8eaf142e3d59d7f3a401213fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackState
+  attackRigidbody: {fileID: 6660510467268262390}
 --- !u!1 &4434807534815196201
 GameObject:
   m_ObjectHideFlags: 0
