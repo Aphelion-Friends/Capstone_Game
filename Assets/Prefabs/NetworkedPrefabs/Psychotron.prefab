@@ -13,7 +13,12 @@ GameObject:
   - component: {fileID: 1393704665033809899}
   - component: {fileID: 6714659204296126690}
   - component: {fileID: 1607163259567410827}
+  - component: {fileID: 4285576216274976261}
   - component: {fileID: 8357521294626045274}
+  - component: {fileID: 7577578330521440191}
+  - component: {fileID: 5622480805165329139}
+  - component: {fileID: 7127041065061461379}
+  - component: {fileID: 8136226341939958108}
   m_Layer: 10
   m_Name: Psychotron
   m_TagString: Untagged
@@ -120,6 +125,24 @@ CapsuleCollider:
   m_Height: 6.5
   m_Direction: 1
   m_Center: {x: 0, y: 3.25, z: 0}
+--- !u!114 &4285576216274976261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843738366486812013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3105e7ae0b4866a3fb99738f5ed1f6da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Psychotron
+  chaseRange: 20
+  attackRange: 3
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  animator: {fileID: 1223443393109069266}
 --- !u!114 &8357521294626045274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +156,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Prediction::PurrNet.Prediction.StateMachine.PredictedStateMachine
   _wrappedStates: []
+--- !u!114 &7577578330521440191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843738366486812013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2acb0226c75433424aa2efeda0245276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  _radius: 1
+  _height: 1
+  _warpDistance: 10
+--- !u!114 &5622480805165329139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843738366486812013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d1095957a6704d299cf8f4e6e4476dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPatrolState
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  giveUpTime: 0
+  walkRange: 0
+  minDistance: 2
+--- !u!114 &7127041065061461379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843738366486812013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63cd9aa49529f8a248cda77175907f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyChaseState
+--- !u!114 &8136226341939958108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843738366486812013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a932b8eaf142e3d59d7f3a401213fb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackState
+  attackRigidbody: {fileID: 0}
 --- !u!1001 &4724309962083283011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -338,6 +422,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d1f6a3339073c2e7802de88f446bd80, type: 3}
+--- !u!95 &1223443393109069266 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 2d1f6a3339073c2e7802de88f446bd80, type: 3}
+  m_PrefabInstance: {fileID: 4724309962083283011}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5051534221385750440 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2d1f6a3339073c2e7802de88f446bd80, type: 3}
