@@ -5,13 +5,16 @@ using PurrNet.Prediction.StateMachine;
 [RequireComponent(typeof(PredictedStateMachine))]
 [RequireComponent(typeof(EnemyPatrolState))]
 [RequireComponent(typeof(EnemyChaseState))]
+[RequireComponent(typeof(EnemyAttackState))]
 public class Spider : StatelessPredictedIdentity
 {
     PredictedStateMachine stateMachine;
     EnemyPatrolState enemyPatrolState;
     EnemyChaseState enemyChaseState;
+    EnemyAttackState enemyAttackState;
 
     [SerializeField] private float chaseRange;
+    [SerializeField] private float attackRange;
     [SerializeField] private LayerMask playerLayer;
 
     void Awake()
@@ -19,8 +22,23 @@ public class Spider : StatelessPredictedIdentity
         stateMachine = GetComponent<PredictedStateMachine>();
         enemyPatrolState = GetComponent<EnemyPatrolState>();
         enemyChaseState = GetComponent<EnemyChaseState>();
+        enemyAttackState = GetComponent<EnemyAttackState>();
         enemyPatrolState.transitionFunc = PatrolTransitions;
         enemyChaseState.transitionFunc = ChaseTransitions;
+        enemyAttackState.transitionFunc = AttackTransitions;
+    }
+
+    void AttackTransitions(ref EnemyAttackState.AttackState state)
+    {
+        GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
+
+        if (targetedPlayer is null)
+            return;
+
+        if (Vector3.Distance(transform.position, targetedPlayer.transform.position) >= attackRange)
+        {
+            stateMachine.SetState(enemyChaseState);
+        }
     }
 
     void ChaseTransitions(ref EnemyChaseState.ChaseState state)
@@ -31,6 +49,10 @@ public class Spider : StatelessPredictedIdentity
         {
             Debug.Log("Transitioning to patrol state!");
             stateMachine.SetState(enemyPatrolState);
+        }
+        else if (Vector3.Distance(transform.position, targetedPlayer.transform.position) <= attackRange)
+        {
+            stateMachine.SetState(enemyAttackState);
         }
     }
 
