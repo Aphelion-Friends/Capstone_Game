@@ -85,22 +85,6 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
         }
     }
 
-    GameObject GetClosestPlayer(Collider[] colliderArray)
-    {
-        GameObject currentBest = colliderArray[0].gameObject;
-        for (int x = 1; x < colliderArray.Length; x++)
-        {
-            float currentBestDistance = Vector3.Distance(transform.position, currentBest.transform.position);
-            float currentDistance = Vector3.Distance(transform.position, colliderArray[x].gameObject.transform.position);
-
-            if (currentDistance < currentBestDistance)
-            {
-                currentBest = colliderArray[x].gameObject;
-            }
-        }
-        return currentBest;
-    }
-
     Vector3 FindRandomDestPoint()
     {
         float x = currentState.random.NextFloat(-walkRange, walkRange);
