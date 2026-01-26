@@ -217,8 +217,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
-  giveUpTime: 0
-  walkRange: 0
+  giveUpTime: 10
+  walkRange: 10
   sightRange: 0
   minDistance: 2
 --- !u!114 &1685356620355799643

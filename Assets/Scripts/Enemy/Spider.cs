@@ -15,6 +15,6 @@ public class Spider : MonoBehaviour
 
     void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
     {
-        Debug.Log("Checking if I should transition....");
+        // Debug.Log("Checking if I should transition....");
     }
 }

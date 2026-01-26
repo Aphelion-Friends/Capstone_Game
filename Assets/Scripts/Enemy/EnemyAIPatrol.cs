@@ -14,8 +14,6 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
 
     [SerializeField] float walkRange;
 
-    [SerializeField] float sightRange;
-
     [SerializeField] float minDistance = 2f;
 
     public delegate void TransitionFunc(ref EnemyPatrolState.PatrolState state);
@@ -23,7 +21,7 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
 
     private EnemyController enemyController;
 
-    protected override void SimulationStart()
+    protected override void LateAwake()
     {
         enemyController = GetComponent<EnemyController>();
     }
@@ -32,18 +30,9 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
     {
         return new PatrolState
         {
-            stopped = false,
-            randomSeedSet = false
+            randomSeedSet = false,
+            destPointSet = false,
         };
-    }
-
-    public void Stop()
-    {
-        currentState.stopped = true;
-        enemyController.active = false;
-        Rigidbody rigidbody = GetComponent<Rigidbody>();
-        rigidbody.isKinematic = false;
-        rigidbody.constraints &= RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
     public struct PatrolState : IPredictedData<PatrolState>
@@ -51,20 +40,14 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
         public PredictedRandom random;
         public bool randomSeedSet;
 
-        public bool stopped;
-
         public Vector3 destPoint;
         public bool destPointSet;
 
-        public bool playerInSight;
-        public bool playerInAttackRange;
-
-        public float attackCooldownTimer;
         public float giveUpTimer;
 
         public override string ToString()
         {
-            return $"Give up timer: {giveUpTimer}\nDest point: {destPoint}\nDest point set: {destPointSet}\nPlayer in sight: {playerInSight}\nPlayer in attack range: {playerInAttackRange}";
+            return $"Give up timer: {giveUpTimer}\nDest point: {destPoint}\nDest point set: {destPointSet}";
         }
 
         public void Dispose() {}
@@ -72,54 +55,34 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
 
     protected override void StateSimulate(ref PatrolState state, float delta)
     {
-        transitionFunc(ref state);
-
-        if (state.stopped)
-            return;
 
         if (!state.randomSeedSet)
             currentState.random.seed = (uint) UnityEngine.Random.Range(0, 100000);
 
-        state.attackCooldownTimer -= delta;
+        transitionFunc(ref state);
 
         state.giveUpTimer -= delta;
 
         float distance = Vector3.Distance(state.destPoint, transform.position);
 
-        // // Destination reached
-        // if (distance <= minDistance)
-        // {
-        //     Debug.Log("Dest reached!");
-        //     state.destPointSet = false;
-        //     state.giveUpTimer = giveUpTime;
-        // }
+        if (state.giveUpTimer <= 0 || distance <= minDistance)
+        {
+            state.destPointSet = false;
+        }
 
-        // if (state.destPointSet && state.giveUpTimer <= 0)
-        // {
-        //     state.giveUpTimer = giveUpTime;
-        //     state.destPointSet = false;
-        //     Debug.Log("Could not reach dest point! I give up!");
-        // }
+        if (state.giveUpTimer <= 0)
+        {
+            state.giveUpTimer = giveUpTime;
+        }
 
-        // GameObject targetedPlayer = null;
-        // Collider[] playerInSightColliders = Physics.OverlapSphere(transform.position, sightRange, playerLayer);
-
-        // state.playerInSight = playerInSightColliders.Length > 0;
-
-        // if (state.playerInSight)
-        // {
-        //     targetedPlayer = GetClosestPlayer(playerInSightColliders);
-        // }
-
-        // if (!state.playerInSight && !state.playerInAttackRange) 
-        // {
-        //     // Patrol(ref PatrolState state);
-        //     state.destPointSet = true;
-        // }
-
-        // if (targetedPlayer is null)
-        //     return;
-
+        if (!state.destPointSet)
+        {
+            Vector3 newTarget = FindRandomDestPoint();
+            state.destPoint = newTarget;
+            enemyController.destination = state.destPoint;
+            state.destPointSet = true;
+            Debug.Log("Set a new dest point!");
+        }
     }
 
     GameObject GetClosestPlayer(Collider[] colliderArray)
@@ -138,31 +101,11 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
         return currentBest;
     }
 
-    void Chase(GameObject targetedPlayer)
-    {
-        enemyController.destination = targetedPlayer.transform.position;
-    }
-
-    void Patrol(ref PatrolState state)
-    {
-        if (!currentState.destPointSet)
-        {
-            Debug.Log("No dest point set! Searching!");
-            SearchForDest();
-            state.destPointSet = true;
-            state.giveUpTimer = giveUpTime;
-        }
-    }
-
-    void SearchForDest()
+    Vector3 FindRandomDestPoint()
     {
         float x = currentState.random.NextFloat(-walkRange, walkRange);
         float z = currentState.random.NextFloat(-walkRange, walkRange);
 
-        currentState.destPoint = new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
-        Debug.Log("New dest point!: " + currentState.destPoint);
-
-        enemyController.destination = currentState.destPoint;
-        Debug.Log($"Dest point set? {currentState.destPointSet}");
+        return new Vector3(transform.position.x + x, transform.position.y, transform.position.z + z);
     }
 }
