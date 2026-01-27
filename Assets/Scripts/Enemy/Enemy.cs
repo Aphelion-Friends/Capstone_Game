@@ -6,12 +6,15 @@ using PurrNet.Prediction.StateMachine;
 [RequireComponent(typeof(EnemyPatrolState))]
 [RequireComponent(typeof(EnemyChaseState))]
 [RequireComponent(typeof(EnemyAttackState))]
+[RequireComponent(typeof(EnemyDeathState))]
+[RequireComponent(typeof(EnemyHealth))]
 public abstract class GenericEnemy : StatelessPredictedIdentity
 {
     protected PredictedStateMachine stateMachine;
     protected EnemyPatrolState enemyPatrolState;
     protected EnemyChaseState enemyChaseState;
     protected EnemyAttackState enemyAttackState;
+    protected EnemyDeathState enemyDeathState;
 
     [SerializeField] protected float chaseRange;
     [SerializeField] protected float attackRange;
@@ -23,6 +26,7 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
         enemyPatrolState = GetComponent<EnemyPatrolState>();
         enemyChaseState = GetComponent<EnemyChaseState>();
         enemyAttackState = GetComponent<EnemyAttackState>();
+        enemyDeathState = GetComponent<EnemyDeathState>();
         enemyPatrolState.transitionFunc = PatrolTransitions;
         enemyChaseState.transitionFunc = ChaseTransitions;
         enemyAttackState.transitionFunc = AttackTransitions;
@@ -91,5 +95,10 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
             }
         }
         return currentBest;
+    }
+
+    virtual public void OnDeath()
+    {
+        stateMachine.SetState(enemyDeathState);
     }
 }
