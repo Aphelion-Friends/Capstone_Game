@@ -33,7 +33,10 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
         GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
 
         if (targetedPlayer is null)
+        {
+            stateMachine.SetState(enemyChaseState);
             return;
+        }
 
         if (Vector3.Distance(transform.position, targetedPlayer.transform.position) >= attackRange)
         {
