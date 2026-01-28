@@ -55,6 +55,12 @@ public class EnemyHealth : PredictedIdentity<EnemyHealth.HealthState>
         }
     }
 
+    public void Reset()
+    {
+        currentState.health = _maxHealth;
+        currentState.alive = true;
+    }
+
     private void Die()
     {
         Debug.Log("The enemy died!");
