@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 5622480805165329139}
   - component: {fileID: 7127041065061461379}
   - component: {fileID: 8136226341939958108}
+  - component: {fileID: 8333510310256981473}
+  - component: {fileID: 5669968398345490754}
   m_Layer: 10
   m_Name: Psychotron
   m_TagString: Untagged
@@ -220,6 +222,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttackState
   attackRigidbody: {fileID: 6714659204296126690}
+--- !u!114 &8333510310256981473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843738366486812013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6246c5e16af08c988776a1f79cb812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyDeathState
+--- !u!114 &5669968398345490754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843738366486812013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 855ae3aa1ca86c022bc4b4650d002c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  _maxHealth: 50
+  _animator: {fileID: 0}
+  enemy: {fileID: 0}
 --- !u!1001 &4724309962083283011
 PrefabInstance:
   m_ObjectHideFlags: 0

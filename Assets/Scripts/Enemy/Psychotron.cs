@@ -13,4 +13,9 @@ public class Psychotron : GenericEnemy
 
         base.AttackTransitions(ref state);
     }
+
+    protected override void OnDeath()
+    {
+        // Psychotron does not die!
+    }
 }
