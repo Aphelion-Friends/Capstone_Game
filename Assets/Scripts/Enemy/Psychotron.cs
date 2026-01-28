@@ -27,5 +27,6 @@ public class Psychotron : GenericEnemy
         // Psychotron does not die! He just gets stunned when he "dies"
 
         enemyHealth.Reset();
+        animator.SetBool("Stunned", true);
     }
 }
