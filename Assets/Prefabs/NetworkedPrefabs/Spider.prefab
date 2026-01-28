@@ -244,6 +244,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  _animator: {fileID: 6982985967500438923}
 --- !u!114 &1415150836451596787
 MonoBehaviour:
   m_ObjectHideFlags: 0
