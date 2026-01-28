@@ -2,16 +2,30 @@ using UnityEngine;
 using PurrNet.Prediction;
 using PurrNet.Prediction.StateMachine;
 
+[RequireComponent(typeof(EnemyStunState))]
+[RequireComponent(typeof(EnemyController))]
 public class Psychotron : GenericEnemy
 {
     [SerializeField] private Animator animator;
     private EnemyHealth enemyHealth;
+    private EnemyStunState enemyStunState;
+    private EnemyController enemyController;
 
     protected override void Awake()
     {
         base.Awake();
 
         enemyHealth = GetComponent<EnemyHealth>();
+        enemyStunState = GetComponent<EnemyStunState>();
+        enemyController = GetComponent<EnemyController>();
+        enemyStunState.transitionFunc = StunTransitions;
+    }
+
+    protected void StunTransitions(ref EnemyStunState.StunState state)
+    {
+        stateMachine.SetState(enemyPatrolState);
+        animator.SetBool("Stunned", false);
+        enemyController.active = true;
     }
 
     protected override void AttackTransitions(ref EnemyAttackState.AttackState state)
@@ -26,7 +40,9 @@ public class Psychotron : GenericEnemy
     {
         // Psychotron does not die! He just gets stunned when he "dies"
 
+        stateMachine.SetState(enemyStunState);
         enemyHealth.Reset();
         animator.SetBool("Stunned", true);
+        enemyController.active = false;
     }
 }

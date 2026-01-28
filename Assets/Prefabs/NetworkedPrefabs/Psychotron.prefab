@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 8136226341939958108}
   - component: {fileID: 8333510310256981473}
   - component: {fileID: 5669968398345490754}
+  - component: {fileID: 5745988219541512490}
   m_Layer: 10
   m_Name: Psychotron
   m_TagString: Untagged
@@ -161,6 +162,7 @@ MonoBehaviour:
   - _object: {fileID: 5622480805165329139}
   - _object: {fileID: 7127041065061461379}
   - _object: {fileID: 8136226341939958108}
+  - _object: {fileID: 5745988219541512490}
 --- !u!114 &7577578330521440191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +251,19 @@ MonoBehaviour:
   _maxHealth: 50
   _animator: {fileID: 0}
   enemy: {fileID: 0}
+--- !u!114 &5745988219541512490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4843738366486812013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa07ab94a84edb56804b948698dfcef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStunState
+  _stunTimer: 5
 --- !u!1001 &4724309962083283011
 PrefabInstance:
   m_ObjectHideFlags: 0
