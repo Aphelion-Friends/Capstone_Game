@@ -3,11 +3,11 @@ using UnityEngine.UI;
 
 public class SetInventoryImage : MonoBehaviour
 {
-    [SerializeField] InventoryObject inventoryObject;
+    [SerializeField] private InventoryUIConfig config;
 
     void Awake()
     {
-        GetComponent<Image>().sprite = inventoryObject.backgroundImage;
+        GetComponent<Image>().sprite = config.backgroundImage;
         GetComponent<CanvasRenderer>().SetAlpha(0f);
     }
 }

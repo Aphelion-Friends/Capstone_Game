@@ -1,97 +1,152 @@
 using UnityEngine;
-using StarterAssets;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class InventoryUI : MonoBehaviour
 {
-
-    [SerializeField] StarterAssetsInputs input;
     public static bool inventoryOpen = false;
-    [SerializeField] InventoryObject inventoryObject;
-    [SerializeField] GameObject slotPrefab;
-    private List<GameObject> slotList;
-    [SerializeField] GameObject itemPrefab;
 
-    void Start()
+    [Header("Runtime Inventory (Networked)")]
+    [SerializeField] private NetworkInventory inventory;
+
+    [Header("Scriptable Object Database")]
+    [SerializeField] private ItemDatabase itemDatabase;
+
+    [Header("UI Prefabs")]
+    [SerializeField] private GameObject slotPrefab;
+
+    private readonly List<GameObject> slotList = new List<GameObject>();
+
+    private void Start()
     {
-        //Debug.Log("WOKE");
-        slotList = new List<GameObject>();
-        inventoryObject.Reset();
-        InstantiateSlots(inventoryObject.numStorageSlots);
+        if (inventory == null)
+        {
+            var all = FindObjectsByType<NetworkInventory>(FindObjectsSortMode.None);
+            for (int i = 0; i < all.Length; i++)
+            {
+                if (all[i] != null && all[i].isOwner)
+                {
+                    inventory = all[i];
+                    break;
+                }
+            }
+        }
+
+        if (inventory == null || !inventory.isOwner)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
+        InstantiateSlots(inventory.SlotCount);
+
+        inventory.OnInventoryChanged += OnInventoryChange;
+
+        OnInventoryChange();
         SetVisibility();
-        inventoryObject.Subscribe(onInventoryChange);
     }
 
-    // Creates the slot GameObjects for the inventory.
-    void InstantiateSlots(int _numSlots)
+    private void OnDestroy()
     {
-        for (int x = 0; x < _numSlots; x++)
+        if (inventory != null)
+            inventory.OnInventoryChanged -= OnInventoryChange;
+    }
+
+    private void Update()
+    {
+        if (InputManager.Instance == null)
+            return;
+
+        if (InputManager.Instance.inventoryAction != null &&
+            InputManager.Instance.inventoryAction.WasPressedThisFrame())
         {
-            GameObject newSlotObject = Instantiate(slotPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            ToggleInventory();
+        }
+    }
+
+    private void InstantiateSlots(int numSlots)
+    {
+        for (int i = slotList.Count - 1; i >= 0; i--)
+        {
+            if (slotList[i] != null) Destroy(slotList[i]);
+        }
+        slotList.Clear();
+
+        for (int x = 0; x < numSlots; x++)
+        {
+            GameObject newSlotObject = Instantiate(slotPrefab, Vector3.zero, Quaternion.identity);
             newSlotObject.GetComponent<SlotScript>().index = x;
             newSlotObject.transform.SetParent(transform, false);
             slotList.Add(newSlotObject);
         }
     }
 
-    // This function is called every time the inventory has a change. For example, if the player picks up an item, or drags an item,
-    // or drops an item. This function updates the actual item GameObjects after the inventory scriptable object has a change.
-    void onInventoryChange()
+    private void OnInventoryChange()
     {
+        if (inventory == null || itemDatabase == null)
+            return;
+
         for (int x = 0; x < slotList.Count; x++)
         {
-            // First delete all of the item GameObjects.
-            if (slotList[x].transform.childCount > 0)
+            var slotGO = slotList[x];
+            if (slotGO == null) continue;
+
+            for (int c = slotGO.transform.childCount - 1; c >= 0; c--)
             {
-                for (int c = 0; c < slotList[x].transform.childCount; c++)
-                {
-                    Destroy(slotList[x].transform.GetChild(c).gameObject);
-                }
+                Destroy(slotGO.transform.GetChild(c).gameObject);
             }
 
-            // Then, recreate the item GameObjects if needed. Sorry this code looks bad. I should rewrite it later.
-            if (!inventoryObject.Container[x].empty)
+            var slot = inventory.GetSlot(x);
+            if (slot.IsEmpty)
+                continue;
+
+            ItemObject itemObj = itemDatabase.GetById(slot.itemId);
+            if (itemObj == null)
             {
-                GameObject newItemGameObject = inventoryObject.Container[x].item.InstantiatePrefab();
-                TMPro.TMP_Text amountText = newItemGameObject.transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>();
-                newItemGameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
-                amountText.enabled = inventoryOpen;
-                amountText.text = inventoryObject.Container[x].amount.ToString();
-                newItemGameObject.GetComponent<DraggableItem>().inventory = inventoryObject;
-                newItemGameObject.transform.SetParent(slotList[x].transform, false);
+                Debug.LogWarning($"InventoryUI: ItemDatabase has no item with id {slot.itemId}.");
+                continue;
             }
+
+            GameObject itemUI = itemObj.InstantiatePrefab();
+
+            var amountText = itemUI.transform.GetChild(0).GetComponent<TMPro.TMP_Text>();
+            amountText.text = slot.amount.ToString();
+            amountText.enabled = inventoryOpen;
+
+            var drag = itemUI.GetComponent<DraggableItem>();
+            drag.inventory = inventory;
+
+            itemUI.transform.SetParent(slotGO.transform, false);
+
+            itemUI.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
         }
-        // Then set the visibility so if the inventory is closed, the inventory GUI and the items are invisible.
+
         SetVisibility();
     }
 
-    public void Update()
+    private void SetVisibility()
     {
-        if (input.inventoryOpen)
-        {
-            OnToggleInventory();
-            input.inventoryOpen = false;
-        }
-    }
-
-    // Sets the visibility of the inventory GUI based on the inventoryOpen bool. It sets the opacity of the objects instead of disabling them.
-    // The reason it sets the opacity to 0 instead of disabling them is because I don't want the scripts attached to the GameObjects to be disabled.
-    public void SetVisibility()
-    {
-        // Set the opacity of the inventory background and then loop through the slots
         GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
-        for (int x = 0; x < slotList.Count; x++){
-            slotList[x].GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
-            if (slotList[x].transform.childCount > 0)
+
+        for (int x = 0; x < slotList.Count; x++)
+        {
+            var slotGO = slotList[x];
+            if (slotGO == null) continue;
+
+            slotGO.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+
+            if (slotGO.transform.childCount > 0)
             {
-                slotList[x].transform.GetChild(0).gameObject.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
-                slotList[x].transform.GetChild(0).GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().enabled = inventoryOpen;
+                var itemGO = slotGO.transform.GetChild(0).gameObject;
+                itemGO.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+
+                var tmp = itemGO.transform.GetChild(0).GetComponent<TMPro.TMP_Text>();
+                tmp.enabled = inventoryOpen;
             }
         }
     }
 
-    // Called when the inventory key is pressed. Toggles inventory visibility and locks/unlocks cursor
-    private void OnToggleInventory()
+    private void ToggleInventory()
     {
         inventoryOpen = !inventoryOpen;
         SetVisibility();

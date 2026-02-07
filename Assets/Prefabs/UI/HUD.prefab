@@ -909,23 +909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bfdf8876d9667e4ab1f32ae2ea2cbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
-  _isSetup: 0
-  _prefabId: -2147483648
-  _componentIndex: -2147483648
-  _shouldBePooled: 0
-  _parent: {fileID: 0}
-  _invertedPathToNearestParent: 
-  _directChildren: []
-  maxHealth: 100
-  currentHealth: 0
-  healthBarFill: {fileID: 4478357581403077007}
-  healthText: {fileID: 198465419833315615}
-  audioSource: {fileID: 0}
-  hurtSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  hurtSoundCooldown: 0.2
+  _maxHealth: 100
 --- !u!1 &4438942568461872448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,7 +1000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9134af95599de679ba954f7ed64071d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  inventoryObject: {fileID: 11400000, guid: 011ceb61190712ee3978dfc6a5d6a0ee, type: 2}
+  config: {fileID: 11400000, guid: a5e0c0dd49a386c4882e0f40f21cab16, type: 2}
 --- !u!114 &5952822777409375991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1029,10 +1013,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098ead992e66ff04599b980e9000fcbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
-  input: {fileID: 0}
-  inventoryObject: {fileID: 11400000, guid: 011ceb61190712ee3978dfc6a5d6a0ee, type: 2}
+  inventory: {fileID: 0}
+  itemDatabase: {fileID: 11400000, guid: 4778f0306dafee2408be9ad3edc6408b, type: 2}
   slotPrefab: {fileID: 9071334772301819752, guid: ac1d57e9eca9c9340b0922609bf65330, type: 3}
-  itemPrefab: {fileID: 0}
 --- !u!114 &5363387811483954488
 MonoBehaviour:
   m_ObjectHideFlags: 0

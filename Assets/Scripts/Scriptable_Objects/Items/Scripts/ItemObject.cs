@@ -10,6 +10,10 @@ public enum ItemType
 
 public abstract class ItemObject : ScriptableObject
 {
+    [Header("Networking")]
+    [Tooltip("Stable ID for this Item. Must be unique for all ItemObjects")]
+    public int itemId;
+
     [Header("UI Settings")]
     public GameObject prefab;
     public Sprite texture;
