@@ -55,5 +55,27 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 81b04d505e3f230f3975fb01d20f5473, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8465286312224436564}
   m_SourcePrefab: {fileID: 100100000, guid: 81b04d505e3f230f3975fb01d20f5473, type: 3}
+--- !u!1 &3647482393032089401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 81b04d505e3f230f3975fb01d20f5473, type: 3}
+  m_PrefabInstance: {fileID: 4494341982887764584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-8465286312224436564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3647482393032089401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be751db24b651d84ebd327d339b49287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AmbientSound
+  delayedTime: 1
+  playProbability: 0.1
