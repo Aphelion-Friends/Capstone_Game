@@ -16,6 +16,7 @@ public class TaskInitializer
         newTask.enemyKilledEnabled = false;
         newTask.itemCollectedEnabled = false;
         newTask.itemDroppedEnabled = false;
+        newTask.extractionEnable = false;
 
         return newTask;
     }
@@ -53,6 +54,7 @@ public class TaskInitializer
         extract.playerMoveEnabled = true;
         extract.extractionLocation = new Vector3(451, 5, -303);
         extract.completionDistance = 5f;
+        extract.extractionEnable = true;
 
         return extract;
     }
@@ -67,4 +69,5 @@ public class TaskInitializer
 
         return power;
     }
+
 }

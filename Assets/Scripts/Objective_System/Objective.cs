@@ -112,4 +112,14 @@ public struct Objective
 
         return isComplete;
     }
+
+    public void ExtractTouched() {
+        foreach (Task task in tasks)
+        {
+            task.ExtractTouched();
+        }
+
+        checkObjectiveCompletion();
+
+    }
 }
