@@ -17,6 +17,11 @@ public class InventoryUI : MonoBehaviour
 
     private readonly List<GameObject> slotList = new List<GameObject>();
 
+    private void Awake()
+    {
+        Debug.Log("InventoryUI Awake");
+    }
+
     private void Start()
     {
         if (inventory == null)
@@ -34,6 +39,14 @@ public class InventoryUI : MonoBehaviour
 
         if (inventory == null || !inventory.isOwner)
         {
+            Debug.LogWarning("InventoryUI: Could not find owned NetworkInventory. Disabling UI.");
+            gameObject.SetActive(false);
+            return;
+        }
+
+        if (itemDatabase == null)
+        {
+            Debug.LogError("InventoryUI: ItemDatabase is not assigned.");
             gameObject.SetActive(false);
             return;
         }
@@ -41,7 +54,6 @@ public class InventoryUI : MonoBehaviour
         InstantiateSlots(inventory.SlotCount);
 
         inventory.OnInventoryChanged += OnInventoryChange;
-
         OnInventoryChange();
         SetVisibility();
     }
@@ -57,8 +69,8 @@ public class InventoryUI : MonoBehaviour
         if (InputManager.Instance == null)
             return;
 
-        if (InputManager.Instance.inventoryAction != null &&
-            InputManager.Instance.inventoryAction.WasPressedThisFrame())
+        var action = InputManager.Instance.inventoryAction;
+        if (action != null && action.WasPressedThisFrame())
         {
             ToggleInventory();
         }
@@ -83,12 +95,11 @@ public class InventoryUI : MonoBehaviour
 
     private void OnInventoryChange()
     {
-        if (inventory == null || itemDatabase == null)
-            return;
+        if (inventory == null) return;
 
         for (int x = 0; x < slotList.Count; x++)
         {
-            var slotGO = slotList[x];
+            GameObject slotGO = slotList[x];
             if (slotGO == null) continue;
 
             for (int c = slotGO.transform.childCount - 1; c >= 0; c--)
@@ -96,21 +107,23 @@ public class InventoryUI : MonoBehaviour
                 Destroy(slotGO.transform.GetChild(c).gameObject);
             }
 
-            var slot = inventory.GetSlot(x);
-            if (slot.IsEmpty)
+            if (inventory.IsEmpty(x))
                 continue;
 
-            ItemObject itemObj = itemDatabase.GetById(slot.itemId);
+            int itemId = inventory.GetItemId(x);
+            int amount = inventory.GetAmount(x);
+
+            ItemObject itemObj = itemDatabase.GetById(itemId);
             if (itemObj == null)
             {
-                Debug.LogWarning($"InventoryUI: ItemDatabase has no item with id {slot.itemId}.");
+                Debug.LogWarning($"InventoryUI: ItemDatabase has no item with id {itemId}.");
                 continue;
             }
 
             GameObject itemUI = itemObj.InstantiatePrefab();
 
             var amountText = itemUI.transform.GetChild(0).GetComponent<TMPro.TMP_Text>();
-            amountText.text = slot.amount.ToString();
+            amountText.text = amount.ToString();
             amountText.enabled = inventoryOpen;
 
             var drag = itemUI.GetComponent<DraggableItem>();

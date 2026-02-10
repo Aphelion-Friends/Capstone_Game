@@ -10,19 +10,12 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
 
     private bool _dirty;
 
-    [Serializable]
-    public struct Slot
-    {
-        public int itemId;
-        public int amount;
-
-        public bool IsEmpty => itemId == 0 || amount <= 0;
-    }
-
     public struct InvState : IPredictedData<InvState>
     {
         public int slotCount;
-        public Slot[] slots;
+
+        public int[] itemIds;
+        public int[] amounts;
 
         public void Dispose() { }
     }
@@ -30,7 +23,6 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     public struct InvInput : IPredictedData
     {
         public bool hasAction;
-
         public int fromIndex;
         public int toIndex;
 
@@ -42,17 +34,34 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         return new InvState
         {
             slotCount = _slotCount,
-            slots = new Slot[_slotCount]
+            itemIds = new int[_slotCount],
+            amounts = new int[_slotCount],
         };
     }
 
     public int SlotCount => currentState.slotCount;
 
-    public Slot GetSlot(int index)
+    public bool IsEmpty(int index)
     {
-        if (index < 0 || index >= currentState.slotCount) return default;
-        return currentState.slots[index];
+        if (index < 0 || index >= currentState.slotCount) return true;
+        return currentState.itemIds[index] == 0 || currentState.amounts[index] <= 0;
     }
+
+    public int GetItemId(int index)
+    {
+        if (index < 0 || index >= currentState.slotCount) return 0;
+        return currentState.itemIds[index];
+    }
+
+    public int GetAmount(int index)
+    {
+        if (index < 0 || index >= currentState.slotCount) return 0;
+        return currentState.amounts[index];
+    }
+
+    private bool _hasPending;
+    private int _pendingFrom;
+    private int _pendingTo;
 
     public void RequestMoveOrSwap(int from, int to)
     {
@@ -61,10 +70,6 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         _pendingTo = to;
         _hasPending = true;
     }
-
-    private bool _hasPending;
-    private int _pendingFrom;
-    private int _pendingTo;
 
     protected override void GetFinalInput(ref InvInput input)
     {
@@ -79,7 +84,6 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
             input.hasAction = true;
             input.fromIndex = _pendingFrom;
             input.toIndex = _pendingTo;
-
             _hasPending = false;
         }
         else
@@ -92,24 +96,34 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     {
         if (!input.hasAction) return;
 
-        if (!IsValid(state, input.fromIndex) || !IsValid(state, input.toIndex) || input.fromIndex == input.toIndex)
+        int from = input.fromIndex;
+        int to = input.toIndex;
+
+        if (!IsValid(state, from) || !IsValid(state, to) || from == to)
             return;
 
-        var a = state.slots[input.fromIndex];
-        var b = state.slots[input.toIndex];
+        int aId = state.itemIds[from];
+        int aAmt = state.amounts[from];
 
-        if (a.IsEmpty) return;
+        if (aId == 0 || aAmt <= 0)
+            return;
 
-        if (!b.IsEmpty && b.itemId == a.itemId)
+        int bId = state.itemIds[to];
+        int bAmt = state.amounts[to];
+
+        if (bId != 0 && bAmt > 0 && bId == aId)
         {
-            b.amount += a.amount;
-            state.slots[input.toIndex] = b;
-            state.slots[input.fromIndex] = default;
+            state.amounts[to] = bAmt + aAmt;
+            state.itemIds[from] = 0;
+            state.amounts[from] = 0;
         }
         else
         {
-            state.slots[input.fromIndex] = b;
-            state.slots[input.toIndex] = a;
+            state.itemIds[from] = bId;
+            state.amounts[from] = bAmt;
+
+            state.itemIds[to] = aId;
+            state.amounts[to] = aAmt;
         }
 
         _dirty = true;
@@ -128,31 +142,24 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
 
     public void ServerAddItem(int itemId, int amount)
     {
- 
-        AddItem_Internal(ref currentState, itemId, amount);
-        _dirty = true;
-    }
-
-    private void AddItem_Internal(ref InvState state, int itemId, int amount)
-    {
         if (itemId == 0 || amount <= 0) return;
-
-        for (int i = 0; i < state.slotCount; i++)
+        for (int i = 0; i < currentState.slotCount; i++)
         {
-            if (!state.slots[i].IsEmpty && state.slots[i].itemId == itemId)
+            if (currentState.itemIds[i] == itemId && currentState.amounts[i] > 0)
             {
-                var s = state.slots[i];
-                s.amount += amount;
-                state.slots[i] = s;
+                currentState.amounts[i] += amount;
+                _dirty = true;
                 return;
             }
         }
 
-        for (int i = 0; i < state.slotCount; i++)
+        for (int i = 0; i < currentState.slotCount; i++)
         {
-            if (state.slots[i].IsEmpty)
+            if (currentState.itemIds[i] == 0 || currentState.amounts[i] <= 0)
             {
-                state.slots[i] = new Slot { itemId = itemId, amount = amount };
+                currentState.itemIds[i] = itemId;
+                currentState.amounts[i] = amount;
+                _dirty = true;
                 return;
             }
         }
