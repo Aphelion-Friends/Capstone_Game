@@ -6,13 +6,15 @@ public class EnemyHealth : PredictedIdentity<EnemyHealth.HealthState>
 {
     [SerializeField] private float _maxHealth;
     [SerializeField] private NetworkAnimator _animator;
-    private EnemyAIPatrol _enemyAIPatrol;
+    // private EnemyAIPatrol _enemyAIPatrol;
 
     private PredictedEvent _onDie;
+    [SerializeField] private GenericEnemy enemy;
 
     private void Awake()
     {
-        _enemyAIPatrol = GetComponent<EnemyAIPatrol>();
+        // _enemyAIPatrol = GetComponent<EnemyAIPatrol>();
+        enemy = GetComponent<GenericEnemy>();
     }
 
     protected override void LateAwake()
@@ -53,13 +55,18 @@ public class EnemyHealth : PredictedIdentity<EnemyHealth.HealthState>
         }
     }
 
+    public void Reset()
+    {
+        currentState.health = _maxHealth;
+        currentState.alive = true;
+    }
+
     private void Die()
     {
         Debug.Log("The enemy died!");
         currentState.alive = false;
-        _animator.SetTrigger("Die");
-        _enemyAIPatrol.Stop();
-
-        ObjectiveManager.Instance.currentState.objective.EnemyKilled("spider");
+        // _animator.SetTrigger("Die");
+        enemy.OnDeath();
+        // _enemyAIPatrol.Stop();
     }
 }
