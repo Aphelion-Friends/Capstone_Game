@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 
@@ -6,54 +7,89 @@ public class InventoryUI : MonoBehaviour
 {
     public static bool inventoryOpen = false;
 
-    [Header("Runtime Inventory (Networked)")]
     [SerializeField] private NetworkInventory inventory;
-
-    [Header("Scriptable Object Database")]
     [SerializeField] private ItemDatabase itemDatabase;
-
-    [Header("UI Prefabs")]
     [SerializeField] private GameObject slotPrefab;
+    [SerializeField] private CanvasGroup canvasGroup;
 
     private readonly List<GameObject> slotList = new List<GameObject>();
 
     private void Awake()
     {
-        Debug.Log("InventoryUI Awake");
+        if (canvasGroup == null)
+            canvasGroup = GetComponent<CanvasGroup>();
+
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+
+        if (inventory == null)
+            inventory = GetComponentInParent<NetworkInventory>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (inventory == null)
+        if (canvasGroup != null)
         {
-            var all = FindObjectsByType<NetworkInventory>(FindObjectsSortMode.None);
-            for (int i = 0; i < all.Length; i++)
+            canvasGroup.alpha = 0f;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        }
+    }
+
+    private IEnumerator Start()
+    {
+        if (itemDatabase == null || slotPrefab == null)
+            yield break;
+
+        float timeout = 10f;
+        while (InputManager.Instance == null && timeout > 0f)
+        {
+            timeout -= Time.deltaTime;
+            yield return null;
+        }
+
+        if (InputManager.Instance == null)
+            yield break;
+
+        var action = InputManager.Instance.inventoryAction;
+        if (action == null)
+            yield break;
+
+        if (!action.enabled)
+            action.Enable();
+
+        timeout = 10f;
+        while ((inventory == null || !inventory.isOwner) && timeout > 0f)
+        {
+            if (inventory == null)
+                inventory = GetComponentInParent<NetworkInventory>();
+
+            if (inventory == null)
             {
-                if (all[i] != null && all[i].isOwner)
+                var all = FindObjectsByType<NetworkInventory>(FindObjectsSortMode.None);
+                foreach (var inv in all)
                 {
-                    inventory = all[i];
-                    break;
+                    if (inv != null && inv.isOwner)
+                    {
+                        inventory = inv;
+                        break;
+                    }
                 }
             }
+
+            timeout -= Time.deltaTime;
+            yield return null;
         }
 
         if (inventory == null || !inventory.isOwner)
         {
-            Debug.LogWarning("InventoryUI: Could not find owned NetworkInventory. Disabling UI.");
             gameObject.SetActive(false);
-            return;
-        }
-
-        if (itemDatabase == null)
-        {
-            Debug.LogError("InventoryUI: ItemDatabase is not assigned.");
-            gameObject.SetActive(false);
-            return;
+            yield break;
         }
 
         InstantiateSlots(inventory.SlotCount);
-
         inventory.OnInventoryChanged += OnInventoryChange;
+
         OnInventoryChange();
         SetVisibility();
     }
@@ -70,17 +106,19 @@ public class InventoryUI : MonoBehaviour
             return;
 
         var action = InputManager.Instance.inventoryAction;
-        if (action != null && action.WasPressedThisFrame())
-        {
+        if (action == null)
+            return;
+
+        if (action.WasPressedThisFrame())
             ToggleInventory();
-        }
     }
 
     private void InstantiateSlots(int numSlots)
     {
         for (int i = slotList.Count - 1; i >= 0; i--)
         {
-            if (slotList[i] != null) Destroy(slotList[i]);
+            if (slotList[i] != null)
+                Destroy(slotList[i]);
         }
         slotList.Clear();
 
@@ -95,17 +133,17 @@ public class InventoryUI : MonoBehaviour
 
     private void OnInventoryChange()
     {
-        if (inventory == null) return;
+        if (inventory == null)
+            return;
 
         for (int x = 0; x < slotList.Count; x++)
         {
             GameObject slotGO = slotList[x];
-            if (slotGO == null) continue;
+            if (slotGO == null)
+                continue;
 
             for (int c = slotGO.transform.childCount - 1; c >= 0; c--)
-            {
                 Destroy(slotGO.transform.GetChild(c).gameObject);
-            }
 
             if (inventory.IsEmpty(x))
                 continue;
@@ -115,10 +153,7 @@ public class InventoryUI : MonoBehaviour
 
             ItemObject itemObj = itemDatabase.GetById(itemId);
             if (itemObj == null)
-            {
-                Debug.LogWarning($"InventoryUI: ItemDatabase has no item with id {itemId}.");
                 continue;
-            }
 
             GameObject itemUI = itemObj.InstantiatePrefab();
 
@@ -130,8 +165,6 @@ public class InventoryUI : MonoBehaviour
             drag.inventory = inventory;
 
             itemUI.transform.SetParent(slotGO.transform, false);
-
-            itemUI.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
         }
 
         SetVisibility();
@@ -139,20 +172,22 @@ public class InventoryUI : MonoBehaviour
 
     private void SetVisibility()
     {
-        GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+        if (canvasGroup != null)
+        {
+            canvasGroup.alpha = inventoryOpen ? 1f : 0f;
+            canvasGroup.interactable = inventoryOpen;
+            canvasGroup.blocksRaycasts = inventoryOpen;
+        }
 
         for (int x = 0; x < slotList.Count; x++)
         {
             var slotGO = slotList[x];
-            if (slotGO == null) continue;
-
-            slotGO.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
+            if (slotGO == null)
+                continue;
 
             if (slotGO.transform.childCount > 0)
             {
                 var itemGO = slotGO.transform.GetChild(0).gameObject;
-                itemGO.GetComponent<CanvasRenderer>().SetAlpha(inventoryOpen ? 1f : 0f);
-
                 var tmp = itemGO.transform.GetChild(0).GetComponent<TMPro.TMP_Text>();
                 tmp.enabled = inventoryOpen;
             }
@@ -164,15 +199,7 @@ public class InventoryUI : MonoBehaviour
         inventoryOpen = !inventoryOpen;
         SetVisibility();
 
-        if (inventoryOpen)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-        }
-        else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
+        Cursor.lockState = inventoryOpen ? CursorLockMode.Confined : CursorLockMode.Locked;
+        Cursor.visible = inventoryOpen;
     }
 }

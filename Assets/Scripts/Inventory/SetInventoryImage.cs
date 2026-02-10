@@ -7,7 +7,7 @@ public class SetInventoryImage : MonoBehaviour
 
     void Awake()
     {
-        GetComponent<Image>().sprite = config.backgroundImage;
-        GetComponent<CanvasRenderer>().SetAlpha(0f);
+        var img = GetComponent<Image>();
+        img.sprite = config.backgroundImage;
     }
 }
