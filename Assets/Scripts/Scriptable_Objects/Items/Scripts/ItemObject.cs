@@ -21,14 +21,8 @@ public abstract class ItemObject : ScriptableObject
 
     [TextArea(15, 20)]
     public string description;
-    public Name itemName;
+    public string itemName;
     public string displayName;
-
-    public enum Name
-    {
-        SpiderAss,
-        Gun
-    }
 
     public GameObject InstantiatePrefab()
     {

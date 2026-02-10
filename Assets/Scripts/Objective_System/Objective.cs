@@ -1,36 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
-public class Objective
+public struct Objective
 {
-    protected List<Task> tasks = new List<Task>();
-    private int numTasks;
-    bool isComplete = false;
+    public List<Task> tasks;
+    public int numTasks;
+    public bool isComplete;
 
     // List of function to call every time the objective is updated
-    protected List<Action> onChangeList = new List<Action>();
-
-    void Start()
-    {
-        numTasks = tasks.Count;
-    }
 
     public int getNumTasks() {  return numTasks; }
 
     // Whenever the objective status changes, all the functions in onChangeList are called
-    protected void OnChange()
-    {
-        foreach (Action onChangeFunction in onChangeList)
-        {
-            onChangeFunction();
-        }
-    }
+    //private void OnChange()
+    //{
+        
+    //    foreach (Action onChangeFunction in onChangeList)
+    //    {
+    //        onChangeFunction();
+    //    }
+    //}
 
-    public void Subscribe(Action newFunction)
-    {
-        onChangeList.Add(newFunction);
-    }
+    //public void Subscribe(Action newFunction)
+    //{
+    //    onChangeList.Add(newFunction);
+    //}
 
     public Task GetFirstIncompleteTask()
     {
@@ -42,7 +38,7 @@ public class Objective
                 return task;
             }
         }
-        return null;
+        return new Task();
     }
 
     public void PlayerMove(Vector3 position)
@@ -53,30 +49,33 @@ public class Objective
         }
 
         checkObjectiveCompletion();
-        OnChange();
+        //OnChange();
     }
 
-    public void EnemyKilled(string enemyName) {
-        foreach (Task task in tasks)
+    public void EnemyKilled(string enemyName)
+    {
+        for (int i = 0; i < tasks.Count; i++)
         {
-            task.EnemyKilled(enemyName);
+            Task newTask = tasks[i];
+            newTask.EnemyKilled(enemyName);
+            tasks[i] = newTask;
         }
 
         checkObjectiveCompletion();
-        OnChange();
+        //OnChange();
     }
 
-    public void ItemCollected(ItemObject.Name itemName) {
+    public void ItemCollected(string itemName) {
         foreach (Task task in tasks)
         {
             task.ItemCollected(itemName);
         }
 
         checkObjectiveCompletion();
-        OnChange();
+        //OnChange();
     }
 
-    public void ItemDropped(ItemObject.Name itemName) {
+    public void ItemDropped(string itemName) {
         foreach (Task task in tasks)
         {
             task.ItemDropped(itemName);
@@ -89,12 +88,19 @@ public class Objective
     public bool checkObjectiveCompletion()
     {
         bool taskIncomplete = false;
-        
+
         foreach (Task task in tasks)
         {
-            if(task.checkTaskCompletion() == false)   //Go through lisit of task objects and see if any are incomplete
+
+            Debug.Log(task.taskName + " is " + task.isComplete);
+            
+            if (!task.isComplete)   //Go through list of task objects and see if any are incomplete
             {
                 taskIncomplete = true;                          //If a task isn't complete, set taskIncomplete to true to prevent the Objective from being marked complete
+            }
+            else
+            {
+                Debug.Log(task.taskName + "Checked off");
             }
         }
 

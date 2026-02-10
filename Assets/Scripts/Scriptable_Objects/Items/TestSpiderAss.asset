@@ -17,5 +17,5 @@ MonoBehaviour:
   worldModelPrefab: {fileID: 919132149155446097, guid: 55df51f98c0b08f46b8eee7d9ca67422, type: 3}
   type: 2
   description: A beautiful spider ass to collect.
-  itemName: 0
+  itemName: spiderAss
   displayName: Spider Ass

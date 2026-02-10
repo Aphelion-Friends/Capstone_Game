@@ -8,15 +8,15 @@ public class UpdateObjectiveUI : MonoBehaviour
     
     void Start()
     {
-        Objective objective = ObjectiveManager.Instance.objective;
+        Objective objective = ObjectiveManager.Instance.currentState.objective;
         UpdateTaskNameAndDescription();
 
-        objective.Subscribe(UpdateTaskNameAndDescription);
+        //objective.Subscribe(UpdateTaskNameAndDescription);
     }
 
     void UpdateTaskNameAndDescription()
     {
-        Objective objective = ObjectiveManager.Instance.objective;
+        Objective objective = ObjectiveManager.Instance.currentState.objective;
 
         if (!objective.checkObjectiveCompletion())
         {

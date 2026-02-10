@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
 
         inventory.AddItem(lookedAtItem.item, 1);
         Debug.Log("Picked up: " + lookedAtItem.name);
-        ObjectiveManager.Instance.objective.ItemCollected(lookedAtItem.item.itemName);
+        ObjectiveManager.Instance.currentState.objective.ItemCollected(lookedAtItem.item.itemName);
 
         // DestroyItemForAll(lookedAtItem.gameObject);
         lookedAtItem = null;
