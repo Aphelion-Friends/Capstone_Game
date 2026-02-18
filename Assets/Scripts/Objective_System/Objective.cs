@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using PurrLobby;
+using UnityEngine.SceneManagement;
 
 public struct Objective
 {
@@ -117,9 +119,14 @@ public struct Objective
         foreach (Task task in tasks)
         {
             task.ExtractTouched();
-        }
+        }  
 
-        checkObjectiveCompletion();
+
+        if (checkObjectiveCompletion())
+        {   
+            Debug.Log("Extract Touched");
+            SceneManager.LoadScene("TitleScreen"); 
+        }
 
     }
 }
