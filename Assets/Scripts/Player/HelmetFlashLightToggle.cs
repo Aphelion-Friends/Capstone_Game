@@ -29,7 +29,12 @@ public class FlashlightToggle : PredictedIdentity<FlashlightToggle.FlashlightInp
 
     protected override void Simulate(FlashlightInput input, ref FlashlightState state, float delta)
     {
+        // if (input.light)
+        // {
+        //     isOn = !isOn;
+        // }
 
+        // lightComp = isOn;
     }
 
     protected override void UpdateInput(ref FlashlightInput input)
