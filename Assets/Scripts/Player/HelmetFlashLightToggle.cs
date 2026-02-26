@@ -1,26 +1,40 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PurrNet.Prediction;
 
-public class FlashlightToggle : MonoBehaviour
+public class FlashlightToggle : PredictedIdentity<FlashlightToggle.FlashlightInput, FlashlightToggle.FlashlightState>
 {
     private Light lightComp;
 
-    private void ToggleLight()
+    public struct FlashlightInput : IPredictedData
     {
-    }
-    
-    private void SetLight(bool On)
-    {
-        lightComp.enabled = On;
+        public bool light;
+
+        public void Dispose() {}
     }
 
-    void Update()
+    public struct FlashlightState : IPredictedData<FlashlightState>
     {
-        // Check if the 'F' key was pressed this frame
-        if (Keyboard.current.fKey.wasPressedThisFrame)
-        {
-            ToggleLight(); 
-        }
+        public bool isOn;
+
+        public override string ToString() { return $"Is on? {isOn}"; }
+
+        public void Dispose() {}
+    }
+    
+    // private void SetLight(bool On)
+    // {
+    //     lightComp.enabled = On;
+    // }
+
+    protected override void Simulate(FlashlightInput input, ref FlashlightState state, float delta)
+    {
+
+    }
+
+    protected override void UpdateInput(ref FlashlightInput input)
+    {
+        input.light |= InputManager.Instance.flashlightAction.inProgress;
     }
 }
 
