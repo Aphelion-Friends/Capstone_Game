@@ -42,6 +42,7 @@ public class ObjectiveInitializer
         objective.tasks.Add(testExtract);
 
         objective.numTasks = 1;
+        Debug.Log($"Extraction enabled {objective.tasks[0].extractionEnable}");
 
         return objective;
     }
