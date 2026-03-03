@@ -443,8 +443,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Objective Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af2b2374405c3184599f902650c3c942, type: 2}
+  m_sharedMaterial: {fileID: -4248235736092369586, guid: af2b2374405c3184599f902650c3c942, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -654,8 +654,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sample objective description. Blah blah blah. Collect your spider ass.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af2b2374405c3184599f902650c3c942, type: 2}
+  m_sharedMaterial: {fileID: -4248235736092369586, guid: af2b2374405c3184599f902650c3c942, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1383,6 +1383,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory
       objectReference: {fileID: 0}
+    - target: {fileID: 3142695170911431587, guid: ae7d4f1d935e05e4080b193b7a397646, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4963676019865685675, guid: ae7d4f1d935e05e4080b193b7a397646, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1409,7 +1413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4963676019865685675, guid: ae7d4f1d935e05e4080b193b7a397646, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 801
       objectReference: {fileID: 0}
     - target: {fileID: 4963676019865685675, guid: ae7d4f1d935e05e4080b193b7a397646, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1445,7 +1449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4963676019865685675, guid: ae7d4f1d935e05e4080b193b7a397646, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 200
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 4963676019865685675, guid: ae7d4f1d935e05e4080b193b7a397646, type: 3}
       propertyPath: m_AnchoredPosition.y
