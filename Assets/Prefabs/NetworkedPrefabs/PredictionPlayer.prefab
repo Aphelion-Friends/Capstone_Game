@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4177482440163666287}
   - component: {fileID: 7521478920796418878}
   - component: {fileID: 1163229273239716845}
+  - component: {fileID: 2146421809894918489}
   m_Layer: 0
   m_Name: Flashlight
   m_TagString: Untagged
@@ -160,6 +161,20 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &2146421809894918489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797370205777024373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f329a946d8f4734d9bc97dd4eca44c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlashlightToggle
+  _repeatInputFactor: 0.8
+  _extrapolateInput: 1
 --- !u!1 &1275632683205316259
 GameObject:
   m_ObjectHideFlags: 0

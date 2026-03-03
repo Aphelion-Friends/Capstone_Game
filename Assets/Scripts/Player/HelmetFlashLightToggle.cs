@@ -21,25 +21,30 @@ public class FlashlightToggle : PredictedIdentity<FlashlightToggle.FlashlightInp
 
         public void Dispose() {}
     }
-    
-    // private void SetLight(bool On)
-    // {
-    //     lightComp.enabled = On;
-    // }
+
+    protected override void LateAwake()
+    {
+        lightComp = GetComponent<Light>();
+    }
 
     protected override void Simulate(FlashlightInput input, ref FlashlightState state, float delta)
     {
-        // if (input.light)
-        // {
-        //     isOn = !isOn;
-        // }
+        if (input.light)
+        {
+            state.isOn = !state.isOn;
+        }
 
-        // lightComp = isOn;
+        lightComp.enabled = state.isOn;
     }
 
     protected override void UpdateInput(ref FlashlightInput input)
     {
         input.light |= InputManager.Instance.flashlightAction.inProgress;
+    }
+
+    protected override void ModifyExtrapolatedInput(ref FlashlightInput input)
+    {
+        input.light = false;
     }
 }
 
