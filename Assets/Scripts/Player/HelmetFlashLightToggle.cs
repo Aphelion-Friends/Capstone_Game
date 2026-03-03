@@ -15,6 +15,7 @@ public class FlashlightToggle : PredictedIdentity<FlashlightToggle.FlashlightInp
 
     public struct FlashlightState : IPredictedData<FlashlightState>
     {
+        public bool alreadyToggled;
         public bool isOn;
 
         public override string ToString() { return $"Is on? {isOn}"; }
@@ -29,9 +30,14 @@ public class FlashlightToggle : PredictedIdentity<FlashlightToggle.FlashlightInp
 
     protected override void Simulate(FlashlightInput input, ref FlashlightState state, float delta)
     {
-        if (input.light)
+        if (input.light && !state.alreadyToggled)
         {
             state.isOn = !state.isOn;
+            state.alreadyToggled = true;
+        }
+        else if (!input.light && state.alreadyToggled)
+        {
+            state.alreadyToggled = false;
         }
 
         lightComp.enabled = state.isOn;
@@ -40,11 +46,12 @@ public class FlashlightToggle : PredictedIdentity<FlashlightToggle.FlashlightInp
     protected override void UpdateInput(ref FlashlightInput input)
     {
         input.light |= InputManager.Instance.flashlightAction.inProgress;
+        Debug.Log($"Light on? {input.light}");
     }
 
-    protected override void ModifyExtrapolatedInput(ref FlashlightInput input)
-    {
-        input.light = false;
-    }
+    // protected override void ModifyExtrapolatedInput(ref FlashlightInput input)
+    // {
+    //     input.light = false;
+    // }
 }
 
