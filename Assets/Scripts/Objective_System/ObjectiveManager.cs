@@ -2,6 +2,11 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using PurrNet.Prediction;
+using UnityEditor.SettingsManagement;
+using PurrNet.Modules;
+using UnityEngine.SceneManagement;
+using System;
+using PurrNet;
 public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveManagerState> {
 
     public static ObjectiveManager Instance;
@@ -29,8 +34,23 @@ public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveMana
         Debug.Log("Initalizing objective!");
         return new ObjectiveManagerState
         {
-            objective = objectiveInitializer.TestExtract(),
+            objective = objectiveInitializer.TestExtract()
         };
+    }
+
+    protected override void Simulate(ref ObjectiveManagerState state, float delta)
+    {
+        
+        if (state.objective.isComplete)
+        {  
+            // var settings = new PurrNet.Modules.PurrSceneSettings();
+            // settings.isPublic = false;
+            // settings.mode = LoadSceneMode.Additive;
+            // predictionManager.networkManager.sceneModule.LoadSceneAsync("TitleScreen");
+            // PlayerID playerID = predictionManager.hierarchy.TryGetId
+            // predictionManager.networkManager.scenePlayersModule.RemovePlayerFromScene()
+            Debug.Log($"PlayerID{predictionManager.networkManager.localPlayer}");
+        }
     }
 
 }
