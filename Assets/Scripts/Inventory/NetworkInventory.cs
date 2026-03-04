@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using PurrNet.Prediction;
+#if UNITY_EDITOR
 
 public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, NetworkInventory.InvState>
 {
@@ -164,4 +165,14 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
             }
         }
     }
+    public void EditorInitForTests(int slotCount = 24)
+    {
+        currentState = new InvState
+        {
+            slotCount = slotCount,
+            itemIds = new int[slotCount],
+            amounts = new int[slotCount]
+        };
+    }
 }
+#endif
