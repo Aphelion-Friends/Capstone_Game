@@ -10,6 +10,7 @@ public class ObjectiveSystemTests
     public void ObjectiveSystemTestsSimplePasses()
     {
         // Use the Assert class to test conditions
+        Assert.AreEqual("One", "Two");
     }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use

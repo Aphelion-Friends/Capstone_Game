@@ -2,11 +2,13 @@
     "name": "Tests",
     "rootNamespace": "",
     "references": [
-        "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        ""
+        "UnityEngine.TestRunner",
+        "Scripts"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
