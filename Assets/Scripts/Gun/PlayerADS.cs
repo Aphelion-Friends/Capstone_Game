@@ -1,46 +1,48 @@
-using UnityEngine;
-using StarterAssets;
+// This code does not work anymore. If we want to have aim down sights again, we will have to rework this script.
 
-public class PlayerADS : MonoBehaviour
-{
-    public StarterAssetsInputs input;
-    public bool isAiming = false;
-    public GameObject gun;
-    private float gunRelativeXBeforeADS;
-    [SerializeField] private GameObject crosshair;
 
-    private float timeForADS = 0.1f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        gunRelativeXBeforeADS = gun.transform.localPosition.x;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (input.aim && !isAiming)
-        {
-            isAiming = true;
-            StartADS();
-        }
-        else if (!input.aim && isAiming)
-        {
-            isAiming = false;
-            StopADS();
-        }
-    }
-
-    void StartADS()
-    {
-        LeanTween.moveLocalX(gun, 0, timeForADS).setEase(LeanTweenType.easeInOutCubic);
-        crosshair.SetActive(false);
-
-    }
-
-    void StopADS()
-    {
-        LeanTween.moveLocalX(gun, gunRelativeXBeforeADS, timeForADS).setEase(LeanTweenType.easeInOutCubic);
-        crosshair.SetActive(true);
-    }
-}
+// using UnityEngine;
+// 
+// public class PlayerADS : MonoBehaviour
+// {
+//     public StarterAssetsInputs input;
+//     public bool isAiming = false;
+//     public GameObject gun;
+//     private float gunRelativeXBeforeADS;
+//     [SerializeField] private GameObject crosshair;
+// 
+//     private float timeForADS = 0.1f;
+//     // Start is called once before the first execution of Update after the MonoBehaviour is created
+//     void Start()
+//     {
+//         gunRelativeXBeforeADS = gun.transform.localPosition.x;
+//     }
+// 
+//     // Update is called once per frame
+//     void Update()
+//     {
+//         if (input.aim && !isAiming)
+//         {
+//             isAiming = true;
+//             StartADS();
+//         }
+//         else if (!input.aim && isAiming)
+//         {
+//             isAiming = false;
+//             StopADS();
+//         }
+//     }
+// 
+//     void StartADS()
+//     {
+//         LeanTween.moveLocalX(gun, 0, timeForADS).setEase(LeanTweenType.easeInOutCubic);
+//         crosshair.SetActive(false);
+// 
+//     }
+// 
+//     void StopADS()
+//     {
+//         LeanTween.moveLocalX(gun, gunRelativeXBeforeADS, timeForADS).setEase(LeanTweenType.easeInOutCubic);
+//         crosshair.SetActive(true);
+//     }
+// }
