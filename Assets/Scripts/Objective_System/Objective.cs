@@ -66,9 +66,11 @@ public struct Objective
     }
 
     public void ItemCollected(string itemName) {
-        foreach (Task task in tasks)
+        for (int i = 0; i < tasks.Count; i++)
         {
-            task.ItemCollected(itemName);
+            Task newTask = tasks[i];
+            newTask.ItemCollected(itemName);
+            tasks[i] = newTask;
         }
 
         checkObjectiveCompletion();
