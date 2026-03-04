@@ -5,21 +5,74 @@ using UnityEngine.TestTools;
 
 public class ObjectiveSystemTests
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void ObjectiveSystemTestsSimplePasses()
+    ObjectiveInitializer objectiveInitializer;
+
+    [SetUp]
+    public void setUp()
     {
-        // Use the Assert class to test conditions
-        Assert.AreEqual("One", "Two");
+        objectiveInitializer = new ObjectiveInitializer();
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator ObjectiveSystemTestsWithEnumeratorPasses()
+    // A Test behaves as an ordinary method
+    [Test]
+    public void InitializeSpiderAssObjective()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        Objective spiderAss = objectiveInitializer.CollectSpiderAss();
+
+        Assert.AreEqual(spiderAss.tasks.Count, 3);
+        Assert.AreEqual(spiderAss.tasks[0].requiredEnemyName, "spider");
+        Assert.IsTrue(spiderAss.tasks[0].enemyKilledEnabled);
+    }
+
+    [Test]
+    public void SpiderAssObjectiveFirstTaskCompletion()
+    {
+        Objective spiderAss = objectiveInitializer.CollectSpiderAss();
+        int killEnemyIndex = 0;
+
+        foreach (Task task in spiderAss.tasks)
+        {
+            Assert.IsFalse(task.isComplete);
+        }
+
+        spiderAss.EnemyKilled("spider");
+
+        for(int i = 0; i < spiderAss.tasks.Count; i++)
+        {
+            if (i == killEnemyIndex)
+            {
+                Assert.IsTrue(spiderAss.tasks[i].isComplete);
+            }
+            else
+            {
+                Assert.IsFalse(spiderAss.tasks[i].isComplete);
+            }
+        }
+    }
+
+    [Test]
+    public void SpiderAssObjectiveSecondTaskCompletion()
+    {
+        Objective spiderAss = objectiveInitializer.CollectSpiderAss();
+        int collectSpiderAssIndex = 1;
+
+        foreach (Task task in spiderAss.tasks)
+        {
+            Assert.IsFalse(task.isComplete);
+        }
+
+        spiderAss.ItemCollected("spiderAss");
+        
+        for(int i = 0; i < spiderAss.tasks.Count; i++)
+        {
+            if (i == collectSpiderAssIndex)
+            {
+                Assert.IsTrue(spiderAss.tasks[i].isComplete);
+            }
+            else
+            {
+                Assert.IsFalse(spiderAss.tasks[i].isComplete);
+            }
+        }
     }
 }
