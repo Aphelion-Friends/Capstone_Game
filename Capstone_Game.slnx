@@ -40,7 +40,7 @@
   <Project Path="PurrDiction.Editor.csproj" />
   <Project Path="Unity.VisualScripting.Core.csproj" />
   <Project Path="Unity.RenderPipelines.Universal.Runtime.csproj" />
-  <Project Path="ObjectiveSystemScripts.csproj" />
+  <Project Path="Scripts.csproj" />
   <Project Path="Unity.VisualScripting.State.Editor.csproj" />
   <Project Path="Unity.AI.Navigation.Editor.ConversionSystem.csproj" />
   <Project Path="Unity.VisualEffectGraph.Runtime.csproj" />
@@ -55,9 +55,9 @@
   <Project Path="Unity.TextMeshPro.Editor.csproj" />
   <Project Path="Unity.Rendering.LightTransport.Runtime.csproj" />
   <Project Path="Unity.Burst.Editor.csproj" />
-  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.Rider.Editor.csproj" />
   <Project Path="Unity.VisualScripting.State.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
   <Project Path="Unity.AI.Navigation.Updater.csproj" />
   <Project Path="UnityEditor.UI.csproj" />
   <Project Path="SimpleWebTransport.csproj" />
@@ -65,7 +65,6 @@
   <Project Path="Unity.AI.Navigation.Editor.csproj" />
   <Project Path="PurrNet.Profiler.Deltas.csproj" />
   <Project Path="Unity.Multiplayer.Center.Common.csproj" />
-  <Project Path="PlayerScripts.csproj" />
   <Project Path="com.rlabrecque.steamworks.net.editor.csproj" />
   <Project Path="LiteNetLib.csproj" />
   <Project Path="Unity.ProBuilder.KdTree.csproj" />
