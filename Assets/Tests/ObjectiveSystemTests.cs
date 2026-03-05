@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -74,5 +75,16 @@ public class ObjectiveSystemTests
                 Assert.IsFalse(spiderAss.tasks[i].isComplete);
             }
         }
+    }
+
+     [Test]
+    public void TestExtractIfOtherTaskAreNotComplete()
+    {
+        Objective spiderAss = objectiveInitializer.CollectSpiderAss();
+        int extractIndex = 2;
+
+        spiderAss.ExtractTouched();
+
+        Assert.IsFalse(spiderAss.tasks[extractIndex].isComplete);       
     }
 }
