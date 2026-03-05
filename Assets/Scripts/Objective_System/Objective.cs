@@ -121,6 +121,8 @@ public struct Objective
     {
         for (int i = 0; i < tasks.Count; i++)
         {
+            if (!tasks[i].extractionEnable && !tasks[i].isComplete) 
+                return;
             Task newTask = tasks[i];
             newTask.ExtractTouched();
             tasks[i] = newTask;
