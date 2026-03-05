@@ -34,7 +34,7 @@ public class EnemyAttackState : PredictedStateNode<EnemyAttackState.AttackState>
     public override void Enter()
     {
         Debug.Log("Entered attack state!");
-        currentState.targetedPlayer = null;
+        //currentState.targetedPlayer = null;
     }
 
     protected override void StateSimulate(ref AttackState state, float delta)
@@ -44,6 +44,14 @@ public class EnemyAttackState : PredictedStateNode<EnemyAttackState.AttackState>
         if (!state.targetedPlayer.HasValue)
             return;
 
-        Debug.Log("Player attacked!");
+        GameObject player;
+
+        if (predictionManager.hierarchy.TryGetGameObject(currentState.targetedPlayer, out player))
+        {
+            Debug.Log("We got " + player);
+            player.GetComponent<PlayerHealth>().ChangeHealth(-25f);
+        }
+
+        Debug.Log("Player" + state.targetedPlayer.Value + "attacked!");
     }
 }
