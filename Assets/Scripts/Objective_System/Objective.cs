@@ -2,10 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-using PurrLobby;
-using UnityEngine.SceneManagement;
-using PurrNet;
-using PurrNet.Prediction;
+
 
 public struct Objective
 {
@@ -132,7 +129,6 @@ public struct Objective
         if (checkObjectiveCompletion())
         {
             Debug.Log("Extract Touched");
-            // SceneManager.LoadScene("TitleScreen");
         }
     }
 
