@@ -31,4 +31,19 @@ public class ObjectiveInitializer
 
         return objective;
     }
+
+    public Objective TestExtract()
+    {
+        Debug.Log("TestExtract");
+        Objective objective = InitializeGenericObjective();
+
+        Task testExtract = taskInitializer.Extract();
+
+        objective.tasks.Add(testExtract);
+
+        objective.numTasks = 1;
+        Debug.Log($"Extraction enabled {objective.tasks[0].extractionEnable}");
+
+        return objective;
+    }
 }

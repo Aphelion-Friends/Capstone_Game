@@ -1,18 +1,19 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using PurrNet.Prediction;
 
-public class ExtractionZone : MonoBehaviour
+[RequireComponent(typeof(PredictedRigidbody))]
+public class ExtractionZone : StatelessPredictedIdentity
 {
-    private void OnTriggerEnter(Collider collsion)
+    private PredictedRigidbody extract;
+    protected override void LateAwake()
     {
-        Player player = collsion.GetComponent<Player>();
+        extract = GetComponent<PredictedRigidbody>();
 
-        if (player != null) 
-        {
-            if (ObjectiveManager.Instance.currentState.objective.checkObjectiveCompletion())
-            {
-                SceneManager.LoadScene(0);
-            }
-        }
+        extract.onTriggerEnter += OnExtract;
+    }
+
+    private void OnExtract(GameObject other)
+    {
+        ObjectiveManager.Instance.currentState.objective.ExtractTouched();
     }
 }

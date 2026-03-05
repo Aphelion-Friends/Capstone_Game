@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using PurrLobby;
+using UnityEngine.SceneManagement;
+using PurrNet;
+using PurrNet.Prediction;
 
 public struct Objective
 {
@@ -90,6 +94,7 @@ public struct Objective
     public bool checkObjectiveCompletion()
     {
         bool taskIncomplete = false;
+        Debug.Log(tasks[0].taskName + " is " + tasks[0].isComplete);
 
         foreach (Task task in tasks)
         {
@@ -114,4 +119,21 @@ public struct Objective
 
         return isComplete;
     }
+
+    public void ExtractTouched()
+    {
+        for (int i = 0; i < tasks.Count; i++)
+        {
+            Task newTask = tasks[i];
+            newTask.ExtractTouched();
+            tasks[i] = newTask;
+        }
+
+        if (checkObjectiveCompletion())
+        {
+            Debug.Log("Extract Touched");
+            // SceneManager.LoadScene("TitleScreen");
+        }
+    }
+
 }

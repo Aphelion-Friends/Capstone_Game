@@ -28,6 +28,9 @@ public struct Task
     public bool itemDroppedEnabled;
     public bool powerActivationEnabled;
 
+    //For testing extraction
+    public bool extractionEnable; 
+
     public void PlayerMove(Vector3 position)
     {
         if (!playerMoveEnabled)
@@ -98,6 +101,16 @@ public struct Task
             return;
 
         isComplete = true;
+    }
+
+    //For testing extraction
+    public void ExtractTouched()
+    {
+        
+        if(extractionEnable){
+            Debug.Log("Extraction Touched");
+            isComplete = true;
+        }
     }
 
 
