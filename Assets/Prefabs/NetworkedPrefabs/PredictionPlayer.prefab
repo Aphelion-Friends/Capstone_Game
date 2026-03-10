@@ -805,6 +805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   _maxHealth: 100
+  corpse: {fileID: 8346573337699782203, guid: 0f380e53969ca044fbb1de9f10fd7e2d, type: 3}
 --- !u!114 &5850925789161093228
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using PurrNet.Prediction;
 public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 {
     [SerializeField] private float _maxHealth = 100f;
+    public GameObject corpse;
 
 
     protected override HealthState GetInitialState()
@@ -42,9 +43,15 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
         GameObject newCam = GameObject.FindWithTag("MainCamera");
         newCam.GetComponent<Camera>().enabled = true;
-
+        //spawnCorpse();
 
         Debug.Log("The player died!");
+    }
+
+    private void spawnCorpse()
+    {
+        GameObject body = Instantiate(corpse);
+        corpse.GetComponent<Camera>().enabled = false;
     }
 
     public struct HealthState : IPredictedData<HealthState>
@@ -58,6 +65,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
         public void Dispose() {}
     }
+
 }
 
 
