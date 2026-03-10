@@ -5,24 +5,18 @@ public class UpdateObjectiveUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI taskName;
     [SerializeField] private TextMeshProUGUI taskDescription;
-    
-    void Start()
-    {
-        Objective objective = ObjectiveManager.Instance.currentState.objective;
-        UpdateTaskNameAndDescription();
+    private Objective objective;
 
-        //objective.Subscribe(UpdateTaskNameAndDescription);
-    }
-
-    void UpdateTaskNameAndDescription()
-    {
+    void Update()
+    {   
         Objective objective = ObjectiveManager.Instance.currentState.objective;
 
         if (!objective.checkObjectiveCompletion())
         {
             Task currentTask = objective.GetFirstIncompleteTask();
-            taskName.text = currentTask.displayName;
+            taskName.text = currentTask.taskName;
             taskDescription.text = currentTask.taskDescription;
+            Debug.Log(taskName.text);
         }
         else
         {

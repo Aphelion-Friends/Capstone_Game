@@ -34,7 +34,7 @@ public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveMana
         Debug.Log("Initalizing objective!");
         return new ObjectiveManagerState
         {
-            objective = objectiveInitializer.TestExtract()
+            objective = objectiveInitializer.CollectSpiderAss()
         };
     }
 
