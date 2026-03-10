@@ -8,6 +8,7 @@ public class Spider : GenericEnemy
     public override void OnDeath()
     {
         _animator.SetTrigger("Die");
+        ObjectiveManager.Instance.currentState.objective.EnemyKilled("spider");
 
         base.OnDeath();
     }
