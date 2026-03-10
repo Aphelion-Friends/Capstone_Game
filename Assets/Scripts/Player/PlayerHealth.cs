@@ -4,6 +4,7 @@ using PurrNet.Prediction;
 public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 {
     [SerializeField] private float _maxHealth = 100f;
+    public GameObject corpse;
 
 
     protected override HealthState GetInitialState()
@@ -11,26 +12,60 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
         return new HealthState
         {
             health = _maxHealth,
+            isDead = false,
         };
     }
 
-    public void ChangeHealth(float change)
+    public bool ChangeHealth(float change)
     {
         currentState.health += change;
+        Debug.Log("Current HP: " + currentState.health);
 
-        if (currentState.health <= 0)
+        if (currentState.health <= 0 && !currentState.isDead)
+        {
+            currentState.isDead = true;
             Die();
+        }
+
+        return currentState.isDead;
     }
 
     private void Die()
     {
-        Debug.Log("The player died!");
+        //this.GetComponent<PlayerShoot>().enabled = false;
+        //this.GetComponent<PlayerMovement>().enabled = false;
+        //this.GetComponent<NetworkInventory>().enabled = false;
+
+        //MeshRenderer[] visuals = this.GetComponentsInChildren<MeshRenderer>();
+
+        if (gameObject != null)
+        {
+            gameObject.tag = "Dead";
+            gameObject.SetActive(false);
+
+            GameObject newCam = GameObject.FindWithTag("MainCamera"); //Search for another player's camera to spectate
+
+            if (newCam != null)
+            {
+                newCam.GetComponent<Camera>().enabled = true;
+            }
+
+            //spawnCorpse();
+
+            Debug.Log("The player died!");
+            currentState.isDead = true;
+        }
+    }
+
+    private void spawnCorpse()
+    {
+        GameObject body = Instantiate(corpse);
     }
 
     public struct HealthState : IPredictedData<HealthState>
     {
         public float health;
-
+        public bool isDead;
         public override string ToString()
         {
             return $"Health: {health}";
@@ -38,6 +73,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
         public void Dispose() {}
     }
+
 }
 
 
