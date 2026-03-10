@@ -11,9 +11,12 @@ public class PlayerTests
 
     public void setUp()
     {
-        testHealth = new PlayerHealth();
-        testMovement = new PlayerMovement();
-        testShoot = new PlayerShoot();
+        GameObject testPlayer = new GameObject("TestPlayer");
+
+        testHealth = testPlayer.AddComponent<PlayerHealth>();
+        testMovement = testPlayer.AddComponent<PlayerMovement>();
+        testShoot = testPlayer.AddComponent<PlayerShoot>();
+
     }
 
     [Test]

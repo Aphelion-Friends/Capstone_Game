@@ -38,20 +38,23 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
         //MeshRenderer[] visuals = this.GetComponentsInChildren<MeshRenderer>();
 
-        gameObject.tag = "Dead";
-        gameObject.SetActive(false);
-
-        GameObject newCam = GameObject.FindWithTag("MainCamera"); //Search for another player's camera to spectate
-
-        if (newCam != null)
+        if (gameObject != null)
         {
-            newCam.GetComponent<Camera>().enabled = true;
-        }
-        
-        //spawnCorpse();
+            gameObject.tag = "Dead";
+            gameObject.SetActive(false);
 
-        Debug.Log("The player died!");
-        currentState.isDead = true;
+            GameObject newCam = GameObject.FindWithTag("MainCamera"); //Search for another player's camera to spectate
+
+            if (newCam != null)
+            {
+                newCam.GetComponent<Camera>().enabled = true;
+            }
+
+            //spawnCorpse();
+
+            Debug.Log("The player died!");
+            currentState.isDead = true;
+        }
     }
 
     private void spawnCorpse()
