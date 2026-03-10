@@ -12,7 +12,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
         return new HealthState
         {
             health = _maxHealth,
-            isDead = false 
+            isDead = false,
         };
     }
 
@@ -46,6 +46,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
         //spawnCorpse();
 
         Debug.Log("The player died!");
+        currentState.isDead = true;
     }
 
     private void spawnCorpse()
