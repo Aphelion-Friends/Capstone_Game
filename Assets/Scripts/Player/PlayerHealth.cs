@@ -41,8 +41,13 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
         gameObject.tag = "Dead";
         gameObject.SetActive(false);
 
-        GameObject newCam = GameObject.FindWithTag("MainCamera");
-        newCam.GetComponent<Camera>().enabled = true;
+        GameObject newCam = GameObject.FindWithTag("MainCamera"); //Search for another player's camera to spectate
+
+        if (newCam != null)
+        {
+            newCam.GetComponent<Camera>().enabled = true;
+        }
+        
         //spawnCorpse();
 
         Debug.Log("The player died!");
@@ -52,7 +57,6 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     private void spawnCorpse()
     {
         GameObject body = Instantiate(corpse);
-        corpse.GetComponent<Camera>().enabled = false;
     }
 
     public struct HealthState : IPredictedData<HealthState>
