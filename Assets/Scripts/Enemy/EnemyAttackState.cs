@@ -49,7 +49,12 @@ public class EnemyAttackState : PredictedStateNode<EnemyAttackState.AttackState>
         if (predictionManager.hierarchy.TryGetGameObject(currentState.targetedPlayer, out player))
         {
             Debug.Log("We got " + player);
-            player.GetComponent<PlayerHealth>().ChangeHealth(-25f);
+            bool playerDead = player.GetComponent<PlayerHealth>().ChangeHealth(-25f);
+
+            if (playerDead)
+            {
+                currentState.targetedPlayer = null;
+            }
         }
 
         Debug.Log("Player" + state.targetedPlayer.Value + "attacked!");
