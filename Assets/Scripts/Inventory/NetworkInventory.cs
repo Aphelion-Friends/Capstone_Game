@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using PurrNet.Prediction;
-#if UNITY_EDITOR
 
 public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, NetworkInventory.InvState>
 {
@@ -175,4 +174,3 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         };
     }
 }
-#endif
