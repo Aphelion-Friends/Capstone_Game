@@ -24,10 +24,10 @@ public class ObjectiveInitializer
         Task extract = taskInitializer.Extract();
 
         objective.tasks.Add(killSpider);
-        objective.tasks.Add(spiderAss);
+        // objective.tasks.Add(spiderAss);
         objective.tasks.Add(extract);
 
-        objective.numTasks = 3;
+        objective.numTasks = 2;
 
         return objective;
     }
