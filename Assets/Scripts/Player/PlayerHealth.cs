@@ -40,6 +40,10 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
         gameObject.tag = "Dead";
         gameObject.SetActive(false);
 
+        GameObject newCam = GameObject.FindWithTag("MainCamera");
+        newCam.GetComponent<Camera>().enabled = true;
+
+
         Debug.Log("The player died!");
     }
 
