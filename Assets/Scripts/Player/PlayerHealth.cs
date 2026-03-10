@@ -11,6 +11,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
         return new HealthState
         {
             health = _maxHealth,
+            isDead = false,
         };
     }
 
@@ -25,11 +26,13 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     private void Die()
     {
         Debug.Log("The player died!");
+        currentState.isDead = true;
     }
 
     public struct HealthState : IPredictedData<HealthState>
     {
         public float health;
+        public bool isDead;
 
         public override string ToString()
         {
