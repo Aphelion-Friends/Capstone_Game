@@ -12,17 +12,20 @@ public class GunEffects : MonoBehaviour
 
     [Header("Visual Effects")]
     [SerializeField] private VisualEffect _muzzleFlash;
+    private GunRecoil gunRecoil;
 
     private MultiAudioSource audioSource;
 
     void Awake()
     {
         audioSource = MultiAudioSource.FromResource(this.gameObject, "gunshot");
+        gunRecoil = GetComponentInChildren<GunRecoil>();
     }
     public void PlayEffects()
     {
         audioSource.Play();
         _muzzleFlash.Play();
+        gunRecoil.Recoil();
     }
 
     // void Start()
