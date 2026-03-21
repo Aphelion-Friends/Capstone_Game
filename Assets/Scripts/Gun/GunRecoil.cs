@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class GunRecoil : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    FirstPersonCamera cameraScript;
+
+    [SerializeField] float recoilX = 1f;
+    [SerializeField] float recoilY = 10f;
+
+    void Awake()
     {
-        
+        cameraScript = GetComponentInParent<FirstPersonCamera>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Recoil()
     {
-        
+        cameraScript.AddRotation(new Vector2(-recoilY, Random.Range(-recoilX, recoilX)));
     }
 }

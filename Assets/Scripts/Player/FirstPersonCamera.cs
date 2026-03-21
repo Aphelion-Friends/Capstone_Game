@@ -30,6 +30,11 @@ public class FirstPersonCamera : MonoBehaviour
         _audioListener.enabled = true;
     }
 
+    public void AddRotation(Vector2 rotationToAdd)
+    {
+        _currentRotation += rotationToAdd;
+    }
+
     void LateUpdate()
     {
         if (!_initalized) return;
