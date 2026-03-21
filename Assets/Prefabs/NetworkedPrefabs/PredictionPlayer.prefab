@@ -788,7 +788,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   _playerMovement: {fileID: 5213993213753222480}
-  roundsPerMinute: 250
+  roundsPerMinute: 450
   _maxAmmo: 30
   _damage: 10
   gunEffects: {fileID: 1110538303390578580}
