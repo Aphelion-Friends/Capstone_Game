@@ -456,6 +456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonCamera
   _lookSensitivity: 0.25
   _maxLookAngle: 85
+  _smoothness: 0.03
 --- !u!20 &6726161711833801846
 Camera:
   m_ObjectHideFlags: 0
