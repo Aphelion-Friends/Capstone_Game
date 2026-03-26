@@ -635,6 +635,8 @@ GameObject:
   - component: {fileID: 6780938194775121917}
   - component: {fileID: 7036621359131802969}
   - component: {fileID: 5850925789161093228}
+  - component: {fileID: 7395234267410833199}
+  - component: {fileID: 18617538117602502}
   m_Layer: 8
   m_Name: PredictionPlayer
   m_TagString: Player
@@ -822,6 +824,51 @@ MonoBehaviour:
   _repeatInputFactor: 0.8
   _extrapolateInput: 1
   _slotCount: 24
+--- !u!114 &7395234267410833199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa55e982d827eb40b62073771e82e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::CriticalHealthOverlay
+  halfHealthOverlay: {fileID: 6297373640106240359}
+  quarterHealthOverlay: {fileID: 8025152283951025859}
+  halfHealthThreshold: 0.5
+  quarterHealthThreshold: 0.25
+--- !u!114 &18617538117602502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d5e4b97b1615f4aae984a3d5f4235f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkOwnershipToggle
+  _isSetup: 0
+  _prefabId: -2147483648
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _components:
+  - target: {fileID: 7395234267410833199}
+    activeAsOwner: 0
+  _gameObjects: []
+  _toActivate: []
+  _toDeactivate: []
+  _toEnable: []
+  _toDisable: []
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,6 +1282,16 @@ PrefabInstance:
 --- !u!224 &887542471119250923 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3068304704505079697, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+  m_PrefabInstance: {fileID: 2793887580138881658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6297373640106240359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8187863008328624925, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+  m_PrefabInstance: {fileID: 2793887580138881658}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8025152283951025859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5303815978723642553, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
   m_PrefabInstance: {fileID: 2793887580138881658}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6427688792468017123
