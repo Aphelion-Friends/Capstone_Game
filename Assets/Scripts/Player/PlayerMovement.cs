@@ -13,6 +13,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
     [SerializeField] private float _jumpForce = 100f;
     [SerializeField] private float _groundCheckRadius = 0.5f;
     [SerializeField] private float _jumpCooldown = 0.2f;
+    [SerializeField] private ViewBobbing _viewBobbing;
     [SerializeField] private LayerMask _groundMask;
 
     [SerializeField] private FirstPersonCamera _camera;
@@ -26,8 +27,14 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     protected override void LateAwake()
     {
-        if(isOwner)
+        if (isOwner)
+        {
             _camera.Init();
+            if(_viewBobbing != null)
+            {
+                _viewBobbing.Init();
+            }
+        }
     }
 
     protected override void Simulate(MoveInput input, ref MoveState state, float delta)

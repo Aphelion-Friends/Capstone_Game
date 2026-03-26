@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 6726161711833801846}
   - component: {fileID: 7895956858399245585}
   - component: {fileID: 6451145636556615780}
+  - component: {fileID: 5905422008217228707}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -560,6 +561,26 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5578140092833276513}
   m_Enabled: 0
+--- !u!114 &5905422008217228707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5578140092833276513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f05fa8c25c109714a9e4dcedf9208a39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::ViewBobbing
+  targetRigidbody: {fileID: 3541979704348186581}
+  bobFrequency: 9
+  bobHorizontalAmplitude: 0.3
+  bobVerticalAmplitude: 0.1
+  sprintMultiplier: 1.5
+  movementThreshold: 0.1
+  positionSmoothness: 10
+  enableBobbing: 1
 --- !u!1 &6969939112291563571
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +704,7 @@ MonoBehaviour:
   _jumpForce: 100
   _groundCheckRadius: 0.6
   _jumpCooldown: 0.2
+  _viewBobbing: {fileID: 5905422008217228707}
   _groundMask:
     serializedVersion: 2
     m_Bits: 1239
