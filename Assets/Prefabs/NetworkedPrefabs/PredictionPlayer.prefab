@@ -659,6 +659,8 @@ GameObject:
   - component: {fileID: 7395234267410833199}
   - component: {fileID: 18617538117602502}
   - component: {fileID: 7418098437742789469}
+  - component: {fileID: 6427207455038124736}
+  - component: {fileID: 8349835911920809892}
   m_Layer: 8
   m_Name: PredictionPlayer
   m_TagString: Player
@@ -907,6 +909,38 @@ MonoBehaviour:
   inventory: {fileID: 0}
   pickupPrompt: {fileID: 0}
   pickupRange: 3
+  itemLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &6427207455038124736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e322384b9e5348d80acb37671ba697a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::FirstPersonCamera
+  _lookSensitivity: 0.2
+  _maxLookAngle: 85
+  _smoothness: 0.2
+--- !u!114 &8349835911920809892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8a87df992f43ed89d882b0235000c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::ItemCollection
+  _repeatInputFactor: 0.8
+  _extrapolateInput: 1
   itemLayer:
     serializedVersion: 2
     m_Bits: 128
