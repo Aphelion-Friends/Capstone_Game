@@ -49,12 +49,29 @@ public class PlayerInteraction : PredictedIdentity<PlayerInteraction.PlayerInter
         // the server does not care about the player camera
         // maybe this is a bad design, I don't know
 
+        // This is probably a terrible way to do this but whatever
         Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, pickupRange);
+        List<PredictedObjectID> newItemList = new List<PredictedObjectID>();
         foreach (var hitCollider in hitColliders)
         {
             GameObject hitObject = hitCollider.gameObject;
             
             // Get predicted identity component for in-world object if exists
+            InWorldItem inWorldItem = hitObject.GetComponent<InWorldItem>();
+
+            PredictedObjectID itemID;
+            bool isPredicted;
+            isPredicted = predictionManager.hierarchy.TryGetId(hitObject, out itemID);
+
+            // Only add the item to the list of items
+            // if it is tracked by PurrNet's prediction system
+            // and if it has the inWorldItem component
+            if (inWorldItem && isPredicted)
+            {
+                newItemList.Add(itemID);
+            }
         }
+
+        state.itemsInRange = newItemList;
     }
 }
