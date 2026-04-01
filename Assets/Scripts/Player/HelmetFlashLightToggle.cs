@@ -46,7 +46,7 @@ public class FlashlightToggle : PredictedIdentity<FlashlightToggle.FlashlightInp
     protected override void UpdateInput(ref FlashlightInput input)
     {
         input.light |= InputManager.Instance.flashlightAction.inProgress;
-        Debug.Log($"Light on? {input.light}");
+        // Debug.Log($"Light on? {input.light}");
     }
 
     // protected override void ModifyExtrapolatedInput(ref FlashlightInput input)

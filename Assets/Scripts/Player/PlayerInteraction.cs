@@ -69,6 +69,7 @@ public class PlayerInteraction : PredictedIdentity<PlayerInteraction.PlayerInter
             if (inWorldItem && isPredicted)
             {
                 newItemList.Add(itemID);
+                Debug.Log(hitObject.name);
             }
         }
 

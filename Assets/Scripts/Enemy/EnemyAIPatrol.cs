@@ -86,7 +86,7 @@ public class EnemyPatrolState : PredictedStateNode<EnemyPatrolState.PatrolState>
             state.destPoint = newTarget;
             enemyController.destination = state.destPoint;
             state.destPointSet = true;
-            Debug.Log("Set a new dest point!");
+            // Debug.Log("Set a new dest point!");
         }
     }
 
