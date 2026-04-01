@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using PurrNet.Prediction;
 using System.Collections.Generic;
@@ -27,9 +26,6 @@ public class PlayerInteraction : PredictedIdentity<PlayerInteraction.PlayerInter
     [Header("Inventory Reference")]
     // Scriptable object inventory, only stores data about inventory
     public InventoryObject inventory;
-
-    [Header("UI")]
-    [SerializeField] private TextMeshProUGUI pickupPrompt;
 
     [Header("Pickup Settings")]
     // Distance between player and item

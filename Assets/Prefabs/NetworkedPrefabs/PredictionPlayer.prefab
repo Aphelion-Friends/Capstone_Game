@@ -659,7 +659,6 @@ GameObject:
   - component: {fileID: 7395234267410833199}
   - component: {fileID: 18617538117602502}
   - component: {fileID: 7418098437742789469}
-  - component: {fileID: 6427207455038124736}
   - component: {fileID: 8349835911920809892}
   m_Layer: 8
   m_Name: PredictionPlayer
@@ -907,26 +906,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::PlayerInteraction
   inventory: {fileID: 0}
-  pickupPrompt: {fileID: 0}
-  pickupRange: 3
+  pickupRange: 8
   itemLayer:
     serializedVersion: 2
     m_Bits: 128
---- !u!114 &6427207455038124736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8078684614268146017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e322384b9e5348d80acb37671ba697a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Scripts::FirstPersonCamera
-  _lookSensitivity: 0.2
-  _maxLookAngle: 85
-  _smoothness: 0.2
 --- !u!114 &8349835911920809892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -941,9 +924,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::ItemCollection
   _repeatInputFactor: 0.8
   _extrapolateInput: 1
+  firstPersonCamera: {fileID: 0}
   itemLayer:
     serializedVersion: 2
     m_Bits: 128
+  pickupPrompt: {fileID: 3264796959491522338}
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,6 +1214,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 831761283195452760, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: m_text
+      value: 'Press E to pick up '
+      objectReference: {fileID: 0}
     - target: {fileID: 1868067647280307792, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1359,6 +1348,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3068304704505079697, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
   m_PrefabInstance: {fileID: 2793887580138881658}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3264796959491522338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 831761283195452760, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+  m_PrefabInstance: {fileID: 2793887580138881658}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &6297373640106240359 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8187863008328624925, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
