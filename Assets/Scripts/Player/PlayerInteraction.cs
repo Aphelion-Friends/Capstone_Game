@@ -39,6 +39,17 @@ public class PlayerInteraction : PredictedIdentity<PlayerInteraction.PlayerInter
     // like buttonLayer or somethink I don't know
     public LayerMask itemLayer;
 
+    private PredictedObjectID? itemToCollect;
+
+    public void CollectItem(GameObject item)
+    {
+        PredictedObjectID itemID;
+        if(predictionManager.hierarchy.TryGetId(item, out itemID))
+        {
+            itemToCollect = itemID;
+        }
+    }
+
     protected override void Simulate(ref PlayerInteractionState state, float delta)
     {
         // We check if any items are in range
@@ -74,5 +85,7 @@ public class PlayerInteraction : PredictedIdentity<PlayerInteraction.PlayerInter
         }
 
         state.itemsInRange = newItemList;
+
+        // if (itemToCollect.hasValue && state.itemsInRange.Contains(itemToCollect))
     }
 }
