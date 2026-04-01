@@ -39,14 +39,13 @@ public class PlayerInteraction : PredictedIdentity<PlayerInteraction.PlayerInter
     // like buttonLayer or somethink I don't know
     public LayerMask itemLayer;
 
-    private PredictedObjectID? itemToCollect;
 
-    public void CollectItem(GameObject item)
+    public void CollectItem(PredictedObjectID? item)
     {
-        PredictedObjectID itemID;
-        if(predictionManager.hierarchy.TryGetId(item, out itemID))
+        if(item.HasValue)
         {
-            itemToCollect = itemID;
+            GameObject itemObject = item.Value.GetGameObject(predictionManager);
+            itemObject.GetComponent<InWorldItem>().currentState.hidden = true;
         }
     }
 
@@ -81,11 +80,10 @@ public class PlayerInteraction : PredictedIdentity<PlayerInteraction.PlayerInter
             {
                 newItemList.Add(itemID);
                 Debug.Log(hitObject.name);
+                CollectItem(itemID);
             }
         }
 
         state.itemsInRange = newItemList;
-
-        // if (itemToCollect.hasValue && state.itemsInRange.Contains(itemToCollect))
     }
 }

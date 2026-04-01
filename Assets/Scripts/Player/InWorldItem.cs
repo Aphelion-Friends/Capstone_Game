@@ -30,5 +30,6 @@ public class InWorldItem : PredictedIdentity<InWorldItem.InWorldItemState>
     protected override void Simulate(ref InWorldItemState state, float delta)
     {
         model.SetActive(!state.hidden);
+        this.GetComponent<Collider>().enabled = !state.hidden;
     }
 }
