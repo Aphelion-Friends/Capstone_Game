@@ -3,6 +3,8 @@ using PurrNet.Prediction;
 
 // I don't know if this is a good or a bad way to handle in-world items
 // I think it works, though
+[RequireComponent(typeof(PredictedTransform))]
+[RequireComponent(typeof(PredictedRigidbody))]
 public class InWorldItem : PredictedIdentity<InWorldItem.InWorldItemState>
 {
     // You gotta drag and drop the model

@@ -658,6 +658,7 @@ GameObject:
   - component: {fileID: 5850925789161093228}
   - component: {fileID: 7395234267410833199}
   - component: {fileID: 18617538117602502}
+  - component: {fileID: 7418098437742789469}
   m_Layer: 8
   m_Name: PredictionPlayer
   m_TagString: Player
@@ -874,6 +875,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d5e4b97b1615f4aae984a3d5f4235f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkOwnershipToggle
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -881,8 +884,6 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _components:
   - target: {fileID: 7395234267410833199}
     activeAsOwner: 0
@@ -891,6 +892,24 @@ MonoBehaviour:
   _toDeactivate: []
   _toEnable: []
   _toDisable: []
+--- !u!114 &7418098437742789469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ec82d3cb025564c8b32e2e522c1179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::PlayerInteraction
+  inventory: {fileID: 0}
+  pickupPrompt: {fileID: 0}
+  pickupRange: 3
+  itemLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0

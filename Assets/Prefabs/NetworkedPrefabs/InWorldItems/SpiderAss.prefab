@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 512752287027942448}
   - component: {fileID: 6916102597464024698}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpiderAss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +97,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 610675e3a71342f848aa59b73520ffd3, type: 3}
       propertyPath: m_Name
       value: spiderass_model
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 610675e3a71342f848aa59b73520ffd3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 610675e3a71342f848aa59b73520ffd3, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
