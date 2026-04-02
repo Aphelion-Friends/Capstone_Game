@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::InWorldItem
   model: {fileID: 7364087725759510554}
+  _item: {fileID: 11400000, guid: 3873ac3b281a88fff93bd215f928ec65, type: 2}
 --- !u!114 &3607933108479380395
 MonoBehaviour:
   m_ObjectHideFlags: 0

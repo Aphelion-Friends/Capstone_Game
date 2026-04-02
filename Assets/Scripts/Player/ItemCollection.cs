@@ -51,7 +51,7 @@ public class ItemCollection : PredictedIdentity<ItemCollection.ItemCollectionInp
         if (Physics.Raycast(ray, out hit, playerInteraction.pickupRange, itemLayer))
         {
             // Debug.Log("NOW looking at item: " + hit.collider.gameObject.name);
-            pickupPrompt.text = originalPrompt + hit.collider.gameObject.name;
+            pickupPrompt.text = originalPrompt + hit.collider.gameObject.GetComponent<InWorldItem>().item.displayName;
             showPrompt = true;
         }
 

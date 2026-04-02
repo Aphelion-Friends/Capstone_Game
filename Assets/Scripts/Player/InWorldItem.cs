@@ -10,6 +10,8 @@ public class InWorldItem : PredictedIdentity<InWorldItem.InWorldItemState>
     // You gotta drag and drop the model
     // It should be a child of the GameObject this script is attached to
     [SerializeField] private GameObject model;
+    [SerializeField] private ItemObject _item;
+    public ItemObject item { get => _item; }
 
     public struct InWorldItemState : IPredictedData<InWorldItemState>
     {
