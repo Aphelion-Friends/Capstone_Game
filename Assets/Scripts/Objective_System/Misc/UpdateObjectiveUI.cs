@@ -16,7 +16,7 @@ public class UpdateObjectiveUI : MonoBehaviour
             Task currentTask = objective.GetFirstIncompleteTask();
             taskName.text = currentTask.taskName;
             taskDescription.text = currentTask.taskDescription;
-            Debug.Log("Task name:" + currentTask.taskName);
+            // Debug.Log("Task name:" + currentTask.taskName);
         }
         else
         {

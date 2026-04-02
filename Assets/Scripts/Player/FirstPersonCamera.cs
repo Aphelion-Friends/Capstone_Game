@@ -59,7 +59,7 @@ public class FirstPersonCamera : MonoBehaviour
         _currentRotation.x = Damp(_currentRotation.x, _targetRotation.x, 1 / _smoothness, Time.deltaTime);
         _currentRotation.y = Damp(_currentRotation.y, _targetRotation.y, 1 / _smoothness, Time.deltaTime);
 
-        Debug.Log($"Current rotation: {_currentRotation}, Target rotation: {_targetRotation}, Smoothness: {_smoothness}");
+        // Debug.Log($"Current rotation: {_currentRotation}, Target rotation: {_targetRotation}, Smoothness: {_smoothness}");
 
         transform.localRotation = Quaternion.Euler(_currentRotation.x, 0f, 0f);
         if (transform.parent != null)

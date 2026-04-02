@@ -91,12 +91,12 @@ public struct Objective
     public bool checkObjectiveCompletion()
     {
         bool taskIncomplete = false;
-        Debug.Log(tasks[0].taskName + " is " + tasks[0].isComplete);
+        // Debug.Log(tasks[0].taskName + " is " + tasks[0].isComplete);
 
         foreach (Task task in tasks)
         {
 
-            Debug.Log(task.taskName + " is " + task.isComplete);
+            // Debug.Log(task.taskName + " is " + task.isComplete);
             
             if (!task.isComplete)   //Go through list of task objects and see if any are incomplete
             {
@@ -104,7 +104,7 @@ public struct Objective
             }
             else
             {
-                Debug.Log(task.taskName + "Checked off");
+                // Debug.Log(task.taskName + "Checked off");
             }
         }
 
