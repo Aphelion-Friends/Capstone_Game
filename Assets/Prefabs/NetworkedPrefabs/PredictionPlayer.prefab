@@ -660,6 +660,7 @@ GameObject:
   - component: {fileID: 18617538117602502}
   - component: {fileID: 7418098437742789469}
   - component: {fileID: 8349835911920809892}
+  - component: {fileID: 434691989972748098}
   m_Layer: 8
   m_Name: PredictionPlayer
   m_TagString: Player
@@ -929,6 +930,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   pickupPrompt: {fileID: 3264796959491522338}
+--- !u!114 &434691989972748098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e71a9c1385d6a97b9de421dbbc12f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0

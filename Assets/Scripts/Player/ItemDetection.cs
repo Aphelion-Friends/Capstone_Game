@@ -53,15 +53,16 @@ public class ItemDetection : PredictedIdentity<ItemDetection.ItemDetectionInput,
             // Debug.Log("NOW looking at item: " + hit.collider.gameObject.name);
             pickupPrompt.text = originalPrompt + hit.collider.gameObject.GetComponent<InWorldItem>().item.displayName;
             showPrompt = true;
-        }
 
-        // We have to find the PurrDiction ID so it works nicely with PurrNet
-        PredictedObjectID hitItem;
-        if (predictionManager.hierarchy.TryGetId(hit.collider.gameObject, out hitItem))
-            state.lookedAtItem = hitItem;
+            // We have to find the PurrDiction ID so it works nicely with PurrNet
+            PredictedObjectID hitItem;
+            if (predictionManager.hierarchy.TryGetId(hit.collider.gameObject, out hitItem))
+                state.lookedAtItem = hitItem;
+            else
+                state.lookedAtItem = null;
+        }
         else
             state.lookedAtItem = null;
-
 
         pickupPrompt.gameObject.SetActive(showPrompt);
     }
