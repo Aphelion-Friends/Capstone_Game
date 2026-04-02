@@ -3,16 +3,16 @@ using UnityEngine;
 using PurrNet.Prediction;
 
 [RequireComponent(typeof(PlayerInteraction))]
-public class ItemCollection : PredictedIdentity<ItemCollection.ItemCollectionInput, ItemCollection.ItemCollectionState>
+public class ItemDetection : PredictedIdentity<ItemDetection.ItemDetectionInput, ItemDetection.ItemDetectionState>
 {
-    public struct ItemCollectionInput : IPredictedData
+    public struct ItemDetectionInput : IPredictedData
     {
         public Vector2 forward;
 
         public void Dispose() {}
     }
 
-    public struct ItemCollectionState : IPredictedData<ItemCollectionState>
+    public struct ItemDetectionState : IPredictedData<ItemDetectionState>
     {
         PredictedObjectID? lookedAtItem;
 
@@ -35,7 +35,7 @@ public class ItemCollection : PredictedIdentity<ItemCollection.ItemCollectionInp
         originalPrompt = pickupPrompt.text;
     }
 
-    protected override void Simulate(ItemCollectionInput input, ref ItemCollectionState state, float delta)
+    protected override void Simulate(ItemDetectionInput input, ref ItemDetectionState state, float delta)
     {
         if (!firstPersonCamera)
         {
@@ -45,7 +45,7 @@ public class ItemCollection : PredictedIdentity<ItemCollection.ItemCollectionInp
 
         Ray ray = new Ray(firstPersonCamera.playerCamera.transform.position, firstPersonCamera.forward);
         RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * playerInteraction.pickupRange, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * playerInteraction.pickupRange, Color.blue);
         bool showPrompt = false;
 
         if (Physics.Raycast(ray, out hit, playerInteraction.pickupRange, itemLayer))
