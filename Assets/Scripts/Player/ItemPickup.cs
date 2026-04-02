@@ -43,6 +43,7 @@ public class ItemPickup : PredictedIdentity<ItemPickup.ItemPickupInput, ItemPick
             if (itemToPickUp.HasValue)
             {
                 Debug.Log($"Item pickup: {itemToPickUp.Value.GetGameObject(predictionManager).name}");
+                predictionManager.hierarchy.Delete(itemToPickUp);
             }
         }
         else if (!input.pickup)
