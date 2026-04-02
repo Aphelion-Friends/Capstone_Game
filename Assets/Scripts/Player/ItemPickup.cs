@@ -28,9 +28,11 @@ public class ItemPickup : PredictedIdentity<ItemPickup.ItemPickupInput, ItemPick
     }
 
     private ItemDetection itemDetection;
+    private NetworkInventory inventory;
     protected override void LateAwake()
     {
         itemDetection = GetComponent<ItemDetection>();
+        inventory = GetComponent<NetworkInventory>();
     }
 
     protected override void Simulate(ItemPickupInput input, ref ItemPickupState state, float delta)
@@ -43,6 +45,10 @@ public class ItemPickup : PredictedIdentity<ItemPickup.ItemPickupInput, ItemPick
             if (itemToPickUp.HasValue)
             {
                 Debug.Log($"Item pickup: {itemToPickUp.Value.GetGameObject(predictionManager).name}");
+
+
+
+                // Delete the item after adding it to the inventory
                 predictionManager.hierarchy.Delete(itemToPickUp);
             }
         }

@@ -8,7 +8,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
 
     public event Action OnInventoryChanged;
 
-    private bool _dirty;
+    // private bool _dirty;
 
     public struct InvState : IPredictedData<InvState>
     {
@@ -49,26 +49,35 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
 
     public int GetItemId(int index)
     {
-        if (index < 0 || index >= currentState.slotCount) return 0;
+        if (index < 0 || index >= currentState.slotCount) return -1;
         return currentState.itemIds[index];
     }
 
     public int GetAmount(int index)
     {
-        if (index < 0 || index >= currentState.slotCount) return 0;
+        if (index < 0 || index >= currentState.slotCount) return -1;
         return currentState.amounts[index];
     }
 
-    private bool _hasPending;
-    private int _pendingFrom;
-    private int _pendingTo;
+    // private bool _hasPending;
+    // private int _pendingFrom;
+    // private int _pendingTo;
 
     public void RequestMoveOrSwap(int from, int to)
     {
         if (from == to) return;
-        _pendingFrom = from;
-        _pendingTo = to;
-        _hasPending = true;
+        // _pendingFrom = from;
+        // _pendingTo = to;
+        // _hasPending = true;
+
+        // Swap the ID and amount of each slot
+        int tempFromID = currentState.itemIds[from];
+        int tempFromAmount = currentState.amounts[from];
+
+        currentState.itemIds[from] = currentState.itemIds[to];
+        currentState.amounts[from] = currentState.amounts[to];
+        currentState.itemIds[to] = tempFromID;
+        currentState.amounts[to] = tempFromAmount;
     }
 
     protected override void GetFinalInput(ref InvInput input)
@@ -92,53 +101,53 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         }
     }
 
-    protected override void Simulate(InvInput input, ref InvState state, float delta)
-    {
-        if (!input.hasAction) return;
+    // protected override void Simulate(InvInput input, ref InvState state, float delta)
+    // {
+    //     if (!input.hasAction) return;
 
-        int from = input.fromIndex;
-        int to = input.toIndex;
+    //     int from = input.fromIndex;
+    //     int to = input.toIndex;
 
-        if (!IsValid(state, from) || !IsValid(state, to) || from == to)
-            return;
+    //     if (!IsValid(state, from) || !IsValid(state, to) || from == to)
+    //         return;
 
-        int aId = state.itemIds[from];
-        int aAmt = state.amounts[from];
+    //     int aId = state.itemIds[from];
+    //     int aAmt = state.amounts[from];
 
-        if (aId == 0 || aAmt <= 0)
-            return;
+    //     if (aId == 0 || aAmt <= 0)
+    //         return;
 
-        int bId = state.itemIds[to];
-        int bAmt = state.amounts[to];
+    //     int bId = state.itemIds[to];
+    //     int bAmt = state.amounts[to];
 
-        if (bId != 0 && bAmt > 0 && bId == aId)
-        {
-            state.amounts[to] = bAmt + aAmt;
-            state.itemIds[from] = 0;
-            state.amounts[from] = 0;
-        }
-        else
-        {
-            state.itemIds[from] = bId;
-            state.amounts[from] = bAmt;
+    //     if (bId != 0 && bAmt > 0 && bId == aId)
+    //     {
+    //         state.amounts[to] = bAmt + aAmt;
+    //         state.itemIds[from] = 0;
+    //         state.amounts[from] = 0;
+    //     }
+    //     else
+    //     {
+    //         state.itemIds[from] = bId;
+    //         state.amounts[from] = bAmt;
 
-            state.itemIds[to] = aId;
-            state.amounts[to] = aAmt;
-        }
+    //         state.itemIds[to] = aId;
+    //         state.amounts[to] = aAmt;
+    //     }
 
-        _dirty = true;
-    }
+    //     _dirty = true;
+    // }
 
     private bool IsValid(InvState s, int i) => i >= 0 && i < s.slotCount;
 
-    private void LateUpdate()
-    {
-        if (_dirty)
-        {
-            _dirty = false;
-            OnInventoryChanged?.Invoke();
-        }
-    }
+    // private void LateUpdate()
+    // {
+    //     if (_dirty)
+    //     {
+    //         _dirty = false;
+    //         OnInventoryChanged?.Invoke();
+    //     }
+    // }
 
     public void ServerAddItem(int itemId, int amount)
     {
@@ -148,7 +157,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
             if (currentState.itemIds[i] == itemId && currentState.amounts[i] > 0)
             {
                 currentState.amounts[i] += amount;
-                _dirty = true;
+                // _dirty = true;
                 return;
             }
         }
@@ -159,7 +168,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
             {
                 currentState.itemIds[i] = itemId;
                 currentState.amounts[i] = amount;
-                _dirty = true;
+                // _dirty = true;
                 return;
             }
         }
