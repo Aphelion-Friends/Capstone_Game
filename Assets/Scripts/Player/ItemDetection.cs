@@ -14,7 +14,7 @@ public class ItemDetection : PredictedIdentity<ItemDetection.ItemDetectionInput,
 
     public struct ItemDetectionState : IPredictedData<ItemDetectionState>
     {
-        PredictedObjectID? lookedAtItem;
+        public PredictedObjectID? lookedAtItem;
 
         public void Dispose() {}
     }
@@ -54,6 +54,14 @@ public class ItemDetection : PredictedIdentity<ItemDetection.ItemDetectionInput,
             pickupPrompt.text = originalPrompt + hit.collider.gameObject.GetComponent<InWorldItem>().item.displayName;
             showPrompt = true;
         }
+
+        // We have to find the PurrDiction ID so it works nicely with PurrNet
+        PredictedObjectID hitItem;
+        if (predictionManager.hierarchy.TryGetId(hit.collider.gameObject, out hitItem))
+            state.lookedAtItem = hitItem;
+        else
+            state.lookedAtItem = null;
+
 
         pickupPrompt.gameObject.SetActive(showPrompt);
     }
