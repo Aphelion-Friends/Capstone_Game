@@ -942,6 +942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e71a9c1385d6a97b9de421dbbc12f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _repeatInputFactor: 0.8
+  _extrapolateInput: 1
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,6 +1236,10 @@ PrefabInstance:
     - target: {fileID: 1868067647280307792, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415651423641915601, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2745884281170271809, guid: 20eb76c25d5ac47f08f94b3ebed6d422, type: 3}
       propertyPath: m_IsActive

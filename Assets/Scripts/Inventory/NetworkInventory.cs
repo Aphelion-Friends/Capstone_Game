@@ -82,27 +82,27 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
 
     protected override void GetFinalInput(ref InvInput input)
     {
-        if (!isOwner)
-        {
-            input.hasAction = false;
-            return;
-        }
+        // if (!isOwner)
+        // {
+        //     input.hasAction = false;
+        //     return;
+        // }
 
-        if (_hasPending)
-        {
-            input.hasAction = true;
-            input.fromIndex = _pendingFrom;
-            input.toIndex = _pendingTo;
-            _hasPending = false;
-        }
-        else
-        {
-            input.hasAction = false;
-        }
+        // if (_hasPending)
+        // {
+        //     input.hasAction = true;
+        //     input.fromIndex = _pendingFrom;
+        //     input.toIndex = _pendingTo;
+        //     _hasPending = false;
+        // }
+        // else
+        // {
+        //     input.hasAction = false;
+        // }
     }
 
-    // protected override void Simulate(InvInput input, ref InvState state, float delta)
-    // {
+    protected override void Simulate(InvInput input, ref InvState state, float delta)
+    {
     //     if (!input.hasAction) return;
 
     //     int from = input.fromIndex;
@@ -136,7 +136,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     //     }
 
     //     _dirty = true;
-    // }
+    }
 
     private bool IsValid(InvState s, int i) => i >= 0 && i < s.slotCount;
 
