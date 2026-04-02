@@ -27,11 +27,19 @@ public class InWorldItem : PredictedIdentity<InWorldItem.InWorldItemState>
         };
     }
 
-    // I don't know how to delete stuff with PurrNet's prediction
-    // so this is what we're doing
+    private Collider collider;
+    private PredictedRigidbody predictedRigidbody;
+
+    protected override void LateAwake()
+    {
+        collider = GetComponent<Collider>();
+        predictedRigidbody = GetComponent<PredictedRigidbody>();
+    }
+
     protected override void Simulate(ref InWorldItemState state, float delta)
     {
         model.SetActive(!state.hidden);
-        this.GetComponent<Collider>().enabled = !state.hidden;
+        collider.enabled = !state.hidden;
+        predictedRigidbody.isKinematic = state.hidden;
     }
 }
