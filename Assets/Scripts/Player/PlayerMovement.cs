@@ -20,8 +20,11 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     [SerializeField] private Animator _playerAnimator;
 
+    private MultiAudioSource audioSource;
+
     private void Awake()
     {
+        audioSource = MultiAudioSource.FromResource(this.gameObject, "Walking");
     }
 
     protected override void LateAwake()
@@ -35,6 +38,8 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         if (input.moveDirection.y > 0)
         {
             _playerAnimator.SetTrigger("StartWalk");
+            //Plays the audi when moviing forward, but not side or backwards. Also needs a cooldown (WIP)
+            // audioSource.Play();
         }
         else if (input.moveDirection.y <= 0)
         {
