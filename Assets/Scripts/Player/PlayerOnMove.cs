@@ -12,4 +12,5 @@ public class PlayerOnMove : MonoBehaviour
             ObjectiveManager.Instance.currentState.objective.PlayerMove(currentPosition);
         }
     }
+
 }
