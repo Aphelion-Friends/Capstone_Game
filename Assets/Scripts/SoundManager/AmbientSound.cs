@@ -11,6 +11,7 @@ public class AmbientSound : MonoBehaviour
         metal,
         glass,
         monsterSound,
+        areaAmbience
     }
 
     [SerializeField] Soundtype soundtype;
@@ -29,9 +30,12 @@ public class AmbientSound : MonoBehaviour
                 break;
 
             case (Soundtype.monsterSound):
-                break; 
+                break;
+
+            case (Soundtype.areaAmbience):
+                break;
         }
-        audioSource = MultiAudioSource.FromResource(this.gameObject, "gunshot");
+        audioSource = MultiAudioSource.FromResource(this.gameObject, "labAmbience");
 
         remainTime = delayedTime;
     }
