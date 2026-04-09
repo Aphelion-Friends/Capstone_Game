@@ -35,11 +35,13 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     protected override void Simulate(MoveInput input, ref MoveState state, float delta)
     {
+        if (input.moveDirection.y != 0 || input.moveDirection.x != 0)
+        {
+            audioSource.PlayOnlyIfDone();
+        }
         if (input.moveDirection.y > 0)
         {
             _playerAnimator.SetTrigger("StartWalk");
-            //Plays the audi when moviing forward, but not side or backwards. Also needs a cooldown (WIP)
-            // audioSource.Play();
         }
         else if (input.moveDirection.y <= 0)
         {

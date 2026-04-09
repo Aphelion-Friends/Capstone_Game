@@ -5,7 +5,7 @@ public class Spider : GenericEnemy
 {
     [SerializeField] private NetworkAnimator _animator;
 
-    private MultiAudioSource audioSource, audioSource2;
+    private MultiAudioSource audioSource;
 
     public override void OnDeath()
     {
@@ -18,7 +18,7 @@ public class Spider : GenericEnemy
     protected override void AttackTransitions(ref EnemyAttackState.AttackState state)
     {
         base.AttackTransitions(ref state);
-        audioSource.Play();
+        audioSource.PlayOnlyIfDone();
     }
 
     protected override void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
@@ -29,14 +29,11 @@ public class Spider : GenericEnemy
     protected override void ChaseTransitions(ref EnemyChaseState.ChaseState state)
     {
         base.ChaseTransitions(ref state);
-        //Work in progress need to add some kind of sound cooldown.
-        // audioSource2.Play();
     }
 
     protected override void Awake()
     {
         base.Awake();
         audioSource = MultiAudioSource.FromResource(this.gameObject, "Spiderattack");
-        audioSource2 = MultiAudioSource.FromResource(this.gameObject, "Spidercrawl");
     }
 }
