@@ -17,6 +17,16 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         public int[] itemIds;
         public int[] amounts;
 
+        public override string ToString()
+        {
+            string displayString = "Inventory State:\n";
+            for (int i = 0; i < slotCount; i++)
+            {
+                displayString += $"{i}: [${itemIds[i]}](${amounts[i]})\n";
+            }
+            return displayString;
+        }
+
         public void Dispose() { }
     }
 
@@ -31,12 +41,20 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
 
     protected override InvState GetInitialState()
     {
-        return new InvState
+        InvState newInv = new InvState
         {
             slotCount = _slotCount,
             itemIds = new int[_slotCount],
             amounts = new int[_slotCount],
         };
+
+        for (int i = 0; i < _slotCount; i++)
+        {
+            newInv.itemIds[i] = -1;
+            newInv.amounts[i] = 0;
+        }
+
+        return newInv;
     }
 
     public int SlotCount => currentState.slotCount;
@@ -149,29 +167,48 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     //     }
     // }
 
-    public void ServerAddItem(int itemId, int amount)
+    // You suppoedsded to use this to add an item to the first inventory slot
+    // public bool AddItem(int itemId)
+    // {
+    //     bool ableToAddItem = false;
+
+    //     for(int i = 0; i < currentState.slotCount && !ableToAddItem; i++)
+    //     {
+    //         // -1 means no item
+    //         if (currentState.itemIds[i] == -1)
+    //         {
+    //             currentState.itemIds[i] = itemId;
+    //         }
+    //     }
+    // }
+
+    public bool AddItem(int itemId, int amount)
     {
-        if (itemId == 0 || amount <= 0) return;
+        if (itemId < 0 || amount <= 0) return false;
+
         for (int i = 0; i < currentState.slotCount; i++)
         {
             if (currentState.itemIds[i] == itemId && currentState.amounts[i] > 0)
             {
                 currentState.amounts[i] += amount;
                 // _dirty = true;
-                return;
+                return true;
             }
         }
 
         for (int i = 0; i < currentState.slotCount; i++)
         {
-            if (currentState.itemIds[i] == 0 || currentState.amounts[i] <= 0)
+            // less than 1 means no item
+            if (currentState.itemIds[i] == -1 || currentState.amounts[i] <= 0)
             {
                 currentState.itemIds[i] = itemId;
                 currentState.amounts[i] = amount;
                 // _dirty = true;
-                return;
+                return true;
             }
         }
+
+        return false;
     }
     public void EditorInitForTests(int slotCount = 24)
     {

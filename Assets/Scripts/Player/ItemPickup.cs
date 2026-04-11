@@ -46,10 +46,11 @@ public class ItemPickup : PredictedIdentity<ItemPickup.ItemPickupInput, ItemPick
             {
                 Debug.Log($"Item pickup: {itemToPickUp.Value.GetGameObject(predictionManager).name}");
 
-
+                bool canCollect = inventory.AddItem(itemToPickUp.GetGameObject(predictionManager).GetComponent<InWorldItem>().item.itemId, 1);
 
                 // Delete the item after adding it to the inventory
-                predictionManager.hierarchy.Delete(itemToPickUp);
+                if (canCollect)
+                    predictionManager.hierarchy.Delete(itemToPickUp);
             }
         }
         else if (!input.pickup)
