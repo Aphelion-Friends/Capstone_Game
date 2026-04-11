@@ -197,10 +197,10 @@ public class InventoryUI : MonoBehaviour
     private void ToggleInventory()
     {
         inventoryOpen = !inventoryOpen;
-        if (!inventoryOpen)
-            InputManager.Instance.LockCursor();
-        else
+        if (inventoryOpen)
             InputManager.Instance.UnlockCursor();
+        else
+            InputManager.Instance.LockCursor();
         SetVisibility();
 
         Cursor.lockState = inventoryOpen ? CursorLockMode.Confined : CursorLockMode.Locked;

@@ -67,15 +67,19 @@ public class InputManager : MonoBehaviour
     {
         if (context.action == _moveAction)
         {
-            if (!_ignoreMouseMove)
-                _moveDirection = moveAction.ReadValue<Vector2>();
-            else
-                _moveDirection = Vector2.zero;
+            _moveDirection = moveAction.ReadValue<Vector2>();
         }
 
         if (context.action == _lookAction)
         {
-            _lookDirection = lookAction.ReadValue<Vector2>();
+            // To prevent the player's camera from jumping when the cursor gets locked
+            if (_ignoreMouseMove && context.performed)
+            {
+                _ignoreMouseMove = false;
+                _lookDirection = Vector2.zero;
+            }
+            else if (!_ignoreMouseMove)
+                _lookDirection = lookAction.ReadValue<Vector2>();
         }
     }
 
@@ -83,12 +87,12 @@ public class InputManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _lookAction.Enable();
-        _ignoreMouseMove = true;
     }
 
     public void UnlockCursor()
     {
         _lookAction.Disable();
         Cursor.lockState = CursorLockMode.Confined;
+        _ignoreMouseMove = true;
     }
 }
