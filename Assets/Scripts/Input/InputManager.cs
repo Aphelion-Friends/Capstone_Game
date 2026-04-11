@@ -36,6 +36,8 @@ public class InputManager : MonoBehaviour
     public InputAction flashlightAction { get { return _flashlightAction; } }
     public InputAction reloadAction { get { return _reloadAction; } }
 
+    private bool _ignoreMouseMove = false;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -65,12 +67,28 @@ public class InputManager : MonoBehaviour
     {
         if (context.action == _moveAction)
         {
-            _moveDirection = moveAction.ReadValue<Vector2>();
+            if (!_ignoreMouseMove)
+                _moveDirection = moveAction.ReadValue<Vector2>();
+            else
+                _moveDirection = Vector2.zero;
         }
 
         if (context.action == _lookAction)
         {
             _lookDirection = lookAction.ReadValue<Vector2>();
         }
+    }
+
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        _lookAction.Enable();
+        _ignoreMouseMove = true;
+    }
+
+    public void UnlockCursor()
+    {
+        _lookAction.Disable();
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
