@@ -133,6 +133,7 @@ public class InventoryUI : MonoBehaviour
 
     private void OnInventoryChange()
     {
+        Debug.Log("CHANGE");
         if (inventory == null)
             return;
 
@@ -145,8 +146,10 @@ public class InventoryUI : MonoBehaviour
             for (int c = slotGO.transform.childCount - 1; c >= 0; c--)
                 Destroy(slotGO.transform.GetChild(c).gameObject);
 
+            Debug.Log("Before inv empty");
             if (inventory.IsEmpty(x))
                 continue;
+            Debug.Log("After inv empty");
 
             int itemId = inventory.GetItemId(x);
             int amount = inventory.GetAmount(x);
@@ -154,6 +157,8 @@ public class InventoryUI : MonoBehaviour
             ItemObject itemObj = itemDatabase.GetById(itemId);
             if (itemObj == null)
                 continue;
+
+            Debug.Log($"Item found: {itemObj.itemName}");
 
             GameObject itemUI = itemObj.InstantiatePrefab();
 

@@ -62,7 +62,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     public bool IsEmpty(int index)
     {
         if (index < 0 || index >= currentState.slotCount) return true;
-        return currentState.itemIds[index] == 0 || currentState.amounts[index] <= 0;
+        return currentState.itemIds[index] < 0 || currentState.amounts[index] <= 0;
     }
 
     public int GetItemId(int index)
@@ -192,6 +192,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
             {
                 currentState.amounts[i] += amount;
                 // _dirty = true;
+                OnInventoryChanged?.Invoke();
                 return true;
             }
         }
@@ -204,6 +205,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
                 currentState.itemIds[i] = itemId;
                 currentState.amounts[i] = amount;
                 // _dirty = true;
+                OnInventoryChanged?.Invoke();
                 return true;
             }
         }
