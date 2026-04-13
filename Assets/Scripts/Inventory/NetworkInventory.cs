@@ -98,6 +98,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         currentState.amounts[to] = tempFromAmount;
     }
 
+    // I don't know why this is here
     protected override void GetFinalInput(ref InvInput input)
     {
         // if (!isOwner)
@@ -119,6 +120,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         // }
     }
 
+    // I don't know why this is here either, keeping it just in case
     protected override void Simulate(InvInput input, ref InvState state, float delta)
     {
     //     if (!input.hasAction) return;
