@@ -119,6 +119,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     {
         if (_hasPending && !input.hasAction)
         {
+            Debug.Log($"Now UPDATING input! From: {_pendingFrom}. To: {_pendingTo}");
             input.fromIndex = _pendingFrom;
             input.toIndex = _pendingTo;
             input.hasAction = true;
