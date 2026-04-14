@@ -11,7 +11,7 @@ public class Psychotron : GenericEnemy
     private EnemyStunState enemyStunState;
     private EnemyController enemyController;
 
-    private MultiAudioSource audioSource;
+    private MultiAudioSource audioSource, multiAudioSource;
 
     protected override void Awake()
     {
@@ -22,6 +22,8 @@ public class Psychotron : GenericEnemy
         enemyController = GetComponent<EnemyController>();
         enemyStunState.transitionFunc = StunTransitions;
         audioSource = MultiAudioSource.FromResource(this.gameObject, "Robotstep");
+        // multiAudioSource = MultiAudioSource.
+        
     }
 
     protected void StunTransitions(ref EnemyStunState.StunState state)
@@ -37,6 +39,8 @@ public class Psychotron : GenericEnemy
         animator.SetTrigger("Attack");
 
         base.AttackTransitions(ref state);
+
+        multiAudioSource.PlayRandom();
 
     }
 
