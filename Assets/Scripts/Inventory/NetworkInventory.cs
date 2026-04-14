@@ -85,18 +85,10 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     public void RequestMoveOrSwap(int from, int to)
     {
         if (from == to) return;
+        Debug.Log("Requesting move!");
         _pendingFrom = from;
         _pendingTo = to;
         _hasPending = true;
-
-        // Swap the ID and amount of each slot
-        // int tempFromID = currentState.itemIds[from];
-        // int tempFromAmount = currentState.amounts[from];
-
-        // currentState.itemIds[from] = currentState.itemIds[to];
-        // currentState.amounts[from] = currentState.amounts[to];
-        // currentState.itemIds[to] = tempFromID;
-        // currentState.amounts[to] = tempFromAmount;
 
         Debug.Log("MOVING!");
     }
@@ -127,16 +119,34 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     {
         if (_hasPending && !input.hasAction)
         {
-            input.from = _pendingFrom;
-            input.to = _pendingTo;
+            input.fromIndex = _pendingFrom;
+            input.toIndex = _pendingTo;
             input.hasAction = true;
             _hasPending = false;
         }
     }
 
-    // I don't know why this is here either, keeping it just in case
     protected override void Simulate(InvInput input, ref InvState state, float delta)
     {
+        // We move the item now if the user is trying to move an item
+        if (input.hasAction)
+        {
+            int from = input.fromIndex;
+            int to = input.toIndex;
+
+            Debug.Log($"MOVING in Simulate From: {from}, To: {to}");
+
+            // Swap the ID and amount of each slot
+            int tempFromID = state.itemIds[from];
+            int tempFromAmount = state.amounts[from];
+
+            state.itemIds[from] = state.itemIds[to];
+            state.amounts[from] = state.amounts[to];
+            state.itemIds[to] = tempFromID;
+            state.amounts[to] = tempFromAmount;
+
+            input.hasAction = false;
+        }
     //     if (!input.hasAction) return;
 
     //     int from = input.fromIndex;
