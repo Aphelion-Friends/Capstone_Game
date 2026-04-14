@@ -87,11 +87,13 @@ public class InputManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         _lookAction.Enable();
+        _fireAction.Enable();
     }
 
     public void UnlockCursor()
     {
         _lookAction.Disable();
+        _fireAction.Disable();
         Cursor.lockState = CursorLockMode.Confined;
         _ignoreMouseMove = true;
     }
