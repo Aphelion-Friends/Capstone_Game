@@ -77,25 +77,28 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         return currentState.amounts[index];
     }
 
-    // private bool _hasPending;
-    // private int _pendingFrom;
-    // private int _pendingTo;
+    // I don't know if this is the best solution
+    private bool _hasPending;
+    private int _pendingFrom;
+    private int _pendingTo;
 
     public void RequestMoveOrSwap(int from, int to)
     {
         if (from == to) return;
-        // _pendingFrom = from;
-        // _pendingTo = to;
-        // _hasPending = true;
+        _pendingFrom = from;
+        _pendingTo = to;
+        _hasPending = true;
 
         // Swap the ID and amount of each slot
-        int tempFromID = currentState.itemIds[from];
-        int tempFromAmount = currentState.amounts[from];
+        // int tempFromID = currentState.itemIds[from];
+        // int tempFromAmount = currentState.amounts[from];
 
-        currentState.itemIds[from] = currentState.itemIds[to];
-        currentState.amounts[from] = currentState.amounts[to];
-        currentState.itemIds[to] = tempFromID;
-        currentState.amounts[to] = tempFromAmount;
+        // currentState.itemIds[from] = currentState.itemIds[to];
+        // currentState.amounts[from] = currentState.amounts[to];
+        // currentState.itemIds[to] = tempFromID;
+        // currentState.amounts[to] = tempFromAmount;
+
+        Debug.Log("MOVING!");
     }
 
     // I don't know why this is here
@@ -118,6 +121,17 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         // {
         //     input.hasAction = false;
         // }
+    }
+
+    protected override void UpdateInput(ref InvInput input)
+    {
+        if (_hasPending && !input.hasAction)
+        {
+            input.from = _pendingFrom;
+            input.to = _pendingTo;
+            input.hasAction = true;
+            _hasPending = false;
+        }
     }
 
     // I don't know why this is here either, keeping it just in case
