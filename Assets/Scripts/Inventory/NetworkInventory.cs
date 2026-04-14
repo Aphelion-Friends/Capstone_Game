@@ -78,6 +78,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
     }
 
     // I don't know if this is the best solution
+    // Seems like it's working though
     private bool _hasPending;
     private int _pendingFrom;
     private int _pendingTo;
@@ -93,7 +94,7 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         Debug.Log("MOVING!");
     }
 
-    // I don't know why this is here
+    // I don't know why this is here keeping it just in case
     protected override void GetFinalInput(ref InvInput input)
     {
         // if (!isOwner)
@@ -148,66 +149,9 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
 
             input.hasAction = false;
         }
-    //     if (!input.hasAction) return;
-
-    //     int from = input.fromIndex;
-    //     int to = input.toIndex;
-
-    //     if (!IsValid(state, from) || !IsValid(state, to) || from == to)
-    //         return;
-
-    //     int aId = state.itemIds[from];
-    //     int aAmt = state.amounts[from];
-
-    //     if (aId == 0 || aAmt <= 0)
-    //         return;
-
-    //     int bId = state.itemIds[to];
-    //     int bAmt = state.amounts[to];
-
-    //     if (bId != 0 && bAmt > 0 && bId == aId)
-    //     {
-    //         state.amounts[to] = bAmt + aAmt;
-    //         state.itemIds[from] = 0;
-    //         state.amounts[from] = 0;
-    //     }
-    //     else
-    //     {
-    //         state.itemIds[from] = bId;
-    //         state.amounts[from] = bAmt;
-
-    //         state.itemIds[to] = aId;
-    //         state.amounts[to] = aAmt;
-    //     }
-
-    //     _dirty = true;
     }
 
     private bool IsValid(InvState s, int i) => i >= 0 && i < s.slotCount;
-
-    // private void LateUpdate()
-    // {
-    //     if (_dirty)
-    //     {
-    //         _dirty = false;
-    //         OnInventoryChanged?.Invoke();
-    //     }
-    // }
-
-    // You suppoedsded to use this to add an item to the first inventory slot
-    // public bool AddItem(int itemId)
-    // {
-    //     bool ableToAddItem = false;
-
-    //     for(int i = 0; i < currentState.slotCount && !ableToAddItem; i++)
-    //     {
-    //         // -1 means no item
-    //         if (currentState.itemIds[i] == -1)
-    //         {
-    //             currentState.itemIds[i] = itemId;
-    //         }
-    //     }
-    // }
 
     public bool AddItem(int itemId, int amount)
     {
