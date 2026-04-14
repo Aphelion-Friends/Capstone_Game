@@ -35,6 +35,12 @@ public class ItemDetection : PredictedIdentity<ItemDetection.ItemDetectionInput,
         originalPrompt = pickupPrompt.text;
     }
 
+    protected override void UpdateInput(ref ItemDetectionInput input)
+    {
+        input.forward = firstPersonCamera.playerCamera.transform.forward;
+        Debug.Log($"Forward: {input.forward}");
+    }
+
     protected override void Simulate(ItemDetectionInput input, ref ItemDetectionState state, float delta)
     {
         if (!firstPersonCamera)
@@ -43,14 +49,14 @@ public class ItemDetection : PredictedIdentity<ItemDetection.ItemDetectionInput,
             return;
         }
 
-        Ray ray = new Ray(firstPersonCamera.playerCamera.transform.position, firstPersonCamera.forward);
+        Ray ray = new Ray(firstPersonCamera.playerCamera.transform.position, input.forward);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * playerInteraction.pickupRange, Color.blue);
         bool showPrompt = false;
 
         if (Physics.Raycast(ray, out hit, playerInteraction.pickupRange, itemLayer))
         {
-            // Debug.Log("NOW looking at item: " + hit.collider.gameObject.name);
+            Debug.Log("NOW looking at item: " + hit.collider.gameObject.name);
             pickupPrompt.text = originalPrompt + hit.collider.gameObject.GetComponent<InWorldItem>().item.displayName;
             showPrompt = true;
 
