@@ -36,6 +36,8 @@ public class InputManager : MonoBehaviour
     public InputAction flashlightAction { get { return _flashlightAction; } }
     public InputAction reloadAction { get { return _reloadAction; } }
 
+    private bool _ignoreMouseMove = false;
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -70,7 +72,29 @@ public class InputManager : MonoBehaviour
 
         if (context.action == _lookAction)
         {
-            _lookDirection = lookAction.ReadValue<Vector2>();
+            // To prevent the player's camera from jumping when the cursor gets locked
+            if (_ignoreMouseMove && context.performed)
+            {
+                _ignoreMouseMove = false;
+                _lookDirection = Vector2.zero;
+            }
+            else if (!_ignoreMouseMove)
+                _lookDirection = lookAction.ReadValue<Vector2>();
         }
+    }
+
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        _lookAction.Enable();
+        _fireAction.Enable();
+    }
+
+    public void UnlockCursor()
+    {
+        _lookAction.Disable();
+        _fireAction.Disable();
+        Cursor.lockState = CursorLockMode.Confined;
+        _ignoreMouseMove = true;
     }
 }

@@ -3,18 +3,18 @@ using UnityEngine;
 using PurrNet.Prediction;
 
 [RequireComponent(typeof(PlayerInteraction))]
-public class ItemCollection : PredictedIdentity<ItemCollection.ItemCollectionInput, ItemCollection.ItemCollectionState>
+public class ItemDetection : PredictedIdentity<ItemDetection.ItemDetectionInput, ItemDetection.ItemDetectionState>
 {
-    public struct ItemCollectionInput : IPredictedData
+    public struct ItemDetectionInput : IPredictedData
     {
         public Vector2 forward;
 
         public void Dispose() {}
     }
 
-    public struct ItemCollectionState : IPredictedData<ItemCollectionState>
+    public struct ItemDetectionState : IPredictedData<ItemDetectionState>
     {
-        PredictedObjectID? lookedAtItem;
+        public PredictedObjectID? lookedAtItem;
 
         public void Dispose() {}
     }
@@ -35,7 +35,12 @@ public class ItemCollection : PredictedIdentity<ItemCollection.ItemCollectionInp
         originalPrompt = pickupPrompt.text;
     }
 
-    protected override void Simulate(ItemCollectionInput input, ref ItemCollectionState state, float delta)
+    protected override void GetFinalInput(ref ItemDetectionInput input)
+    {
+        input.forward = firstPersonCamera.playerCamera.transform.forward;
+    }
+
+    protected override void Simulate(ItemDetectionInput input, ref ItemDetectionState state, float delta)
     {
         if (!firstPersonCamera)
         {
@@ -43,9 +48,9 @@ public class ItemCollection : PredictedIdentity<ItemCollection.ItemCollectionInp
             return;
         }
 
-        Ray ray = new Ray(firstPersonCamera.playerCamera.transform.position, firstPersonCamera.forward);
+        Ray ray = new Ray(firstPersonCamera.playerCamera.transform.position, input.forward);
         RaycastHit hit;
-        Debug.DrawRay(ray.origin, ray.direction * playerInteraction.pickupRange, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * playerInteraction.pickupRange, Color.blue);
         bool showPrompt = false;
 
         if (Physics.Raycast(ray, out hit, playerInteraction.pickupRange, itemLayer))
@@ -53,7 +58,16 @@ public class ItemCollection : PredictedIdentity<ItemCollection.ItemCollectionInp
             // Debug.Log("NOW looking at item: " + hit.collider.gameObject.name);
             pickupPrompt.text = originalPrompt + hit.collider.gameObject.GetComponent<InWorldItem>().item.displayName;
             showPrompt = true;
+
+            // We have to find the PurrDiction ID so it works nicely with PurrNet
+            PredictedObjectID hitItem;
+            if (predictionManager.hierarchy.TryGetId(hit.collider.gameObject, out hitItem))
+                state.lookedAtItem = hitItem;
+            else
+                state.lookedAtItem = null;
         }
+        else
+            state.lookedAtItem = null;
 
         pickupPrompt.gameObject.SetActive(showPrompt);
     }

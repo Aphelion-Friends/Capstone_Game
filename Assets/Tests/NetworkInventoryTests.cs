@@ -26,7 +26,7 @@ public class NetworkInventoryTests
     [Test]
     public void AddingItemToInventory_PutsItemInFirstSlot()
     {
-        inv.ServerAddItem(itemId: 10, amount: 3);
+        inv.AddItem(itemId: 10, amount: 3);
 
         Assert.AreEqual(10, inv.GetItemId(0));
         Assert.AreEqual(3, inv.GetAmount(0));
@@ -36,8 +36,8 @@ public class NetworkInventoryTests
     [Test]
     public void AddingSameItemTwice_StacksItemAmount()
     {
-        inv.ServerAddItem(itemId: 10, amount: 3);
-        inv.ServerAddItem(itemId: 10, amount: 2);
+        inv.AddItem(itemId: 10, amount: 3);
+        inv.AddItem(itemId: 10, amount: 2);
 
         Assert.AreEqual(10, inv.GetItemId(0));
         Assert.AreEqual(5, inv.GetAmount(0));
