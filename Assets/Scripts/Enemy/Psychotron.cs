@@ -40,7 +40,7 @@ public class Psychotron : GenericEnemy
 
         base.AttackTransitions(ref state);
 
-        multiAudioSource.PlayRandom();
+        // multiAudioSource.PlayRandom();
 
     }
 
