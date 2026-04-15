@@ -56,18 +56,18 @@ public class SettingsManager : MonoBehaviour
 
     void LoadSettings()
     {
-        // Load saved values
+        //Load saved values from PlayerPrefs
         float savedVolume = PlayerPrefs.GetFloat("volume", 1f);
         int savedResolution = PlayerPrefs.GetInt("resolution", 0);
         bool savedFullscreen = PlayerPrefs.GetInt("fullscreen", 1) == 1;
 
-        // Apply UI values
+        //Apply UI values
         volumeSlider.value = savedVolume;
         fullscreenToggle.isOn = savedFullscreen;
         resolutionDropdown.value = savedResolution;
         resolutionDropdown.RefreshShownValue();
 
-        // Apply actual settings
+        //Apply actual settings
         AudioListener.volume = savedVolume;
         ApplyResolution(savedResolution, savedFullscreen);
     }
@@ -78,7 +78,7 @@ public class SettingsManager : MonoBehaviour
 
         PlayerPrefs.SetFloat("volume", volume);         //You'll notice that in all the set functions "PlayerPrefs" is referenced, its basically a built in unity
         PlayerPrefs.Save();                             //class meant for storing user settings. You'll notice even in the editor your setting will be the same as how you left them
-    }   
+    }                                                   //Might want to start using an audiomixer later so we can change the ambience and gun volumes seperately
 
     public void SetResolution(int index)
     {
