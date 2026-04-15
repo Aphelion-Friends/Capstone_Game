@@ -15,6 +15,7 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
     protected EnemyChaseState enemyChaseState;
     protected EnemyAttackState enemyAttackState;
     protected EnemyDeathState enemyDeathState;
+    // protected EnemyRetreatState enemyRetreatState;
 
     [SerializeField] protected float chaseRange;
     [SerializeField] protected float attackRange;
@@ -27,9 +28,11 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
         enemyChaseState = GetComponent<EnemyChaseState>();
         enemyAttackState = GetComponent<EnemyAttackState>();
         enemyDeathState = GetComponent<EnemyDeathState>();
+        // enemyRetreatState = GetComponent<EnemyRetreatState>();
         enemyPatrolState.transitionFunc = PatrolTransitions;
         enemyChaseState.transitionFunc = ChaseTransitions;
         enemyAttackState.transitionFunc = AttackTransitions;
+        // enemyRetreatState.transitionFunc = RetreatTransitions;
     }
     
     virtual protected void AttackTransitions(ref EnemyAttackState.AttackState state)
@@ -96,6 +99,11 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
         }
         return currentBest;
     }
+
+    // virtual protected void RetreatTransitions(ref EnemyRetreatState.RetreatState state)
+    // {
+        
+    // }
 
     virtual public void OnDeath()
     {
