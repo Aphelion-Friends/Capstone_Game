@@ -51902,6 +51902,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7491281470483297598, guid: d80eb8d27f7c8ab47a257e120d18e603, type: 3}
   m_PrefabInstance: {fileID: 935032566}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &935163889
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 377.82635
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.777639
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -342.39716
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 512752287027942448, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5811777857825763031, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+      propertyPath: m_Name
+      value: AmmoBox
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 010a860962bd92109b52b218f5d11107, type: 3}
 --- !u!1001 &935177915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59100,6 +59157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0112282cee605384cb1835dbd2b236de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Prediction::PurrNet.Prediction.PredictionManager
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -59107,8 +59166,6 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _physicsProvider: 1
   _updateViewMode: 1
   _builtInSystems: 31
@@ -117968,3 +118025,4 @@ SceneRoots:
   - {fileID: 1125914165}
   - {fileID: 102571879}
   - {fileID: 354435398}
+  - {fileID: 935163889}
