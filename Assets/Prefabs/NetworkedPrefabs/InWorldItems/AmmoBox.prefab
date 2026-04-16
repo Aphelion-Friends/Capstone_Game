@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98dbb08343eac044895b9b52872bcb49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Prediction::PurrNet.Prediction.PredictedTransform
-  _graphics: {fileID: 0}
+  _graphics: {fileID: 422451185691028014}
   _floatAccuracy: 1
   _interpolationSettings: {fileID: 11400000, guid: 4a8aa8e44e23cfd4a8d4387ef3f36173, type: 2}
   _unparentGraphics: 0
@@ -130,8 +130,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.8, z: 1.7}
-  m_Center: {x: 0, y: 0.4, z: 0.7}
+  m_Size: {x: 2.8294046, y: 1.9102211, z: 1.6698365}
+  m_Center: {x: 0.018924832, y: 0.95511055, z: -0.00042295456}
 --- !u!1001 &168428001584942533
 PrefabInstance:
   m_ObjectHideFlags: 0
