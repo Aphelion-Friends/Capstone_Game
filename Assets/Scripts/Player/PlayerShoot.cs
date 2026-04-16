@@ -88,7 +88,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     {
         return new ShootState
         {
-            ammo = _maxAmmo,
+            ammo = 0,
             shootCooldown = 0,
         };
     }
