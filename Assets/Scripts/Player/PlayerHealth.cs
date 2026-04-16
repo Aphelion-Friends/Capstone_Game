@@ -67,6 +67,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     private void spawnCorpse()
     {
         GameObject body = Instantiate(corpse);
+        body.transform.position = this.transform.position;
     }
 
     public struct HealthState : IPredictedData<HealthState>
