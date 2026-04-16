@@ -820,6 +820,8 @@ MonoBehaviour:
   _damage: 10
   gunEffects: {fileID: 1110538303390578580}
   shootOrigin: {fileID: 3433072650591229891}
+  inventory: {fileID: 5850925789161093228}
+  ammoItem: {fileID: 11400000, guid: 05be03e5ceceaec95bc64a613f4be723, type: 2}
 --- !u!114 &7036621359131802969
 MonoBehaviour:
   m_ObjectHideFlags: 0
