@@ -1,0 +1,12 @@
+# Blender 5.1.0 MTL File: 'ammo_box.blend'
+# www.blender.org
+
+newmtl ammo_box.vox_Material
+Ns 408.286285
+Ka 0.253776 0.253776 0.253776
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 3
+map_Kd ammo_box.png

@@ -12,6 +12,10 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
     [SerializeField] private Transform shootOrigin;
 
+    [Header("Inventory + Items Stuff")]
+    [SerializeField] private NetworkInventory inventory;
+    [SerializeField] private ItemObject ammoItem;
+
     private PredictedEvent _onShoot;
 
     protected override void LateAwake()
@@ -38,7 +42,9 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
         if (input.reload)
         {
-            state.ammo = _maxAmmo;
+            bool hasAmmo = inventory.TryRemoveItem(ammoItem.itemId, 1);
+            if (hasAmmo)
+                state.ammo = _maxAmmo;
         }
 
         if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0)

@@ -183,6 +183,24 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
 
         return false;
     }
+
+    public bool TryRemoveItem(int itemId, int amount)
+    {
+        for (int i = 0; i < currentState.slotCount; i++)
+        {
+            if (currentState.itemIds[i] == itemId && currentState.amounts[i] >= amount)
+            {
+                currentState.amounts[i] -= amount;
+                if (currentState.amounts[i] <= 0)
+                    currentState.itemIds[i] = -1;
+
+                OnInventoryChanged?.Invoke();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void EditorInitForTests(int slotCount = 24)
     {
         currentState = new InvState
