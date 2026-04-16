@@ -43,7 +43,15 @@ MonoBehaviour:
     pooling:
       usePooling: 0
       initialSize: 0
-  - prefab: {fileID: 5811777857825763031, guid: 010a860962bd92109b52b218f5d11107, type: 3}
+  - prefab: {fileID: 6443193354737850092, guid: 458e1e2bab8c6ed4fb123d4fed832341, type: 3}
+    pooling:
+      usePooling: 0
+      initialSize: 0
+  - prefab: {fileID: 7313613825057764812, guid: c224275e3c81dab4ca9d4a29399d2c78, type: 3}
+    pooling:
+      usePooling: 0
+      initialSize: 0
+  - prefab: {fileID: 4664176889516456397, guid: 8b305049feefb404fac1f2a1c3b6b9e4, type: 3}
     pooling:
       usePooling: 0
       initialSize: 0
