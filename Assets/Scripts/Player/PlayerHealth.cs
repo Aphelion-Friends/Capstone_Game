@@ -11,6 +11,13 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     public float HealthPercent => _maxHealth > 0f ? currentState.health / _maxHealth : 0f;
     public bool IsDead => currentState.isDead;
 
+    // private MultiAudioSource playerDeathAudio;
+
+    // private void Awake()
+    // {
+    //     playerDeathAudio = MultiAudioSource.FromResource(this.gameObject, "Playerdeath");
+    // }
+
     protected override HealthState GetInitialState()
     {
         return new HealthState
@@ -61,6 +68,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
             Debug.Log("The player died!");
             currentState.isDead = true;
+            // playerDeathAudio.Play();
         }
     }
 
@@ -82,4 +90,5 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
         public void Dispose() { }
     }
+
 }
