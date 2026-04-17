@@ -11,6 +11,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     public float HealthPercent => _maxHealth > 0f ? currentState.health / _maxHealth : 0f;
     public bool IsDead => currentState.isDead;
 
+
     protected override HealthState GetInitialState()
     {
         return new HealthState
@@ -68,6 +69,9 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     {
         GameObject body = Instantiate(corpse);
         body.transform.position = this.transform.position;
+
+        MultiAudioSource deathAudio = MultiAudioSource.FromResource(body, "Tacobellbong");
+        deathAudio.Play();
     }
 
     public struct HealthState : IPredictedData<HealthState>
@@ -82,4 +86,5 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
         public void Dispose() { }
     }
+
 }

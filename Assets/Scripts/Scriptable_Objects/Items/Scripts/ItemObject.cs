@@ -23,6 +23,9 @@ public abstract class ItemObject : ScriptableObject
 
     public ItemType type;
 
+    [Header("Pickup Settings")]
+    public int pickupAmount = 1;
+
     [TextArea(15, 20)]
     public string description;
     public string itemName;

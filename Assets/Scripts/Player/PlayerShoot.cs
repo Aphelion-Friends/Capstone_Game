@@ -18,17 +18,42 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
     private PredictedEvent _onShoot;
 
+    public int CurrentAmmo => currentState.ammo;
+    public int ReserveAmmo => inventory != null ? inventory.GetTotalAmount(ammoItem.itemId) : 0;
+    public int MaxAmmo => _maxAmmo;
+
     protected override void LateAwake()
     {
         base.LateAwake();
-        _onShoot  = new PredictedEvent(predictionManager, this);
+
+        _onShoot = new PredictedEvent(predictionManager, this);
         _onShoot.AddListener(OnShootEvent);
+
+        RegisterToAmmoUI();
+    }
+
+    private void Start()
+    {
+        RegisterToAmmoUI();
     }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
         _onShoot.RemoveListener(OnShootEvent);
+    }
+
+    private void RegisterToAmmoUI()
+    {
+        if (!isOwner)
+            return;
+
+        AmmoUI ammoUI = FindFirstObjectByType<AmmoUI>();
+
+        if (ammoUI != null)
+        {
+            ammoUI.SetPlayer(this);
+        }
     }
 
     private void OnShootEvent()
@@ -42,16 +67,30 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
         if (input.reload)
         {
-            bool hasAmmo = inventory.TryRemoveItem(ammoItem.itemId, 1);
-            if (hasAmmo)
-                state.ammo = _maxAmmo;
+            int neededAmmo = _maxAmmo - state.ammo;
+
+            if (neededAmmo > 0)
+            {
+                int availableAmmo = inventory.GetTotalAmount(ammoItem.itemId);
+                int ammoToLoad = Mathf.Min(neededAmmo, availableAmmo);
+
+                if (ammoToLoad > 0)
+                {
+                    bool removedAmmo = inventory.TryRemoveItem(ammoItem.itemId, ammoToLoad);
+
+                    if (removedAmmo)
+                    {
+                        state.ammo += ammoToLoad;
+                    }
+                }
+            }
         }
 
         if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0)
         {
-            
             Shoot();
-            float cooldownTime = 1 / (roundsPerMinute / 60);
+
+            float cooldownTime = 1 / (roundsPerMinute / 60f);
             state.shootCooldown = cooldownTime;
             state.ammo--;
         }
@@ -63,11 +102,16 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
         RaycastHit hit;
 
-        if (Physics.Raycast(shootOrigin.position, _playerMovement.currentInput.cameraForward, out hit, Mathf.Infinity, _shootLayerMask))
+        if (Physics.Raycast(
+            shootOrigin.position,
+            _playerMovement.currentInput.cameraForward,
+            out hit,
+            Mathf.Infinity,
+            _shootLayerMask))
         {
-            if(hit.transform.TryGetComponent(out PlayerHealth playerHealth))
+            if (hit.transform.TryGetComponent(out PlayerHealth playerHealth))
                 playerHealth.ChangeHealth(-_damage);
-            else if(hit.transform.TryGetComponent(out EnemyHealth enemyHealth))
+            else if (hit.transform.TryGetComponent(out EnemyHealth enemyHealth))
                 enemyHealth.ChangeHealth(-_damage);
         }
     }
@@ -98,7 +142,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
         public bool shoot;
         public bool reload;
 
-        public void Dispose() {}
+        public void Dispose() { }
     }
 
     public struct ShootState : IPredictedData<ShootState>
@@ -111,6 +155,6 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
             return $"Ammo: {ammo}\nCooldown: {shootCooldown}";
         }
 
-        public void Dispose() {}
+        public void Dispose() { }
     }
 }
