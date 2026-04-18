@@ -6,16 +6,17 @@ public class Spider : GenericEnemy
 {
     [SerializeField] private NetworkAnimator _animator;
 
-    private MultiAudioSource audioSource, audioSource2, spiderDeathAudio; //Spider death doesn't work as in it won't play it on spiders death.
+    private MultiAudioSource audioSource, audioSource2, spiderDeathAudio;
 
     public override void OnDeath()
     {
-        spiderDeathAudio.Play();
         _animator.SetTrigger("Die");
         ObjectiveManager.Instance.currentState.objective.EnemyKilled("spider");
         
 
         base.OnDeath();
+        Debug.Log("Spider death audio played");
+        spiderDeathAudio.PlayOnlyIfDone();
     }
 
     protected override void AttackTransitions(ref EnemyAttackState.AttackState state)
@@ -40,6 +41,6 @@ public class Spider : GenericEnemy
         base.Awake();
         audioSource = MultiAudioSource.FromResource(this.gameObject, "Spiderattack");
         audioSource2 = MultiAudioSource.FromResource(this.gameObject, "Spidercrawl");
-        spiderDeathAudio = MultiAudioSource.FromResource(this.gameObject, "Spiderdeath");
+        spiderDeathAudio = MultiAudioSource.FromResource(this.gameObject, "spiderdeath");
     }
 }
