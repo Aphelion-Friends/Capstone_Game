@@ -117634,6 +117634,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Medkit
       objectReference: {fileID: 0}
+    - target: {fileID: 4920926280413998330, guid: 18377f68540b40c4390e8ea1a569cf6d, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6457270229196581526, guid: 18377f68540b40c4390e8ea1a569cf6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 377.31
