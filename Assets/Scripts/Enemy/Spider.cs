@@ -22,8 +22,8 @@ public class Spider : GenericEnemy
     {
         base.AttackTransitions(ref state);
         enemyAttackCooldown.ResetTimer();
-        stateMachine.SetState(enemyChaseState);
         audioSource.PlayOnlyIfDone();
+        stateMachine.SetState(enemyChaseState);
     }
 
     protected override void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
