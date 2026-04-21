@@ -7,7 +7,7 @@ public class ItemDetection : PredictedIdentity<ItemDetection.ItemDetectionInput,
 {
     public struct ItemDetectionInput : IPredictedData
     {
-        public Vector2 forward;
+        public Vector3 forward;
 
         public void Dispose() {}
     }

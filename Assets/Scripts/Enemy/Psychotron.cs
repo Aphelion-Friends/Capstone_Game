@@ -4,6 +4,7 @@ using PurrNet.Prediction.StateMachine;
 
 [RequireComponent(typeof(EnemyStunState))]
 [RequireComponent(typeof(EnemyController))]
+[RequireComponent(typeof(EnemyAttackCooldown))]
 public class Psychotron : GenericEnemy
 {
     [SerializeField] private Animator animator;
@@ -12,6 +13,8 @@ public class Psychotron : GenericEnemy
     private EnemyController enemyController;
 
     private MultiAudioSource audioSource, multiAudioSource;
+
+    private EnemyAttackCooldown enemyAttackCooldown;
 
     protected override void Awake()
     {
@@ -22,6 +25,7 @@ public class Psychotron : GenericEnemy
         enemyController = GetComponent<EnemyController>();
         enemyStunState.transitionFunc = StunTransitions;
         audioSource = MultiAudioSource.FromResource(this.gameObject, "Robotstep");
+        enemyAttackCooldown = GetComponent<EnemyAttackCooldown>();
         // multiAudioSource = MultiAudioSource.
         
     }
@@ -35,11 +39,12 @@ public class Psychotron : GenericEnemy
 
     protected override void AttackTransitions(ref EnemyAttackState.AttackState state)
     {
-        Debug.Log("Psychotron attak!!!");
         animator.SetTrigger("Attack");
 
         base.AttackTransitions(ref state);
 
+        enemyAttackCooldown.ResetTimer();
+        stateMachine.SetState(enemyChaseState);
         // multiAudioSource.PlayRandom();
 
     }
@@ -56,7 +61,17 @@ public class Psychotron : GenericEnemy
 
     protected override void ChaseTransitions(ref EnemyChaseState.ChaseState state)
     {
-        base.ChaseTransitions(ref state);
+        GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
+
+        if (Vector3.Distance(transform.position, targetedPlayer.transform.position) >= chaseRange)
+        {
+            stateMachine.SetState(enemyPatrolState);
+        }
+        else if (Vector3.Distance(transform.position, targetedPlayer.transform.position) <= attackRange &&
+                enemyAttackCooldown.currentState.timer <= 0)
+        {
+            stateMachine.SetState(enemyAttackState);
+        }
         audioSource.PlayOnlyIfDone();
     }
 }
