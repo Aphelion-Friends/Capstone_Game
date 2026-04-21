@@ -51,7 +51,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
             spawnCorpse();
 
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
 
             GameObject newCam = GameObject.FindWithTag("MainCamera"); // Search for another player's camera to spectate
 
@@ -62,6 +62,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
 
             Debug.Log("The player died!");
             currentState.isDead = true;
+            predictionManager.hierarchy.Delete(this.gameObject);
         }
     }
 
