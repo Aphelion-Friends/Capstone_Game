@@ -63,6 +63,12 @@ public class Psychotron : GenericEnemy
     {
         GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
 
+        if (targetedPlayer == null)
+        {
+            state.targetedPlayer = null;
+            stateMachine.SetState(enemyPatrolState);
+        }
+
         if (Vector3.Distance(transform.position, targetedPlayer.transform.position) >= chaseRange)
         {
             stateMachine.SetState(enemyPatrolState);
