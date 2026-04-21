@@ -61023,6 +61023,52 @@ Transform:
   - {fileID: 1415927777}
   m_Father: {fileID: 57699742}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1104834040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1104834042}
+  - component: {fileID: 1104834041}
+  m_Layer: 0
+  m_Name: PlayerRespawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1104834041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104834040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d27b2ec1000203f813c7a5b0377296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _respawnTimer: 5
+  deathScreen: {fileID: 0}
+--- !u!4 &1104834042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1104834040}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 426.3202, y: 16.01135, z: -395.54965}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105548274 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5b6e49d6756a908408f13a5cd86cdbd1, type: 3}
@@ -116863,10 +116909,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DeathScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 41890457181010805, guid: 0aaefed6796cb66b0bd91bd4df52fc90, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3314074982133712814, guid: 0aaefed6796cb66b0bd91bd4df52fc90, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -118234,6 +118276,7 @@ SceneRoots:
   - {fileID: 30369864}
   - {fileID: 2040057607}
   - {fileID: 1090045579}
+  - {fileID: 1104834042}
   - {fileID: 355007681}
   - {fileID: 368354782}
   - {fileID: 209874784}
