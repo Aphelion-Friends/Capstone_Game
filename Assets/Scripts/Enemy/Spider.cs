@@ -17,6 +17,7 @@ public class Spider : GenericEnemy
         base.OnDeath();
         Debug.Log("Spider death audio played");
         spiderDeathAudio.PlayOnlyIfDone();
+        spiderDeathAudio.SetVolume(0.5f);
     }
 
     protected override void AttackTransitions(ref EnemyAttackState.AttackState state)

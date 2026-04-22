@@ -55,6 +55,7 @@ public class Psychotron : GenericEnemy
         enemyController.active = false;
         Debug.Log("Stun audio plays");
         stunAudio.PlayOnlyIfDone();
+        stunAudio.SetVolume(0.5f);
     }
 
     protected override void ChaseTransitions(ref EnemyChaseState.ChaseState state)
