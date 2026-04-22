@@ -13,6 +13,10 @@ public class EnemyController : PredictedIdentity<EnemyController.ControllerState
     // Choose a value that is not too small because the enemy movement will get too twitchy but also not too large
     [SerializeField] private float _warpDistance = 10f;
 
+    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _turnSpeed = 90f;
+    [SerializeField] private float _acceleration = 1f;
+
     public bool active { get => currentState.active; set { currentState.active = value; SetActive(); } }
 
     public float speed { get => currentState.speed; set => currentState.speed = Mathf.Abs(value); }
@@ -26,6 +30,9 @@ public class EnemyController : PredictedIdentity<EnemyController.ControllerState
         _agent.height = _height;
         _agent.radius = _radius;
         _agent.enabled = true;
+        _agent.autoBraking = true;
+        _agent.angularSpeed = _turnSpeed;
+        _agent.acceleration = _acceleration;
     }
 
     private void SetActive()
@@ -56,7 +63,7 @@ public class EnemyController : PredictedIdentity<EnemyController.ControllerState
         return new ControllerState{
             active = true,
             destPoint = new Vector3(),
-            speed = 5f
+            speed = _speed
         };
     }
 

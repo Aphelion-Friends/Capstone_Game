@@ -9,6 +9,12 @@ public class AmmoUI : MonoBehaviour
 
     public void SetPlayer(PlayerShoot newPlayerShoot)
     {
+        if (newPlayerShoot == null)
+            return;
+
+        if (!newPlayerShoot.isOwner)
+            return;
+
         playerShoot = newPlayerShoot;
     }
 
@@ -19,7 +25,14 @@ public class AmmoUI : MonoBehaviour
 
         if (playerShoot == null)
         {
-            ammoText.text = "Ammo: 0 / 0";
+            ammoText.text = "0 / 0";
+            return;
+        }
+
+        if (!playerShoot.isActiveAndEnabled)
+        {
+            ammoText.text = "0 / 0";
+            playerShoot = null;
             return;
         }
 

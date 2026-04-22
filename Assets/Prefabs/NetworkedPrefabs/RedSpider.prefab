@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 2973923519811017814}
   - component: {fileID: 8850779383116090009}
   - component: {fileID: 1821396325429868636}
-  - component: {fileID: 1493394964987028034}
+  - component: {fileID: 4880936098422385667}
   m_Layer: 10
   m_Name: RedSpider
   m_TagString: Untagged
@@ -239,6 +239,9 @@ MonoBehaviour:
   _radius: 1
   _height: 1
   _warpDistance: 10
+  _speed: 10
+  _turnSpeed: 360
+  _acceleration: 10
 --- !u!114 &185633383459557565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855ae3aa1ca86c022bc4b4650d002c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  _maxHealth: 30
+  _maxHealth: 150
   _animator: {fileID: 0}
   enemy: {fileID: 0}
 --- !u!114 &1821396325429868636
@@ -330,18 +333,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6246c5e16af08c988776a1f79cb812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeathState
---- !u!114 &1493394964987028034
+--- !u!114 &4880936098422385667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7313613825057764812}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 096a29b353e661648a9efd6cec6b7bdf, type: 3}
+  m_Script: {fileID: 11500000, guid: e0542fb4bcc35470095ec3efb9ea9661, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Scripts::SpiderCrawl
+  m_EditorClassIdentifier: Scripts::EnemyAttackCooldown
+  cooldown: 2
 --- !u!1001 &3668195206153699479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -350,6 +354,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4642783690089085911}
     m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.096
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.096
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.096
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -364,7 +380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.07075491
+      value: 0.030743891
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
       propertyPath: m_LocalRotation.x
@@ -372,7 +388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9974938
+      value: 0.9995273
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
       propertyPath: m_LocalRotation.z
@@ -384,7 +400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 171.885
+      value: 176.476
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6ceea5389d1bddd46b40725f72e341ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

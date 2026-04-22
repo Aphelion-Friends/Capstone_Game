@@ -24,14 +24,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940662813278865243}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.06513205, z: -0, w: 0.99787664}
+  m_LocalRotation: {x: -0, y: 0.0030698823, z: -0, w: 0.9999953}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 324058547664029281}
   m_Father: {fileID: 6952670294922703168}
-  m_LocalEulerAnglesHint: {x: 0, y: -7.469, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.352, z: 0}
 --- !u!1 &4664176889516456397
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 8971992119761654375}
   - component: {fileID: 7678186487502642301}
   - component: {fileID: 1296984895149626577}
-  - component: {fileID: 7766570255018172431}
+  - component: {fileID: 1473404159990373339}
   m_Layer: 10
   m_Name: PsychedlicSpider
   m_TagString: Untagged
@@ -239,6 +239,9 @@ MonoBehaviour:
   _radius: 1
   _height: 1
   _warpDistance: 10
+  _speed: 20
+  _turnSpeed: 360
+  _acceleration: 20
 --- !u!114 &5418258708022974763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855ae3aa1ca86c022bc4b4650d002c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  _maxHealth: 30
+  _maxHealth: 60
   _animator: {fileID: 0}
   enemy: {fileID: 0}
 --- !u!114 &1296984895149626577
@@ -330,18 +333,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6246c5e16af08c988776a1f79cb812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeathState
---- !u!114 &7766570255018172431
+--- !u!114 &1473404159990373339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4664176889516456397}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 096a29b353e661648a9efd6cec6b7bdf, type: 3}
+  m_Script: {fileID: 11500000, guid: e0542fb4bcc35470095ec3efb9ea9661, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Scripts::SpiderCrawl
+  m_EditorClassIdentifier: Scripts::EnemyAttackCooldown
+  cooldown: 2
 --- !u!1001 &285399087628214666
 PrefabInstance:
   m_ObjectHideFlags: 0

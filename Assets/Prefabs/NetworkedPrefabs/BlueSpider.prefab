@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 4746489064510932201}
   - component: {fileID: 13869447971261082}
   - component: {fileID: 5310760041207422413}
-  - component: {fileID: 2669243469940706026}
+  - component: {fileID: 5723257096297172495}
   m_Layer: 10
   m_Name: BlueSpider
   m_TagString: Untagged
@@ -41,7 +41,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6612732, y: 0.6612732, z: 0.6612732}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2670658627885667341}
@@ -207,6 +207,9 @@ MonoBehaviour:
   _radius: 1
   _height: 1
   _warpDistance: 10
+  _speed: 50
+  _turnSpeed: 360
+  _acceleration: 50
 --- !u!114 &7747008556448405094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855ae3aa1ca86c022bc4b4650d002c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  _maxHealth: 30
+  _maxHealth: 20
   _animator: {fileID: 0}
   enemy: {fileID: 0}
 --- !u!114 &5310760041207422413
@@ -298,18 +301,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6246c5e16af08c988776a1f79cb812, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDeathState
---- !u!114 &2669243469940706026
+--- !u!114 &5723257096297172495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6443193354737850092}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 096a29b353e661648a9efd6cec6b7bdf, type: 3}
+  m_Script: {fileID: 11500000, guid: e0542fb4bcc35470095ec3efb9ea9661, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Scripts::SpiderCrawl
+  m_EditorClassIdentifier: Scripts::EnemyAttackCooldown
+  cooldown: 2
 --- !u!1 &8781720222719550784
 GameObject:
   m_ObjectHideFlags: 0
