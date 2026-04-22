@@ -179,6 +179,9 @@ MonoBehaviour:
   _radius: 1
   _height: 1
   _warpDistance: 10
+  _speed: 5
+  _turnSpeed: 360
+  _acceleration: 10
 --- !u!114 &5622480805165329139
 MonoBehaviour:
   m_ObjectHideFlags: 0
