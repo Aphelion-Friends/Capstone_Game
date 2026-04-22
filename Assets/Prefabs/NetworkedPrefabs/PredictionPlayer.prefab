@@ -1014,6 +1014,7 @@ MonoBehaviour:
   _camera: {fileID: 5425517718750818120}
   _rigidbody: {fileID: 7961874865920024228}
   _playerAnimator: {fileID: 3781700708315503250}
+  _walkSoundDelay: 0.2
 --- !u!54 &3541979704348186581
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1119,9 +1120,11 @@ MonoBehaviour:
   _maxAmmo: 30
   _damage: 10
   gunEffects: {fileID: 1110538303390578580}
+  gunRecoil: {fileID: 6149227165875636559}
   shootOrigin: {fileID: 3433072650591229891}
   inventory: {fileID: 5850925789161093228}
   ammoItem: {fileID: 11400000, guid: 05be03e5ceceaec95bc64a613f4be723, type: 2}
+  reloadDuration: 0.8
 --- !u!114 &7036621359131802969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,6 +2070,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   recoilX: 1
   recoilY: 2
+  kickPosition: {x: 0, y: 0, z: -0.08}
+  kickRotation: {x: -8, y: 2, z: 2}
+  returnSpeed: 8
+  snappiness: 16
 --- !u!4 &7316061736729316872 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4374230564946100715, guid: 2fe622745a564344c8d3d2f5d1312dbe, type: 3}

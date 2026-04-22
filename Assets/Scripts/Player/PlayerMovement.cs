@@ -21,11 +21,14 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     [SerializeField] private Animator _playerAnimator;
 
+    [SerializeField] private float _walkSoundDelay = 0.2f;
+
     private MultiAudioSource audioSource;
+    private float _walkSoundTimer;
 
     private void Awake()
     {
-        audioSource = MultiAudioSource.FromResource(this.gameObject, "Walking");
+        audioSource = MultiAudioSource.FromResource(this.gameObject, "Walking2");
     }
 
     protected override void LateAwake()
@@ -42,10 +45,23 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     protected override void Simulate(MoveInput input, ref MoveState state, float delta)
     {
-        if (input.moveDirection.y != 0 || input.moveDirection.x != 0)
+        bool isMoving = input.moveDirection.y != 0 || input.moveDirection.x != 0;
+
+        if(isMoving)
         {
-            audioSource.PlayOnlyIfDone();
+            _walkSoundTimer -= delta;
+            if( _walkSoundTimer <= 0f)
+            {
+                audioSource.PlayOnlyIfDone();
+                _walkSoundTimer = _walkSoundDelay;
+            }
         }
+
+        else
+        {
+            _walkSoundTimer = 0f;
+        }
+
         if (input.moveDirection.y > 0)
         {
             _playerAnimator.SetTrigger("StartWalk");

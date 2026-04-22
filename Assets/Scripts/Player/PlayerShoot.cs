@@ -9,6 +9,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     [SerializeField] private int _maxAmmo = 30;
     [SerializeField] private float _damage = 10f;
     [SerializeField] private GunEffects gunEffects;
+    [SerializeField] private GunRecoil gunRecoil;
 
     [SerializeField] private Transform shootOrigin;
 
@@ -16,7 +17,11 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     [SerializeField] private NetworkInventory inventory;
     [SerializeField] private ItemObject ammoItem;
 
+    [Header("Reload Settings")]
+    [SerializeField] private float reloadDuration = 1.5f;
+
     private PredictedEvent _onShoot;
+    private MultiAudioSource reloadAudio;
 
     public int CurrentAmmo => currentState.ammo;
     public int ReserveAmmo => inventory != null ? inventory.GetTotalAmount(ammoItem.itemId) : 0;
@@ -28,6 +33,8 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
         _onShoot = new PredictedEvent(predictionManager, this);
         _onShoot.AddListener(OnShootEvent);
+
+        reloadAudio = MultiAudioSource.FromResource(this.gameObject, "Reload");
 
         RegisterToAmmoUI();
     }
@@ -59,13 +66,35 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     private void OnShootEvent()
     {
         gunEffects.PlayEffects();
+        if (gunRecoil != null)
+        {
+            gunRecoil.Recoil();
+        }
     }
 
     protected override void Simulate(ShootInput input, ref ShootState state, float delta)
     {
         state.shootCooldown -= delta;
+        state.reloadTimer -= delta;
 
-        if (input.reload)
+        if (input.reload && state.reloadTimer <= 0f)
+        {
+            int neededAmmo = _maxAmmo - state.ammo;
+
+            if (neededAmmo > 0)
+            {
+                int availableAmmo = inventory.GetTotalAmount(ammoItem.itemId);
+
+                if (availableAmmo > 0)
+                {
+                    state.reloadTimer = reloadDuration;
+
+                    reloadAudio.PlayOnlyIfDone();
+                }
+            }
+        }
+
+        if (state.reloadTimer <= 0f && state.wasReloading)
         {
             int neededAmmo = _maxAmmo - state.ammo;
 
@@ -79,14 +108,12 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
                     bool removedAmmo = inventory.TryRemoveItem(ammoItem.itemId, ammoToLoad);
 
                     if (removedAmmo)
-                    {
                         state.ammo += ammoToLoad;
-                    }
                 }
             }
         }
 
-        if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0)
+        if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0 && state.reloadTimer <= 0f)
         {
             Shoot();
 
@@ -94,6 +121,8 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
             state.shootCooldown = cooldownTime;
             state.ammo--;
         }
+
+        state.wasReloading = state.reloadTimer > 0f;
     }
 
     private void Shoot()
@@ -134,6 +163,8 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
         {
             ammo = 0,
             shootCooldown = 0,
+            reloadTimer = 0,
+            wasReloading = false
         };
     }
 
@@ -150,9 +181,12 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
         public int ammo;
         public float shootCooldown;
 
+        public float reloadTimer;
+        public bool wasReloading;
+
         public override string ToString()
         {
-            return $"Ammo: {ammo}\nCooldown: {shootCooldown}";
+            return $"Ammo: {ammo}\nCooldown: {shootCooldown}\nReloadTimer: {reloadTimer}";
         }
 
         public void Dispose() { }
