@@ -11,6 +11,8 @@ public class PlayerHeal : PredictedIdentity<PlayerHeal.HealInput, PlayerHeal.Hea
     [Header("Heal Settings")]
     [SerializeField] private float healAmount = 25f;
 
+    private MultiAudioSource healAudio;
+
     public struct HealInput : IPredictedData
     {
         public bool heal;
@@ -34,6 +36,8 @@ public class PlayerHeal : PredictedIdentity<PlayerHeal.HealInput, PlayerHeal.Hea
         {
             playerHealth = GetComponent<PlayerHealth>();
         }
+
+        healAudio = MultiAudioSource.FromResource(this.gameObject, "heal");
     }
 
     protected override void UpdateInput(ref HealInput input)
@@ -72,6 +76,7 @@ public class PlayerHeal : PredictedIdentity<PlayerHeal.HealInput, PlayerHeal.Hea
             if (removedMedkit)
             {
                 playerHealth.ChangeHealth(healAmount);
+                healAudio.PlayOnlyIfDone();
                 Debug.Log($"Used medkit. Healed {healAmount} HP.");
             }
         }
