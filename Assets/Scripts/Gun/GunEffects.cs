@@ -18,12 +18,13 @@ public class GunEffects : MonoBehaviour
 
     void Awake()
     {
-        audioSource = MultiAudioSource.FromResource(this.gameObject, "gunshot");
+        audioSource = MultiAudioSource.FromResource(this.gameObject, "HandGun1");
         gunRecoil = GetComponentInChildren<GunRecoil>();
     }
     public void PlayEffects()
     {
         audioSource.Play();
+        audioSource.SetVolume(0.4f);
         _muzzleFlash.Play();
         gunRecoil.Recoil();
     }

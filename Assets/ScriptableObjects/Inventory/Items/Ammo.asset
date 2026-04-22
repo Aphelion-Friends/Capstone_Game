@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Scripts::DefaultObject
   itemId: 1
   prefab: {fileID: 646221675248979603, guid: 776c77cb476280f46bfd8e574e159926, type: 3}
-  texture: {fileID: 21300000, guid: 8041de87f61a5df69a580f5ccb196e96, type: 3}
+  texture: {fileID: 21300000, guid: 49351cc9f24bd884f993b8e31c13e0c8, type: 3}
   worldModelPrefab: {fileID: 5811777857825763031, guid: 010a860962bd92109b52b218f5d11107, type: 3}
-  type: 0
+  type: 2
+  pickupAmount: 30
   description: 
   itemName: ammo
   displayName: Ammo Box

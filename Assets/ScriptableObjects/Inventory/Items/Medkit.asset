@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8525f62f5e719416b36b03d48529da3, type: 3}
+  m_Name: Medkit
+  m_EditorClassIdentifier: Scripts::DefaultObject
+  itemId: 2
+  prefab: {fileID: 646221675248979603, guid: 776c77cb476280f46bfd8e574e159926, type: 3}
+  texture: {fileID: 21300000, guid: 54c179666eeffc94db75386b29fe0b2f, type: 3}
+  worldModelPrefab: {fileID: 3579147552763969772, guid: 18377f68540b40c4390e8ea1a569cf6d, type: 3}
+  type: 2
+  pickupAmount: 1
+  description: 
+  itemName: medKit
+  displayName: Med Kit

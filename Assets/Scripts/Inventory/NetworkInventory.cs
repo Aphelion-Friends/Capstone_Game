@@ -76,7 +76,20 @@ public class NetworkInventory : PredictedIdentity<NetworkInventory.InvInput, Net
         if (index < 0 || index >= currentState.slotCount) return -1;
         return currentState.amounts[index];
     }
+    public int GetTotalAmount(int itemId)
+    {
+        int total = 0;
 
+        for (int i = 0; i < currentState.slotCount; i++)
+        {
+            if (currentState.itemIds[i] == itemId && currentState.amounts[i] > 0)
+            {
+                total += currentState.amounts[i];
+            }
+        }
+
+        return total;
+    }
     // I don't know if this is the best solution
     // Seems like it's working though
     private bool _hasPending;

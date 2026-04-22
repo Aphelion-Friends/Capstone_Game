@@ -2,11 +2,14 @@ using UnityEngine;
 using PurrNet;
 using UnityEngine.Audio;
 
+[RequireComponent(typeof(EnemyAttackCooldown))]
 public class Spider : GenericEnemy
 {
     [SerializeField] private NetworkAnimator _animator;
 
     private MultiAudioSource audioSource, audioSource2, spiderDeathAudio;
+
+    private EnemyAttackCooldown enemyAttackCooldown;
 
     public override void OnDeath()
     {
@@ -23,7 +26,9 @@ public class Spider : GenericEnemy
     protected override void AttackTransitions(ref EnemyAttackState.AttackState state)
     {
         base.AttackTransitions(ref state);
+        enemyAttackCooldown.ResetTimer();
         audioSource.PlayOnlyIfDone();
+        stateMachine.SetState(enemyChaseState);
     }
 
     protected override void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
@@ -33,7 +38,17 @@ public class Spider : GenericEnemy
 
     protected override void ChaseTransitions(ref EnemyChaseState.ChaseState state)
     {
-        base.ChaseTransitions(ref state);
+        GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
+
+        if (Vector3.Distance(transform.position, targetedPlayer.transform.position) >= chaseRange)
+        {
+            stateMachine.SetState(enemyPatrolState);
+        }
+        else if (Vector3.Distance(transform.position, targetedPlayer.transform.position) <= attackRange &&
+                enemyAttackCooldown.currentState.timer <= 0)
+        {
+            stateMachine.SetState(enemyAttackState);
+        }
         audioSource2.PlayOnlyIfDone();
     }
 
@@ -43,5 +58,6 @@ public class Spider : GenericEnemy
         audioSource = MultiAudioSource.FromResource(this.gameObject, "Spiderattack");
         audioSource2 = MultiAudioSource.FromResource(this.gameObject, "Spidercrawl");
         spiderDeathAudio = MultiAudioSource.FromResource(this.gameObject, "spiderdeath");
+        enemyAttackCooldown = GetComponent<EnemyAttackCooldown>();
     }
 }

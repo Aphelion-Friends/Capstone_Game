@@ -69,6 +69,9 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
     {
         GameObject body = Instantiate(corpse);
         body.transform.position = this.transform.position;
+
+        MultiAudioSource deathAudio = MultiAudioSource.FromResource(body, "Tacobellbong");
+        deathAudio.Play();
     }
 
     public struct HealthState : IPredictedData<HealthState>

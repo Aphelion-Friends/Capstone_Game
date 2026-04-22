@@ -93,7 +93,6 @@ MonoBehaviour:
   image: {fileID: 5554081213239076490}
   inventory: {fileID: 0}
   parentAfterDrag: {fileID: 0}
-  canvas: {fileID: 0}
 --- !u!114 &3789512851931773235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,8 +173,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: af2b2374405c3184599f902650c3c942, type: 2}
+  m_sharedMaterial: {fileID: -4248235736092369586, guid: af2b2374405c3184599f902650c3c942, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -199,8 +198,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
