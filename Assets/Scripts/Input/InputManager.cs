@@ -25,6 +25,7 @@ public class InputManager : MonoBehaviour
     private InputAction _inventoryAction;
     private InputAction _flashlightAction;
     private InputAction _reloadAction;
+    private InputAction _healAction;
 
     public InputAction moveAction { get { return _moveAction; } }
     public InputAction lookAction { get { return _lookAction; } }
@@ -35,6 +36,7 @@ public class InputManager : MonoBehaviour
     public InputAction inventoryAction { get { return _inventoryAction; } }
     public InputAction flashlightAction { get { return _flashlightAction; } }
     public InputAction reloadAction { get { return _reloadAction; } }
+    public InputAction healAction { get { return _healAction; } }
 
     private bool _ignoreMouseMove = false;
 
@@ -59,6 +61,7 @@ public class InputManager : MonoBehaviour
         _inventoryAction = _playerInput.currentActionMap.FindAction("Inventory");
         _flashlightAction = _playerInput.currentActionMap.FindAction("Flashlight");
         _reloadAction = _playerInput.currentActionMap.FindAction("Reload");
+        _healAction = _playerInput.currentActionMap.FindAction("Heal");
 
         _playerInput.onActionTriggered += OnAction;
     }

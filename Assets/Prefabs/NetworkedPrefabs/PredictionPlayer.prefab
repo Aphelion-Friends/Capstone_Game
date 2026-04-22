@@ -961,6 +961,7 @@ GameObject:
   - component: {fileID: 7418098437742789469}
   - component: {fileID: 8349835911920809892}
   - component: {fileID: 434691989972748098}
+  - component: {fileID: 6766447414326797002}
   m_Layer: 8
   m_Name: PredictionPlayer
   m_TagString: Player
@@ -1249,6 +1250,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _repeatInputFactor: 0.8
   _extrapolateInput: 1
+--- !u!114 &6766447414326797002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470177a8b88611e4bbba3a641a213b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::PlayerHeal
+  _repeatInputFactor: 0.8
+  _extrapolateInput: 1
+  inventory: {fileID: 5850925789161093228}
+  playerHealth: {fileID: 7036621359131802969}
+  medkitItem: {fileID: 11400000, guid: dcb6096643843d541b64bc74847ebfce, type: 2}
+  healAmount: 50
 --- !u!1 &8103881228185689354
 GameObject:
   m_ObjectHideFlags: 0
