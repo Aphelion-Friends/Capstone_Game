@@ -1,12 +1,13 @@
 using UnityEngine;
 using PurrNet;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(EnemyAttackCooldown))]
 public class Spider : GenericEnemy
 {
     [SerializeField] private NetworkAnimator _animator;
 
-    private MultiAudioSource audioSource, audioSource2;
+    private MultiAudioSource audioSource, audioSource2, spiderDeathAudio;
 
     private EnemyAttackCooldown enemyAttackCooldown;
 
@@ -14,8 +15,12 @@ public class Spider : GenericEnemy
     {
         _animator.SetTrigger("Die");
         ObjectiveManager.Instance.currentState.objective.EnemyKilled("spider");
+        
 
         base.OnDeath();
+        Debug.Log("Spider death audio played");
+        spiderDeathAudio.PlayOnlyIfDone();
+        spiderDeathAudio.SetVolume(0.5f);
     }
 
     protected override void AttackTransitions(ref EnemyAttackState.AttackState state)
@@ -52,6 +57,7 @@ public class Spider : GenericEnemy
         base.Awake();
         audioSource = MultiAudioSource.FromResource(this.gameObject, "Spiderattack");
         audioSource2 = MultiAudioSource.FromResource(this.gameObject, "Spidercrawl");
+        spiderDeathAudio = MultiAudioSource.FromResource(this.gameObject, "spiderdeath");
         enemyAttackCooldown = GetComponent<EnemyAttackCooldown>();
     }
 }
