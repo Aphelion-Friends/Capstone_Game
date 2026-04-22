@@ -113,7 +113,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
             }
         }
 
-        if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0 && state.reloadTimer <= 0f)
+        if (input.shoot && state.shootCooldown <= 0 && state.ammo > 0 && state.reloadTimer <= 0f && !input.sprint)
         {
             Shoot();
 
@@ -149,12 +149,14 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     {
         input.shoot = false;
         input.reload = false;
+        input.sprint = false;
     }
 
     protected override void UpdateInput(ref ShootInput input)
     {
         input.shoot |= InputManager.Instance.fireAction.inProgress;
         input.reload |= InputManager.Instance.reloadAction.inProgress;
+        input.sprint |= InputManager.Instance.sprintAction.inProgress;
     }
 
     protected override ShootState GetInitialState()
@@ -172,7 +174,7 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
     {
         public bool shoot;
         public bool reload;
-
+        public bool sprint;
         public void Dispose() { }
     }
 
