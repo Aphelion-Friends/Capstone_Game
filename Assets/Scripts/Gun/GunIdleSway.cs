@@ -34,13 +34,17 @@ public class GunIdleSway : MonoBehaviour
         baseLocalRotation = transform.localRotation;
 
         if (playerMovement == null)
+        {
             playerMovement = GetComponentInParent<PlayerMovement>();
+        }
     }
 
     private void LateUpdate()
     {
         if (playerMovement == null)
+        {
             return;
+        }
 
         Vector2 moveInput = playerMovement.currentInput.moveDirection;
         bool isMoving = moveInput.sqrMagnitude > 0.001f;
@@ -54,7 +58,6 @@ public class GunIdleSway : MonoBehaviour
         if (isSprinting)
         {
             Vector3 sprintBob = new Vector3(Mathf.Sin(t * moveSpeed) * 0.02f, Mathf.Cos(t * moveSpeed * 2f) * 0.015f, 0f);
-
             Vector3 sprintRotBob = new Vector3(Mathf.Cos(t * moveSpeed * 2f) * 2f, Mathf.Sin(t * moveSpeed) * 1.5f, Mathf.Sin(t * moveSpeed) * 1f);
 
             targetPos = baseLocalPosition + sprintPositionOffset + sprintBob;
@@ -67,34 +70,17 @@ public class GunIdleSway : MonoBehaviour
 
         if (isMoving)
         {
-            Vector3 bobPos = new Vector3(
-                Mathf.Sin(t * moveSpeed) * moveHorizontalAmount,
-                Mathf.Cos(t * moveSpeed * 2f) * moveVerticalAmount,
-                0f
-            );
-
-            Vector3 bobRot = new Vector3(
-                Mathf.Cos(t * moveSpeed * 2f) * moveRotationAmount,
-                Mathf.Sin(t * moveSpeed) * moveRotationAmount,
-                Mathf.Sin(t * moveSpeed) * (moveRotationAmount * 0.5f)
-            );
+            Vector3 bobPos = new Vector3(Mathf.Sin(t * moveSpeed) * moveHorizontalAmount, Mathf.Cos(t * moveSpeed * 2f) * moveVerticalAmount,0f);
+            Vector3 bobRot = new Vector3(Mathf.Cos(t * moveSpeed * 2f) * moveRotationAmount, Mathf.Sin(t * moveSpeed) * moveRotationAmount, Mathf.Sin(t * moveSpeed) * (moveRotationAmount * 0.5f));
 
             targetPos += bobPos;
             targetRot = baseLocalRotation * Quaternion.Euler(bobRot);
         }
         else
         {
-            Vector3 idlePos = new Vector3(
-                Mathf.Sin(t * idleSpeed) * idleHorizontalAmount,
-                Mathf.Cos(t * idleSpeed * 2f) * idleVerticalAmount,
-                0f
-            );
+            Vector3 idlePos = new Vector3(Mathf.Sin(t * idleSpeed) * idleHorizontalAmount, Mathf.Cos(t * idleSpeed * 2f) * idleVerticalAmount, 0f);
 
-            Vector3 idleRot = new Vector3(
-                Mathf.Cos(t * idleSpeed) * idleRotationAmount,
-                Mathf.Sin(t * idleSpeed) * idleRotationAmount,
-                Mathf.Sin(t * idleSpeed * 0.5f) * (idleRotationAmount * 0.35f)
-            );
+            Vector3 idleRot = new Vector3(Mathf.Cos(t * idleSpeed) * idleRotationAmount, Mathf.Sin(t * idleSpeed) * idleRotationAmount, Mathf.Sin(t * idleSpeed * 0.5f) * (idleRotationAmount * 0.35f));
 
             targetPos += idlePos;
             targetRot = baseLocalRotation * Quaternion.Euler(idleRot);
