@@ -83,8 +83,8 @@ public class Player : MonoBehaviour
             return;
         }
 
-        inventory.AddItem(lookedAtItem.item, 1);
-        Debug.Log("Picked up: " + lookedAtItem.name);
+        // inventory.AddItem(lookedAtItem.item, 1);
+        // Debug.Log("Picked up: " + lookedAtItem.name);
         ObjectiveManager.Instance.currentState.objective.ItemCollected(lookedAtItem.item.itemName);
 
         // DestroyItemForAll(lookedAtItem.gameObject);

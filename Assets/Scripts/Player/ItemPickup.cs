@@ -71,17 +71,14 @@ public class ItemPickup : PredictedIdentity<ItemPickup.ItemPickupInput, ItemPick
                 Debug.Log($"Item pickup: {pickedUpObject.name}");
                 Debug.Log($"Adding {item.pickupAmount} of item ID {item.itemId}");
 
-                bool canCollect = inventory.AddItem(item.itemId, item.pickupAmount);
+                // bool canCollect = inventory.AddItem(item.itemId, item.pickupAmount);
+                // inventory.AddItemWithInput(item.itemId, item.pickupAmount);
 
-                if (canCollect)
+                if (pickupAudio != null)
                 {
-                    if (pickupAudio != null)
-                    {
-                        pickupAudio.Play();
-                    }
-                    predictionManager.hierarchy.Delete(itemToPickUp);
+                    pickupAudio.Play();
                 }
- 
+                predictionManager.hierarchy.Delete(itemToPickUp);
             }
         }
         else if (!input.pickup)

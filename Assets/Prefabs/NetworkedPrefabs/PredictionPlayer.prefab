@@ -2429,6 +2429,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2983309001620146729}
+  - component: {fileID: 8349835911920809892}
+  - component: {fileID: 434691989972748098}
   - component: {fileID: 5213993213753222480}
   - component: {fileID: 3541979704348186581}
   - component: {fileID: 4293443447547487517}
@@ -2440,8 +2442,6 @@ GameObject:
   - component: {fileID: 7395234267410833199}
   - component: {fileID: 18617538117602502}
   - component: {fileID: 7418098437742789469}
-  - component: {fileID: 8349835911920809892}
-  - component: {fileID: 434691989972748098}
   - component: {fileID: 6766447414326797002}
   m_Layer: 8
   m_Name: PredictionPlayer
@@ -2468,6 +2468,39 @@ Transform:
   - {fileID: 3433072650591229891}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8349835911920809892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8a87df992f43ed89d882b0235000c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::ItemCollection
+  _repeatInputFactor: 0.8
+  _extrapolateInput: 1
+  firstPersonCamera: {fileID: 0}
+  itemLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  pickupPrompt: {fileID: 3264796959491522338}
+--- !u!114 &434691989972748098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8078684614268146017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e71a9c1385d6a97b9de421dbbc12f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _repeatInputFactor: 0.8
+  _extrapolateInput: 1
 --- !u!114 &5213993213753222480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,6 +2697,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d5e4b97b1615f4aae984a3d5f4235f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkOwnershipToggle
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -2671,8 +2706,6 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _components:
   - target: {fileID: 7395234267410833199}
     activeAsOwner: 0
@@ -2698,39 +2731,6 @@ MonoBehaviour:
   itemLayer:
     serializedVersion: 2
     m_Bits: 128
---- !u!114 &8349835911920809892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8078684614268146017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa8a87df992f43ed89d882b0235000c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Scripts::ItemCollection
-  _repeatInputFactor: 0.8
-  _extrapolateInput: 1
-  firstPersonCamera: {fileID: 0}
-  itemLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  pickupPrompt: {fileID: 3264796959491522338}
---- !u!114 &434691989972748098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8078684614268146017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7e71a9c1385d6a97b9de421dbbc12f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _repeatInputFactor: 0.8
-  _extrapolateInput: 1
 --- !u!114 &6766447414326797002
 MonoBehaviour:
   m_ObjectHideFlags: 0
