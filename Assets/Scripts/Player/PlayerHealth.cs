@@ -60,6 +60,8 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
                 newCam.GetComponent<Camera>().enabled = true;
             }
 
+            RespawnPlayer_UI.Instance.ShowUI(isOwner);
+
             Debug.Log("The player died!");
             currentState.isDead = true;
             predictionManager.hierarchy.Delete(this.gameObject);

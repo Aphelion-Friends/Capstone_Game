@@ -6,7 +6,7 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
     public static PlayerRespawnManager Instance;
 
     [SerializeField] private float _respawnTimer = 5f;
-    [SerializeField] private GameObject deathScreen;
+    
 
     private UpdateRespawnCountdown updateRespawnCounter;
 
@@ -14,7 +14,7 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
     {
         Instance = this;
 
-        updateRespawnCounter = deathScreen.GetComponent<UpdateRespawnCountdown>();
+        // updateRespawnCounter = deathScreen.GetComponent<UpdateRespawnCountdown>();
     }
 
     public struct RespawnState : IPredictedData<RespawnState>
@@ -38,6 +38,7 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
     {
         RestartTimer();
         currentState.isDead = true;
+        // deathScreen.SetActive(true);
     }
 
     public void RestartTimer()
@@ -47,6 +48,7 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
 
     protected override void Simulate(ref RespawnState state, float delta)
     {
+
         if (!state.isDead) return;
 
         if(state.respawnTimer > 0)
