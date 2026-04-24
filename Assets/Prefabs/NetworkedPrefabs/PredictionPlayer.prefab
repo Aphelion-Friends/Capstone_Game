@@ -683,7 +683,7 @@ MonoBehaviour:
   moveHorizontalAmount: 0.03
   moveVerticalAmount: 0.025
   moveRotationAmount: 3
-  moveSpeed: 7
+  moveSpeed: 8
   sprintPositionOffset: {x: -0.18, y: 0.1, z: -0.12}
   sprintRotationOffset: {x: 18, y: -35, z: 12}
   sprintSmooth: 10
