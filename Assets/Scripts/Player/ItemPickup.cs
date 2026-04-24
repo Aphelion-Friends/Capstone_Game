@@ -29,10 +29,22 @@ public class ItemPickup : PredictedIdentity<ItemPickup.ItemPickupInput, ItemPick
 
     private ItemDetection itemDetection;
     private NetworkInventory inventory;
+
+    private static MultiAudioSource pickupAudio;
+    private static GameObject audioObject;
     protected override void LateAwake()
     {
         itemDetection = GetComponent<ItemDetection>();
         inventory = GetComponent<NetworkInventory>();
+
+        if (audioObject == null)
+        {
+            audioObject = new GameObject("PickupAudio");
+            DontDestroyOnLoad(audioObject);
+
+            pickupAudio = MultiAudioSource.FromResources(audioObject, "InventoryStash", 3);
+            pickupAudio.SetVolume(0.5f);
+        }
     }
 
     protected override void Simulate(ItemPickupInput input, ref ItemPickupState state, float delta)
@@ -62,7 +74,14 @@ public class ItemPickup : PredictedIdentity<ItemPickup.ItemPickupInput, ItemPick
                 bool canCollect = inventory.AddItem(item.itemId, item.pickupAmount);
 
                 if (canCollect)
+                {
+                    if (pickupAudio != null)
+                    {
+                        pickupAudio.Play();
+                    }
                     predictionManager.hierarchy.Delete(itemToPickUp);
+                }
+ 
             }
         }
         else if (!input.pickup)
