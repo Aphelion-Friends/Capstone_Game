@@ -19,7 +19,7 @@ public class PredictedItemSpawner : PredictedIdentity<PredictedItemSpawner.ItemS
 
     protected override void LateAwake()
     {
-        SpawnItem(ref currentState);
+        //SpawnItem(ref currentState);
     }
 
     protected override void Simulate(ref ItemSpawnerState state, float delta)
