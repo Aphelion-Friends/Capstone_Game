@@ -61,6 +61,10 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
         else
             state.respawnTimer = 0f;
 
+
+        Debug.Log($"isOwner: {isOwner}, timer: {state.respawnTimer}");
         updateRespawnCounter.SetCounterValue((int) state.respawnTimer);
+     
     }
+
 }
