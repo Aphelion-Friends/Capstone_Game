@@ -100,11 +100,23 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
 
     protected override void UpdateInput(ref MoveInput input)
     {
+        if (PauseMenuController.IsPaused)
+            return;
+
         input.jump |= InputManager.Instance.jumpAction.inProgress;
     }
 
     protected override void GetFinalInput(ref MoveInput input)
     {
+        if (PauseMenuController.IsPaused)
+        {
+            input.moveDirection = Vector2.zero;
+            input.jump = false;
+            input.sprint = false;
+            input.cameraForward = _camera.forward;
+            return;
+        }
+
         Vector2 move = Vector2.zero;
 
         move = InputManager.Instance.moveDirection;

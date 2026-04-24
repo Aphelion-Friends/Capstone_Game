@@ -10,6 +10,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private TMP_Dropdown resolutionDropdown;
     [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private float maxVolume = 0.6f;
 
     private Vector2Int[] customResolutions =
     {
@@ -57,7 +58,7 @@ public class SettingsManager : MonoBehaviour
     void LoadSettings()
     {
         //Load saved values from PlayerPrefs
-        float savedVolume = PlayerPrefs.GetFloat("volume", 1f);
+        float savedVolume = Mathf.Clamp(PlayerPrefs.GetFloat("volume", 0.5f), 0f, maxVolume);
         int savedResolution = PlayerPrefs.GetInt("resolution", 0);
         bool savedFullscreen = PlayerPrefs.GetInt("fullscreen", 1) == 1;
 
@@ -74,6 +75,8 @@ public class SettingsManager : MonoBehaviour
 
     public void SetVolume(float volume)
     {
+        float clampedVolume = Mathf.Clamp(volume, 0f, maxVolume);
+
         AudioListener.volume = volume;
 
         PlayerPrefs.SetFloat("volume", volume);         //You'll notice that in all the set functions "PlayerPrefs" is referenced, its basically a built in unity

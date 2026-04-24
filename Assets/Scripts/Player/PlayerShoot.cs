@@ -74,6 +74,13 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
     protected override void Simulate(ShootInput input, ref ShootState state, float delta)
     {
+        if (PauseMenuController.IsPaused)
+        {
+            input.shoot = false;
+            input.reload = false;
+            return;
+        }
+
         state.shootCooldown -= delta;
         state.reloadTimer -= delta;
 
@@ -154,6 +161,13 @@ public class PlayerShoot : PredictedIdentity<PlayerShoot.ShootInput, PlayerShoot
 
     protected override void UpdateInput(ref ShootInput input)
     {
+        if (PauseMenuController.IsPaused)
+        {
+            input.shoot = false;
+            input.reload = false;
+            return;
+        }
+
         input.shoot |= InputManager.Instance.fireAction.inProgress;
         input.reload |= InputManager.Instance.reloadAction.inProgress;
         input.sprint |= InputManager.Instance.sprintAction.inProgress;
