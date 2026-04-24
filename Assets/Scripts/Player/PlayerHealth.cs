@@ -61,6 +61,7 @@ public class PlayerHealth : PredictedIdentity<PlayerHealth.HealthState>
             }
 
             RespawnPlayer_UI.Instance.ShowUI(isOwner);
+            PlayerRespawnManager.Instance.PlayerDied();
 
             Debug.Log("The player died!");
             currentState.isDead = true;

@@ -769,51 +769,6 @@ Transform:
   - {fileID: 906113689}
   m_Father: {fileID: 2085689815}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7775425
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7775427}
-  - component: {fileID: 7775426}
-  m_Layer: 0
-  m_Name: RespawnUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &7775426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7775425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b64a49c80acec7e44ad2f910d27fc5c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Scripts::RespawnPlayer_UI
-  deathScreen: {fileID: 1859552331}
---- !u!4 &7775427
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7775425}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 380.3363, y: 0.61843, z: -370.08664}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8905235
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5084,10 +5039,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 41890457181010805, guid: 0aaefed6796cb66b0bd91bd4df52fc90, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1859552336}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aaefed6796cb66b0bd91bd4df52fc90, type: 3}
 --- !u!1001 &116045954
 PrefabInstance:
@@ -6552,17 +6504,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5b6e49d6756a908408f13a5cd86cdbd1, type: 3}
   m_PrefabInstance: {fileID: 127216497}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &145059209 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4829647204280956004, guid: 0aaefed6796cb66b0bd91bd4df52fc90, type: 3}
-  m_PrefabInstance: {fileID: 114738647}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &146732110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40045,6 +39986,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: a06a2fb2a5a15d84b8cb3fae6a700687, type: 3}
+--- !u!1 &723586249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 41890457181010805, guid: 0aaefed6796cb66b0bd91bd4df52fc90, type: 3}
+  m_PrefabInstance: {fileID: 114738647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &726326411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5315017014636303451, guid: 8c44086c2ae5dd2418361c07d16c113f, type: 3}
@@ -55646,6 +55592,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8115450444034583683, guid: 6426bc688561b3647bc8a5b7db479a72, type: 3}
   m_PrefabInstance: {fileID: 1023489891}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1024966671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1024966673}
+  - component: {fileID: 1024966672}
+  m_Layer: 0
+  m_Name: RespawnUI?
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1024966672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024966671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64a49c80acec7e44ad2f910d27fc5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::RespawnPlayer_UI
+  deathScreen: {fileID: 723586249}
+--- !u!4 &1024966673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024966671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 427.81888, y: 16.38721, z: -386.48944}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1027540622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61213,7 +61204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _respawnTimer: 5
-  deathScreen: {fileID: 1859552331}
 --- !u!4 &1104834042
 Transform:
   m_ObjectHideFlags: 0
@@ -98665,24 +98655,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1168034057058009584, guid: 82b3f950958c09b44a6f2d8d63865128, type: 3}
   m_PrefabInstance: {fileID: 2019349032}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1859552331 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 41890457181010805, guid: 0aaefed6796cb66b0bd91bd4df52fc90, type: 3}
-  m_PrefabInstance: {fileID: 114738647}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1859552336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859552331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c9d81ab5f5f07cba21e8bf7b7b032b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Scripts::UpdateRespawnCountdown
-  respawnCounter: {fileID: 145059209}
 --- !u!43 &1860176760
 Mesh:
   m_ObjectHideFlags: 0
@@ -118358,7 +118330,7 @@ SceneRoots:
   - {fileID: 2040057607}
   - {fileID: 1090045579}
   - {fileID: 1104834042}
-  - {fileID: 7775427}
+  - {fileID: 1024966673}
   - {fileID: 355007681}
   - {fileID: 368354782}
   - {fileID: 209874784}
