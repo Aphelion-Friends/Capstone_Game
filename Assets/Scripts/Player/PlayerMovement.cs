@@ -50,7 +50,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         if(isMoving)
         {
             _walkSoundTimer -= delta;
-            if( _walkSoundTimer <= 0f)
+            if( _walkSoundTimer <= 0f && isGrounded())
             {
                 audioSource.PlayOnlyIfDone();
                 _walkSoundTimer = _walkSoundDelay;
