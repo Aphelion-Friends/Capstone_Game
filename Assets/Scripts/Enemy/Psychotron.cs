@@ -12,7 +12,7 @@ public class Psychotron : GenericEnemy
     private EnemyStunState enemyStunState;
     private EnemyController enemyController;
 
-    private MultiAudioSource audioSource, multiAudioSource;
+    private MultiAudioSource audioSource, attackSource;
 
     private EnemyAttackCooldown enemyAttackCooldown;
 
@@ -26,7 +26,7 @@ public class Psychotron : GenericEnemy
         enemyStunState.transitionFunc = StunTransitions;
         audioSource = MultiAudioSource.FromResource(this.gameObject, "Robotstep");
         enemyAttackCooldown = GetComponent<EnemyAttackCooldown>();
-        // multiAudioSource = MultiAudioSource.
+        attackSource = MultiAudioSource.FromResource(this.gameObject, "Robotbigstep5");
         
     }
 
@@ -45,7 +45,8 @@ public class Psychotron : GenericEnemy
 
         enemyAttackCooldown.ResetTimer();
         stateMachine.SetState(enemyChaseState);
-        // multiAudioSource.PlayRandom();
+        attackSource.PlayOnlyIfDone();
+        attackSource.SetVolume(0.4f);
 
     }
 
