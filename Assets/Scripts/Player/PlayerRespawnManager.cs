@@ -1,5 +1,7 @@
 using UnityEngine;
 using PurrNet.Prediction;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
+
 
 public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.RespawnState>
 {
@@ -8,15 +10,23 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
     [SerializeField] private float _respawnTimer = 5f;
 
     [SerializeField] private GameObject deathScreen;
+
+    [SerializeField] private GameObject _playerPrefab;
+
+    [SerializeField] private Transform[] spawnPoints;
     
 
     private UpdateRespawnCountdown updateRespawnCounter;
+
+    private PredictedPlayerSpawner playerRespawn;
 
     void Awake()
     {
         Instance = this;
 
         updateRespawnCounter = deathScreen.GetComponent<UpdateRespawnCountdown>();
+
+        playerRespawn = FindObjectsByType<PredictedPlayerSpawner>(FindObjectsSortMode.None)[0];
     }
 
     public struct RespawnState : IPredictedData<RespawnState>
@@ -56,15 +66,35 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
 
         if (!state.isDead) return;
 
-        if(state.respawnTimer > 0)
+        if(state.respawnTimer > 0) {
             state.respawnTimer -= delta;
+        }
         else
+        {
             state.respawnTimer = 0f;
+
+            if (state.isDead)
+            {
+                state.isDead = false;
+                TriggerRespawn();
+            }
+
+        }
 
 
         Debug.Log($"isOwner: {isOwner}, timer: {state.respawnTimer}");
         updateRespawnCounter.SetCounterValue((int) state.respawnTimer);
      
+    }
+
+    private void TriggerRespawn()
+    {
+        deathScreen.SetActive(false);
+
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        var newPlayer = hierarchy.Create(_playerPrefab, spawnPoint.position, spawnPoint.rotation, owner);
+        predictionManager.SetOwnership(newPlayer, owner);  
+
     }
 
 }
