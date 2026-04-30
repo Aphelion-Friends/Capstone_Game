@@ -46,7 +46,7 @@ public class ObjectiveManager : PredictedIdentity<ObjectiveManager.ObjectiveMana
             // var settings = new PurrNet.Modules.PurrSceneSettings();
             // settings.isPublic = false;
             // settings.mode = LoadSceneMode.Additive;
-            predictionManager.networkManager.sceneModule.LoadSceneAsync("TitleScreen");
+            //predictionManager.networkManager.sceneModule.LoadSceneAsync("TitleScreen");
             // PlayerID playerID = predictionManager.hierarchy.TryGetId
             // predictionManager.networkManager.scenePlayersModule.RemovePlayerFromScene()
             Debug.Log($"PlayerID{predictionManager.networkManager.localPlayer}");
