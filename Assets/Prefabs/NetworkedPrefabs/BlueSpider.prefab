@@ -207,7 +207,7 @@ MonoBehaviour:
   _radius: 1
   _height: 1
   _warpDistance: 10
-  _speed: 50
+  _speed: 30
   _turnSpeed: 360
   _acceleration: 50
 --- !u!114 &7747008556448405094
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855ae3aa1ca86c022bc4b4650d002c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
-  _maxHealth: 20
+  _maxHealth: 10
   _animator: {fileID: 0}
   enemy: {fileID: 0}
 --- !u!114 &5310760041207422413
