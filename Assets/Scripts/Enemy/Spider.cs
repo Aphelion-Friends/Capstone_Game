@@ -34,11 +34,45 @@ public class Spider : GenericEnemy
 
     protected override void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
     {
+        if (flashlightDetector != null && flashlightDetector.isLit && flashlightSense != null)
+        {
+            if (flashlightSense.reaction == FlashLightReaction.Flee)
+            {
+                enemyFleeState.fleeFrom = flashlightDetector.lightSource;
+                stateMachine.SetState(enemyFleeState);
+                return;
+            }
+            else if (flashlightSense.reaction == FlashLightReaction.Attracted)
+            {
+                enemyAttractedState.attractedTo = flashlightDetector.lightSource;
+                stateMachine.SetState(enemyAttractedState);
+                return;
+            }
+        }
+
+
         base.PatrolTransitions(ref state);
     }
 
     protected override void ChaseTransitions(ref EnemyChaseState.ChaseState state)
     {
+
+        if (flashlightDetector != null && flashlightDetector.isLit && flashlightSense != null)
+        {
+            if (flashlightSense.reaction == FlashLightReaction.Flee)
+            {
+                enemyFleeState.fleeFrom = flashlightDetector.lightSource;
+                stateMachine.SetState(enemyFleeState);
+                return;
+            }
+            else if (flashlightSense.reaction == FlashLightReaction.Attracted)
+            {
+                enemyAttractedState.attractedTo = flashlightDetector.lightSource;
+                stateMachine.SetState(enemyAttractedState);
+                return;
+            }
+        }
+
         GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
 
         if (Vector3.Distance(transform.position, targetedPlayer.transform.position) >= chaseRange)
