@@ -13,7 +13,7 @@ public class FlashlightDetector : MonoBehaviour
         isLit = false;
 
         FlashlightToggle[] flashlights = FindObjectsByType<FlashlightToggle>(FindObjectsSortMode.None);
-        Debug.Log($"Flashlights found: {flashlights.Length}");
+        Debug.Log($"{gameObject.name} - Flashlights found: {flashlights.Length}");
 
         foreach (var flashlight in flashlights)
         {
@@ -25,19 +25,19 @@ public class FlashlightDetector : MonoBehaviour
             }
 
             Light light = flashlight.GetComponentInChildren<Light>();
-            Debug.Log($"Light found: {light != null}, Light enabled: {light?.enabled}");
+            Debug.Log($"{gameObject.name} - Light enabled: {light?.enabled}");
 
             if (light == null || !light.enabled) 
                 continue;
                 
             float distanceToLight = Vector3.Distance(transform.position, flashlight.transform.position);
-            Debug.Log($"Distance to light: {distanceToLight}, Detection range: {_detectionRange}");
+            Debug.Log($"{gameObject.name} - Distance: {distanceToLight}, Range: {_detectionRange}");
             if (distanceToLight > _detectionRange)
                 continue;
 
             Vector3 directToEnemy = (transform.position - flashlight.transform.position).normalized;
             float angle = Vector3.Angle(flashlight.transform.forward, directToEnemy);
-            Debug.Log($"Angle to enemy: {angle}, Detection angle: {_detectionAngle}");
+            Debug.Log($"{gameObject.name} - Angle: {angle}, Max: {_detectionAngle}");
 
             if (angle < _detectionAngle)
             {

@@ -228,6 +228,8 @@ MonoBehaviour:
   - _object: {fileID: 4789066397020135143}
   - _object: {fileID: 8971992119761654375}
   - _object: {fileID: 1296984895149626577}
+  - _object: {fileID: 3915539416171842499}
+  - _object: {fileID: 8410703031144496368}
 --- !u!114 &6859578714921511255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,7 +384,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4664176889516456397}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37040d44f680b314a86ffef64b48db36, type: 3}
   m_Name: 
@@ -396,12 +398,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4664176889516456397}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2073ab5fab68594db1c0470346ccae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::FlashlightSense
-  reaction: 1
+  reaction: 0
 --- !u!1001 &285399087628214666
 PrefabInstance:
   m_ObjectHideFlags: 0
