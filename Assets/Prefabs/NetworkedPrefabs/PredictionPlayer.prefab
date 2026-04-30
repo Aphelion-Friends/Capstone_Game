@@ -2486,7 +2486,7 @@ MonoBehaviour:
   _sprintSpeed: 15
   _acceleration: 20
   _planarDamping: 10
-  _jumpForce: 100
+  _jumpForce: 200
   _groundCheckRadius: 0.6
   _jumpCooldown: 0.2
   _viewBobbing: {fileID: 5905422008217228707}

@@ -83,11 +83,21 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         if (horizontal.magnitude > _moveSpeed)
             _rigidbody.velocity = new Vector3(targetVel.x, _rigidbody.velocity.y, targetVel.z);
 
-        
-        if(input.jump && isGrounded() && state.jumpCooldown <= 0)
+
+        if (input.jump && isGrounded() && state.jumpCooldown <= 0)
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce);
             state.jumpCooldown = _jumpCooldown;
+        }
+
+        if (_rigidbody.linearVelocity.y > 0)
+        {
+            _rigidbody.AddForce(Vector3.down * 10f);
+        }
+
+        if (_rigidbody.linearVelocity.y < 0)
+        {
+            _rigidbody.AddForce(Vector3.up * -30f);
         }
 
         Vector3 cameraForward = input.cameraForward;
