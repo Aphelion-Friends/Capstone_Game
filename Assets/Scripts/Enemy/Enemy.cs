@@ -94,16 +94,68 @@ public abstract class GenericEnemy : StatelessPredictedIdentity
     }
 
     virtual protected void FleeTransitions(ref EnemyFleeState.FleeState state)
+{
+    if (flashlightDetector != null && flashlightDetector.isLit)
     {
-        if (flashlightDetector == null || !flashlightDetector.isLit)
-            stateMachine.SetState(enemyPatrolState);
+        state.fleeFrom = flashlightDetector.lightSource;
+    }
+    else
+    {
+        // Find player and set as target before chasing
+        Collider[] playerColliders = Physics.OverlapSphere(transform.position, chaseRange, playerLayer);
+        if (playerColliders.Length > 0)
+        {
+            GameObject closestPlayer = GetClosestPlayer(playerColliders);
+            PredictedObjectID playerID;
+            if (predictionManager.hierarchy.TryGetId(closestPlayer, out playerID))
+            {
+                enemyChaseState.targetedPlayer = playerID;
+                stateMachine.SetState(enemyChaseState);
+                return;
+            }
+        }
+
+        // No player found nearby, go back to patrol
+        stateMachine.SetState(enemyPatrolState);
+    }      
+}
+
+   virtual protected void AttractedTransitions(ref EnemyAttractedState.AttractedState state)
+{
+    if (flashlightDetector == null || !flashlightDetector.isLit)
+    {
+        // Find player and set as target before chasing
+        Collider[] playerColliders = Physics.OverlapSphere(transform.position, chaseRange, playerLayer);
+        if (playerColliders.Length > 0)
+        {
+            GameObject closestPlayer = GetClosestPlayer(playerColliders);
+            PredictedObjectID playerID;
+            if (predictionManager.hierarchy.TryGetId(closestPlayer, out playerID))
+            {
+                enemyChaseState.targetedPlayer = playerID;
+                stateMachine.SetState(enemyChaseState);
+                return;
+            }
+        }
+
+        // No player found nearby, go back to patrol
+        stateMachine.SetState(enemyPatrolState);
+        return;
     }
 
-    virtual protected void AttractedTransitions(ref EnemyAttractedState.AttractedState state)
+    // Still lit - check if player is within attack range
+    Collider[] attackColliders = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
+    if (attackColliders.Length > 0)
     {
-        if (flashlightDetector == null || !flashlightDetector.isLit)
+        GameObject closestPlayer = GetClosestPlayer(attackColliders);
+        PredictedObjectID playerID;
+        if (predictionManager.hierarchy.TryGetId(closestPlayer, out playerID))
+        {
+            enemyChaseState.targetedPlayer = playerID;
             stateMachine.SetState(enemyChaseState);
+        }
     }
+}
 
     virtual protected GameObject GetClosestPlayer(Collider[] colliderArray)
     {

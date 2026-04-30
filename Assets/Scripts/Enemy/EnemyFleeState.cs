@@ -30,6 +30,20 @@ public class EnemyFleeState : PredictedStateNode<EnemyFleeState.FleeState>
 
         Vector3 fleeDirection = (transform.position - state.fleeFrom).normalized;
         Vector3 fleeTarget = transform.position + fleeDirection * _fleeDistance;
-        enemyController.destination = fleeTarget;
+
+        Debug.Log($"FleeFrom: {state.fleeFrom}, FleeTarget: {fleeTarget}, Current pos: {transform.position}");
+
+        UnityEngine.AI.NavMeshHit hit;
+
+        if (UnityEngine.AI.NavMesh.SamplePosition(fleeTarget, out hit, _fleeDistance, UnityEngine.AI.NavMesh.AllAreas))
+        {
+            Debug.Log($"Valid navmesh position found: {hit.position}");
+            enemyController.destination = hit.position;
+        }
+        else
+        {
+            Debug.Log("No valid navmesh position found!");
+            enemyController.destination = fleeTarget;
+        }
     }
 }

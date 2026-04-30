@@ -196,6 +196,8 @@ MonoBehaviour:
   - _object: {fileID: 1415150836451596787}
   - _object: {fileID: 2501398386697882068}
   - _object: {fileID: 2744235743653164378}
+  - _object: {fileID: 2889681530032298598}
+  - _object: {fileID: 6620639878783003729}
 --- !u!114 &3745326291466856234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0542fb4bcc35470095ec3efb9ea9661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::EnemyAttackCooldown
-  cooldown: 2
+  cooldown: 5
 --- !u!114 &2889681530032298598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a5ca4dbf73fa8498ea9580b2cd5285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::EnemyFleeState
-  _fleeDistance: 10
+  _fleeDistance: 5
 --- !u!114 &6620639878783003729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,8 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37040d44f680b314a86ffef64b48db36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::FlashlightDetector
-  _detectionAngle: 90
-  _detectionRange: 15
+  _detectionAngle: 40
+  _detectionRange: 30
 --- !u!114 &-1243320050857046043
 MonoBehaviour:
   m_ObjectHideFlags: 0
