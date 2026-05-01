@@ -8,8 +8,8 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] private float _lookSensitivity = 0.2f;
     [SerializeField] private float _maxLookAngle = 85f;
     [SerializeField] private float _smoothness = 0.2f;
-    private Camera _playerCamera; //Camera I'm using for fps
-    private AudioListener _audioListener;
+    [SerializeField] private Camera _playerCamera; //Camera I'm using for fps
+    [SerializeField] private AudioListener _audioListener;
 
     public Camera playerCamera { get { return _playerCamera; } }
 
@@ -19,11 +19,11 @@ public class FirstPersonCamera : MonoBehaviour
 
     public Vector3 forward => transform.forward;
     
-    void Awake()
-    {
-        _playerCamera = GetComponent<Camera>();
-        _audioListener = GetComponent<AudioListener>();
-    }
+    // void Start()
+    // {
+    //     _playerCamera = GetComponent<Camera>();
+    //     _audioListener = GetComponent<AudioListener>();
+    // }
 
     public void Init()
     {

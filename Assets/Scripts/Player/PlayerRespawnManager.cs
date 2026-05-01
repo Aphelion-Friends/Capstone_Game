@@ -95,7 +95,25 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         var newPlayer = hierarchy.Create(_playerPrefab, spawnPoint.position, spawnPoint.rotation, owner);
         predictionManager.SetOwnership(newPlayer, player);  
+        // newPlayer.GetComponent<FirstPersonCamera>(predictionManager).Init();
+        // newPlayer.GetComponent<SetCamera>(predictionManager).enabled = true;
 
+        // SetCorrectCamera(player);
     }
 
+    // void SetCorrectCamera(PredictedObjectID player)
+    // {
+    //     if (player.GetGameObject(predictionManager).GetComponent<PlayerMovement>().isOwner)
+    //     {
+    //         Camera[] cameras = new Camera[100];
+    //         Camera.GetAllCameras(cameras);
+    //         foreach (Camera camera in cameras)
+    //         {
+    //             if (camera != null)
+    //                 camera.enabled = false;
+    //         }
+
+    //         player.GetGameObject(predictionManager).GetComponent<Camera>();
+    //     }
+    // }
 }

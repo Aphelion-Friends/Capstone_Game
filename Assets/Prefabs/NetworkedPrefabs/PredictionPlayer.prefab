@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 7895956858399245585}
   - component: {fileID: 6451145636556615780}
   - component: {fileID: 5905422008217228707}
+  - component: {fileID: 3561643522015104275}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -758,6 +759,8 @@ MonoBehaviour:
   _lookSensitivity: 0.25
   _maxLookAngle: 85
   _smoothness: 0.03
+  _playerCamera: {fileID: 6726161711833801846}
+  _audioListener: {fileID: 6451145636556615780}
 --- !u!20 &6726161711833801846
 Camera:
   m_ObjectHideFlags: 0
@@ -881,6 +884,18 @@ MonoBehaviour:
   movementThreshold: 0.1
   positionSmoothness: 10
   enableBobbing: 1
+--- !u!114 &3561643522015104275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5578140092833276513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b415dc0b6daa5ca78a533ba48be1b28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &6969939112291563571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,6 +1194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d5e4b97b1615f4aae984a3d5f4235f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkOwnershipToggle
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -1186,8 +1203,6 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _components:
   - target: {fileID: 7395234267410833199}
     activeAsOwner: 0
