@@ -15,6 +15,7 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
 
     [SerializeField] private Transform[] spawnPoints;
     
+    public PurrNet.PlayerID player;
 
     private UpdateRespawnCountdown updateRespawnCounter;
 
@@ -93,7 +94,7 @@ public class PlayerRespawnManager : PredictedIdentity<PlayerRespawnManager.Respa
 
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         var newPlayer = hierarchy.Create(_playerPrefab, spawnPoint.position, spawnPoint.rotation, owner);
-        predictionManager.SetOwnership(newPlayer, owner);  
+        predictionManager.SetOwnership(newPlayer, player);  
 
     }
 
