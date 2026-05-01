@@ -117,6 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7b598b9d8509d64abb9fdaf07fa3f6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkAnimator
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _componentIndex: -2147483648
@@ -124,8 +126,6 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _animator: {fileID: 8254907246619473258}
   _ownerAuth: 1
   _autoSyncParameters: 1
@@ -245,7 +245,7 @@ MonoBehaviour:
   _radius: 1
   _height: 1
   _warpDistance: 10
-  _speed: 20
+  _speed: 10
   _turnSpeed: 360
   _acceleration: 20
 --- !u!114 &5418258708022974763
