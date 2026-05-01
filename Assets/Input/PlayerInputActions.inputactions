@@ -109,9 +109,15 @@
                     "name": "ObjectiveToggle",
                     "type": "Button",
                     "id": "907983de-3b8a-4664-b414-4624e447276e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Reset",
                     "type": "Button",
-                    "id": "77869da0-b51e-4c61-9977-1fbe1a00db71",
+                    "id": "fc9f201d-c5a7-4365-8207-4d23a8cb4e62",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -292,7 +298,12 @@
                     "processors": "",
                     "groups": "",
                     "action": "ObjectiveToggle",
-                    "id": "a7fd90a8-e774-468f-9157-192de0757839",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ccc7db7a-7aa2-43e4-a244-747cc6ea24ad",
                     "path": "<Keyboard>/numpad8",
                     "interactions": "",
                     "processors": "",
