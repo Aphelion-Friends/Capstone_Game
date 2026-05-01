@@ -17,13 +17,6 @@ public class FlashlightDetector : MonoBehaviour
 
         foreach (var flashlight in flashlights)
         {
-
-            if (!flashlight.isOwner)
-            {
-                Debug.Log("Skipping non-owner flashlight");
-                continue;
-            }
-
             Light light = flashlight.GetComponentInChildren<Light>();
             Debug.Log($"{gameObject.name} - Light enabled: {light?.enabled}");
 

@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37040d44f680b314a86ffef64b48db36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::FlashlightDetector
-  _detectionAngle: 15
+  _detectionAngle: 45
   _detectionRange: 60
 --- !u!114 &7163015870169737765
 MonoBehaviour:
