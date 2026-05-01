@@ -27,6 +27,7 @@ public class InputManager : MonoBehaviour
     private InputAction _reloadAction;
     private InputAction _healAction;
     private InputAction _pauseAction;
+    private InputAction _resetAction;
 
     public InputAction moveAction { get { return _moveAction; } }
     public InputAction lookAction { get { return _lookAction; } }
@@ -39,6 +40,7 @@ public class InputManager : MonoBehaviour
     public InputAction reloadAction { get { return _reloadAction; } }
     public InputAction healAction { get { return _healAction; } }
     public InputAction pauseAction { get { return _pauseAction; } }
+    public InputAction resetAction { get { return _resetAction; } }
 
     private bool _ignoreMouseMove = false;
 
@@ -65,6 +67,7 @@ public class InputManager : MonoBehaviour
         _reloadAction = _playerInput.currentActionMap.FindAction("Reload");
         _healAction = _playerInput.currentActionMap.FindAction("Heal");
         _pauseAction = _playerInput.currentActionMap.FindAction("Pause");
+        _resetAction = _playerInput.currentActionMap.FindAction("Reset");
 
         _playerInput.onActionTriggered += OnAction;
     }
