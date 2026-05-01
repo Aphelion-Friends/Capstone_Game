@@ -14,11 +14,21 @@ public class ExtractionZone : StatelessPredictedIdentity
 
     private void OnExtract(GameObject other)
     {
-        if(!other.TryGetComponent(out PlayerHealth player))
+        if (TryGetComponent(out PlayerHealth player))
+        {
+            ObjectiveManager.Instance.currentState.objective.ExtractTouched();
+
+            if (ObjectiveManager.Instance.currentState.objective.checkObjectiveCompletion())
+            {
+                Debug.Log("Objective complete!");
+                predictionManager.hierarchy.Delete(other);
+            }
+        }
+        else
         {
             return;
         }
 
-        ObjectiveManager.Instance.currentState.objective.ExtractTouched();
+        
     }
 }
