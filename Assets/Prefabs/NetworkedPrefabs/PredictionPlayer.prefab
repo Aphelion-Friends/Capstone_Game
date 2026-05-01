@@ -4706,7 +4706,7 @@ MonoBehaviour:
   _viewBobbing: {fileID: 5905422008217228707}
   _groundMask:
     serializedVersion: 2
-    m_Bits: 1239
+    m_Bits: 1751
   _camera: {fileID: 5425517718750818120}
   _rigidbody: {fileID: 7961874865920024228}
   _playerAnimator: {fileID: 3781700708315503250}
