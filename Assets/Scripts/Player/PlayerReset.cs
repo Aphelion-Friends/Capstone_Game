@@ -31,9 +31,9 @@ public class PlayerReset : PredictedIdentity<PlayerReset.ResetInput, PlayerReset
         {
             state.pressed = true;
 
-            SceneManager.LoadScene("SpaceStationMap");
-            
-            }
+            predictionManager.networkManager.sceneModule.LoadSceneAsync("SpaceStationScene");
+
+        }
             else if (!input.reset)
         {
             state.pressed = false;
