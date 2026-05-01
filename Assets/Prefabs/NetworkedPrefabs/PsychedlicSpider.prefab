@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::EnemyFleeState
   _fleeDistance: 10
+  _stopDuration: 0.5
 --- !u!114 &8410703031144496368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::FlashlightDetector
   _detectionAngle: 45
-  _detectionRange: 15
+  _detectionRange: 60
 --- !u!114 &-8954902350893686543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2073ab5fab68594db1c0470346ccae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scripts::FlashlightSense
-  reaction: 0
+  reaction: 2
 --- !u!1001 &285399087628214666
 PrefabInstance:
   m_ObjectHideFlags: 0

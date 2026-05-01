@@ -365,6 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::EnemyFleeState
   _fleeDistance: 10
+  _stopDuration: 0.5
 --- !u!114 &2347201574941637700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::FlashlightDetector
   _detectionAngle: 45
-  _detectionRange: 100
+  _detectionRange: 60
 --- !u!114 &1193254326431504950
 MonoBehaviour:
   m_ObjectHideFlags: 0

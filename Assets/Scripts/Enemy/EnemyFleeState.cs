@@ -9,6 +9,7 @@ public class EnemyFleeState : PredictedStateNode<EnemyFleeState.FleeState>
     public TransitionFunc transitionFunc;
 
     [SerializeField] private float _fleeDistance = 10f;
+    [SerializeField] private float _stopDuration = 0.5f;
     private EnemyController enemyController;
 
     public Vector3 fleeFrom { get => currentState.fleeFrom; set => currentState.fleeFrom = value; }
@@ -16,6 +17,7 @@ public class EnemyFleeState : PredictedStateNode<EnemyFleeState.FleeState>
     public struct FleeState : IPredictedData<FleeState>
     {
         public Vector3 fleeFrom;
+        public float stopTimer;
         public void Dispose() {}
     }
 
@@ -24,9 +26,21 @@ public class EnemyFleeState : PredictedStateNode<EnemyFleeState.FleeState>
         enemyController = GetComponent<EnemyController>();
     }
 
+    public override void Enter()
+    {
+        currentState.stopTimer = _stopDuration;
+    }
+
     protected override void StateSimulate(ref FleeState state, float delta)
     {
         transitionFunc(ref state);
+
+        if (state.stopTimer > 0)
+        {
+            state.stopTimer -= delta;
+            enemyController.destination = transform.position;
+            return;
+        }
 
         Vector3 fleeDirection = (transform.position - state.fleeFrom).normalized;
         Vector3 fleeTarget = transform.position + fleeDirection * _fleeDistance;
