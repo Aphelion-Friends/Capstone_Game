@@ -18,6 +18,7 @@ public class FreecamSpectator : MonoBehaviour
 
     [Header("References")]
     public Camera cam;
+    public bool isSpectating = false;
 
     void Start()
     {
@@ -27,6 +28,8 @@ public class FreecamSpectator : MonoBehaviour
 
     void Update()
     {
+        if (!isSpectating) return;
+
         HandleMouseLook();
         HandleMovement();
     }
@@ -50,7 +53,7 @@ public class FreecamSpectator : MonoBehaviour
     void HandleMovement()
     {
         float speed = moveSpeed;
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (InputManager.Instance.sprintAction.inProgress)
             speed *= sprintMultiplier;
 
         Vector3 move = new Vector3(
@@ -62,10 +65,26 @@ public class FreecamSpectator : MonoBehaviour
         transform.Translate(move * speed * Time.deltaTime);
 
         // Vertical movement
-        if (Input.GetKey(KeyCode.E))
+        if (InputManager.Instance.interactAction.inProgress)
             transform.position += Vector3.up * verticalSpeed * Time.deltaTime;
 
         if (Input.GetKey(KeyCode.Q))
             transform.position += Vector3.down * verticalSpeed * Time.deltaTime;
+    }
+
+    public void EnableSpectator()
+    {
+        isSpectating = true;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void DisableSpectator()
+    {
+        isSpectating = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

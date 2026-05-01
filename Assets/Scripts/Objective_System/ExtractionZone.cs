@@ -18,7 +18,9 @@ public class ExtractionZone : StatelessPredictedIdentity
 
         {
             Debug.Log("Playerhealth found");
-            player.gameObject.SetActive(false);
+            predictionManager.hierarchy.Delete(player);
+            
+            //player.gameObject.SetActive(false);
             ObjectiveManager.Instance.currentState.objective.ExtractTouched();
 
             if (ObjectiveManager.Instance.currentState.objective.checkObjectiveCompletion())
