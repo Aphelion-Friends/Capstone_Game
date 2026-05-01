@@ -34,6 +34,23 @@ public class Spider : GenericEnemy
 
     protected override void PatrolTransitions(ref EnemyPatrolState.PatrolState state)
     {
+        if (flashlightDetector != null && flashlightDetector.isLit && flashlightSense != null)
+        {
+            if (flashlightSense.reaction == FlashLightReaction.Flee)
+            {
+                enemyFleeState.fleeFrom = flashlightDetector.lightSource;
+                stateMachine.SetState(enemyFleeState);
+                return;
+            }
+            else if (flashlightSense.reaction == FlashLightReaction.Attracted)
+            {
+                enemyAttractedState.attractedTo = flashlightDetector.lightSource;
+                stateMachine.SetState(enemyAttractedState);
+                return;
+            }
+        }
+
+
         base.PatrolTransitions(ref state);
     }
 
@@ -41,15 +58,49 @@ public class Spider : GenericEnemy
     {
         GameObject targetedPlayer = predictionManager.hierarchy.GetGameObject(state.targetedPlayer);
 
-        if (Vector3.Distance(transform.position, targetedPlayer.transform.position) >= chaseRange)
+        if (targetedPlayer == null)
         {
+            state.targetedPlayer = null;
             stateMachine.SetState(enemyPatrolState);
+            return;
         }
-        else if (Vector3.Distance(transform.position, targetedPlayer.transform.position) <= attackRange &&
-                enemyAttackCooldown.currentState.timer <= 0)
+
+        float distance = Vector3.Distance(transform.position, targetedPlayer.transform.position);
+
+        // Attack check first - don't interrupt if in attack range
+        if (distance <= attackRange && enemyAttackCooldown.currentState.timer <= 0)
         {
             stateMachine.SetState(enemyAttackState);
+            return;
         }
+
+        // Flashlight check second - only if not in attack range
+        if (flashlightDetector != null && flashlightDetector.isLit && flashlightSense != null)
+        {
+            if (flashlightSense.reaction == FlashLightReaction.Flee)
+            {
+                enemyFleeState.fleeFrom = flashlightDetector.lightSource;
+                stateMachine.SetState(enemyFleeState);
+                return;
+            }
+            else if (flashlightSense.reaction == FlashLightReaction.Attracted)
+            {
+                enemyAttractedState.attractedTo = flashlightDetector.lightSource;
+                stateMachine.SetState(enemyAttractedState);
+                return;
+            }
+        }
+
+        // Normal chase/patrol transitions last
+        if (distance >= chaseRange)
+            stateMachine.SetState(enemyPatrolState);
+
+        audioSource2.PlayOnlyIfDone();
+    }
+
+    protected override void AttractedTransitions(ref EnemyAttractedState.AttractedState state)
+    {
+        base.AttractedTransitions(ref state);
         audioSource2.PlayOnlyIfDone();
     }
 

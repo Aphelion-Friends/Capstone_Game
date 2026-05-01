@@ -14,7 +14,7 @@ public class ExtractionZone : StatelessPredictedIdentity
 
     private void OnExtract(GameObject other)
     {
-        if(!other.TryGetComponent(out PlayerHealth player))
+        if (!TryGetComponent(out PlayerHealth player))
         {
             return;
         }

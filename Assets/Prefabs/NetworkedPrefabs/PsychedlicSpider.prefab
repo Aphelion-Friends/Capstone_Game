@@ -56,6 +56,10 @@ GameObject:
   - component: {fileID: 7678186487502642301}
   - component: {fileID: 1296984895149626577}
   - component: {fileID: 1473404159990373339}
+  - component: {fileID: 3915539416171842499}
+  - component: {fileID: 8410703031144496368}
+  - component: {fileID: -7279126026077504317}
+  - component: {fileID: -8954902350893686543}
   m_Layer: 10
   m_Name: PsychedlicSpider
   m_TagString: Untagged
@@ -224,6 +228,8 @@ MonoBehaviour:
   - _object: {fileID: 4789066397020135143}
   - _object: {fileID: 8971992119761654375}
   - _object: {fileID: 1296984895149626577}
+  - _object: {fileID: 3915539416171842499}
+  - _object: {fileID: 8410703031144496368}
 --- !u!114 &6859578714921511255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,6 +352,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Scripts::EnemyAttackCooldown
   cooldown: 2
+--- !u!114 &3915539416171842499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4664176889516456397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a5ca4dbf73fa8498ea9580b2cd5285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::EnemyFleeState
+  _fleeDistance: 10
+  _stopDuration: 0.5
+--- !u!114 &8410703031144496368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4664176889516456397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8471fec091326de46a77bddeefe688cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::EnemyAttractedState
+--- !u!114 &-7279126026077504317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4664176889516456397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37040d44f680b314a86ffef64b48db36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::FlashlightDetector
+  _detectionAngle: 45
+  _detectionRange: 60
+--- !u!114 &-8954902350893686543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4664176889516456397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2073ab5fab68594db1c0470346ccae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scripts::FlashlightSense
+  reaction: 2
 --- !u!1001 &285399087628214666
 PrefabInstance:
   m_ObjectHideFlags: 0

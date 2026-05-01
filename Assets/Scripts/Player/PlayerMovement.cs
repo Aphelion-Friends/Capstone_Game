@@ -50,7 +50,7 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         if(isMoving)
         {
             _walkSoundTimer -= delta;
-            if( _walkSoundTimer <= 0f)
+            if( _walkSoundTimer <= 0f && isGrounded())
             {
                 audioSource.PlayOnlyIfDone();
                 _walkSoundTimer = _walkSoundDelay;
@@ -78,16 +78,37 @@ public class PlayerMovement : PredictedIdentity<PlayerMovement.MoveInput, Player
         Vector3 targetVel = (transform.forward * input.moveDirection.y + transform.right * input.moveDirection.x) * speed;
         _rigidbody.AddForce(targetVel * _acceleration);
 
+
+        bool grounded = isGrounded();
         var horizontal = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);
-        _rigidbody.AddForce(-horizontal * _planarDamping);
-        if (horizontal.magnitude > _moveSpeed)
+
+        if (grounded)
+        {
+            _rigidbody.AddForce(-horizontal * _planarDamping);
+        }
+        else
+        {
+            _rigidbody.AddForce(-horizontal * (_planarDamping * 0.2f));
+        }
+
+        if (horizontal.magnitude > speed)
             _rigidbody.velocity = new Vector3(targetVel.x, _rigidbody.velocity.y, targetVel.z);
 
-        
-        if(input.jump && isGrounded() && state.jumpCooldown <= 0)
+
+        if (input.jump && isGrounded() && state.jumpCooldown <= 0)
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce);
             state.jumpCooldown = _jumpCooldown;
+        }
+
+        if (_rigidbody.linearVelocity.y > 0)
+        {
+            _rigidbody.AddForce(Vector3.down * 10f);
+        }
+
+        if (_rigidbody.linearVelocity.y < 0)
+        {
+            _rigidbody.AddForce(Vector3.up * -20f);
         }
 
         Vector3 cameraForward = input.cameraForward;

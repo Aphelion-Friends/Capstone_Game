@@ -18,6 +18,8 @@ public class ViewBobbing : MonoBehaviour
     [Header("Toggle")]
     [SerializeField] private bool enableBobbing = true;
 
+    public Vector3 CurrentBobOffset { get; private set; }
+
     private Vector3 _initialLocalPosition;
     private float _bobTimer;
     private bool _initialized;
@@ -78,7 +80,9 @@ public class ViewBobbing : MonoBehaviour
         float xOffset = Mathf.Cos(_bobTimer * 0.5f) * bobHorizontalAmplitude * speedFactor;
         float yOffset = Mathf.Sin(_bobTimer) * bobVerticalAmplitude * speedFactor;
 
-        Vector3 targetPosition = _initialLocalPosition + new Vector3(xOffset, yOffset, 0f);
+        CurrentBobOffset = new Vector3(xOffset, yOffset, 0f);
+
+        Vector3 targetPosition = _initialLocalPosition + CurrentBobOffset;
 
         transform.localPosition = Vector3.Lerp(
             transform.localPosition,
@@ -90,6 +94,9 @@ public class ViewBobbing : MonoBehaviour
     private void ReturnToRest()
     {
         _bobTimer = 0f;
+
+        CurrentBobOffset = Vector3.zero;
+
         transform.localPosition = Vector3.Lerp(
             transform.localPosition,
             _initialLocalPosition,
